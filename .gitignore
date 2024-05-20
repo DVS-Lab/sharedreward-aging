@@ -135,10 +135,10 @@ dmypy.json
 # potentially private
 .heudiconv
 
-# imaging output
-*.nii.gz
+# imaging input and output output
 *.json
-#bids
+ds005123
+ds003745
 derivatives
 sub-*.html
 *.asv
