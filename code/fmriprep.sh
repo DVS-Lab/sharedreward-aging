@@ -31,6 +31,7 @@ if [ $sub -ge 300 ] ; then
 	/ZPOOL/data/tools/fmriprep-23.2.1.simg \
 	/base/ds005123 /base/derivatives/fmriprep \
 	participant --participant_label $sub \
+	-t sharedreward \
 	--stop-on-first-crash \
 	--me-output-echos \
 	--use-syn-sdc \
@@ -46,9 +47,11 @@ else
 	/ZPOOL/data/tools/fmriprep-23.2.1.simg \
 	/base/ds003745 /base/derivatives/fmriprep \
 	participant --participant_label $sub \
+	-t sharedreward \
 	--stop-on-first-crash \
 	--use-syn-sdc \
 	--output-spaces MNI152NLin6Asym:res-2 \
-	--bids-filter-file /base/code/fmriprep_config.json \
 	--fs-no-reconall --fs-license-file /opts/fs_license.txt -w /scratch
 fi
+
+#	--bids-filter-file /base/code/fmriprep_config.json \
