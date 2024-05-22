@@ -26,10 +26,11 @@ if [ $sub -ge 300 ] ; then
 	singularity run --cleanenv \
 	-B ${TEMPLATEFLOW_DIR}:/opt/templateflow \
 	-B $maindir:/base \
+	-B /ZPOOL/data/projects/rf1-sra-data/bids:/input \
 	-B /ZPOOL/data/tools/licenses:/opts \
 	-B $scratchdir:/scratch \
 	/ZPOOL/data/tools/fmriprep-23.2.1.simg \
-	/base/ds005123 /base/derivatives/fmriprep \
+	/input /base/derivatives/fmriprep \
 	participant --participant_label $sub \
 	-t sharedreward \
 	--stop-on-first-crash \
