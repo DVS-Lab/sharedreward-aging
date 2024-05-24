@@ -13,7 +13,7 @@ module load singularity
 cd $PBS_O_WORKDIR
 
 # ensure paths are correct
-projectname=rf1-sra-data #this should be the only line that has to change if the rest of the script is set up correctly
+projectname=sharedreward-aging #this should be the only line that has to change if the rest of the script is set up correctly
 maindir=~/work/$projectname
 scriptdir=$maindir/code
 bidsdir=$maindir/bids
@@ -32,7 +32,7 @@ if [ ! -d $maindir/derivatives ]; then
 	mkdir -p $maindir/derivatives
 fi
 
-scratchdir=/ZPOOL/data/scratch/`whoami`
+scratchdir=~/scratch/$projectname/fmriprep
 if [ ! -d $scratchdir ]; then
 	mkdir -p $scratchdir
 fi

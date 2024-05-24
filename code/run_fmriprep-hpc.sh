@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ensure paths are correct
-maindir=~/work/rf1-sra-data #this should be the only line that has to change if the rest of the script is set up correctly
+maindir=~/work/sharedreward-aging #this should be the only line that has to change if the rest of the script is set up correctly
 scriptdir=$maindir/code
 
 
