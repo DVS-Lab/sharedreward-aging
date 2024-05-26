@@ -6,10 +6,10 @@
 scriptdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 maindir="$(dirname "$scriptdir")"
 
-for sub in `cat $scriptdir/sublist-srndna.txt`; do
+for sub in `cat $scriptdir/sublist-rf1.txt`; do
 
 	SCRIPTNAME=${scriptdir}/flirt.sh
-	NCORES=25
+	NCORES=20
 	while [ $(ps -ef | grep -v grep | grep $SCRIPTNAME | wc -l) -ge $NCORES ]; do
 			sleep 5s
 	done
