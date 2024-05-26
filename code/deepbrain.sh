@@ -10,12 +10,9 @@ maindir="$(dirname "$scriptdir")"
 mainoutput=${maindir}/derivatives/deepbrain
 mkdir -p $mainoutput
 
-DATA_PATH=/ZPOOL/data/projects/rf1-wmh/derivatives/fmriprep-anat/
+DATA_PATH=/ZPOOL/data/projects/sharedreward-aging/derivatives/deepbrain/
 OUT_PATH=${mainoutput}
 MODEL=/ZPOOL/data/tools/DeepBrainNet/Models/DeepBrainNet_VGG16.h5
 
-#mkdir ${mainoutput}/tmp/
-
-#python /ZPOOL/data/tools/DeepBrainNet/Script/Slicer.py $DATA_PATH ${mainoutput}/tmp/
 
 python /ZPOOL/data/tools/DeepBrainNet/Script/Model_Test.py ${mainoutput}/tmp/ ${OUT_PATH}pred.csv $MODEL
