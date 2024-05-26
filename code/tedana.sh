@@ -32,4 +32,4 @@ tedana -d $echo1 $echo2 $echo3 $echo4 \
 --overwrite
 
 # clean up and save space
-rm -rf ${outdir}/*.nii.gz
+rm -rf ${outdir}/sub-${sub}_task-${task}_run-${run}_*.nii.gz
