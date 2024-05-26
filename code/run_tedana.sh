@@ -8,7 +8,7 @@ touch $scriptdir/missing-tedanaInput.log
 for sub in `cat ${scriptdir}/sublist-rf1.txt`; do
 	for run in 1 2; do
 		script=${scriptdir}/tedana.sh
-		NCORES=8
+		NCORES=12
 		while [ $(ps -ef | grep -v grep | grep $script | wc -l) -ge $NCORES ]; do
 			sleep 5s
 		done
