@@ -10,10 +10,10 @@ run=$2
 
 # prepare inputs and outputs; don't run if data is missing, but log missingness
 prepdir=${maindir}/derivatives/fmriprep/sub-${sub}/func
-echo1=${maindir}/sub-${sub}_task-${task}_run-${run}_echo-1_part-mag_desc-preproc_bold.nii.gz
-echo2=${maindir}/sub-${sub}_task-${task}_run-${run}_echo-2_part-mag_desc-preproc_bold.nii.gz
-echo3=${maindir}/sub-${sub}_task-${task}_run-${run}_echo-3_part-mag_desc-preproc_bold.nii.gz
-echo4=${maindir}/sub-${sub}_task-${task}_run-${run}_echo-4_part-mag_desc-preproc_bold.nii.gz
+echo1=${prepdir}/sub-${sub}_task-${task}_run-${run}_echo-1_part-mag_desc-preproc_bold.nii.gz
+echo2=${prepdir}/sub-${sub}_task-${task}_run-${run}_echo-2_part-mag_desc-preproc_bold.nii.gz
+echo3=${prepdir}/sub-${sub}_task-${task}_run-${run}_echo-3_part-mag_desc-preproc_bold.nii.gz
+echo4=${prepdir}/sub-${sub}_task-${task}_run-${run}_echo-4_part-mag_desc-preproc_bold.nii.gz
 outdir=${maindir}/derivatives/tedana/sub-${sub}
 if [ ! -e $echo1 ]; then
 	echo "missing ${echo1}"
