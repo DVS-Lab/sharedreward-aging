@@ -15,4 +15,6 @@ OUT_PATH=${mainoutput}
 MODEL=/ZPOOL/data/tools/DeepBrainNet/Models/DeepBrainNet_VGG16.h5
 
 
-python /ZPOOL/data/tools/DeepBrainNet/Script/Model_Test.py ${mainoutput}/tmp/ ${OUT_PATH}pred.csv $MODEL
+#python /ZPOOL/data/tools/DeepBrainNet/Script/Model_Test.py ${mainoutput}/tmp/ ${OUT_PATH}pred.csv $MODEL
+
+bash /ZPOOL/data/tools/DeepBrainNet/Script/test.sh -d $DATA_PATH -o $OUT_PATH -m $MODEL
