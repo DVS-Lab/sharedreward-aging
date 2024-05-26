@@ -10,7 +10,7 @@ maindir="$(dirname "$scriptdir")"
 mainoutput=${maindir}/derivatives/deepbrain
 mkdir -p $mainoutput
 
-DATA_PATH=/ZPOOL/data/projects/sharedreward-aging/derivatives/deepbrain/
+DATA_PATH=/ZPOOL/data/projects/sharedreward-aging/derivatives/deepbrain/data/
 OUT_PATH=${mainoutput}
 MODEL=/ZPOOL/data/tools/DeepBrainNet/Models/DeepBrainNet_VGG16.h5
 
