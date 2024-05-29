@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set the number of cores to use
-NCORES=20
+#NCORES=20
 
 # Ensure paths are correct irrespective from where user runs the script
 scriptdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
@@ -32,19 +32,19 @@ process_subject() {
 
             if [ -e "$stan_file" ]; then
                 # Apply transformation using antsApplyTransforms
-                antsApplyTransforms \
-                -i /ZPOOL/data/projects/sharedreward-aging/masks/VS-Imanova_2mm.nii \
-                -r "$coreg_file" \
-                -t /ZPOOL/data/projects/sharedreward-aging/derivatives/fmriprep/sub-${sub}/anat/sub-${sub}_from-MNI152NLin6Asym_to-T1w_mode-image_xfm.h5 \
-                -t [/ZPOOL/data/projects/sharedreward-aging/derivatives/fmriprep/sub-${sub}/func/sub-${sub}_task-${task}_run-${run}_from-boldref_to-T1w_mode-image_desc-coreg_xfm.txt, 1] \
-                -n Linear \
-                -o /ZPOOL/data/projects/sharedreward-aging/derivatives/fmriprep/sub-${sub}/func/sub-${sub}_task-${task}_run-${run}_space-native_roi-vs_mask.nii.gz
+               # antsApplyTransforms \
+               # -i /ZPOOL/data/projects/sharedreward-aging/masks/VS-Imanova_2mm.nii \
+               # -r "$coreg_file" \
+               # -t /ZPOOL/data/projects/sharedreward-aging/derivatives/fmriprep/sub-${sub}/anat/sub-${sub}_from-MNI152NLin6Asym_to-T1w_mode-image_xfm.h5 \
+               # -t [/ZPOOL/data/projects/sharedreward-aging/derivatives/fmriprep/sub-${sub}/func/sub-${sub}_task-${task}_run-${run}_from-boldref_to-T1w_mode-image_desc-coreg_xfm.txt, 1] \
+               # -n Linear \
+               # -o /ZPOOL/data/projects/sharedreward-aging/derivatives/fmriprep/sub-${sub}/func/sub-${sub}_task-${task}_run-${run}_space-native_roi-vs_mask.nii.gz
 
-                fslmaths "$stan_file" -Tmean tmp_mean
-                fslmaths "$stan_file" -Tstd tmp_std
-                fslmaths tmp_mean -div tmp_std tmp_tsnr
-                fslmaths tmp_tsnr -thr 2 thr_tmp_tsnr
-                vsmean_stan=$(fslstats thr_tmp_tsnr -k /ZPOOL/data/projects/sharedreward-aging/masks/VS-Imanova_2mm.nii -M)
+                fslmaths "$stan_file" -Tmean ${sub}_tmp_mean
+                fslmaths "$stan_file" -Tstd ${sub}_tmp_std
+                fslmaths ${sub}_tmp_mean -div ${sub}_tmp_std ${sub}_tmp_tsnr
+                fslmaths ${sub}_tmp_tsnr -thr 2 ${sub}_thr_tmp_tsnr
+                vsmean_stan=$(fslstats ${sub}_thr_tmp_tsnr -k /ZPOOL/data/projects/sharedreward-aging/masks/VS-Imanova_2mm.nii -M)
             else
                 vsmean_stan="NA"
             fi
