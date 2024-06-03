@@ -1,0 +1,172 @@
+2024-05-26T10:19:43	tedana.tedana_workflow	INFO    	Using output directory: /ZPOOL/data/projects/sharedreward-aging/derivatives/tedana/sub-10661
+2024-05-26T10:19:43	tedana.tedana_workflow	INFO    	Initializing and validating component selection tree
+2024-05-26T10:19:43	component_selector.validate_tree	WARNING 	Decision tree includes fields that are not used or logged {'_comment'}
+2024-05-26T10:19:43	component_selector.__init__    	INFO    	Performing component selection with tedana_orig_decision_tree
+2024-05-26T10:19:43	component_selector.__init__    	INFO    	Very similar to the decision tree designed by Prantik Kundu
+2024-05-26T10:19:43	tedana.tedana_workflow	INFO    	Loading input data: ['/ZPOOL/data/projects/sharedreward-aging/derivatives/fmriprep/sub-10661/func/sub-10661_task-sharedreward_run-1_echo-1_part-mag_desc-preproc_bold.nii.gz', '/ZPOOL/data/projects/sharedreward-aging/derivatives/fmriprep/sub-10661/func/sub-10661_task-sharedreward_run-1_echo-2_part-mag_desc-preproc_bold.nii.gz', '/ZPOOL/data/projects/sharedreward-aging/derivatives/fmriprep/sub-10661/func/sub-10661_task-sharedreward_run-1_echo-3_part-mag_desc-preproc_bold.nii.gz', '/ZPOOL/data/projects/sharedreward-aging/derivatives/fmriprep/sub-10661/func/sub-10661_task-sharedreward_run-1_echo-4_part-mag_desc-preproc_bold.nii.gz']
+2024-05-26T10:20:30	io.__init__    	INFO    	Generating figures directory: /ZPOOL/data/projects/sharedreward-aging/derivatives/tedana/sub-10661/figures
+2024-05-26T10:20:30	tedana.tedana_workflow	INFO    	Computing EPI mask from first echo
+2024-05-26T10:20:32	utils.make_adaptive_mask	INFO    	Echo-wise intensity thresholds for adaptive mask: [1798.92172564 1415.17310049  977.84599801  731.70440059]
+2024-05-26T10:20:32	utils.make_adaptive_mask	WARNING 	59 voxels in user-defined mask do not have good signal. Removing voxels from mask.
+2024-05-26T10:20:32	tedana.tedana_workflow	INFO    	Computing T2* map
+2024-05-26T10:25:08	combine.make_optcom 	INFO    	Optimally combining data with voxel-wise T2* estimates
+2024-05-26T10:25:21	tedana.tedana_workflow	INFO    	Writing optimally combined data set: /ZPOOL/data/projects/sharedreward-aging/derivatives/tedana/sub-10661/sub-10661_task-sharedreward_run-1_desc-optcom_bold.nii.gz
+2024-05-26T10:25:21	pca.tedpca      	INFO    	Computing PCA of optimally combined multi-echo data with selection criteria: aic
+2024-05-26T10:25:52	pca.tedpca      	INFO    	Optimal number of components based on different criteria:
+2024-05-26T10:25:52	pca.tedpca      	INFO    	AIC: 17 | KIC: 14 | MDL: 9 | 90% varexp: 213 | 95% varexp: 233
+2024-05-26T10:25:52	pca.tedpca      	INFO    	Explained variance based on different criteria:
+2024-05-26T10:25:52	pca.tedpca      	INFO    	AIC: 0.336% | KIC: 0.321% | MDL: 0.29% | 90% varexp: 0.902% | 95% varexp: 0.951%
+2024-05-26T10:25:52	pca.tedpca      	INFO    	Plotting maPCA optimization curves
+2024-05-26T10:25:54	collect.generate_metrics	INFO    	Calculating weight maps
+2024-05-26T10:25:56	collect.generate_metrics	INFO    	Calculating parameter estimate maps for optimally combined data
+2024-05-26T10:25:58	collect.generate_metrics	INFO    	Calculating z-statistic maps
+2024-05-26T10:25:58	collect.generate_metrics	INFO    	Calculating F-statistic maps
+2024-05-26T10:26:04	collect.generate_metrics	INFO    	Thresholding z-statistic maps
+2024-05-26T10:26:05	collect.generate_metrics	INFO    	Calculating T2* F-statistic maps
+2024-05-26T10:26:05	collect.generate_metrics	INFO    	Calculating S0 F-statistic maps
+2024-05-26T10:26:06	collect.generate_metrics	INFO    	Counting significant voxels in T2* F-statistic maps
+2024-05-26T10:26:06	collect.generate_metrics	INFO    	Counting significant voxels in S0 F-statistic maps
+2024-05-26T10:26:06	collect.generate_metrics	INFO    	Thresholding optimal combination beta maps to match T2* F-statistic maps
+2024-05-26T10:26:09	collect.generate_metrics	INFO    	Thresholding optimal combination beta maps to match S0 F-statistic maps
+2024-05-26T10:26:12	collect.generate_metrics	INFO    	Calculating kappa and rho
+2024-05-26T10:26:12	collect.generate_metrics	INFO    	Calculating variance explained
+2024-05-26T10:26:12	collect.generate_metrics	INFO    	Calculating normalized variance explained
+2024-05-26T10:26:12	collect.generate_metrics	INFO    	Calculating DSI between thresholded T2* F-statistic and optimal combination beta maps
+2024-05-26T10:26:12	utils.dice        	WARNING 	2 of 17 components have empty maps, resulting in Dice values of 0. Please check your component table for dice columns with 0-values.
+2024-05-26T10:26:12	collect.generate_metrics	INFO    	Calculating DSI between thresholded S0 F-statistic and optimal combination beta maps
+2024-05-26T10:26:12	utils.dice        	WARNING 	4 of 17 components have empty maps, resulting in Dice values of 0. Please check your component table for dice columns with 0-values.
+2024-05-26T10:26:12	collect.generate_metrics	INFO    	Calculating signal-noise t-statistics
+2024-05-26T10:26:12	collect.generate_metrics	INFO    	Counting significant noise voxels from z-statistic maps
+2024-05-26T10:26:12	collect.generate_metrics	INFO    	Calculating decision table score
+2024-05-26T10:26:14	pca.tedpca      	INFO    	Selected 17 components with 33.56% normalized variance explained using aic dimensionality estimate
+2024-05-26T10:26:24	ica.tedica      	INFO    	ICA with random seed 42 converged in 51 iterations
+2024-05-26T10:26:25	collect.generate_metrics	INFO    	Calculating weight maps
+2024-05-26T10:26:26	collect.generate_metrics	INFO    	Calculating parameter estimate maps for optimally combined data
+2024-05-26T10:26:27	collect.generate_metrics	INFO    	Calculating z-statistic maps
+2024-05-26T10:26:27	collect.generate_metrics	INFO    	Calculating F-statistic maps
+2024-05-26T10:26:33	collect.generate_metrics	INFO    	Thresholding z-statistic maps
+2024-05-26T10:26:34	collect.generate_metrics	INFO    	Calculating T2* F-statistic maps
+2024-05-26T10:26:34	collect.generate_metrics	INFO    	Calculating S0 F-statistic maps
+2024-05-26T10:26:35	collect.generate_metrics	INFO    	Counting significant voxels in T2* F-statistic maps
+2024-05-26T10:26:35	collect.generate_metrics	INFO    	Counting significant voxels in S0 F-statistic maps
+2024-05-26T10:26:35	collect.generate_metrics	INFO    	Thresholding optimal combination beta maps to match T2* F-statistic maps
+2024-05-26T10:26:40	collect.generate_metrics	INFO    	Thresholding optimal combination beta maps to match S0 F-statistic maps
+2024-05-26T10:26:44	collect.generate_metrics	INFO    	Calculating kappa and rho
+2024-05-26T10:26:44	collect.generate_metrics	INFO    	Calculating variance explained
+2024-05-26T10:26:44	collect.generate_metrics	INFO    	Calculating normalized variance explained
+2024-05-26T10:26:44	collect.generate_metrics	INFO    	Calculating DSI between thresholded T2* F-statistic and optimal combination beta maps
+2024-05-26T10:26:44	utils.dice        	WARNING 	2 of 17 components have empty maps, resulting in Dice values of 0. Please check your component table for dice columns with 0-values.
+2024-05-26T10:26:44	collect.generate_metrics	INFO    	Calculating DSI between thresholded S0 F-statistic and optimal combination beta maps
+2024-05-26T10:26:44	utils.dice        	WARNING 	2 of 17 components have empty maps, resulting in Dice values of 0. Please check your component table for dice columns with 0-values.
+2024-05-26T10:26:44	collect.generate_metrics	INFO    	Calculating signal-noise t-statistics
+2024-05-26T10:26:44	collect.generate_metrics	INFO    	Counting significant noise voxels from z-statistic maps
+2024-05-26T10:26:44	collect.generate_metrics	INFO    	Calculating decision table score
+2024-05-26T10:26:44	tedana.tedana_workflow	INFO    	Selecting components from ICA results
+2024-05-26T10:26:44	tedica.automatic_selection	INFO    	Performing ICA component selection
+2024-05-26T10:26:44	selection_nodes.manual_classify	INFO    	Step 0: manual_classify: Set all to unclassified 
+2024-05-26T10:26:44	selection_utils.log_decision_tree_step	INFO    	Step 0: manual_classify applied to 17 components. 17 True -> unclassified. 0 False -> nochange.
+2024-05-26T10:26:44	selection_nodes.manual_classify	INFO    	Step 0: manual_classify component classification tags are cleared
+2024-05-26T10:26:44	selection_utils.log_classification_counts	INFO    	Step 0: Total component classifications: 17 unclassified
+2024-05-26T10:26:44	selection_nodes.dec_left_op_right	INFO    	Step 1: left_op_right: rejected if rho>kappa, else nochange
+2024-05-26T10:26:44	selection_utils.comptable_classification_changer	INFO    	Step 1: No components fit criterion True to change classification
+2024-05-26T10:26:44	selection_utils.log_decision_tree_step	INFO    	Step 1: left_op_right applied to 17 components. 0 True -> rejected. 17 False -> nochange.
+2024-05-26T10:26:44	selection_utils.log_classification_counts	INFO    	Step 1: Total component classifications: 17 unclassified
+2024-05-26T10:26:44	selection_nodes.dec_left_op_right	INFO    	Step 2: left_op_right: rejected if ['countsigFS0>countsigFT2 & countsigFT2>0'], else nochange
+2024-05-26T10:26:44	selection_utils.log_decision_tree_step	INFO    	Step 2: left_op_right applied to 17 components. 1 True -> rejected. 16 False -> nochange.
+2024-05-26T10:26:44	selection_utils.log_classification_counts	INFO    	Step 2: Total component classifications: 1 rejected, 16 unclassified
+2024-05-26T10:26:44	selection_nodes.calc_median 	INFO    	Step 3: calc_median: Median(median_varex)
+2024-05-26T10:26:44	selection_utils.log_decision_tree_step	INFO    	Step 3: calc_median calculated: median_varex=1.7923700403509424
+2024-05-26T10:26:44	selection_utils.log_classification_counts	INFO    	Step 3: Total component classifications: 1 rejected, 16 unclassified
+2024-05-26T10:26:44	selection_nodes.dec_left_op_right	INFO    	Step 4: left_op_right: rejected if ['dice_FS0>dice_FT2 & variance explained>1.79'], else nochange
+2024-05-26T10:26:44	selection_utils.comptable_classification_changer	INFO    	Step 4: No components fit criterion True to change classification
+2024-05-26T10:26:44	selection_utils.log_decision_tree_step	INFO    	Step 4: left_op_right applied to 17 components. 0 True -> rejected. 17 False -> nochange.
+2024-05-26T10:26:44	selection_utils.log_classification_counts	INFO    	Step 4: Total component classifications: 1 rejected, 16 unclassified
+2024-05-26T10:26:44	selection_nodes.dec_left_op_right	INFO    	Step 5: left_op_right: rejected if ['0>signal-noise_t & variance explained>1.79'], else nochange
+2024-05-26T10:26:44	selection_utils.comptable_classification_changer	INFO    	Step 5: No components fit criterion True to change classification
+2024-05-26T10:26:44	selection_utils.log_decision_tree_step	INFO    	Step 5: left_op_right applied to 17 components. 0 True -> rejected. 17 False -> nochange.
+2024-05-26T10:26:44	selection_utils.log_classification_counts	INFO    	Step 5: Total component classifications: 1 rejected, 16 unclassified
+2024-05-26T10:26:44	selection_nodes.calc_kappa_elbow	INFO    	Step 6: calc_kappa_elbow: Calc Kappa Elbow
+2024-05-26T10:26:44	selection_utils.kappa_elbow_kundu	INFO    	Calculating kappa elbow based on min of all and nonsig components.
+2024-05-26T10:26:44	selection_utils.log_decision_tree_step	INFO    	Step 6: calc_kappa_elbow calculated: kappa_elbow_kundu=19.017698750713084, kappa_allcomps_elbow=19.017698750713084, kappa_nonsig_elbow=19.017698750713084, varex_upper_p=11.569648953013672
+2024-05-26T10:26:44	selection_utils.log_classification_counts	INFO    	Step 6: Total component classifications: 1 rejected, 16 unclassified
+2024-05-26T10:26:44	selection_nodes.dec_reclassify_high_var_comps	INFO    	Step 7: reclassify_high_var_comps: Change unclassified to unclass_highvar for the top couple of components with the highest jumps in variance
+2024-05-26T10:26:44	selection_utils.comptable_classification_changer	INFO    	Step 7: No components fit criterion True to change classification
+2024-05-26T10:26:44	selection_utils.log_decision_tree_step	INFO    	Step 7: reclassify_high_var_comps applied to 16 components. 0 True -> unclass_highvar. 16 False -> nochange.
+2024-05-26T10:26:44	selection_utils.log_classification_counts	INFO    	Step 7: Total component classifications: 1 rejected, 16 unclassified
+2024-05-26T10:26:44	selection_nodes.calc_rho_elbow	INFO    	Step 8: calc_rho_elbow: Calc Rho Elbow
+2024-05-26T10:26:44	selection_utils.log_decision_tree_step	INFO    	Step 8: calc_rho_elbow calculated: rho_elbow_kundu=16.865496559221928, rho_allcomps_elbow=20.23426259582593, rho_unclassified_elbow=20.23426259582593, elbow_f05=10.127964486013928
+2024-05-26T10:26:44	selection_utils.log_classification_counts	INFO    	Step 8: Total component classifications: 1 rejected, 16 unclassified
+2024-05-26T10:26:44	selection_nodes.dec_left_op_right	INFO    	Step 9: left_op_right: provisionalaccept if kappa>=19.02, else nochange
+2024-05-26T10:26:44	selection_utils.log_decision_tree_step	INFO    	Step 9: left_op_right applied to 16 components. 11 True -> provisionalaccept. 5 False -> nochange.
+2024-05-26T10:26:44	selection_utils.log_classification_counts	INFO    	Step 9: Total component classifications: 11 provisionalaccept, 1 rejected, 5 unclassified
+2024-05-26T10:26:44	selection_nodes.dec_left_op_right	INFO    	Step 10: left_op_right: unclassified if rho>16.87, else nochange
+2024-05-26T10:26:44	selection_utils.log_decision_tree_step	INFO    	Step 10: left_op_right applied to 11 components. 6 True -> unclassified. 5 False -> nochange.
+2024-05-26T10:26:44	selection_utils.log_classification_counts	INFO    	Step 10: Total component classifications: 5 provisionalaccept, 1 rejected, 11 unclassified
+2024-05-26T10:26:44	selection_nodes.dec_classification_doesnt_exist	INFO    	Step 11: classification_doesnt_exist: Change ['provisionalaccept', 'unclassified', 'unclass_highvar'] to accepted if less than 2 components with provisionalaccept exist
+2024-05-26T10:26:44	selection_nodes.dec_classification_doesnt_exist	INFO    	Step 11: classification_doesnt_exist If nothing is provisionally accepted by this point, then rerun ICA & selection. If max iterations of rerunning done, then accept everything not already rejected
+2024-05-26T10:26:44	selection_utils.log_decision_tree_step	INFO    	Step 11: classification_doesnt_exist applied to 16 components. None True -> 0. None False -> 16.
+2024-05-26T10:26:44	selection_utils.log_classification_counts	INFO    	Step 11: Total component classifications: 5 provisionalaccept, 1 rejected, 11 unclassified
+2024-05-26T10:26:44	selection_nodes.calc_varex_thresh	INFO    	Step 12: calc_varex_thresh: Calc varex_upper_thresh, 90th percentile threshold
+2024-05-26T10:26:44	selection_utils.log_decision_tree_step	INFO    	Step 12: calc_varex_thresh calculated: varex_upper_thresh=8.580412185979679, upper_perc=90
+2024-05-26T10:26:44	selection_utils.log_classification_counts	INFO    	Step 12: Total component classifications: 5 provisionalaccept, 1 rejected, 11 unclassified
+2024-05-26T10:26:44	selection_nodes.calc_varex_thresh	INFO    	Step 13: calc_varex_thresh: Calc varex_lower_thresh, 25th percentile threshold
+2024-05-26T10:26:44	selection_utils.log_decision_tree_step	INFO    	Step 13: calc_varex_thresh calculated: varex_lower_thresh=1.3885886613459775, lower_perc=25
+2024-05-26T10:26:44	selection_utils.log_classification_counts	INFO    	Step 13: Total component classifications: 5 provisionalaccept, 1 rejected, 11 unclassified
+2024-05-26T10:26:44	selection_utils.get_extend_factor	INFO    	extend_factor=2.0, based on number of fMRI volumes
+2024-05-26T10:26:44	selection_utils.log_decision_tree_step	INFO    	Step 14: calc_extend_factor calculated: extend_factor=2.0
+2024-05-26T10:26:44	selection_utils.log_classification_counts	INFO    	Step 14: Total component classifications: 5 provisionalaccept, 1 rejected, 11 unclassified
+2024-05-26T10:26:44	selection_utils.log_decision_tree_step	INFO    	Step 15: calc_max_good_meanmetricrank calculated: max_good_meanmetricrank=10.0
+2024-05-26T10:26:44	selection_utils.log_classification_counts	INFO    	Step 15: Total component classifications: 5 provisionalaccept, 1 rejected, 11 unclassified
+2024-05-26T10:26:44	selection_utils.log_decision_tree_step	INFO    	Step 16: calc_varex_kappa_ratio calculated: kappa_rate=2.900650553915842
+2024-05-26T10:26:44	selection_utils.log_classification_counts	INFO    	Step 16: Total component classifications: 5 provisionalaccept, 1 rejected, 11 unclassified
+2024-05-26T10:26:44	selection_nodes.dec_left_op_right	INFO    	Step 17: left_op_right: rejected if ['d_table_score>10.0 & variance explained>2.0*8.58'], else nochange
+2024-05-26T10:26:44	selection_nodes.dec_left_op_right	INFO    	Step 17: left_op_right If variance and d_table_scores are high, then reject
+2024-05-26T10:26:44	selection_utils.comptable_classification_changer	INFO    	Step 17: No components fit criterion True to change classification
+2024-05-26T10:26:44	selection_utils.log_decision_tree_step	INFO    	Step 17: left_op_right applied to 16 components. 0 True -> rejected. 16 False -> nochange.
+2024-05-26T10:26:44	selection_utils.log_classification_counts	INFO    	Step 17: Total component classifications: 5 provisionalaccept, 1 rejected, 11 unclassified
+2024-05-26T10:26:44	selection_nodes.dec_left_op_right	INFO    	Step 18: left_op_right: accepted if ['d_table_score>10.0 & variance explained<=1.39 & kappa<=19.02'], else nochange
+2024-05-26T10:26:44	selection_nodes.dec_left_op_right	INFO    	Step 18: left_op_right If low variance, accept even if bad kappa & d_table_scores
+2024-05-26T10:26:44	selection_utils.log_decision_tree_step	INFO    	Step 18: left_op_right applied to 16 components. 3 True -> accepted. 13 False -> nochange.
+2024-05-26T10:26:44	selection_utils.log_classification_counts	INFO    	Step 18: Total component classifications: 3 accepted, 5 provisionalaccept, 1 rejected, 8 unclassified
+2024-05-26T10:26:44	selection_nodes.dec_classification_doesnt_exist	INFO    	Step 19: classification_doesnt_exist: Change ['provisionalaccept', 'unclassified', 'unclass_highvar'] to accepted if ['unclassified', 'unclass_highvar'] doesn't exist
+2024-05-26T10:26:44	selection_nodes.dec_classification_doesnt_exist	INFO    	Step 19: classification_doesnt_exist If nothing left is unclassified, then accept all
+2024-05-26T10:26:44	selection_utils.log_decision_tree_step	INFO    	Step 19: classification_doesnt_exist applied to 13 components. None True -> 0. None False -> 13.
+2024-05-26T10:26:44	selection_utils.log_classification_counts	INFO    	Step 19: Total component classifications: 3 accepted, 5 provisionalaccept, 1 rejected, 8 unclassified
+2024-05-26T10:26:44	selection_nodes.calc_revised_meanmetricrank_guesses	INFO    	Step 20: calc_revised_meanmetricrank_guesses: Calc revised d_table_score & num accepted component guesses
+2024-05-26T10:26:44	selection_utils.log_decision_tree_step	INFO    	Step 20: calc_revised_meanmetricrank_guesses calculated: num_acc_guess=7, conservative_guess=3.5, restrict_factor=2
+2024-05-26T10:26:44	selection_utils.log_classification_counts	INFO    	Step 20: Total component classifications: 3 accepted, 5 provisionalaccept, 1 rejected, 8 unclassified
+2024-05-26T10:26:44	selection_nodes.dec_left_op_right	INFO    	Step 21: left_op_right: rejected if ['d_table_score_node20>3.5 & varex kappa ratio>2*2.0 & variance explained>2.0*8.58'], else nochange
+2024-05-26T10:26:44	selection_nodes.dec_left_op_right	INFO    	Step 21: left_op_right Reject if a combination of kappa, variance, and other factors are ranked worse than others
+2024-05-26T10:26:44	selection_utils.comptable_classification_changer	INFO    	Step 21: No components fit criterion True to change classification
+2024-05-26T10:26:44	selection_utils.log_decision_tree_step	INFO    	Step 21: left_op_right applied to 13 components. 0 True -> rejected. 13 False -> nochange.
+2024-05-26T10:26:44	selection_utils.log_classification_counts	INFO    	Step 21: Total component classifications: 3 accepted, 5 provisionalaccept, 1 rejected, 8 unclassified
+2024-05-26T10:26:44	selection_nodes.dec_left_op_right	INFO    	Step 22: left_op_right: rejected if ['d_table_score_node20>0.9*7 & variance explained>2.0*1.39'], else nochange
+2024-05-26T10:26:44	selection_nodes.dec_left_op_right	INFO    	Step 22: left_op_right Reject if a combination of variance and ranks of other metrics are worse than others
+2024-05-26T10:26:44	selection_utils.log_decision_tree_step	INFO    	Step 22: left_op_right applied to 13 components. 2 True -> rejected. 11 False -> nochange.
+2024-05-26T10:26:44	selection_utils.log_classification_counts	INFO    	Step 22: Total component classifications: 3 accepted, 5 provisionalaccept, 3 rejected, 6 unclassified
+2024-05-26T10:26:44	selection_nodes.calc_varex_thresh	INFO    	Step 23: calc_varex_thresh: Calc varex_new_lower_thresh, 25th percentile threshold
+2024-05-26T10:26:44	selection_utils.log_decision_tree_step	INFO    	Step 23: calc_varex_thresh calculated: varex_new_lower_thresh=2.422020790790564, new_lower_perc=25
+2024-05-26T10:26:44	selection_utils.log_classification_counts	INFO    	Step 23: Total component classifications: 3 accepted, 5 provisionalaccept, 3 rejected, 6 unclassified
+2024-05-26T10:26:44	selection_nodes.dec_left_op_right	INFO    	Step 24: left_op_right: accepted if ['d_table_score_node20>7 & variance explained>2.42'], else nochange
+2024-05-26T10:26:44	selection_nodes.dec_left_op_right	INFO    	Step 24: left_op_right Accept components with a bad d_table_score, but are at the higher end of the remaining variance so more cautious to not remove
+2024-05-26T10:26:44	selection_utils.comptable_classification_changer	INFO    	Step 24: No components fit criterion True to change classification
+2024-05-26T10:26:44	selection_utils.log_decision_tree_step	INFO    	Step 24: left_op_right applied to 11 components. 0 True -> accepted. 11 False -> nochange.
+2024-05-26T10:26:44	selection_utils.log_classification_counts	INFO    	Step 24: Total component classifications: 3 accepted, 5 provisionalaccept, 3 rejected, 6 unclassified
+2024-05-26T10:26:44	selection_nodes.dec_left_op_right	INFO    	Step 25: left_op_right: accepted if ['kappa<=19.02 & variance explained>2.42'], else nochange
+2024-05-26T10:26:44	selection_nodes.dec_left_op_right	INFO    	Step 25: left_op_right For not already rejected components, accept ones below the kappa elbow, but at the higher end of the remaining variance so more cautious to not remove
+2024-05-26T10:26:44	selection_utils.comptable_classification_changer	INFO    	Step 25: No components fit criterion True to change classification
+2024-05-26T10:26:44	selection_utils.log_decision_tree_step	INFO    	Step 25: left_op_right applied to 11 components. 0 True -> accepted. 11 False -> nochange.
+2024-05-26T10:26:44	selection_utils.log_classification_counts	INFO    	Step 25: Total component classifications: 3 accepted, 5 provisionalaccept, 3 rejected, 6 unclassified
+2024-05-26T10:26:44	selection_nodes.manual_classify	INFO    	Step 26: manual_classify: Set ['provisionalaccept', 'unclassified', 'unclass_highvar'] to accepted 
+2024-05-26T10:26:44	selection_nodes.manual_classify	INFO    	Step 26: manual_classify Anything still provisional (accepted or rejected) or unclassified should be accepted
+2024-05-26T10:26:44	selection_utils.log_decision_tree_step	INFO    	Step 26: manual_classify applied to 11 components. 11 True -> accepted. 0 False -> nochange.
+2024-05-26T10:26:44	selection_utils.log_classification_counts	INFO    	Step 26: Total component classifications: 14 accepted, 3 rejected
+2024-05-26T10:26:52	io.denoise_ts  	INFO    	Variance explained by decomposition: 48.13%
+2024-05-26T10:27:03	io.write_split_ts	INFO    	Writing denoised time series: /ZPOOL/data/projects/sharedreward-aging/derivatives/tedana/sub-10661/sub-10661_task-sharedreward_run-1_desc-denoised_bold.nii.gz
+2024-05-26T10:27:05	io.writeresults	INFO    	Writing full ICA coefficient feature set: /ZPOOL/data/projects/sharedreward-aging/derivatives/tedana/sub-10661/sub-10661_task-sharedreward_run-1_desc-ICA_components.nii.gz
+2024-05-26T10:27:05	io.writeresults	INFO    	Writing denoised ICA coefficient feature set: /ZPOOL/data/projects/sharedreward-aging/derivatives/tedana/sub-10661/sub-10661_task-sharedreward_run-1_desc-ICAAccepted_components.nii.gz
+2024-05-26T10:27:13	io.writeresults	INFO    	Writing Z-normalized spatial component maps: /ZPOOL/data/projects/sharedreward-aging/derivatives/tedana/sub-10661/sub-10661_task-sharedreward_run-1_desc-ICAAccepted_stat-z_components.nii.gz
+2024-05-26T10:27:13	tedana.tedana_workflow	INFO    	Making figures folder with static component maps and timecourse plots.
+2024-05-26T10:27:16	io.denoise_ts  	INFO    	Variance explained by decomposition: 48.13%
+2024-05-26T10:28:21	tedana.tedana_workflow	INFO    	Generating dynamic report
+2024-05-26T10:28:21	tedana.tedana_workflow	INFO    	Workflow completed
