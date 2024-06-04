@@ -47,6 +47,9 @@ for file in metric_files:
         filter_col=np.concatenate([aCompCor,cosine,NSS,motion,fd])
         fmriprep_confounds=fmriprep_confounds[filter_col]
 
+        # replace n/a values with 0 so that FSL doesn't ignore the whole column and shift other values
+        fmriprep_confounds.fillna(0, inplace=True)
+
         #Combine horizontally
         tedana_confounds=pd.concat([bad_components], axis=1)
         confounds_df=pd.concat([fmriprep_confounds, tedana_confounds], axis=1)
