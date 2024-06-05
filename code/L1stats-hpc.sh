@@ -12,7 +12,7 @@ source $FSLDIR/etc/fslconf/fsl.sh
 cd $PBS_O_WORKDIR
 
 # ensure paths are correct
-rf1datadir=~/work/sharedreward-aging #this should be the only line that has to change if the rest of the script is set up correctly
+datadir=~/work/sharedreward-aging #this should be the only line that has to change if the rest of the script is set up correctly
 projectdir=~/work/sharedreward-aging
 scriptdir=$projectdir/code
 bidsdir=$rf1datadir/bids
@@ -24,9 +24,9 @@ touch $logdir/cmd_feat_${PBS_JOBID}.txt
 
 TASK=sharedreward
 ppi=0
-sm=5
+sm=4
 
-# need to change this to a more targetted list of subjects
+# need to change this to a more targeted list of subjects
 # also should only run this if the inputs exist. add if statements.
 for sub in ${subjects[@]}; do
     for run in 1 2; do
@@ -38,16 +38,24 @@ for sub in ${subjects[@]}; do
             run_padded=$run
         fi
 
-        # set inputs and general outputs (should not need to chage across studies in Smith Lab)
+        # set inputs and general outputs (should not need to change across studies in Smith Lab)
         MAINOUTPUT=${projectdir}/derivatives/fsl/sub-${sub}
         mkdir -p $MAINOUTPUT
-        DATA=${rf1datadir}/derivatives/fmriprep/sub-${sub}/sub-${sub}/func/sub-${sub}_task-${TASK}_run-${run_padded}_space-MNI152NLin6Asym_desc-preproc_bold.nii.gz
-        CONFOUNDEVS=${rf1datadir}/derivatives/fsl/confounds/sub-${sub}/sub-${sub}_task-${TASK}_run-${run_padded}_desc-fslConfounds.tsv
+        DATA=${datadir}/derivatives/fmriprep/sub-${sub}/sub-${sub}/func/sub-${sub}_task-${TASK}_run-${run_padded}_space-MNI152NLin6Asym_res-2_desc-preproc_bold.nii.gz
+        
+        # Conditional setting of CONFOUNDEVS based on the length of sub
+        if [ ${#sub} -eq 3 ]; then
+            CONFOUNDEVS=${datadir}/derivatives/fsl/confounds/sub-${sub}/sub-${sub}_task-${TASK}_run-${run_padded}_desc-fslConfounds.tsv
+        elif [ ${#sub} -eq 5 ]; then
+            CONFOUNDEVS=${datadir}/derivatives/fsl/confounds_tedana/sub-${sub}_task-${TASK}_run-${run_padded}_desc-TedanaPlusConfounds.tsv
+        fi
+
         if [ ! -e $CONFOUNDEVS ]; then
             echo "missing: $CONFOUNDEVS " >> ${projectdir}/re-runL1.log
             continue # exiting/continuing to ensure nothing gets run without confounds
         fi
-        EVDIR=${projectdir}/derivatives/fsl/EVfiles/sub-${sub}/${TASK}/run-${run} # don't zeropad here since only 2 runs at most
+        
+        EVDIR=${projectdir}/derivatives/fsl/EVfiles/sub-${sub}/${TASK}/run-${run} # don't zero-pad here since only 2 runs at most
         if [ ! -d ${projectdir}/derivatives/fsl/EVfiles/sub-${sub}/${TASK} ]; then
             echo "missing EVfiles: $EVDIR " >> ${projectdir}/re-runL1.log
             continue # skip these since some won't exist yet
@@ -130,7 +138,7 @@ for sub in ${subjects[@]}; do
             fi
 
             # check for output and skip existing
-            if [ -e ${OUTPUT}.feat/cluster_mask_zstat1.nii.gz ]; then
+            if [ -e ${OUTPUT}.feat/cluster_mask_zstat1.nii.gz]; then
                 continue
             else
                 echo "missing: $OUTPUT " >> ${projectdir}/re-runL1.log
