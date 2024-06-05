@@ -4,7 +4,7 @@
 #PBS -q normal
 #PBS -m ae
 #PBS -M cooper.sharp@temple.edu
-#PBS -l nodes=1:ppn=28
+#PBS -l nodes=1:ppn=2
 
 # load modules and go to workdir
 module load fsl/6.0.2
@@ -14,9 +14,9 @@ cd $PBS_O_WORKDIR
 # ensure paths are correct
 datadir=~/work/sharedreward-aging #this should be the only line that has to change if the rest of the script is set up correctly
 projectdir=~/work/sharedreward-aging
-scriptdir=$projectdir/code
-bidsdir=$rf1datadir/bids
-logdir=$rf1datadir/logs
+scriptdir=/$projectdir/code
+bidsdir=/$datadir/ds003745
+logdir=/$datadir/logs
 mkdir -p $logdir
 
 rm -f $logdir/cmd_feat_${PBS_JOBID}.txt
@@ -41,8 +41,14 @@ for sub in ${subjects[@]}; do
         # set inputs and general outputs (should not need to change across studies in Smith Lab)
         MAINOUTPUT=${projectdir}/derivatives/fsl/sub-${sub}
         mkdir -p $MAINOUTPUT
-        DATA=${datadir}/derivatives/fmriprep/sub-${sub}/sub-${sub}/func/sub-${sub}_task-${TASK}_run-${run_padded}_space-MNI152NLin6Asym_res-2_desc-preproc_bold.nii.gz
-        
+
+        # Conditional setting of DATA variable based on the length of sub
+        if [ ${#sub} -eq 3 ]; then
+            DATA=${datadir}/derivatives/fmriprep/sub-${sub}/func/sub-${sub}_task-${TASK}_run-${run_padded}_space-MNI152NLin6Asym_res-2_desc-preproc_bold.nii.gz
+        elif [ ${#sub} -eq 5 ]; then
+            DATA=${datadir}/derivatives/fmriprep/sub-${sub}/func/sub-${sub}_task-${TASK}_run-${run_padded}_part-mag_space-MNI152NLin6Asym_res-2_desc-preproc_bold.nii.gz
+        fi
+
         # Conditional setting of CONFOUNDEVS based on the length of sub
         if [ ${#sub} -eq 3 ]; then
             CONFOUNDEVS=${datadir}/derivatives/fsl/confounds/sub-${sub}/sub-${sub}_task-${TASK}_run-${run_padded}_desc-fslConfounds.tsv
@@ -68,6 +74,10 @@ for sub in ${subjects[@]}; do
         else
             EV_SHAPE=10
         fi
+
+        # Obtain REPLACE_TR and REPLACE_NVOLS values
+        REPLACE_TR=$(fslval $DATA pixdim4)
+        REPLACE_NVOLS=$(fslvols $DATA)
 
         # if network (ecn or dmn), do nppi; otherwise, do activation or seed-based ppi
         if [ "$ppi" == "ecn" -o  "$ppi" == "dmn" ]; then
@@ -124,6 +134,8 @@ for sub in ${subjects[@]}; do
             -e 's@INPUT6@'$INPUT6'@g' \
             -e 's@INPUT8@'$INPUT8'@g' \
             -e 's@INPUT9@'$INPUT9'@g' \
+            -e 's@REPLACE_TR@'$REPLACE_TR'@g' \
+            -e 's@REPLACE_NVOLS@'$REPLACE_NVOLS'@g' \
             <$ITEMPLATE> $OTEMPLATE
 
         else # otherwise, do activation and seed-based ppi
@@ -154,26 +166,24 @@ for sub in ${subjects[@]}; do
                 -e 's@EVDIR@'$EVDIR'@g' \
                 -e 's@MISSED_TRIAL@'$MISSED_TRIAL'@g' \
                 -e 's@EV_SHAPE@'$EV_SHAPE'@g' \
-                -e 's@SMOOTH@'$sm'@g' \
                 -e 's@CONFOUNDEVS@'$CONFOUNDEVS'@g' \
                 <$ITEMPLATE> $OTEMPLATE
             else
-                PHYS=${MAINOUTPUT}/ts_task-${TASK}_mask-${ppi}_run-${run}.txt
-                MASK=${projectdir}/masks/seed-${ppi}.nii.gz
-                fslmeants -i $DATA -o $PHYS -m $MASK
                 sed -e 's@OUTPUT@'$OUTPUT'@g' \
                 -e 's@DATA@'$DATA'@g' \
                 -e 's@EVDIR@'$EVDIR'@g' \
                 -e 's@MISSED_TRIAL@'$MISSED_TRIAL'@g' \
                 -e 's@EV_SHAPE@'$EV_SHAPE'@g' \
-                -e 's@PHYS@'$PHYS'@g' \
-                -e 's@SMOOTH@'$sm'@g' \
                 -e 's@CONFOUNDEVS@'$CONFOUNDEVS'@g' \
+                -e 's@SMOOTH@'$sm'@g' \
+                -e 's@PPI@'$ppi'@g' \
+                -e 's@REPLACE_TR@'$REPLACE_TR'@g' \
+                -e 's@REPLACE_NVOLS@'$REPLACE_NVOLS'@g' \
                 <$ITEMPLATE> $OTEMPLATE
             fi
         fi
 
-        # run feat on the fsf file created
         feat $OTEMPLATE
+        echo "feat $OTEMPLATE" >> $logdir/cmd_feat_${PBS_JOBID}.txt
     done
 done
