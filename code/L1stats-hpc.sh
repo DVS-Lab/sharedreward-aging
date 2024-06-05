@@ -47,7 +47,7 @@ for sub in ${subjects[@]}; do
         if [ ${#sub} -eq 3 ]; then
             CONFOUNDEVS=${datadir}/derivatives/fsl/confounds/sub-${sub}/sub-${sub}_task-${TASK}_run-${run_padded}_desc-fslConfounds.tsv
         elif [ ${#sub} -eq 5 ]; then
-            CONFOUNDEVS=${datadir}/derivatives/fsl/confounds_tedana/sub-${sub}_task-${TASK}_run-${run_padded}_desc-TedanaPlusConfounds.tsv
+            CONFOUNDEVS=${datadir}/derivatives/fsl/confounds_tedana//sub-${sub}/sub-${sub}_task-${TASK}_run-${run_padded}_desc-TedanaPlusConfounds.tsv
         fi
 
         if [ ! -e $CONFOUNDEVS ]; then
@@ -131,10 +131,10 @@ for sub in ${subjects[@]}; do
             # set output based in whether it is activation or ppi
             if [ "$ppi" == "0" ]; then
                 TYPE=act
-                OUTPUT=${MAINOUTPUT}/L1_task-${TASK}_model-1_type-${TYPE}_run-${run}_sm-${sm}
+                OUTPUT=${MAINOUTPUT}/L1_task-${TASK}_model-1_type-${TYPE}_run-${run_padded}_sm-${sm}
             else
                 TYPE=ppi
-                OUTPUT=${MAINOUTPUT}/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_run-${run}_sm-${sm}
+                OUTPUT=${MAINOUTPUT}/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_run-${run_padded}_sm-${sm}
             fi
 
             # check for output and skip existing
