@@ -47,7 +47,7 @@ for sub in ${subjects[@]}; do
         if [ ${#sub} -eq 3 ]; then
             CONFOUNDEVS=${datadir}/derivatives/fsl/confounds/sub-${sub}/sub-${sub}_task-${TASK}_run-${run_padded}_desc-fslConfounds.tsv
         elif [ ${#sub} -eq 5 ]; then
-            CONFOUNDEVS=${datadir}/derivatives/fsl/confounds_tedana//sub-${sub}/sub-${sub}_task-${TASK}_run-${run_padded}_desc-TedanaPlusConfounds.tsv
+            CONFOUNDEVS=${datadir}/derivatives/fsl/confounds_tedana/sub-${sub}/sub-${sub}_task-${TASK}_run-${run_padded}_desc-TedanaPlusConfounds.tsv
         fi
 
         if [ ! -e $CONFOUNDEVS ]; then
