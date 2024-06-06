@@ -138,9 +138,13 @@ for sub in ${subjects[@]}; do
             if [ "$ppi" == "0" ]; then
                 TYPE=act
                 OUTPUT=${MAINOUTPUT}/L1_task-${TASK}_model-1_type-${TYPE}_run-${run_padded}_sm-${sm}
+                REPLACE_NVOLS=$(fslnvols $DATA)
+                REPLACE_TR=$(fslval $DATA pixdim4)
             else
                 TYPE=ppi
                 OUTPUT=${MAINOUTPUT}/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_run-${run_padded}_sm-${sm}
+                REPLACE_NVOLS=$(fslnvols $DATA)
+                REPLACE_TR=$(fslval $DATA pixdim4)
             fi
 
             # check for output and skip existing
