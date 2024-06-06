@@ -158,9 +158,9 @@ for sub in ${subjects[@]}; do
             OTEMPLATE=${MAINOUTPUT}/L1_sub-${sub}_task-${TASK}_model-1_seed-${ppi}_run-${run}.fsf
             if [ "$ppi" == "0" ]; then
             	 REPLACE_NVOLS=$(fslnvols $DATA)
-                REPLACE_TR=$(fslval $DATA pixdim4)
+                #REPLACE_TR=$(fslval $DATA pixdim4)
                 sed -e 's@OUTPUT@'$OUTPUT'@g' \
-                -e 's@REPLACE_TR@'$REPLACE_TR'@g' \
+                #-e 's@REPLACE_TR@'$REPLACE_TR'@g' \
                 -e 's@REPLACE_NVOLS@'$REPLACE_NVOLS'@g' \
                 -e 's@DATA@'$DATA'@g' \
                 -e 's@EVDIR@'$EVDIR'@g' \
@@ -170,9 +170,9 @@ for sub in ${subjects[@]}; do
                 <$ITEMPLATE> $OTEMPLATE
             else
             	 REPLACE_NVOLS=$(fslnvols $DATA)
-                REPLACE_TR=$(fslval $DATA pixdim4)
+                #REPLACE_TR=$(fslval $DATA pixdim4)
                 sed -e 's@OUTPUT@'$OUTPUT'@g' \
-                -e 's@REPLACE_TR@'$REPLACE_TR'@g' \
+                #-e 's@REPLACE_TR@'$REPLACE_TR'@g' \
                 -e 's@REPLACE_NVOLS@'$REPLACE_NVOLS'@g' \
                 -e 's@DATA@'$DATA'@g' \
                 -e 's@EVDIR@'$EVDIR'@g' \
