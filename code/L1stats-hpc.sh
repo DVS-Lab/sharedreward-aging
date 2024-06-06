@@ -146,7 +146,7 @@ for sub in ${subjects[@]}; do
             fi
 
             # check for output and skip existing
-            if [ -e ${OUTPUT}.feat/cluster_mask_zstat1.nii.gz]; then
+            if [ -e ${OUTPUT}.feat/cluster_mask_zstat1.nii.gz ]; then
                 continue
             else
                 echo "missing: $OUTPUT " >> ${projectdir}/re-runL1.log
