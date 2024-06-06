@@ -129,7 +129,7 @@ for sub in ${subjects[@]}; do
             -e 's@INPUT5@'$INPUT5'@g' \
             -e 's@INPUT6@'$INPUT6'@g' \
             -e 's@INPUT8@'$INPUT8'@g' \
-            -e 's@INPUT9@'$INPUT9'@g' 
+            -e 's@INPUT9@'$INPUT9'@g' \
             <$ITEMPLATE> $OTEMPLATE
 
         else # otherwise, do activation and seed-based ppi
