@@ -75,7 +75,6 @@ for sub in ${subjects[@]}; do
             EV_SHAPE=10
         fi
 
-
         # if network (ecn or dmn), do nppi; otherwise, do activation or seed-based ppi
         if [ "$ppi" == "ecn" -o  "$ppi" == "dmn" ]; then
 
@@ -130,9 +129,7 @@ for sub in ${subjects[@]}; do
             -e 's@INPUT5@'$INPUT5'@g' \
             -e 's@INPUT6@'$INPUT6'@g' \
             -e 's@INPUT8@'$INPUT8'@g' \
-            -e 's@INPUT9@'$INPUT9'@g' \
-            #-e 's@REPLACE_TR@'$REPLACE_TR'@g' \
-            #-e 's@REPLACE_NVOLS@'$REPLACE_NVOLS'@g' \
+            -e 's@INPUT9@'$INPUT9'@g' 
             <$ITEMPLATE> $OTEMPLATE
 
         else # otherwise, do activation and seed-based ppi
@@ -158,21 +155,14 @@ for sub in ${subjects[@]}; do
             ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}.fsf
             OTEMPLATE=${MAINOUTPUT}/L1_sub-${sub}_task-${TASK}_model-1_seed-${ppi}_run-${run}.fsf
             if [ "$ppi" == "0" ]; then
-                    # Obtain REPLACE_TR and REPLACE_NVOLS values
-			  		REPLACE_TR=$(fslval $DATA pixdim4)
-			  		REPLACE_NVOLS=$(fslnvols $DATA)
                 sed -e 's@OUTPUT@'$OUTPUT'@g' \
-                -e 's@REPLACE_TR@'$REPLACE_TR'@g' \
-                -e 's@REPLACE_NVOLS@'$REPLACE_NVOLS'@g' \
                 -e 's@DATA@'$DATA'@g' \
                 -e 's@EVDIR@'$EVDIR'@g' \
                 -e 's@MISSED_TRIAL@'$MISSED_TRIAL'@g' \
-                #-e 's@EV_SHAPE@'$EV_SHAPE'@g' \
-                #-e 's@CONFOUNDEVS@'$CONFOUNDEVS'@g' \
+                -e 's@EV_SHAPE@'$EV_SHAPE'@g' \
+                -e 's@CONFOUNDEVS@'$CONFOUNDEVS'@g' \
                 <$ITEMPLATE> $OTEMPLATE
             else
-            	REPLACE_TR=$(fslval $DATA pixdim4)
-			  		REPLACE_NVOLS=$(fslnvols $DATA)
                 sed -e 's@OUTPUT@'$OUTPUT'@g' \
                 -e 's@DATA@'$DATA'@g' \
                 -e 's@EVDIR@'$EVDIR'@g' \
@@ -181,8 +171,6 @@ for sub in ${subjects[@]}; do
                 -e 's@CONFOUNDEVS@'$CONFOUNDEVS'@g' \
                 -e 's@SMOOTH@'$sm'@g' \
                 -e 's@PPI@'$ppi'@g' \
-                #-e 's@REPLACE_TR@'$REPLACE_TR'@g' \
-                #-e 's@REPLACE_NVOLS@'$REPLACE_NVOLS'@g' \
                 <$ITEMPLATE> $OTEMPLATE
             fi
         fi
