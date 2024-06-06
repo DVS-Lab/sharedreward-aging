@@ -143,8 +143,6 @@ for sub in ${subjects[@]}; do
             else
                 TYPE=ppi
                 OUTPUT=${MAINOUTPUT}/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_run-${run_padded}_sm-${sm}
-                REPLACE_NVOLS=$(fslnvols $DATA)
-                REPLACE_TR=$(fslval $DATA pixdim4)
             fi
 
             # check for output and skip existing
@@ -159,6 +157,8 @@ for sub in ${subjects[@]}; do
             ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}.fsf
             OTEMPLATE=${MAINOUTPUT}/L1_sub-${sub}_task-${TASK}_model-1_seed-${ppi}_run-${run}.fsf
             if [ "$ppi" == "0" ]; then
+            	 REPLACE_NVOLS=$(fslnvols $DATA)
+                REPLACE_TR=$(fslval $DATA pixdim4)
                 sed -e 's@OUTPUT@'$OUTPUT'@g' \
                 -e 's@REPLACE_TR@'$REPLACE_TR'@g' \
                 -e 's@REPLACE_NVOLS@'$REPLACE_NVOLS'g@' \
@@ -167,9 +167,10 @@ for sub in ${subjects[@]}; do
                 -e 's@MISSED_TRIAL@'$MISSED_TRIAL'@g' \
                 -e 's@EV_SHAPE@'$EV_SHAPE'@g' \
                 -e 's@CONFOUNDEVS@'$CONFOUNDEVS'@g' \
-
                 <$ITEMPLATE> $OTEMPLATE
             else
+            	 REPLACE_NVOLS=$(fslnvols $DATA)
+                REPLACE_TR=$(fslval $DATA pixdim4)
                 sed -e 's@OUTPUT@'$OUTPUT'@g' \
                 -e 's@REPLACE_TR@'$REPLACE_TR'@g' \
                 -e 's@REPLACE_NVOLS@'$REPLACE_NVOLS'g@' \
