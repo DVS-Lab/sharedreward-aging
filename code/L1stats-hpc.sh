@@ -153,38 +153,43 @@ for sub in ${subjects[@]}; do
                 rm -rf ${OUTPUT}.feat
             fi
 
-            # create template and run analyses
-            ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}.fsf
-            OTEMPLATE=${MAINOUTPUT}/L1_sub-${sub}_task-${TASK}_model-1_seed-${ppi}_run-${run}.fsf
-            if [ "$ppi" == "0" ]; then
-            	 REPLACE_NVOLS=$(fslnvols $DATA)
-                #REPLACE_TR=$(fslval $DATA pixdim4)
-                sed -e 's@OUTPUT@'$OUTPUT'@g' \
-                #-e 's@REPLACE_TR@'$REPLACE_TR'@g' \
-                -e 's@REPLACE_NVOLS@'$REPLACE_NVOLS'@g' \
-                -e 's@DATA@'$DATA'@g' \
-                -e 's@EVDIR@'$EVDIR'@g' \
-                -e 's@MISSED_TRIAL@'$MISSED_TRIAL'@g' \
-                -e 's@EV_SHAPE@'$EV_SHAPE'@g' \
-                -e 's@CONFOUNDEVS@'$CONFOUNDEVS'@g' \
-                <$ITEMPLATE> $OTEMPLATE
-            else
-            	 REPLACE_NVOLS=$(fslnvols $DATA)
-                #REPLACE_TR=$(fslval $DATA pixdim4)
-                sed -e 's@OUTPUT@'$OUTPUT'@g' \
-                #-e 's@REPLACE_TR@'$REPLACE_TR'@g' \
-                -e 's@REPLACE_NVOLS@'$REPLACE_NVOLS'@g' \
-                -e 's@DATA@'$DATA'@g' \
-                -e 's@EVDIR@'$EVDIR'@g' \
-                -e 's@MISSED_TRIAL@'$MISSED_TRIAL'@g' \
-                -e 's@EV_SHAPE@'$EV_SHAPE'@g' \
-                -e 's@CONFOUNDEVS@'$CONFOUNDEVS'@g' \
-                -e 's@SMOOTH@'$sm'@g' \
-                -e 's@PPI@'$ppi'@g' \
-                <$ITEMPLATE> $OTEMPLATE
-            fi
+				# create template and run analyses
+				if [ ${#sub} -eq 3 ]; then
+				    ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_srndna.fsf
+				else
+				    ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_rf1.fsf
+				fi
+				
+				OTEMPLATE=${MAINOUTPUT}/L1_sub-${sub}_task-${TASK}_model-1_seed-${ppi}_run-${run}.fsf
+				if [ "$ppi" == "0" ]; then
+				    # REPLACE_NVOLS=$(fslnvols $DATA)
+				    # REPLACE_TR=$(fslval $DATA pixdim4)
+				    sed -e 's@OUTPUT@'$OUTPUT'@g' \
+				        # -e 's@REPLACE_TR@'$REPLACE_TR'@g' \
+				        # -e 's@REPLACE_NVOLS@'$REPLACE_NVOLS'@g' \
+				        -e 's@DATA@'$DATA'@g' \
+				        -e 's@EVDIR@'$EVDIR'@g' \
+				        -e 's@MISSED_TRIAL@'$MISSED_TRIAL'@g' \
+				        -e 's@EV_SHAPE@'$EV_SHAPE'@g' \
+				        -e 's@CONFOUNDEVS@'$CONFOUNDEVS'@g' \
+				        <$ITEMPLATE> $OTEMPLATE
+				else
+				    # REPLACE_NVOLS=$(fslnvols $DATA)
+				    # REPLACE_TR=$(fslval $DATA pixdim4)
+				    sed -e 's@OUTPUT@'$OUTPUT'@g' \
+				        # -e 's@REPLACE_TR@'$REPLACE_TR'@g' \
+				        # -e 's@REPLACE_NVOLS@'$REPLACE_NVOLS'@g' \
+				        -e 's@DATA@'$DATA'@g' \
+				        -e 's@EVDIR@'$EVDIR'@g' \
+				        -e 's@MISSED_TRIAL@'$MISSED_TRIAL'@g' \
+				        -e 's@EV_SHAPE@'$EV_SHAPE'@g' \
+				        -e 's@CONFOUNDEVS@'$CONFOUNDEVS'@g' \
+				        -e 's@SMOOTH@'$sm'@g' \
+				        -e 's@PPI@'$ppi'@g' \
+				        <$ITEMPLATE> $OTEMPLATE
+				fi
         fi
-
+	
         feat $OTEMPLATE
         echo "feat $OTEMPLATE" >> $logdir/cmd_feat_${PBS_JOBID}.txt
     done
