@@ -167,8 +167,8 @@ for sub in ${subjects[@]}; do
                 -e 's@DATA@'$DATA'@g' \
                 -e 's@EVDIR@'$EVDIR'@g' \
                 -e 's@MISSED_TRIAL@'$MISSED_TRIAL'@g' \
-                -e 's@EV_SHAPE@'$EV_SHAPE'@g' \
-                -e 's@CONFOUNDEVS@'$CONFOUNDEVS'@g' \
+                #-e 's@EV_SHAPE@'$EV_SHAPE'@g' \
+                #-e 's@CONFOUNDEVS@'$CONFOUNDEVS'@g' \
                 <$ITEMPLATE> $OTEMPLATE
             else
             	REPLACE_TR=$(fslval $DATA pixdim4)
@@ -181,8 +181,8 @@ for sub in ${subjects[@]}; do
                 -e 's@CONFOUNDEVS@'$CONFOUNDEVS'@g' \
                 -e 's@SMOOTH@'$sm'@g' \
                 -e 's@PPI@'$ppi'@g' \
-                -e 's@REPLACE_TR@'$REPLACE_TR'@g' \
-                -e 's@REPLACE_NVOLS@'$REPLACE_NVOLS'@g' \
+                #-e 's@REPLACE_TR@'$REPLACE_TR'@g' \
+                #-e 's@REPLACE_NVOLS@'$REPLACE_NVOLS'@g' \
                 <$ITEMPLATE> $OTEMPLATE
             fi
         fi
