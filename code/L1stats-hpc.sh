@@ -189,3 +189,5 @@ for sub in ${subjects[@]}; do
         echo "feat $OTEMPLATE" >> $logdir/cmd_feat_${PBS_JOBID}.txt
     done
 done
+
+torque-launch -p $logdir/chk_feat_${PBS_JOBID}.txt $logdir/cmd_feat_${PBS_JOBID}.txt
