@@ -164,7 +164,7 @@ for sub in ${subjects[@]}; do
             if [ "$ppi" == "0" ]; then
                 # REPLACE_NVOLS=$(fslnvols $DATA)
                 # REPLACE_TR=$(fslval $DATA pixdim4)
-                sed -e 's@OUTPUT@'$OUTPUT'@g' \
+                    sed -e 's@OUTPUT@'$OUTPUT'@g' \
                     # -e 's@REPLACE_TR@'$REPLACE_TR'@g' \
                     # -e 's@REPLACE_NVOLS@'$REPLACE_NVOLS'@g' \
                     -e 's@DATA@'$DATA'@g' \
@@ -176,7 +176,7 @@ for sub in ${subjects[@]}; do
             else
                 # REPLACE_NVOLS=$(fslnvols $DATA)
                 # REPLACE_TR=$(fslval $DATA pixdim4)
-                sed -e 's@OUTPUT@'$OUTPUT'@g' \
+                    sed -e 's@OUTPUT@'$OUTPUT'@g' \
                     # -e 's@REPLACE_TR@'$REPLACE_TR'@g' \
                     # -e 's@REPLACE_NVOLS@'$REPLACE_NVOLS'@g' \
                     -e 's@DATA@'$DATA'@g' \
