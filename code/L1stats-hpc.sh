@@ -44,9 +44,9 @@ for sub in ${subjects[@]}; do
 
         # Conditional setting of DATA variable based on the length of sub
         if [ ${#sub} -eq 3 ]; then
-            DATA=${datadir}/derivatives/fmriprep/sub-${sub}/func/sub-${sub}_task-${TASK}_run-${run_padded}_space-MNI152NLin6Asym_res-2_desc-preproc_bold.nii.gz
+            DATA=${datadir}/derivatives/fmriprep/sub-${sub}/sub-${sub}/func/sub-${sub}_task-${TASK}_run-${run_padded}_space-MNI152NLin6Asym_res-2_desc-preproc_bold.nii.gz
         elif [ ${#sub} -eq 5 ]; then
-            DATA=${datadir}/derivatives/fmriprep/sub-${sub}/func/sub-${sub}_task-${TASK}_run-${run_padded}_part-mag_space-MNI152NLin6Asym_res-2_desc-preproc_bold.nii.gz
+            DATA=${datadir}/derivatives/fmriprep/sub-${sub}/sub-${sub}/func/sub-${sub}_task-${TASK}_run-${run_padded}_part-mag_space-MNI152NLin6Asym_res-2_desc-preproc_bold.nii.gz
         fi
 
         # Conditional setting of CONFOUNDEVS based on the length of sub
