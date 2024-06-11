@@ -6,7 +6,7 @@ maindir="$(dirname "$scriptdir")"
 
 # the "type" variable below is setting a path inside the main script
 for type in "act" ; do #"ppi_seed-VS_thr5" "act" "nppi-dmn"; do # act nppi-ecn #"ppi_seed-NAcc"
-	for sub in `cat ${scriptdir}/sublist_all.txt`; do
+	for sub in `cat ${scriptdir}/sublist-sr.txt`; do
 	#for sub in 10529 10541 10572 10581 10584; do
 
 		# Manages the number of jobs and cores

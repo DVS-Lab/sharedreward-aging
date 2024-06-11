@@ -7,25 +7,14 @@ maindir="$(dirname "$scriptdir")"
 # setting inputs and common variables
 sub=$1
 type=$2
-task1=trust # edit if necessary
-sm=5 # edit if necessary
+task1=sharedreward # edit if necessary
+sm=4 # edit if necessary
 MAINOUTPUT=${maindir}/derivatives/fsl/sub-${sub}
 model=1
 NCOPES=18
 
 
 # --- start EDIT HERE start: exceptions and conditionals for the task
-
-#if [ $sub -eq 1001 ]; then # bad data
-#	echo "skipping sub-${sub} for task-${task}"
-#	exit
-#fi
-
-# hopefully temporary:
-#if [ $sub -eq 1001 ]; then # bad data
-#	echo "skipping sub-${sub} for task-${task}"
-#	exit
-#fi
 
 # ppi has more contrasts than act (phys), so need a different L2 template
 if [ "${type}" == "act" ]; then
@@ -35,10 +24,16 @@ else
 	ITEMPLATE=${maindir}/templates/L2_task-trust_model-${model}_type-ppi_nruns-2.fsf
 	let NCOPES=${NCOPES}+1 # add 1 since we tend to only have one extra contrast for PPI
 fi
-INPUT1=${MAINOUTPUT}/L1_task-trust_model-${model}_type-${type}_run-1_sm-${sm}.feat
-INPUT2=${MAINOUTPUT}/L1_task-trust_model-${model}_type-${type}_run-2_sm-${sm}.feat
+
 # --- end EDIT HERE end: exceptions and conditionals for the task; need to exclude bad/missing runs
 
+if [ ${#sub} -eq 3 ]; then
+	INPUT1=${MAINOUTPUT}/L1_task-trust_model-${model}_type-${type}_run-01_sm-${sm}.feat
+	INPUT2=${MAINOUTPUT}/L1_task-trust_model-${model}_type-${type}_run-02_sm-${sm}.feat
+elif [ ${#sub} -eq 5 ]; then
+	INPUT1=${MAINOUTPUT}/L1_task-trust_model-${model}_type-${type}_run-1_sm-${sm}.feat
+	INPUT2=${MAINOUTPUT}/L1_task-trust_model-${model}_type-${type}_run-2_sm-${sm}.feat
+fi
 
 # check for existing output and re-do if missing/incomplete
 OUTPUT=${MAINOUTPUT}/L2_task-trust_model-${model}_type-${type}_sm-${sm}
