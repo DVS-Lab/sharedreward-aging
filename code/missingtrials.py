@@ -89,7 +89,7 @@ df_pivot['Missed_Trial_Count'] = df_pivot.apply(
 )
 
 # Calculate the exclusion status based on missed trial count
-df_pivot['Exclude'] = df_pivot.apply(
+df_pivot['Exclusion'] = df_pivot.apply(
     lambda row: 'Exclude' if row['Missed_Trial_Count'] > 0.25 * total_row_count_dict.get(row['Subject'], {}).get(row['Run'], 0) else 'Include',
     axis=1
 )
