@@ -282,7 +282,7 @@ set feat_files(2) "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/sub-1
 set feat_files(3) "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/sub-108/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (4)
-set feat_files(4) "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/sub-111/L1_task-sharedreward_model-1_type-REPLACEME_run-2_sm-4.feat/stats/cope1.nii.gz"
+set feat_files(4) "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/sub-111/L1_task-sharedreward_model-1_type-REPLACEME_run-02_sm-4.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (5)
 set feat_files(5) "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/sub-112/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
@@ -300,7 +300,7 @@ set feat_files(8) "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/sub-1
 set feat_files(9) "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/sub-117/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (10)
-set feat_files(10) "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/sub-120/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/cope1.nii.gz"
+set feat_files(10) "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/sub-120/L1_task-sharedreward_model-1_type-REPLACEME_run-01_sm-4.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (11)
 set feat_files(11) "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/sub-121/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
@@ -345,7 +345,7 @@ set feat_files(23) "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/sub-
 set feat_files(24) "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/sub-147/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (25)
-set feat_files(25) "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/sub-149/L1_task-sharedreward_model-1_type-REPLACEME_run-2_sm-4.feat/stats/cope1.nii.gz"
+set feat_files(25) "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/sub-149/L1_task-sharedreward_model-1_type-REPLACEME_run-02_sm-4.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (26)
 set feat_files(26) "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/sub-150/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
