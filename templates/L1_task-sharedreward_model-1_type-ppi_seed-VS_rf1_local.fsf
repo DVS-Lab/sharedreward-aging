@@ -30,7 +30,7 @@ set fmri(featwatcher_yn) 0
 set fmri(sscleanup_yn) 0
 
 # Output directory
-set fmri(outputdir) "/Users/coopersharp/Desktop/sub-10661"
+set fmri(outputdir) "OUTPUT"
 
 # TR(s)
 set fmri(tr) 1.615
