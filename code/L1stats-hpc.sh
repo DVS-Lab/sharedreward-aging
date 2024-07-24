@@ -23,7 +23,7 @@ rm -f $logdir/cmd_feat_${PBS_JOBID}.txt
 touch $logdir/cmd_feat_${PBS_JOBID}.txt
 
 TASK=sharedreward
-ppi=0
+ppi=VS
 sm=4
 
 # need to change this to a more targeted list of subjects
@@ -155,9 +155,9 @@ for sub in ${subjects[@]}; do
 
             # create template and run analyses
             if [ ${#sub} -eq 3 ]; then
-                ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_srndna.fsf
+                ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_seed-VS_srndna-HPC.fsf
             else
-                ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_rf1.fsf
+                ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_seed-VS_rf1-HPC.fsf
             fi
             
             OTEMPLATE=${MAINOUTPUT}/L1_sub-${sub}_task-${TASK}_model-1_seed-${ppi}_run-${run}.fsf

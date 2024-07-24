@@ -5,14 +5,14 @@ maindir=~/work/sharedreward-aging #this should be the only line that has to chan
 scriptdir=$trustdir/code
 
 
-mapfile -t myArray < sublist-test.txt
+mapfile -t myArray < sublist-sr.txt
 
 
 # grab the first 10 elements
 ntasks=4
 counter=0
 for task in sharedreward; do
-	for ppi in "0"; do #"VS_thr5" "dmn"; do # 0 "VS_thr5" "dmn"; do # putting 0 first will indicate "activation"
+	for ppi in "VS"; do #"VS_thr5" "dmn"; do # 0 "VS_thr5" "dmn"; do # putting 0 first will indicate "activation"
 		#for run in 1 2; do
 		
 		while [ $counter -lt ${#myArray[@]} ]; do
