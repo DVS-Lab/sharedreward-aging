@@ -4,7 +4,7 @@
 #PBS -q normal
 #PBS -m ae
 #PBS -M cooper.sharp@temple.edu
-#PBS -l nodes=1:ppn=2
+#PBS -l nodes=1:ppn=28
 
 # load modules and go to workdir
 module load fsl/6.0.2
@@ -16,7 +16,7 @@ datadir=~/work/sharedreward-aging #this should be the only line that has to chan
 projectdir=~/work/sharedreward-aging
 scriptdir=/$projectdir/code
 bidsdir=/$datadir/ds003745
-logdir=/$datadir/logs
+logdir=/home/tun31934/work/sharedreward-aging/logs
 mkdir -p $logdir
 
 rm -f $logdir/cmd_feat_${PBS_JOBID}.txt
