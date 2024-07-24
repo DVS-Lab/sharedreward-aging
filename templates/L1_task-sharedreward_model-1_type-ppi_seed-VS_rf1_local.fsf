@@ -279,7 +279,7 @@ set feat_files(1) "/ZPOOL/data/projects/sharedreward-aging/derivatives/fmriprep/
 set fmri(confoundevs) 1
 
 # Confound EVs text file for analysis 1
-set confoundev_files(1) "/Users/coopersharp/Desktop/sub-10661/meants.txt"
+set confoundev_files(1) "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/confounds_tedana/sub-10661/sub-10661_task-sharedreward_run-1_desc-TedanaPlusConfounds.tsv"
 
 # EV 1 title
 set fmri(evtitle1) "C_pun"
@@ -291,7 +291,7 @@ set fmri(evtitle1) "C_pun"
 # 3 : Custom (3 column format)
 # 4 : Interaction
 # 10 : Empty (all zeros)
-set fmri(shape1) 2
+set fmri(shape1) 3
 
 # Convolution (EV 1)
 # 0 : None
@@ -302,7 +302,7 @@ set fmri(shape1) 2
 # 5 : Sine basis functions
 # 6 : FIR basis functions
 # 8 : Alternate Double-Gamma
-set fmri(convolve1) 0
+set fmri(convolve1) 3
 
 # Convolve phase (EV 1)
 set fmri(convolve_phase1) 0
@@ -410,7 +410,7 @@ set fmri(evtitle2) "C_rew"
 # 3 : Custom (3 column format)
 # 4 : Interaction
 # 10 : Empty (all zeros)
-set fmri(shape2) 2
+set fmri(shape2) 3
 
 # Convolution (EV 2)
 # 0 : None
@@ -421,7 +421,7 @@ set fmri(shape2) 2
 # 5 : Sine basis functions
 # 6 : FIR basis functions
 # 8 : Alternate Double-Gamma
-set fmri(convolve2) 0
+set fmri(convolve2) 3
 
 # Convolve phase (EV 2)
 set fmri(convolve_phase2) 0
@@ -529,7 +529,7 @@ set fmri(evtitle3) "F_pun"
 # 3 : Custom (3 column format)
 # 4 : Interaction
 # 10 : Empty (all zeros)
-set fmri(shape3) 2
+set fmri(shape3) 3
 
 # Convolution (EV 3)
 # 0 : None
@@ -540,7 +540,7 @@ set fmri(shape3) 2
 # 5 : Sine basis functions
 # 6 : FIR basis functions
 # 8 : Alternate Double-Gamma
-set fmri(convolve3) 0
+set fmri(convolve3) 3
 
 # Convolve phase (EV 3)
 set fmri(convolve_phase3) 0
@@ -648,7 +648,7 @@ set fmri(evtitle4) "F_rew"
 # 3 : Custom (3 column format)
 # 4 : Interaction
 # 10 : Empty (all zeros)
-set fmri(shape4) 2
+set fmri(shape4) 3
 
 # Convolution (EV 4)
 # 0 : None
@@ -659,7 +659,7 @@ set fmri(shape4) 2
 # 5 : Sine basis functions
 # 6 : FIR basis functions
 # 8 : Alternate Double-Gamma
-set fmri(convolve4) 0
+set fmri(convolve4) 3
 
 # Convolve phase (EV 4)
 set fmri(convolve_phase4) 0
@@ -767,7 +767,7 @@ set fmri(evtitle5) "S_pun"
 # 3 : Custom (3 column format)
 # 4 : Interaction
 # 10 : Empty (all zeros)
-set fmri(shape5) 2
+set fmri(shape5) 3
 
 # Convolution (EV 5)
 # 0 : None
@@ -778,7 +778,7 @@ set fmri(shape5) 2
 # 5 : Sine basis functions
 # 6 : FIR basis functions
 # 8 : Alternate Double-Gamma
-set fmri(convolve5) 0
+set fmri(convolve5) 3
 
 # Convolve phase (EV 5)
 set fmri(convolve_phase5) 0
@@ -886,7 +886,7 @@ set fmri(evtitle6) "S_rew"
 # 3 : Custom (3 column format)
 # 4 : Interaction
 # 10 : Empty (all zeros)
-set fmri(shape6) 2
+set fmri(shape6) 3
 
 # Convolution (EV 6)
 # 0 : None
@@ -897,7 +897,7 @@ set fmri(shape6) 2
 # 5 : Sine basis functions
 # 6 : FIR basis functions
 # 8 : Alternate Double-Gamma
-set fmri(convolve6) 0
+set fmri(convolve6) 3
 
 # Convolve phase (EV 6)
 set fmri(convolve_phase6) 0
@@ -1005,7 +1005,7 @@ set fmri(evtitle7) "C_neu"
 # 3 : Custom (3 column format)
 # 4 : Interaction
 # 10 : Empty (all zeros)
-set fmri(shape7) 2
+set fmri(shape7) 3
 
 # Convolution (EV 7)
 # 0 : None
@@ -1016,7 +1016,7 @@ set fmri(shape7) 2
 # 5 : Sine basis functions
 # 6 : FIR basis functions
 # 8 : Alternate Double-Gamma
-set fmri(convolve7) 0
+set fmri(convolve7) 3
 
 # Convolve phase (EV 7)
 set fmri(convolve_phase7) 0
@@ -1124,7 +1124,7 @@ set fmri(evtitle8) "F_neu"
 # 3 : Custom (3 column format)
 # 4 : Interaction
 # 10 : Empty (all zeros)
-set fmri(shape8) 2
+set fmri(shape8) 3
 
 # Convolution (EV 8)
 # 0 : None
@@ -1135,7 +1135,7 @@ set fmri(shape8) 2
 # 5 : Sine basis functions
 # 6 : FIR basis functions
 # 8 : Alternate Double-Gamma
-set fmri(convolve8) 0
+set fmri(convolve8) 3
 
 # Convolve phase (EV 8)
 set fmri(convolve_phase8) 0
@@ -1243,7 +1243,7 @@ set fmri(evtitle9) "S_neu"
 # 3 : Custom (3 column format)
 # 4 : Interaction
 # 10 : Empty (all zeros)
-set fmri(shape9) 2
+set fmri(shape9) 3
 
 # Convolution (EV 9)
 # 0 : None
@@ -1254,7 +1254,7 @@ set fmri(shape9) 2
 # 5 : Sine basis functions
 # 6 : FIR basis functions
 # 8 : Alternate Double-Gamma
-set fmri(convolve9) 0
+set fmri(convolve9) 3
 
 # Convolve phase (EV 9)
 set fmri(convolve_phase9) 0
@@ -1478,7 +1478,7 @@ set fmri(evtitle11) "F_dec"
 # 3 : Custom (3 column format)
 # 4 : Interaction
 # 10 : Empty (all zeros)
-set fmri(shape11) 2
+set fmri(shape11) 3
 
 # Convolution (EV 11)
 # 0 : None
@@ -1489,7 +1489,7 @@ set fmri(shape11) 2
 # 5 : Sine basis functions
 # 6 : FIR basis functions
 # 8 : Alternate Double-Gamma
-set fmri(convolve11) 0
+set fmri(convolve11) 3
 
 # Convolve phase (EV 11)
 set fmri(convolve_phase11) 0
@@ -1597,7 +1597,7 @@ set fmri(evtitle12) "S_dec"
 # 3 : Custom (3 column format)
 # 4 : Interaction
 # 10 : Empty (all zeros)
-set fmri(shape12) 2
+set fmri(shape12) 3
 
 # Convolution (EV 12)
 # 0 : None
@@ -1608,7 +1608,7 @@ set fmri(shape12) 2
 # 5 : Sine basis functions
 # 6 : FIR basis functions
 # 8 : Alternate Double-Gamma
-set fmri(convolve12) 0
+set fmri(convolve12) 3
 
 # Convolve phase (EV 12)
 set fmri(convolve_phase12) 0
@@ -1716,7 +1716,7 @@ set fmri(evtitle13) "C_dec"
 # 3 : Custom (3 column format)
 # 4 : Interaction
 # 10 : Empty (all zeros)
-set fmri(shape13) 2
+set fmri(shape13) 3
 
 # Convolution (EV 13)
 # 0 : None
@@ -1727,7 +1727,7 @@ set fmri(shape13) 2
 # 5 : Sine basis functions
 # 6 : FIR basis functions
 # 8 : Alternate Double-Gamma
-set fmri(convolve13) 0
+set fmri(convolve13) 3
 
 # Convolve phase (EV 13)
 set fmri(convolve_phase13) 0
@@ -1835,7 +1835,7 @@ set fmri(evtitle14) "phys"
 # 3 : Custom (3 column format)
 # 4 : Interaction
 # 10 : Empty (all zeros)
-set fmri(shape14) 4
+set fmri(shape14) 2
 
 # Convolution (EV 14)
 # 0 : None
@@ -1857,83 +1857,8 @@ set fmri(tempfilt_yn14) 0
 # Add temporal derivative (EV 14)
 set fmri(deriv_yn14) 0
 
-# Interactions (EV 14 with EV 1)
-set fmri(interactions14.1) 1
-
-# Demean before using in interactions (EV 14 with EV 1)
-set fmri(interactionsd14.1) 0
-
-# Interactions (EV 14 with EV 2)
-set fmri(interactions14.2) 1
-
-# Demean before using in interactions (EV 14 with EV 2)
-set fmri(interactionsd14.2) 0
-
-# Interactions (EV 14 with EV 3)
-set fmri(interactions14.3) 0
-
-# Demean before using in interactions (EV 14 with EV 3)
-set fmri(interactionsd14.3) 0
-
-# Interactions (EV 14 with EV 4)
-set fmri(interactions14.4) 0
-
-# Demean before using in interactions (EV 14 with EV 4)
-set fmri(interactionsd14.4) 0
-
-# Interactions (EV 14 with EV 5)
-set fmri(interactions14.5) 0
-
-# Demean before using in interactions (EV 14 with EV 5)
-set fmri(interactionsd14.5) 0
-
-# Interactions (EV 14 with EV 6)
-set fmri(interactions14.6) 0
-
-# Demean before using in interactions (EV 14 with EV 6)
-set fmri(interactionsd14.6) 0
-
-# Interactions (EV 14 with EV 7)
-set fmri(interactions14.7) 0
-
-# Demean before using in interactions (EV 14 with EV 7)
-set fmri(interactionsd14.7) 0
-
-# Interactions (EV 14 with EV 8)
-set fmri(interactions14.8) 0
-
-# Demean before using in interactions (EV 14 with EV 8)
-set fmri(interactionsd14.8) 0
-
-# Interactions (EV 14 with EV 9)
-set fmri(interactions14.9) 0
-
-# Demean before using in interactions (EV 14 with EV 9)
-set fmri(interactionsd14.9) 0
-
-# Interactions (EV 14 with EV 10)
-set fmri(interactions14.10) 0
-
-# Demean before using in interactions (EV 14 with EV 10)
-set fmri(interactionsd14.10) 0
-
-# Interactions (EV 14 with EV 11)
-set fmri(interactions14.11) 0
-
-# Demean before using in interactions (EV 14 with EV 11)
-set fmri(interactionsd14.11) 0
-
-# Interactions (EV 14 with EV 12)
-set fmri(interactions14.12) 0
-
-# Demean before using in interactions (EV 14 with EV 12)
-set fmri(interactionsd14.12) 0
-
-# Interactions (EV 14 with EV 13)
-set fmri(interactions14.13) 0
-
-# Demean before using in interactions (EV 14 with EV 13)
-set fmri(interactionsd14.13) 0
+# Custom EV file (EV 14)
+set fmri(custom14) "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/sub-10661/L1_task-sharedreward_model-1_type-act_run-1_sm-4.feat/meants.txt"
 
 # Orthogonalise EV 14 wrt EV 0
 set fmri(ortho14.0) 0
