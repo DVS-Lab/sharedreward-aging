@@ -1,6 +1,6 @@
 #!/bin/bash
 #PBS -l walltime=12:00:00
-#PBS -N L1stats-trust-all
+#PBS -N L1stats-aging
 #PBS -q normal
 #PBS -m ae
 #PBS -M cooper.sharp@temple.edu
@@ -182,7 +182,6 @@ for sub in ${subjects[@]}; do
             fi
         fi
 	
-        feat $OTEMPLATE
         echo "feat $OTEMPLATE" >> $logdir/cmd_feat_${PBS_JOBID}.txt
         
     done

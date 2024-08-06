@@ -260,7 +260,7 @@ set fmri(regstandard_dof) 12
 set fmri(regstandard_nonlinear_yn) 0
 
 # Control nonlinear warp field resolution
-set fmri(regstandard_nonlinear_warpres) 10
+set fmri(regstandard_nonlinear_warpres) 10 
 
 # High pass filter cutoff
 set fmri(paradigm_hp) 200
@@ -3584,7 +3584,7 @@ set fmri(interactionsd22.13) 0
 set fmri(interactions22.14) 1
 
 # Demean before using in interactions (EV 22 with EV 14)
-set fmri(interactionsd22.14) 0
+set fmri(interactionsd22.14) 2
 
 # Interactions (EV 22 with EV 15)
 set fmri(interactions22.15) 0
@@ -4074,7 +4074,7 @@ set fmri(interactionsd24.13) 0
 set fmri(interactions24.14) 1
 
 # Demean before using in interactions (EV 24 with EV 14)
-set fmri(interactionsd24.14) 0
+set fmri(interactionsd24.14) 2
 
 # Interactions (EV 24 with EV 15)
 set fmri(interactions24.15) 0
