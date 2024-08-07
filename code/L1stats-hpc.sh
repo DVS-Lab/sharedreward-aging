@@ -156,7 +156,7 @@ for sub in ${subjects[@]}; do
             # create template and run analyses; need to turn film off for two subjects in order to avoid SVD failure
             if [ ${#sub} -eq 3 ]; then
                 ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_srndna-HPC.fsf
-            elif [ ${#sub} -eq 10777 ]  && [ ${type} == "act" ] || [ ${#sub} -eq 10929] && [ ${type} == "act" ]; then 
+            elif [ ${sub} -eq 10777 ]  && [ ${type} == "act" ] || [ ${sub} -eq 10929] && [ ${type} == "act" ]; then 
                 ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_film-off_rf1-HPC.fsf
             else 
 		ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_rf1-HPC.fsf
