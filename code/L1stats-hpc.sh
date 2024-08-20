@@ -4,7 +4,7 @@
 #PBS -q normal
 #PBS -m ae
 #PBS -M cooper.sharp@temple.edu
-#PBS -l nodes=1:ppn=28
+#PBS -l nodes=1:ppn=4
 
 # load modules and go to workdir
 module load fsl/6.0.2
@@ -23,7 +23,7 @@ rm -f $logdir/cmd_feat_${PBS_JOBID}.txt
 touch $logdir/cmd_feat_${PBS_JOBID}.txt
 
 TASK=sharedreward
-ppi=VS
+ppi="0"
 sm=4
 
 # need to change this to a more targeted list of subjects
@@ -156,7 +156,27 @@ for sub in ${subjects[@]}; do
             # create template and run analyses; need to turn film off for two subjects in order to avoid SVD failure
             if [ ${#sub} -eq 3 ]; then
                 ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_srndna-HPC.fsf
-            elif [ ${sub} -eq 10777 ]  && [ ${type} == "act" ] || [ ${sub} -eq 10929] && [ ${type} == "act" ]; then 
+            elif [ ${sub} == "10777" ] && [ ${TYPE} == "act" ]; then 
+                ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_film-off_rf1-HPC.fsf
+            elif [ ${sub} == "10929" ] && [ ${TYPE} == "act" ]; then
+                ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_film-off_rf1-HPC.fsf
+            elif [ ${sub} == "10369" ] && [ ${TYPE} == "ppi" ]; then
+                ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_film-off_rf1-HPC.fsf
+            elif [ ${sub} == "10585" ] && [ ${TYPE} == "ppi" ]; then
+                ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_film-off_rf1-HPC.fsf
+            elif [ ${sub} == "10718" ] && [ ${TYPE} == "ppi" ]; then
+                ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_film-off_rf1-HPC.fsf
+            elif [ ${sub} == "10720" ] && [ ${TYPE} == "ppi" ]; then
+                ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_film-off_rf1-HPC.fsf
+            elif [ ${sub} == "10777" ] && [ ${TYPE} == "ppi" ]; then
+                ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_film-off_rf1-HPC.fsf
+            elif [ ${sub} == "10812" ] && [ ${TYPE} == "ppi" ]; then
+                ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_film-off_rf1-HPC.fsf
+            elif [ ${sub} == "10858" ] && [ ${TYPE} == "ppi" ]; then
+                ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_film-off_rf1-HPC.fsf
+            elif [ ${sub} == "10958" ] && [ ${TYPE} == "ppi" ]; then
+                ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_film-off_rf1-HPC.fsf
+            elif [ ${sub} == "10977" ] && [ ${TYPE} == "ppi" ]; then
                 ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_film-off_rf1-HPC.fsf
             else 
 		ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_rf1-HPC.fsf
