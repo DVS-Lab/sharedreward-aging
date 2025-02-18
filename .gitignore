@@ -136,6 +136,8 @@ dmypy.json
 .heudiconv
 
 # imaging input and output output
+*.bval
+*.bvec
 *.json
 ds005123
 ds003745
