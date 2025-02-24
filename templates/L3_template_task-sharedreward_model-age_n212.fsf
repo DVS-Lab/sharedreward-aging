@@ -393,7 +393,7 @@ set feat_files(39) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/de
 set feat_files(40) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10462/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
 
 # 4D AVW data or FEAT directory (41)
-set feat_files(41) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10478/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+set feat_files(41) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10478/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
 
 # 4D AVW data or FEAT directory (42)
 set feat_files(42) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10486/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
@@ -561,13 +561,13 @@ set feat_files(95) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/de
 set feat_files(96) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10803/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
 
 # 4D AVW data or FEAT directory (97)
-set feat_files(97) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10804/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+set feat_files(97) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10804/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
 
 # 4D AVW data or FEAT directory (98)
 set feat_files(98) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10806/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
 
 # 4D AVW data or FEAT directory (99)
-set feat_files(99) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10809/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+set feat_files(99) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10809/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
 
 # 4D AVW data or FEAT directory (100)
 set feat_files(100) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10810/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
