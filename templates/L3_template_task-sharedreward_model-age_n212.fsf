@@ -224,3 +224,5642 @@ set fmri(reginitial_highres_yn) 0
 set fmri(reginitial_highres_search) 90
 
 # Degrees of Freedom for registration to initial structural
+set fmri(reginitial_highres_dof) 3
+
+# Registration to main structural
+set fmri(reghighres_yn) 0
+
+# Search space for registration to main structural
+# 0   : No search
+# 90  : Normal search
+# 180 : Full search
+set fmri(reghighres_search) 90
+
+# Degrees of Freedom for registration to main structural
+set fmri(reghighres_dof) BBR
+
+# Registration to standard image?
+set fmri(regstandard_yn) 1
+
+# Use alternate reference images?
+set fmri(alternateReference_yn) 0
+
+# Standard image
+set fmri(regstandard) "/Users/coopersharp/fsl/data/standard/MNI152_T1_2mm_brain"
+
+# Search space for registration to standard space
+# 0   : No search
+# 90  : Normal search
+# 180 : Full search
+set fmri(regstandard_search) 90
+
+# Degrees of Freedom for registration to standard space
+set fmri(regstandard_dof) 12
+
+# Do nonlinear registration from structural to standard space?
+set fmri(regstandard_nonlinear_yn) 0
+
+# Control nonlinear warp field resolution
+set fmri(regstandard_nonlinear_warpres) 10
+
+# High pass filter cutoff
+set fmri(paradigm_hp) 100
+
+# Total voxels
+set fmri(totalVoxels) 902629
+
+
+# Number of lower-level copes feeding into higher-level analysis
+set fmri(ncopeinputs) 0
+
+# 4D AVW data or FEAT directory (1)
+set feat_files(1) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-104/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (2)
+set feat_files(2) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-105/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (3)
+set feat_files(3) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-106/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (4)
+set feat_files(4) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-108/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (5)
+set feat_files(5) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-109/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (6)
+set feat_files(6) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-110/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (7)
+set feat_files(7) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-111/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (8)
+set feat_files(8) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-112/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (9)
+set feat_files(9) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-113/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (10)
+set feat_files(10) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-115/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (11)
+set feat_files(11) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-116/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (12)
+set feat_files(12) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-117/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (13)
+set feat_files(13) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-120/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (14)
+set feat_files(14) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-121/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (15)
+set feat_files(15) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-122/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (16)
+set feat_files(16) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-124/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (17)
+set feat_files(17) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-125/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (18)
+set feat_files(18) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-128/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (19)
+set feat_files(19) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-130/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (20)
+set feat_files(20) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-132/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (21)
+set feat_files(21) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-133/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (22)
+set feat_files(22) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-136/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (23)
+set feat_files(23) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-137/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (24)
+set feat_files(24) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-141/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (25)
+set feat_files(25) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-142/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (26)
+set feat_files(26) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-147/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (27)
+set feat_files(27) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-149/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (28)
+set feat_files(28) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-150/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (29)
+set feat_files(29) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-151/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (30)
+set feat_files(30) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-153/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (31)
+set feat_files(31) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-154/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (32)
+set feat_files(32) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-156/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (33)
+set feat_files(33) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-157/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (34)
+set feat_files(34) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-158/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (35)
+set feat_files(35) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-159/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (36)
+set feat_files(36) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10317/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (37)
+set feat_files(37) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10369/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (38)
+set feat_files(38) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10402/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (39)
+set feat_files(39) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10418/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (40)
+set feat_files(40) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10462/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (41)
+set feat_files(41) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10478/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (42)
+set feat_files(42) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10486/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (43)
+set feat_files(43) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10529/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (44)
+set feat_files(44) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10541/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (45)
+set feat_files(45) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10559/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (46)
+set feat_files(46) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10572/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (47)
+set feat_files(47) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10581/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (48)
+set feat_files(48) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10584/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (49)
+set feat_files(49) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10585/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (50)
+set feat_files(50) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10589/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (51)
+set feat_files(51) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10590/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (52)
+set feat_files(52) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10596/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (53)
+set feat_files(53) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10603/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (54)
+set feat_files(54) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10606/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (55)
+set feat_files(55) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10608/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (56)
+set feat_files(56) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10617/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (57)
+set feat_files(57) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10636/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (58)
+set feat_files(58) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10638/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (59)
+set feat_files(59) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10640/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (60)
+set feat_files(60) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10641/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (61)
+set feat_files(61) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10642/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (62)
+set feat_files(62) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10644/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (63)
+set feat_files(63) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10647/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (64)
+set feat_files(64) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10649/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (65)
+set feat_files(65) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10652/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (66)
+set feat_files(66) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10656/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (67)
+set feat_files(67) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10657/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (68)
+set feat_files(68) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10661/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (69)
+set feat_files(69) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10663/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (70)
+set feat_files(70) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10668/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (71)
+set feat_files(71) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10673/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (72)
+set feat_files(72) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10674/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (73)
+set feat_files(73) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10677/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (74)
+set feat_files(74) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10685/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (75)
+set feat_files(75) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10690/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (76)
+set feat_files(76) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10691/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (77)
+set feat_files(77) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10700/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (78)
+set feat_files(78) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10701/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (79)
+set feat_files(79) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10713/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (80)
+set feat_files(80) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10716/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (81)
+set feat_files(81) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10718/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (82)
+set feat_files(82) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10720/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (83)
+set feat_files(83) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10723/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (84)
+set feat_files(84) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10741/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (85)
+set feat_files(85) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10748/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (86)
+set feat_files(86) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10767/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (87)
+set feat_files(87) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10770/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (88)
+set feat_files(88) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10777/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (89)
+set feat_files(89) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10781/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (90)
+set feat_files(90) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10783/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (91)
+set feat_files(91) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10785/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (92)
+set feat_files(92) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10794/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (93)
+set feat_files(93) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10800/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (94)
+set feat_files(94) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10801/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (95)
+set feat_files(95) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10802/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (96)
+set feat_files(96) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10803/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (97)
+set feat_files(97) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10804/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (98)
+set feat_files(98) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10806/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (99)
+set feat_files(99) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10809/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (100)
+set feat_files(100) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10810/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (101)
+set feat_files(101) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10812/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (102)
+set feat_files(102) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10817/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (103)
+set feat_files(103) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10827/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (104)
+set feat_files(104) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10831/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (105)
+set feat_files(105) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10834/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (106)
+set feat_files(106) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10838/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (107)
+set feat_files(107) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10843/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (108)
+set feat_files(108) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10850/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (109)
+set feat_files(109) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10854/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (110)
+set feat_files(110) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10857/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (111)
+set feat_files(111) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10858/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (112)
+set feat_files(112) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10862/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (113)
+set feat_files(113) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10863/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (114)
+set feat_files(114) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10866/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (115)
+set feat_files(115) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10875/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (116)
+set feat_files(116) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10881/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (117)
+set feat_files(117) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10886/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (118)
+set feat_files(118) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10887/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (119)
+set feat_files(119) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10896/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (120)
+set feat_files(120) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10897/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (121)
+set feat_files(121) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10898/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (122)
+set feat_files(122) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10908/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (123)
+set feat_files(123) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10913/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (124)
+set feat_files(124) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10918/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (125)
+set feat_files(125) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10919/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (126)
+set feat_files(126) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10924/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (127)
+set feat_files(127) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10928/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (128)
+set feat_files(128) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10929/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (129)
+set feat_files(129) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10930/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (130)
+set feat_files(130) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10938/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (131)
+set feat_files(131) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10950/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (132)
+set feat_files(132) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10951/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (133)
+set feat_files(133) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10952/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (134)
+set feat_files(134) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10953/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (135)
+set feat_files(135) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10954/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (136)
+set feat_files(136) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10956/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (137)
+set feat_files(137) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10958/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (138)
+set feat_files(138) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10961/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (139)
+set feat_files(139) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10964/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (140)
+set feat_files(140) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10966/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (141)
+set feat_files(141) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10969/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (142)
+set feat_files(142) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10974/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (143)
+set feat_files(143) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10977/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (144)
+set feat_files(144) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10979/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (145)
+set feat_files(145) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10983/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (146)
+set feat_files(146) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10984/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (147)
+set feat_files(147) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-10998/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (148)
+set feat_files(148) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11007/L1_task-sharedreward_model-1_type-REPLACEME_run-2_sm-4.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (149)
+set feat_files(149) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11012/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (150)
+set feat_files(150) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11016/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (151)
+set feat_files(151) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11021/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (152)
+set feat_files(152) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11030/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (153)
+set feat_files(153) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11031/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (154)
+set feat_files(154) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11036/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (155)
+set feat_files(155) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11039/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (156)
+set feat_files(156) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11042/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (157)
+set feat_files(157) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11053/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (158)
+set feat_files(158) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11058/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (159)
+set feat_files(159) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11060/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (160)
+set feat_files(160) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11063/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (161)
+set feat_files(161) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11065/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (162)
+set feat_files(162) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11066/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (163)
+set feat_files(163) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11068/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (164)
+set feat_files(164) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11072/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (165)
+set feat_files(165) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11074/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (166)
+set feat_files(166) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11075/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (167)
+set feat_files(167) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11076/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (168)
+set feat_files(168) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11078/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (169)
+set feat_files(169) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11083/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (170)
+set feat_files(170) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11084/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (171)
+set feat_files(171) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11090/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (172)
+set feat_files(172) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11110/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (173)
+set feat_files(173) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11113/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (174)
+set feat_files(174) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11116/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (175)
+set feat_files(175) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11120/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (176)
+set feat_files(176) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11126/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (177)
+set feat_files(177) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11128/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (178)
+set feat_files(178) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11139/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (179)
+set feat_files(179) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11145/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (180)
+set feat_files(180) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11164/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (181)
+set feat_files(181) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11167/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (182)
+set feat_files(182) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11168/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (183)
+set feat_files(183) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11171/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (184)
+set feat_files(184) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11177/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (185)
+set feat_files(185) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11192/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (186)
+set feat_files(186) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11193/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (187)
+set feat_files(187) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11201/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (188)
+set feat_files(188) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11227/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (189)
+set feat_files(189) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11238/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (190)
+set feat_files(190) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11241/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (191)
+set feat_files(191) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11246/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (192)
+set feat_files(192) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11286/L1_task-sharedreward_model-1_type-REPLACEME_run-1_sm-4.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (193)
+set feat_files(193) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11301/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (194)
+set feat_files(194) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11311/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (195)
+set feat_files(195) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11312/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (196)
+set feat_files(196) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11316/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (197)
+set feat_files(197) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11321/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (198)
+set feat_files(198) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11325/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (199)
+set feat_files(199) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11326/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (200)
+set feat_files(200) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11329/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (201)
+set feat_files(201) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11330/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (202)
+set feat_files(202) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11337/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (203)
+set feat_files(203) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11338/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (204)
+set feat_files(204) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11340/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (205)
+set feat_files(205) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11343/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (206)
+set feat_files(206) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11345/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (207)
+set feat_files(207) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11348/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (208)
+set feat_files(208) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11358/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (209)
+set feat_files(209) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11364/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (210)
+set feat_files(210) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11376/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (211)
+set feat_files(211) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11387/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (212)
+set feat_files(212) "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging/derivatives/fsl/sub-11410/L2_task-sharedreward_model-1_type-REPLACEME_sm-4.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# Add confound EVs text file
+set fmri(confoundevs) 0
+
+# EV 1 title
+set fmri(evtitle1) "ones"
+
+# Basic waveform shape (EV 1)
+# 0 : Square
+# 1 : Sinusoid
+# 2 : Custom (1 entry per volume)
+# 3 : Custom (3 column format)
+# 4 : Interaction
+# 10 : Empty (all zeros)
+set fmri(shape1) 2
+
+# Convolution (EV 1)
+# 0 : None
+# 1 : Gaussian
+# 2 : Gamma
+# 3 : Double-Gamma HRF
+# 4 : Gamma basis functions
+# 5 : Sine basis functions
+# 6 : FIR basis functions
+# 8 : Alternate Double-Gamma
+set fmri(convolve1) 0
+
+# Convolve phase (EV 1)
+set fmri(convolve_phase1) 0
+
+# Apply temporal filtering (EV 1)
+set fmri(tempfilt_yn1) 0
+
+# Add temporal derivative (EV 1)
+set fmri(deriv_yn1) 0
+
+# Custom EV file (EV 1)
+set fmri(custom1) "dummy"
+
+# Orthogonalise EV 1 wrt EV 0
+set fmri(ortho1.0) 0
+
+# Orthogonalise EV 1 wrt EV 1
+set fmri(ortho1.1) 0
+
+# Orthogonalise EV 1 wrt EV 2
+set fmri(ortho1.2) 0
+
+# Orthogonalise EV 1 wrt EV 3
+set fmri(ortho1.3) 0
+
+# Orthogonalise EV 1 wrt EV 4
+set fmri(ortho1.4) 0
+
+# Orthogonalise EV 1 wrt EV 5
+set fmri(ortho1.5) 0
+
+# Orthogonalise EV 1 wrt EV 6
+set fmri(ortho1.6) 0
+
+# Higher-level EV value for EV 1 and input 1
+set fmri(evg1.1) 1
+
+# Higher-level EV value for EV 1 and input 2
+set fmri(evg2.1) 1
+
+# Higher-level EV value for EV 1 and input 3
+set fmri(evg3.1) 1
+
+# Higher-level EV value for EV 1 and input 4
+set fmri(evg4.1) 1
+
+# Higher-level EV value for EV 1 and input 5
+set fmri(evg5.1) 1
+
+# Higher-level EV value for EV 1 and input 6
+set fmri(evg6.1) 1
+
+# Higher-level EV value for EV 1 and input 7
+set fmri(evg7.1) 1
+
+# Higher-level EV value for EV 1 and input 8
+set fmri(evg8.1) 1
+
+# Higher-level EV value for EV 1 and input 9
+set fmri(evg9.1) 1
+
+# Higher-level EV value for EV 1 and input 10
+set fmri(evg10.1) 1
+
+# Higher-level EV value for EV 1 and input 11
+set fmri(evg11.1) 1
+
+# Higher-level EV value for EV 1 and input 12
+set fmri(evg12.1) 1
+
+# Higher-level EV value for EV 1 and input 13
+set fmri(evg13.1) 1
+
+# Higher-level EV value for EV 1 and input 14
+set fmri(evg14.1) 1
+
+# Higher-level EV value for EV 1 and input 15
+set fmri(evg15.1) 1
+
+# Higher-level EV value for EV 1 and input 16
+set fmri(evg16.1) 1
+
+# Higher-level EV value for EV 1 and input 17
+set fmri(evg17.1) 1
+
+# Higher-level EV value for EV 1 and input 18
+set fmri(evg18.1) 1
+
+# Higher-level EV value for EV 1 and input 19
+set fmri(evg19.1) 1
+
+# Higher-level EV value for EV 1 and input 20
+set fmri(evg20.1) 1
+
+# Higher-level EV value for EV 1 and input 21
+set fmri(evg21.1) 1
+
+# Higher-level EV value for EV 1 and input 22
+set fmri(evg22.1) 1
+
+# Higher-level EV value for EV 1 and input 23
+set fmri(evg23.1) 1
+
+# Higher-level EV value for EV 1 and input 24
+set fmri(evg24.1) 1
+
+# Higher-level EV value for EV 1 and input 25
+set fmri(evg25.1) 1
+
+# Higher-level EV value for EV 1 and input 26
+set fmri(evg26.1) 1
+
+# Higher-level EV value for EV 1 and input 27
+set fmri(evg27.1) 1
+
+# Higher-level EV value for EV 1 and input 28
+set fmri(evg28.1) 1
+
+# Higher-level EV value for EV 1 and input 29
+set fmri(evg29.1) 1
+
+# Higher-level EV value for EV 1 and input 30
+set fmri(evg30.1) 1
+
+# Higher-level EV value for EV 1 and input 31
+set fmri(evg31.1) 1
+
+# Higher-level EV value for EV 1 and input 32
+set fmri(evg32.1) 1
+
+# Higher-level EV value for EV 1 and input 33
+set fmri(evg33.1) 1
+
+# Higher-level EV value for EV 1 and input 34
+set fmri(evg34.1) 1
+
+# Higher-level EV value for EV 1 and input 35
+set fmri(evg35.1) 1
+
+# Higher-level EV value for EV 1 and input 36
+set fmri(evg36.1) 1
+
+# Higher-level EV value for EV 1 and input 37
+set fmri(evg37.1) 1
+
+# Higher-level EV value for EV 1 and input 38
+set fmri(evg38.1) 1
+
+# Higher-level EV value for EV 1 and input 39
+set fmri(evg39.1) 1
+
+# Higher-level EV value for EV 1 and input 40
+set fmri(evg40.1) 1
+
+# Higher-level EV value for EV 1 and input 41
+set fmri(evg41.1) 1
+
+# Higher-level EV value for EV 1 and input 42
+set fmri(evg42.1) 1
+
+# Higher-level EV value for EV 1 and input 43
+set fmri(evg43.1) 1
+
+# Higher-level EV value for EV 1 and input 44
+set fmri(evg44.1) 1
+
+# Higher-level EV value for EV 1 and input 45
+set fmri(evg45.1) 1
+
+# Higher-level EV value for EV 1 and input 46
+set fmri(evg46.1) 1
+
+# Higher-level EV value for EV 1 and input 47
+set fmri(evg47.1) 1
+
+# Higher-level EV value for EV 1 and input 48
+set fmri(evg48.1) 1
+
+# Higher-level EV value for EV 1 and input 49
+set fmri(evg49.1) 1
+
+# Higher-level EV value for EV 1 and input 50
+set fmri(evg50.1) 1
+
+# Higher-level EV value for EV 1 and input 51
+set fmri(evg51.1) 1
+
+# Higher-level EV value for EV 1 and input 52
+set fmri(evg52.1) 1
+
+# Higher-level EV value for EV 1 and input 53
+set fmri(evg53.1) 1
+
+# Higher-level EV value for EV 1 and input 54
+set fmri(evg54.1) 1
+
+# Higher-level EV value for EV 1 and input 55
+set fmri(evg55.1) 1
+
+# Higher-level EV value for EV 1 and input 56
+set fmri(evg56.1) 1
+
+# Higher-level EV value for EV 1 and input 57
+set fmri(evg57.1) 1
+
+# Higher-level EV value for EV 1 and input 58
+set fmri(evg58.1) 1
+
+# Higher-level EV value for EV 1 and input 59
+set fmri(evg59.1) 1
+
+# Higher-level EV value for EV 1 and input 60
+set fmri(evg60.1) 1
+
+# Higher-level EV value for EV 1 and input 61
+set fmri(evg61.1) 1
+
+# Higher-level EV value for EV 1 and input 62
+set fmri(evg62.1) 1
+
+# Higher-level EV value for EV 1 and input 63
+set fmri(evg63.1) 1
+
+# Higher-level EV value for EV 1 and input 64
+set fmri(evg64.1) 1
+
+# Higher-level EV value for EV 1 and input 65
+set fmri(evg65.1) 1
+
+# Higher-level EV value for EV 1 and input 66
+set fmri(evg66.1) 1
+
+# Higher-level EV value for EV 1 and input 67
+set fmri(evg67.1) 1
+
+# Higher-level EV value for EV 1 and input 68
+set fmri(evg68.1) 1
+
+# Higher-level EV value for EV 1 and input 69
+set fmri(evg69.1) 1
+
+# Higher-level EV value for EV 1 and input 70
+set fmri(evg70.1) 1
+
+# Higher-level EV value for EV 1 and input 71
+set fmri(evg71.1) 1
+
+# Higher-level EV value for EV 1 and input 72
+set fmri(evg72.1) 1
+
+# Higher-level EV value for EV 1 and input 73
+set fmri(evg73.1) 1
+
+# Higher-level EV value for EV 1 and input 74
+set fmri(evg74.1) 1
+
+# Higher-level EV value for EV 1 and input 75
+set fmri(evg75.1) 1
+
+# Higher-level EV value for EV 1 and input 76
+set fmri(evg76.1) 1
+
+# Higher-level EV value for EV 1 and input 77
+set fmri(evg77.1) 1
+
+# Higher-level EV value for EV 1 and input 78
+set fmri(evg78.1) 1
+
+# Higher-level EV value for EV 1 and input 79
+set fmri(evg79.1) 1
+
+# Higher-level EV value for EV 1 and input 80
+set fmri(evg80.1) 1
+
+# Higher-level EV value for EV 1 and input 81
+set fmri(evg81.1) 1
+
+# Higher-level EV value for EV 1 and input 82
+set fmri(evg82.1) 1
+
+# Higher-level EV value for EV 1 and input 83
+set fmri(evg83.1) 1
+
+# Higher-level EV value for EV 1 and input 84
+set fmri(evg84.1) 1
+
+# Higher-level EV value for EV 1 and input 85
+set fmri(evg85.1) 1
+
+# Higher-level EV value for EV 1 and input 86
+set fmri(evg86.1) 1
+
+# Higher-level EV value for EV 1 and input 87
+set fmri(evg87.1) 1
+
+# Higher-level EV value for EV 1 and input 88
+set fmri(evg88.1) 1
+
+# Higher-level EV value for EV 1 and input 89
+set fmri(evg89.1) 1
+
+# Higher-level EV value for EV 1 and input 90
+set fmri(evg90.1) 1
+
+# Higher-level EV value for EV 1 and input 91
+set fmri(evg91.1) 1
+
+# Higher-level EV value for EV 1 and input 92
+set fmri(evg92.1) 1
+
+# Higher-level EV value for EV 1 and input 93
+set fmri(evg93.1) 1
+
+# Higher-level EV value for EV 1 and input 94
+set fmri(evg94.1) 1
+
+# Higher-level EV value for EV 1 and input 95
+set fmri(evg95.1) 1
+
+# Higher-level EV value for EV 1 and input 96
+set fmri(evg96.1) 1
+
+# Higher-level EV value for EV 1 and input 97
+set fmri(evg97.1) 1
+
+# Higher-level EV value for EV 1 and input 98
+set fmri(evg98.1) 1
+
+# Higher-level EV value for EV 1 and input 99
+set fmri(evg99.1) 1
+
+# Higher-level EV value for EV 1 and input 100
+set fmri(evg100.1) 1
+
+# Higher-level EV value for EV 1 and input 101
+set fmri(evg101.1) 1
+
+# Higher-level EV value for EV 1 and input 102
+set fmri(evg102.1) 1
+
+# Higher-level EV value for EV 1 and input 103
+set fmri(evg103.1) 1
+
+# Higher-level EV value for EV 1 and input 104
+set fmri(evg104.1) 1
+
+# Higher-level EV value for EV 1 and input 105
+set fmri(evg105.1) 1
+
+# Higher-level EV value for EV 1 and input 106
+set fmri(evg106.1) 1
+
+# Higher-level EV value for EV 1 and input 107
+set fmri(evg107.1) 1
+
+# Higher-level EV value for EV 1 and input 108
+set fmri(evg108.1) 1
+
+# Higher-level EV value for EV 1 and input 109
+set fmri(evg109.1) 1
+
+# Higher-level EV value for EV 1 and input 110
+set fmri(evg110.1) 1
+
+# Higher-level EV value for EV 1 and input 111
+set fmri(evg111.1) 1
+
+# Higher-level EV value for EV 1 and input 112
+set fmri(evg112.1) 1
+
+# Higher-level EV value for EV 1 and input 113
+set fmri(evg113.1) 1
+
+# Higher-level EV value for EV 1 and input 114
+set fmri(evg114.1) 1
+
+# Higher-level EV value for EV 1 and input 115
+set fmri(evg115.1) 1
+
+# Higher-level EV value for EV 1 and input 116
+set fmri(evg116.1) 1
+
+# Higher-level EV value for EV 1 and input 117
+set fmri(evg117.1) 1
+
+# Higher-level EV value for EV 1 and input 118
+set fmri(evg118.1) 1
+
+# Higher-level EV value for EV 1 and input 119
+set fmri(evg119.1) 1
+
+# Higher-level EV value for EV 1 and input 120
+set fmri(evg120.1) 1
+
+# Higher-level EV value for EV 1 and input 121
+set fmri(evg121.1) 1
+
+# Higher-level EV value for EV 1 and input 122
+set fmri(evg122.1) 1
+
+# Higher-level EV value for EV 1 and input 123
+set fmri(evg123.1) 1
+
+# Higher-level EV value for EV 1 and input 124
+set fmri(evg124.1) 1
+
+# Higher-level EV value for EV 1 and input 125
+set fmri(evg125.1) 1
+
+# Higher-level EV value for EV 1 and input 126
+set fmri(evg126.1) 1
+
+# Higher-level EV value for EV 1 and input 127
+set fmri(evg127.1) 1
+
+# Higher-level EV value for EV 1 and input 128
+set fmri(evg128.1) 1
+
+# Higher-level EV value for EV 1 and input 129
+set fmri(evg129.1) 1
+
+# Higher-level EV value for EV 1 and input 130
+set fmri(evg130.1) 1
+
+# Higher-level EV value for EV 1 and input 131
+set fmri(evg131.1) 1
+
+# Higher-level EV value for EV 1 and input 132
+set fmri(evg132.1) 1
+
+# Higher-level EV value for EV 1 and input 133
+set fmri(evg133.1) 1
+
+# Higher-level EV value for EV 1 and input 134
+set fmri(evg134.1) 1
+
+# Higher-level EV value for EV 1 and input 135
+set fmri(evg135.1) 1
+
+# Higher-level EV value for EV 1 and input 136
+set fmri(evg136.1) 1
+
+# Higher-level EV value for EV 1 and input 137
+set fmri(evg137.1) 1
+
+# Higher-level EV value for EV 1 and input 138
+set fmri(evg138.1) 1
+
+# Higher-level EV value for EV 1 and input 139
+set fmri(evg139.1) 1
+
+# Higher-level EV value for EV 1 and input 140
+set fmri(evg140.1) 1
+
+# Higher-level EV value for EV 1 and input 141
+set fmri(evg141.1) 1
+
+# Higher-level EV value for EV 1 and input 142
+set fmri(evg142.1) 1
+
+# Higher-level EV value for EV 1 and input 143
+set fmri(evg143.1) 1
+
+# Higher-level EV value for EV 1 and input 144
+set fmri(evg144.1) 1
+
+# Higher-level EV value for EV 1 and input 145
+set fmri(evg145.1) 1
+
+# Higher-level EV value for EV 1 and input 146
+set fmri(evg146.1) 1
+
+# Higher-level EV value for EV 1 and input 147
+set fmri(evg147.1) 1
+
+# Higher-level EV value for EV 1 and input 148
+set fmri(evg148.1) 1
+
+# Higher-level EV value for EV 1 and input 149
+set fmri(evg149.1) 1
+
+# Higher-level EV value for EV 1 and input 150
+set fmri(evg150.1) 1
+
+# Higher-level EV value for EV 1 and input 151
+set fmri(evg151.1) 1
+
+# Higher-level EV value for EV 1 and input 152
+set fmri(evg152.1) 1
+
+# Higher-level EV value for EV 1 and input 153
+set fmri(evg153.1) 1
+
+# Higher-level EV value for EV 1 and input 154
+set fmri(evg154.1) 1
+
+# Higher-level EV value for EV 1 and input 155
+set fmri(evg155.1) 1
+
+# Higher-level EV value for EV 1 and input 156
+set fmri(evg156.1) 1
+
+# Higher-level EV value for EV 1 and input 157
+set fmri(evg157.1) 1
+
+# Higher-level EV value for EV 1 and input 158
+set fmri(evg158.1) 1
+
+# Higher-level EV value for EV 1 and input 159
+set fmri(evg159.1) 1
+
+# Higher-level EV value for EV 1 and input 160
+set fmri(evg160.1) 1
+
+# Higher-level EV value for EV 1 and input 161
+set fmri(evg161.1) 1
+
+# Higher-level EV value for EV 1 and input 162
+set fmri(evg162.1) 1
+
+# Higher-level EV value for EV 1 and input 163
+set fmri(evg163.1) 1
+
+# Higher-level EV value for EV 1 and input 164
+set fmri(evg164.1) 1
+
+# Higher-level EV value for EV 1 and input 165
+set fmri(evg165.1) 1
+
+# Higher-level EV value for EV 1 and input 166
+set fmri(evg166.1) 1
+
+# Higher-level EV value for EV 1 and input 167
+set fmri(evg167.1) 1
+
+# Higher-level EV value for EV 1 and input 168
+set fmri(evg168.1) 1
+
+# Higher-level EV value for EV 1 and input 169
+set fmri(evg169.1) 1
+
+# Higher-level EV value for EV 1 and input 170
+set fmri(evg170.1) 1
+
+# Higher-level EV value for EV 1 and input 171
+set fmri(evg171.1) 1
+
+# Higher-level EV value for EV 1 and input 172
+set fmri(evg172.1) 1
+
+# Higher-level EV value for EV 1 and input 173
+set fmri(evg173.1) 1
+
+# Higher-level EV value for EV 1 and input 174
+set fmri(evg174.1) 1
+
+# Higher-level EV value for EV 1 and input 175
+set fmri(evg175.1) 1
+
+# Higher-level EV value for EV 1 and input 176
+set fmri(evg176.1) 1
+
+# Higher-level EV value for EV 1 and input 177
+set fmri(evg177.1) 1
+
+# Higher-level EV value for EV 1 and input 178
+set fmri(evg178.1) 1
+
+# Higher-level EV value for EV 1 and input 179
+set fmri(evg179.1) 1
+
+# Higher-level EV value for EV 1 and input 180
+set fmri(evg180.1) 1
+
+# Higher-level EV value for EV 1 and input 181
+set fmri(evg181.1) 1
+
+# Higher-level EV value for EV 1 and input 182
+set fmri(evg182.1) 1
+
+# Higher-level EV value for EV 1 and input 183
+set fmri(evg183.1) 1
+
+# Higher-level EV value for EV 1 and input 184
+set fmri(evg184.1) 1
+
+# Higher-level EV value for EV 1 and input 185
+set fmri(evg185.1) 1
+
+# Higher-level EV value for EV 1 and input 186
+set fmri(evg186.1) 1
+
+# Higher-level EV value for EV 1 and input 187
+set fmri(evg187.1) 1
+
+# Higher-level EV value for EV 1 and input 188
+set fmri(evg188.1) 1
+
+# Higher-level EV value for EV 1 and input 189
+set fmri(evg189.1) 1
+
+# Higher-level EV value for EV 1 and input 190
+set fmri(evg190.1) 1
+
+# Higher-level EV value for EV 1 and input 191
+set fmri(evg191.1) 1
+
+# Higher-level EV value for EV 1 and input 192
+set fmri(evg192.1) 1
+
+# Higher-level EV value for EV 1 and input 193
+set fmri(evg193.1) 1
+
+# Higher-level EV value for EV 1 and input 194
+set fmri(evg194.1) 1
+
+# Higher-level EV value for EV 1 and input 195
+set fmri(evg195.1) 1
+
+# Higher-level EV value for EV 1 and input 196
+set fmri(evg196.1) 1
+
+# Higher-level EV value for EV 1 and input 197
+set fmri(evg197.1) 1
+
+# Higher-level EV value for EV 1 and input 198
+set fmri(evg198.1) 1
+
+# Higher-level EV value for EV 1 and input 199
+set fmri(evg199.1) 1
+
+# Higher-level EV value for EV 1 and input 200
+set fmri(evg200.1) 1
+
+# Higher-level EV value for EV 1 and input 201
+set fmri(evg201.1) 1
+
+# Higher-level EV value for EV 1 and input 202
+set fmri(evg202.1) 1
+
+# Higher-level EV value for EV 1 and input 203
+set fmri(evg203.1) 1
+
+# Higher-level EV value for EV 1 and input 204
+set fmri(evg204.1) 1
+
+# Higher-level EV value for EV 1 and input 205
+set fmri(evg205.1) 1
+
+# Higher-level EV value for EV 1 and input 206
+set fmri(evg206.1) 1
+
+# Higher-level EV value for EV 1 and input 207
+set fmri(evg207.1) 1
+
+# Higher-level EV value for EV 1 and input 208
+set fmri(evg208.1) 1
+
+# Higher-level EV value for EV 1 and input 209
+set fmri(evg209.1) 1
+
+# Higher-level EV value for EV 1 and input 210
+set fmri(evg210.1) 1
+
+# Higher-level EV value for EV 1 and input 211
+set fmri(evg211.1) 1
+
+# Higher-level EV value for EV 1 and input 212
+set fmri(evg212.1) 1
+
+# EV 2 title
+set fmri(evtitle2) "age"
+
+# Basic waveform shape (EV 2)
+# 0 : Square
+# 1 : Sinusoid
+# 2 : Custom (1 entry per volume)
+# 3 : Custom (3 column format)
+# 4 : Interaction
+# 10 : Empty (all zeros)
+set fmri(shape2) 2
+
+# Convolution (EV 2)
+# 0 : None
+# 1 : Gaussian
+# 2 : Gamma
+# 3 : Double-Gamma HRF
+# 4 : Gamma basis functions
+# 5 : Sine basis functions
+# 6 : FIR basis functions
+# 8 : Alternate Double-Gamma
+set fmri(convolve2) 0
+
+# Convolve phase (EV 2)
+set fmri(convolve_phase2) 0
+
+# Apply temporal filtering (EV 2)
+set fmri(tempfilt_yn2) 0
+
+# Add temporal derivative (EV 2)
+set fmri(deriv_yn2) 0
+
+# Custom EV file (EV 2)
+set fmri(custom2) "dummy"
+
+# Orthogonalise EV 2 wrt EV 0
+set fmri(ortho2.0) 0
+
+# Orthogonalise EV 2 wrt EV 1
+set fmri(ortho2.1) 0
+
+# Orthogonalise EV 2 wrt EV 2
+set fmri(ortho2.2) 0
+
+# Orthogonalise EV 2 wrt EV 3
+set fmri(ortho2.3) 0
+
+# Orthogonalise EV 2 wrt EV 4
+set fmri(ortho2.4) 0
+
+# Orthogonalise EV 2 wrt EV 5
+set fmri(ortho2.5) 0
+
+# Orthogonalise EV 2 wrt EV 6
+set fmri(ortho2.6) 0
+
+# Higher-level EV value for EV 2 and input 1
+set fmri(evg1.2) -22.0990566
+
+# Higher-level EV value for EV 2 and input 2
+set fmri(evg2.2) -21.0990566
+
+# Higher-level EV value for EV 2 and input 3
+set fmri(evg3.2) -22.0990566
+
+# Higher-level EV value for EV 2 and input 4
+set fmri(evg4.2) -21.0990566
+
+# Higher-level EV value for EV 2 and input 5
+set fmri(evg5.2) -14.0990566
+
+# Higher-level EV value for EV 2 and input 6
+set fmri(evg6.2) -22.0990566
+
+# Higher-level EV value for EV 2 and input 7
+set fmri(evg7.2) 37.9009434
+
+# Higher-level EV value for EV 2 and input 8
+set fmri(evg8.2) -19.0990566
+
+# Higher-level EV value for EV 2 and input 9
+set fmri(evg9.2) -8.099056604
+
+# Higher-level EV value for EV 2 and input 10
+set fmri(evg10.2) -21.0990566
+
+# Higher-level EV value for EV 2 and input 11
+set fmri(evg11.2) -17.0990566
+
+# Higher-level EV value for EV 2 and input 12
+set fmri(evg12.2) -22.0990566
+
+# Higher-level EV value for EV 2 and input 13
+set fmri(evg13.2) -24.0990566
+
+# Higher-level EV value for EV 2 and input 14
+set fmri(evg14.2) -22.0990566
+
+# Higher-level EV value for EV 2 and input 15
+set fmri(evg15.2) -22.0990566
+
+# Higher-level EV value for EV 2 and input 16
+set fmri(evg16.2) -22.0990566
+
+# Higher-level EV value for EV 2 and input 17
+set fmri(evg17.2) -21.0990566
+
+# Higher-level EV value for EV 2 and input 18
+set fmri(evg18.2) 20.9009434
+
+# Higher-level EV value for EV 2 and input 19
+set fmri(evg19.2) 25.9009434
+
+# Higher-level EV value for EV 2 and input 20
+set fmri(evg20.2) 30.9009434
+
+# Higher-level EV value for EV 2 and input 21
+set fmri(evg21.2) 27.9009434
+
+# Higher-level EV value for EV 2 and input 22
+set fmri(evg22.2) 22.9009434
+
+# Higher-level EV value for EV 2 and input 23
+set fmri(evg23.2) 29.9009434
+
+# Higher-level EV value for EV 2 and input 24
+set fmri(evg24.2) 33.9009434
+
+# Higher-level EV value for EV 2 and input 25
+set fmri(evg25.2) 27.9009434
+
+# Higher-level EV value for EV 2 and input 26
+set fmri(evg26.2) 22.9009434
+
+# Higher-level EV value for EV 2 and input 27
+set fmri(evg27.2) 23.9009434
+
+# Higher-level EV value for EV 2 and input 28
+set fmri(evg28.2) -19.0990566
+
+# Higher-level EV value for EV 2 and input 29
+set fmri(evg29.2) 22.9009434
+
+# Higher-level EV value for EV 2 and input 30
+set fmri(evg30.2) -13.0990566
+
+# Higher-level EV value for EV 2 and input 31
+set fmri(evg31.2) 24.9009434
+
+# Higher-level EV value for EV 2 and input 32
+set fmri(evg32.2) -12.0990566
+
+# Higher-level EV value for EV 2 and input 33
+set fmri(evg33.2) -17.0990566
+
+# Higher-level EV value for EV 2 and input 34
+set fmri(evg34.2) -16.0990566
+
+# Higher-level EV value for EV 2 and input 35
+set fmri(evg35.2) -18.0990566
+
+# Higher-level EV value for EV 2 and input 36
+set fmri(evg36.2) 20.9009434
+
+# Higher-level EV value for EV 2 and input 37
+set fmri(evg37.2) -10.0990566
+
+# Higher-level EV value for EV 2 and input 38
+set fmri(evg38.2) -6.099056604
+
+# Higher-level EV value for EV 2 and input 39
+set fmri(evg39.2) 25.9009434
+
+# Higher-level EV value for EV 2 and input 40
+set fmri(evg40.2) 19.9009434
+
+# Higher-level EV value for EV 2 and input 41
+set fmri(evg41.2) -14.0990566
+
+# Higher-level EV value for EV 2 and input 42
+set fmri(evg42.2) -0.099056604
+
+# Higher-level EV value for EV 2 and input 43
+set fmri(evg43.2) 25.9009434
+
+# Higher-level EV value for EV 2 and input 44
+set fmri(evg44.2) 26.9009434
+
+# Higher-level EV value for EV 2 and input 45
+set fmri(evg45.2) -14.0990566
+
+# Higher-level EV value for EV 2 and input 46
+set fmri(evg46.2) 27.9009434
+
+# Higher-level EV value for EV 2 and input 47
+set fmri(evg47.2) 5.900943396
+
+# Higher-level EV value for EV 2 and input 48
+set fmri(evg48.2) 7.900943396
+
+# Higher-level EV value for EV 2 and input 49
+set fmri(evg49.2) 20.9009434
+
+# Higher-level EV value for EV 2 and input 50
+set fmri(evg50.2) -8.099056604
+
+# Higher-level EV value for EV 2 and input 51
+set fmri(evg51.2) 13.9009434
+
+# Higher-level EV value for EV 2 and input 52
+set fmri(evg52.2) -15.0990566
+
+# Higher-level EV value for EV 2 and input 53
+set fmri(evg53.2) 26.9009434
+
+# Higher-level EV value for EV 2 and input 54
+set fmri(evg54.2) -20.0990566
+
+# Higher-level EV value for EV 2 and input 55
+set fmri(evg55.2) -13.0990566
+
+# Higher-level EV value for EV 2 and input 56
+set fmri(evg56.2) 30.9009434
+
+# Higher-level EV value for EV 2 and input 57
+set fmri(evg57.2) -15.0990566
+
+# Higher-level EV value for EV 2 and input 58
+set fmri(evg58.2) 29.9009434
+
+# Higher-level EV value for EV 2 and input 59
+set fmri(evg59.2) -11.0990566
+
+# Higher-level EV value for EV 2 and input 60
+set fmri(evg60.2) 1.900943396
+
+# Higher-level EV value for EV 2 and input 61
+set fmri(evg61.2) -10.0990566
+
+# Higher-level EV value for EV 2 and input 62
+set fmri(evg62.2) 26.9009434
+
+# Higher-level EV value for EV 2 and input 63
+set fmri(evg63.2) -18.0990566
+
+# Higher-level EV value for EV 2 and input 64
+set fmri(evg64.2) 20.9009434
+
+# Higher-level EV value for EV 2 and input 65
+set fmri(evg65.2) 27.9009434
+
+# Higher-level EV value for EV 2 and input 66
+set fmri(evg66.2) -21.0990566
+
+# Higher-level EV value for EV 2 and input 67
+set fmri(evg67.2) 16.9009434
+
+# Higher-level EV value for EV 2 and input 68
+set fmri(evg68.2) 7.900943396
+
+# Higher-level EV value for EV 2 and input 69
+set fmri(evg69.2) -20.0990566
+
+# Higher-level EV value for EV 2 and input 70
+set fmri(evg70.2) -5.099056604
+
+# Higher-level EV value for EV 2 and input 71
+set fmri(evg71.2) 5.900943396
+
+# Higher-level EV value for EV 2 and input 72
+set fmri(evg72.2) -9.099056604
+
+# Higher-level EV value for EV 2 and input 73
+set fmri(evg73.2) -9.099056604
+
+# Higher-level EV value for EV 2 and input 74
+set fmri(evg74.2) -8.099056604
+
+# Higher-level EV value for EV 2 and input 75
+set fmri(evg75.2) 13.9009434
+
+# Higher-level EV value for EV 2 and input 76
+set fmri(evg76.2) 15.9009434
+
+# Higher-level EV value for EV 2 and input 77
+set fmri(evg77.2) -19.0990566
+
+# Higher-level EV value for EV 2 and input 78
+set fmri(evg78.2) -15.0990566
+
+# Higher-level EV value for EV 2 and input 79
+set fmri(evg79.2) 28.9009434
+
+# Higher-level EV value for EV 2 and input 80
+set fmri(evg80.2) 26.9009434
+
+# Higher-level EV value for EV 2 and input 81
+set fmri(evg81.2) -14.0990566
+
+# Higher-level EV value for EV 2 and input 82
+set fmri(evg82.2) -9.099056604
+
+# Higher-level EV value for EV 2 and input 83
+set fmri(evg83.2) -21.0990566
+
+# Higher-level EV value for EV 2 and input 84
+set fmri(evg84.2) -5.099056604
+
+# Higher-level EV value for EV 2 and input 85
+set fmri(evg85.2) -9.099056604
+
+# Higher-level EV value for EV 2 and input 86
+set fmri(evg86.2) -17.0990566
+
+# Higher-level EV value for EV 2 and input 87
+set fmri(evg87.2) 21.9009434
+
+# Higher-level EV value for EV 2 and input 88
+set fmri(evg88.2) -4.099056604
+
+# Higher-level EV value for EV 2 and input 89
+set fmri(evg89.2) -5.099056604
+
+# Higher-level EV value for EV 2 and input 90
+set fmri(evg90.2) 8.900943396
+
+# Higher-level EV value for EV 2 and input 91
+set fmri(evg91.2) 18.9009434
+
+# Higher-level EV value for EV 2 and input 92
+set fmri(evg92.2) -3.099056604
+
+# Higher-level EV value for EV 2 and input 93
+set fmri(evg93.2) -16.0990566
+
+# Higher-level EV value for EV 2 and input 94
+set fmri(evg94.2) -8.099056604
+
+# Higher-level EV value for EV 2 and input 95
+set fmri(evg95.2) -0.099056604
+
+# Higher-level EV value for EV 2 and input 96
+set fmri(evg96.2) -21.0990566
+
+# Higher-level EV value for EV 2 and input 97
+set fmri(evg97.2) -17.0990566
+
+# Higher-level EV value for EV 2 and input 98
+set fmri(evg98.2) -15.0990566
+
+# Higher-level EV value for EV 2 and input 99
+set fmri(evg99.2) 25.9009434
+
+# Higher-level EV value for EV 2 and input 100
+set fmri(evg100.2) 25.9009434
+
+# Higher-level EV value for EV 2 and input 101
+set fmri(evg101.2) 19.9009434
+
+# Higher-level EV value for EV 2 and input 102
+set fmri(evg102.2) -15.0990566
+
+# Higher-level EV value for EV 2 and input 103
+set fmri(evg103.2) -19.0990566
+
+# Higher-level EV value for EV 2 and input 104
+set fmri(evg104.2) -17.0990566
+
+# Higher-level EV value for EV 2 and input 105
+set fmri(evg105.2) -2.099056604
+
+# Higher-level EV value for EV 2 and input 106
+set fmri(evg106.2) -19.0990566
+
+# Higher-level EV value for EV 2 and input 107
+set fmri(evg107.2) -15.0990566
+
+# Higher-level EV value for EV 2 and input 108
+set fmri(evg108.2) -10.0990566
+
+# Higher-level EV value for EV 2 and input 109
+set fmri(evg109.2) 3.900943396
+
+# Higher-level EV value for EV 2 and input 110
+set fmri(evg110.2) -20.0990566
+
+# Higher-level EV value for EV 2 and input 111
+set fmri(evg111.2) 37.9009434
+
+# Higher-level EV value for EV 2 and input 112
+set fmri(evg112.2) 17.9009434
+
+# Higher-level EV value for EV 2 and input 113
+set fmri(evg113.2) -0.099056604
+
+# Higher-level EV value for EV 2 and input 114
+set fmri(evg114.2) 29.9009434
+
+# Higher-level EV value for EV 2 and input 115
+set fmri(evg115.2) -10.0990566
+
+# Higher-level EV value for EV 2 and input 116
+set fmri(evg116.2) 19.9009434
+
+# Higher-level EV value for EV 2 and input 117
+set fmri(evg117.2) 12.9009434
+
+# Higher-level EV value for EV 2 and input 118
+set fmri(evg118.2) -7.099056604
+
+# Higher-level EV value for EV 2 and input 119
+set fmri(evg119.2) -14.0990566
+
+# Higher-level EV value for EV 2 and input 120
+set fmri(evg120.2) -11.0990566
+
+# Higher-level EV value for EV 2 and input 121
+set fmri(evg121.2) 18.9009434
+
+# Higher-level EV value for EV 2 and input 122
+set fmri(evg122.2) -0.099056604
+
+# Higher-level EV value for EV 2 and input 123
+set fmri(evg123.2) 24.9009434
+
+# Higher-level EV value for EV 2 and input 124
+set fmri(evg124.2) -18.0990566
+
+# Higher-level EV value for EV 2 and input 125
+set fmri(evg125.2) 6.900943396
+
+# Higher-level EV value for EV 2 and input 126
+set fmri(evg126.2) -10.0990566
+
+# Higher-level EV value for EV 2 and input 127
+set fmri(evg127.2) 12.9009434
+
+# Higher-level EV value for EV 2 and input 128
+set fmri(evg128.2) -0.099056604
+
+# Higher-level EV value for EV 2 and input 129
+set fmri(evg129.2) 6.900943396
+
+# Higher-level EV value for EV 2 and input 130
+set fmri(evg130.2) 15.9009434
+
+# Higher-level EV value for EV 2 and input 131
+set fmri(evg131.2) -18.0990566
+
+# Higher-level EV value for EV 2 and input 132
+set fmri(evg132.2) -21.0990566
+
+# Higher-level EV value for EV 2 and input 133
+set fmri(evg133.2) -10.0990566
+
+# Higher-level EV value for EV 2 and input 134
+set fmri(evg134.2) 20.9009434
+
+# Higher-level EV value for EV 2 and input 135
+set fmri(evg135.2) 3.900943396
+
+# Higher-level EV value for EV 2 and input 136
+set fmri(evg136.2) -14.0990566
+
+# Higher-level EV value for EV 2 and input 137
+set fmri(evg137.2) -8.099056604
+
+# Higher-level EV value for EV 2 and input 138
+set fmri(evg138.2) -19.0990566
+
+# Higher-level EV value for EV 2 and input 139
+set fmri(evg139.2) 17.9009434
+
+# Higher-level EV value for EV 2 and input 140
+set fmri(evg140.2) -8.099056604
+
+# Higher-level EV value for EV 2 and input 141
+set fmri(evg141.2) -16.0990566
+
+# Higher-level EV value for EV 2 and input 142
+set fmri(evg142.2) 37.9009434
+
+# Higher-level EV value for EV 2 and input 143
+set fmri(evg143.2) -1.099056604
+
+# Higher-level EV value for EV 2 and input 144
+set fmri(evg144.2) -10.0990566
+
+# Higher-level EV value for EV 2 and input 145
+set fmri(evg145.2) -18.0990566
+
+# Higher-level EV value for EV 2 and input 146
+set fmri(evg146.2) 9.900943396
+
+# Higher-level EV value for EV 2 and input 147
+set fmri(evg147.2) -21.0990566
+
+# Higher-level EV value for EV 2 and input 148
+set fmri(evg148.2) 3.900943396
+
+# Higher-level EV value for EV 2 and input 149
+set fmri(evg149.2) 15.9009434
+
+# Higher-level EV value for EV 2 and input 150
+set fmri(evg150.2) -20.0990566
+
+# Higher-level EV value for EV 2 and input 151
+set fmri(evg151.2) -17.0990566
+
+# Higher-level EV value for EV 2 and input 152
+set fmri(evg152.2) -19.0990566
+
+# Higher-level EV value for EV 2 and input 153
+set fmri(evg153.2) -19.0990566
+
+# Higher-level EV value for EV 2 and input 154
+set fmri(evg154.2) -20.0990566
+
+# Higher-level EV value for EV 2 and input 155
+set fmri(evg155.2) -1.099056604
+
+# Higher-level EV value for EV 2 and input 156
+set fmri(evg156.2) -13.0990566
+
+# Higher-level EV value for EV 2 and input 157
+set fmri(evg157.2) -12.0990566
+
+# Higher-level EV value for EV 2 and input 158
+set fmri(evg158.2) -4.099056604
+
+# Higher-level EV value for EV 2 and input 159
+set fmri(evg159.2) -13.0990566
+
+# Higher-level EV value for EV 2 and input 160
+set fmri(evg160.2) -21.0990566
+
+# Higher-level EV value for EV 2 and input 161
+set fmri(evg161.2) -21.0990566
+
+# Higher-level EV value for EV 2 and input 162
+set fmri(evg162.2) -20.0990566
+
+# Higher-level EV value for EV 2 and input 163
+set fmri(evg163.2) 0.900943396
+
+# Higher-level EV value for EV 2 and input 164
+set fmri(evg164.2) -17.0990566
+
+# Higher-level EV value for EV 2 and input 165
+set fmri(evg165.2) -1.099056604
+
+# Higher-level EV value for EV 2 and input 166
+set fmri(evg166.2) 34.9009434
+
+# Higher-level EV value for EV 2 and input 167
+set fmri(evg167.2) 30.9009434
+
+# Higher-level EV value for EV 2 and input 168
+set fmri(evg168.2) 29.9009434
+
+# Higher-level EV value for EV 2 and input 169
+set fmri(evg169.2) 25.9009434
+
+# Higher-level EV value for EV 2 and input 170
+set fmri(evg170.2) 25.9009434
+
+# Higher-level EV value for EV 2 and input 171
+set fmri(evg171.2) 26.9009434
+
+# Higher-level EV value for EV 2 and input 172
+set fmri(evg172.2) 24.9009434
+
+# Higher-level EV value for EV 2 and input 173
+set fmri(evg173.2) -21.0990566
+
+# Higher-level EV value for EV 2 and input 174
+set fmri(evg174.2) 16.9009434
+
+# Higher-level EV value for EV 2 and input 175
+set fmri(evg175.2) 23.9009434
+
+# Higher-level EV value for EV 2 and input 176
+set fmri(evg176.2) 15.9009434
+
+# Higher-level EV value for EV 2 and input 177
+set fmri(evg177.2) 17.9009434
+
+# Higher-level EV value for EV 2 and input 178
+set fmri(evg178.2) -22.0990566
+
+# Higher-level EV value for EV 2 and input 179
+set fmri(evg179.2) 21.9009434
+
+# Higher-level EV value for EV 2 and input 180
+set fmri(evg180.2) 41.9009434
+
+# Higher-level EV value for EV 2 and input 181
+set fmri(evg181.2) 14.9009434
+
+# Higher-level EV value for EV 2 and input 182
+set fmri(evg182.2) -15.0990566
+
+# Higher-level EV value for EV 2 and input 183
+set fmri(evg183.2) -17.0990566
+
+# Higher-level EV value for EV 2 and input 184
+set fmri(evg184.2) 12.9009434
+
+# Higher-level EV value for EV 2 and input 185
+set fmri(evg185.2) 26.9009434
+
+# Higher-level EV value for EV 2 and input 186
+set fmri(evg186.2) 12.9009434
+
+# Higher-level EV value for EV 2 and input 187
+set fmri(evg187.2) 24.9009434
+
+# Higher-level EV value for EV 2 and input 188
+set fmri(evg188.2) -12.0990566
+
+# Higher-level EV value for EV 2 and input 189
+set fmri(evg189.2) 2.900943396
+
+# Higher-level EV value for EV 2 and input 190
+set fmri(evg190.2) -16.0990566
+
+# Higher-level EV value for EV 2 and input 191
+set fmri(evg191.2) -3.099056604
+
+# Higher-level EV value for EV 2 and input 192
+set fmri(evg192.2) -19.0990566
+
+# Higher-level EV value for EV 2 and input 193
+set fmri(evg193.2) -20.0990566
+
+# Higher-level EV value for EV 2 and input 194
+set fmri(evg194.2) -21.0990566
+
+# Higher-level EV value for EV 2 and input 195
+set fmri(evg195.2) -20.0990566
+
+# Higher-level EV value for EV 2 and input 196
+set fmri(evg196.2) -1.099056604
+
+# Higher-level EV value for EV 2 and input 197
+set fmri(evg197.2) -20.0990566
+
+# Higher-level EV value for EV 2 and input 198
+set fmri(evg198.2) -15.0990566
+
+# Higher-level EV value for EV 2 and input 199
+set fmri(evg199.2) -17.0990566
+
+# Higher-level EV value for EV 2 and input 200
+set fmri(evg200.2) -19.0990566
+
+# Higher-level EV value for EV 2 and input 201
+set fmri(evg201.2) -16.0990566
+
+# Higher-level EV value for EV 2 and input 202
+set fmri(evg202.2) -12.0990566
+
+# Higher-level EV value for EV 2 and input 203
+set fmri(evg203.2) -21.0990566
+
+# Higher-level EV value for EV 2 and input 204
+set fmri(evg204.2) -11.0990566
+
+# Higher-level EV value for EV 2 and input 205
+set fmri(evg205.2) -10.0990566
+
+# Higher-level EV value for EV 2 and input 206
+set fmri(evg206.2) -9.099056604
+
+# Higher-level EV value for EV 2 and input 207
+set fmri(evg207.2) -7.099056604
+
+# Higher-level EV value for EV 2 and input 208
+set fmri(evg208.2) 5.900943396
+
+# Higher-level EV value for EV 2 and input 209
+set fmri(evg209.2) 11.9009434
+
+# Higher-level EV value for EV 2 and input 210
+set fmri(evg210.2) 27.9009434
+
+# Higher-level EV value for EV 2 and input 211
+set fmri(evg211.2) 10.9009434
+
+# Higher-level EV value for EV 2 and input 212
+set fmri(evg212.2) 2.900943396
+
+# EV 3 title
+set fmri(evtitle3) "tsnr"
+
+# Basic waveform shape (EV 3)
+# 0 : Square
+# 1 : Sinusoid
+# 2 : Custom (1 entry per volume)
+# 3 : Custom (3 column format)
+# 4 : Interaction
+# 10 : Empty (all zeros)
+set fmri(shape3) 2
+
+# Convolution (EV 3)
+# 0 : None
+# 1 : Gaussian
+# 2 : Gamma
+# 3 : Double-Gamma HRF
+# 4 : Gamma basis functions
+# 5 : Sine basis functions
+# 6 : FIR basis functions
+# 8 : Alternate Double-Gamma
+set fmri(convolve3) 0
+
+# Convolve phase (EV 3)
+set fmri(convolve_phase3) 0
+
+# Apply temporal filtering (EV 3)
+set fmri(tempfilt_yn3) 0
+
+# Add temporal derivative (EV 3)
+set fmri(deriv_yn3) 0
+
+# Custom EV file (EV 3)
+set fmri(custom3) "dummy"
+
+# Orthogonalise EV 3 wrt EV 0
+set fmri(ortho3.0) 0
+
+# Orthogonalise EV 3 wrt EV 1
+set fmri(ortho3.1) 0
+
+# Orthogonalise EV 3 wrt EV 2
+set fmri(ortho3.2) 0
+
+# Orthogonalise EV 3 wrt EV 3
+set fmri(ortho3.3) 0
+
+# Orthogonalise EV 3 wrt EV 4
+set fmri(ortho3.4) 0
+
+# Orthogonalise EV 3 wrt EV 5
+set fmri(ortho3.5) 0
+
+# Orthogonalise EV 3 wrt EV 6
+set fmri(ortho3.6) 0
+
+# Higher-level EV value for EV 3 and input 1
+set fmri(evg1.3) 44.32618497
+
+# Higher-level EV value for EV 3 and input 2
+set fmri(evg2.3) 59.55762109
+
+# Higher-level EV value for EV 3 and input 3
+set fmri(evg3.3) 41.45749452
+
+# Higher-level EV value for EV 3 and input 4
+set fmri(evg4.3) 18.87197198
+
+# Higher-level EV value for EV 3 and input 5
+set fmri(evg5.3) 34.22204435
+
+# Higher-level EV value for EV 3 and input 6
+set fmri(evg6.3) 38.80731212
+
+# Higher-level EV value for EV 3 and input 7
+set fmri(evg7.3) 5.731619338
+
+# Higher-level EV value for EV 3 and input 8
+set fmri(evg8.3) 44.18074146
+
+# Higher-level EV value for EV 3 and input 9
+set fmri(evg9.3) 32.16981753
+
+# Higher-level EV value for EV 3 and input 10
+set fmri(evg10.3) 52.08462288
+
+# Higher-level EV value for EV 3 and input 11
+set fmri(evg11.3) 4.958909327
+
+# Higher-level EV value for EV 3 and input 12
+set fmri(evg12.3) 42.38629734
+
+# Higher-level EV value for EV 3 and input 13
+set fmri(evg13.3) 8.81895618
+
+# Higher-level EV value for EV 3 and input 14
+set fmri(evg14.3) 57.1997799
+
+# Higher-level EV value for EV 3 and input 15
+set fmri(evg15.3) 60.8905655
+
+# Higher-level EV value for EV 3 and input 16
+set fmri(evg16.3) 34.75694163
+
+# Higher-level EV value for EV 3 and input 17
+set fmri(evg17.3) 58.71583226
+
+# Higher-level EV value for EV 3 and input 18
+set fmri(evg18.3) 28.19206597
+
+# Higher-level EV value for EV 3 and input 19
+set fmri(evg19.3) -2.615633844
+
+# Higher-level EV value for EV 3 and input 20
+set fmri(evg20.3) 21.77701365
+
+# Higher-level EV value for EV 3 and input 21
+set fmri(evg21.3) 41.28844093
+
+# Higher-level EV value for EV 3 and input 22
+set fmri(evg22.3) 32.99909168
+
+# Higher-level EV value for EV 3 and input 23
+set fmri(evg23.3) 36.40820057
+
+# Higher-level EV value for EV 3 and input 24
+set fmri(evg24.3) 46.9908194
+
+# Higher-level EV value for EV 3 and input 25
+set fmri(evg25.3) 27.87549648
+
+# Higher-level EV value for EV 3 and input 26
+set fmri(evg26.3) 24.85630827
+
+# Higher-level EV value for EV 3 and input 27
+set fmri(evg27.3) 5.343643854
+
+# Higher-level EV value for EV 3 and input 28
+set fmri(evg28.3) 13.59620461
+
+# Higher-level EV value for EV 3 and input 29
+set fmri(evg29.3) 23.03421046
+
+# Higher-level EV value for EV 3 and input 30
+set fmri(evg30.3) 14.63093255
+
+# Higher-level EV value for EV 3 and input 31
+set fmri(evg31.3) 20.13191931
+
+# Higher-level EV value for EV 3 and input 32
+set fmri(evg32.3) 4.420319595
+
+# Higher-level EV value for EV 3 and input 33
+set fmri(evg33.3) 10.4765887
+
+# Higher-level EV value for EV 3 and input 34
+set fmri(evg34.3) 17.57247936
+
+# Higher-level EV value for EV 3 and input 35
+set fmri(evg35.3) 46.20566631
+
+# Higher-level EV value for EV 3 and input 36
+set fmri(evg36.3) -15.30610591
+
+# Higher-level EV value for EV 3 and input 37
+set fmri(evg37.3) -14.33046508
+
+# Higher-level EV value for EV 3 and input 38
+set fmri(evg38.3) -13.94471352
+
+# Higher-level EV value for EV 3 and input 39
+set fmri(evg39.3) -12.63322185
+
+# Higher-level EV value for EV 3 and input 40
+set fmri(evg40.3) -14.46710936
+
+# Higher-level EV value for EV 3 and input 41
+set fmri(evg41.3) -11.76281489
+
+# Higher-level EV value for EV 3 and input 42
+set fmri(evg42.3) -13.78983205
+
+# Higher-level EV value for EV 3 and input 43
+set fmri(evg43.3) -13.29637485
+
+# Higher-level EV value for EV 3 and input 44
+set fmri(evg44.3) -18.23107139
+
+# Higher-level EV value for EV 3 and input 45
+set fmri(evg45.3) -17.63099386
+
+# Higher-level EV value for EV 3 and input 46
+set fmri(evg46.3) -18.53439441
+
+# Higher-level EV value for EV 3 and input 47
+set fmri(evg47.3) -18.29795144
+
+# Higher-level EV value for EV 3 and input 48
+set fmri(evg48.3) -14.47465784
+
+# Higher-level EV value for EV 3 and input 49
+set fmri(evg49.3) -16.85763522
+
+# Higher-level EV value for EV 3 and input 50
+set fmri(evg50.3) -14.79494069
+
+# Higher-level EV value for EV 3 and input 51
+set fmri(evg51.3) -11.6939173
+
+# Higher-level EV value for EV 3 and input 52
+set fmri(evg52.3) -13.34271316
+
+# Higher-level EV value for EV 3 and input 53
+set fmri(evg53.3) -14.08876634
+
+# Higher-level EV value for EV 3 and input 54
+set fmri(evg54.3) -10.86802571
+
+# Higher-level EV value for EV 3 and input 55
+set fmri(evg55.3) -11.83998178
+
+# Higher-level EV value for EV 3 and input 56
+set fmri(evg56.3) -15.09004067
+
+# Higher-level EV value for EV 3 and input 57
+set fmri(evg57.3) -14.64445526
+
+# Higher-level EV value for EV 3 and input 58
+set fmri(evg58.3) -12.38939895
+
+# Higher-level EV value for EV 3 and input 59
+set fmri(evg59.3) -0.990747776
+
+# Higher-level EV value for EV 3 and input 60
+set fmri(evg60.3) -14.3905002
+
+# Higher-level EV value for EV 3 and input 61
+set fmri(evg61.3) 1.252453866
+
+# Higher-level EV value for EV 3 and input 62
+set fmri(evg62.3) -18.43271276
+
+# Higher-level EV value for EV 3 and input 63
+set fmri(evg63.3) 4.059313065
+
+# Higher-level EV value for EV 3 and input 64
+set fmri(evg64.3) -17.15651436
+
+# Higher-level EV value for EV 3 and input 65
+set fmri(evg65.3) -11.96496219
+
+# Higher-level EV value for EV 3 and input 66
+set fmri(evg66.3) -15.00194376
+
+# Higher-level EV value for EV 3 and input 67
+set fmri(evg67.3) -16.88499082
+
+# Higher-level EV value for EV 3 and input 68
+set fmri(evg68.3) -13.00542671
+
+# Higher-level EV value for EV 3 and input 69
+set fmri(evg69.3) -12.15072467
+
+# Higher-level EV value for EV 3 and input 70
+set fmri(evg70.3) -2.740345021
+
+# Higher-level EV value for EV 3 and input 71
+set fmri(evg71.3) -13.68463042
+
+# Higher-level EV value for EV 3 and input 72
+set fmri(evg72.3) -13.51193897
+
+# Higher-level EV value for EV 3 and input 73
+set fmri(evg73.3) -18.12655921
+
+# Higher-level EV value for EV 3 and input 74
+set fmri(evg74.3) -7.906268143
+
+# Higher-level EV value for EV 3 and input 75
+set fmri(evg75.3) -3.441208358
+
+# Higher-level EV value for EV 3 and input 76
+set fmri(evg76.3) -12.55318719
+
+# Higher-level EV value for EV 3 and input 77
+set fmri(evg77.3) -13.40430149
+
+# Higher-level EV value for EV 3 and input 78
+set fmri(evg78.3) -13.52706432
+
+# Higher-level EV value for EV 3 and input 79
+set fmri(evg79.3) -8.417787048
+
+# Higher-level EV value for EV 3 and input 80
+set fmri(evg80.3) 0.505801474
+
+# Higher-level EV value for EV 3 and input 81
+set fmri(evg81.3) -7.584001939
+
+# Higher-level EV value for EV 3 and input 82
+set fmri(evg82.3) 7.658965495
+
+# Higher-level EV value for EV 3 and input 83
+set fmri(evg83.3) -16.37049655
+
+# Higher-level EV value for EV 3 and input 84
+set fmri(evg84.3) -16.18126033
+
+# Higher-level EV value for EV 3 and input 85
+set fmri(evg85.3) 2.533331202
+
+# Higher-level EV value for EV 3 and input 86
+set fmri(evg86.3) 0.779207061
+
+# Higher-level EV value for EV 3 and input 87
+set fmri(evg87.3) -9.598778196
+
+# Higher-level EV value for EV 3 and input 88
+set fmri(evg88.3) -1.013135558
+
+# Higher-level EV value for EV 3 and input 89
+set fmri(evg89.3) -2.77320603
+
+# Higher-level EV value for EV 3 and input 90
+set fmri(evg90.3) -2.13760814
+
+# Higher-level EV value for EV 3 and input 91
+set fmri(evg91.3) -2.124978104
+
+# Higher-level EV value for EV 3 and input 92
+set fmri(evg92.3) -1.681532842
+
+# Higher-level EV value for EV 3 and input 93
+set fmri(evg93.3) -10.19355975
+
+# Higher-level EV value for EV 3 and input 94
+set fmri(evg94.3) -2.887180718
+
+# Higher-level EV value for EV 3 and input 95
+set fmri(evg95.3) -5.976394169
+
+# Higher-level EV value for EV 3 and input 96
+set fmri(evg96.3) 7.104621132
+
+# Higher-level EV value for EV 3 and input 97
+set fmri(evg97.3) 4.456912069
+
+# Higher-level EV value for EV 3 and input 98
+set fmri(evg98.3) -16.26120122
+
+# Higher-level EV value for EV 3 and input 99
+set fmri(evg99.3) 1.569567067
+
+# Higher-level EV value for EV 3 and input 100
+set fmri(evg100.3) -3.987940992
+
+# Higher-level EV value for EV 3 and input 101
+set fmri(evg101.3) -6.33789692
+
+# Higher-level EV value for EV 3 and input 102
+set fmri(evg102.3) -8.510817238
+
+# Higher-level EV value for EV 3 and input 103
+set fmri(evg103.3) -0.079486312
+
+# Higher-level EV value for EV 3 and input 104
+set fmri(evg104.3) -8.046869889
+
+# Higher-level EV value for EV 3 and input 105
+set fmri(evg105.3) -0.373944358
+
+# Higher-level EV value for EV 3 and input 106
+set fmri(evg106.3) -14.83237704
+
+# Higher-level EV value for EV 3 and input 107
+set fmri(evg107.3) 6.90211233
+
+# Higher-level EV value for EV 3 and input 108
+set fmri(evg108.3) 4.184640253
+
+# Higher-level EV value for EV 3 and input 109
+set fmri(evg109.3) -2.516245866
+
+# Higher-level EV value for EV 3 and input 110
+set fmri(evg110.3) -5.516354224
+
+# Higher-level EV value for EV 3 and input 111
+set fmri(evg111.3) -13.15190354
+
+# Higher-level EV value for EV 3 and input 112
+set fmri(evg112.3) -6.888868367
+
+# Higher-level EV value for EV 3 and input 113
+set fmri(evg113.3) -3.705889938
+
+# Higher-level EV value for EV 3 and input 114
+set fmri(evg114.3) -3.260020026
+
+# Higher-level EV value for EV 3 and input 115
+set fmri(evg115.3) -8.002521071
+
+# Higher-level EV value for EV 3 and input 116
+set fmri(evg116.3) -16.6283441
+
+# Higher-level EV value for EV 3 and input 117
+set fmri(evg117.3) -17.5259977
+
+# Higher-level EV value for EV 3 and input 118
+set fmri(evg118.3) -17.74027611
+
+# Higher-level EV value for EV 3 and input 119
+set fmri(evg119.3) -1.938335043
+
+# Higher-level EV value for EV 3 and input 120
+set fmri(evg120.3) -7.966450257
+
+# Higher-level EV value for EV 3 and input 121
+set fmri(evg121.3) -10.00637904
+
+# Higher-level EV value for EV 3 and input 122
+set fmri(evg122.3) -16.34896036
+
+# Higher-level EV value for EV 3 and input 123
+set fmri(evg123.3) -6.3637024
+
+# Higher-level EV value for EV 3 and input 124
+set fmri(evg124.3) -2.166201074
+
+# Higher-level EV value for EV 3 and input 125
+set fmri(evg125.3) -14.11936611
+
+# Higher-level EV value for EV 3 and input 126
+set fmri(evg126.3) 5.738047411
+
+# Higher-level EV value for EV 3 and input 127
+set fmri(evg127.3) -3.216283426
+
+# Higher-level EV value for EV 3 and input 128
+set fmri(evg128.3) -1.191397646
+
+# Higher-level EV value for EV 3 and input 129
+set fmri(evg129.3) -1.774444315
+
+# Higher-level EV value for EV 3 and input 130
+set fmri(evg130.3) -7.678127512
+
+# Higher-level EV value for EV 3 and input 131
+set fmri(evg131.3) -13.69022801
+
+# Higher-level EV value for EV 3 and input 132
+set fmri(evg132.3) -10.0426306
+
+# Higher-level EV value for EV 3 and input 133
+set fmri(evg133.3) -9.24707782
+
+# Higher-level EV value for EV 3 and input 134
+set fmri(evg134.3) -9.777805202
+
+# Higher-level EV value for EV 3 and input 135
+set fmri(evg135.3) -14.99902322
+
+# Higher-level EV value for EV 3 and input 136
+set fmri(evg136.3) 6.35917615
+
+# Higher-level EV value for EV 3 and input 137
+set fmri(evg137.3) -8.621213396
+
+# Higher-level EV value for EV 3 and input 138
+set fmri(evg138.3) 2.299299942
+
+# Higher-level EV value for EV 3 and input 139
+set fmri(evg139.3) -7.681135509
+
+# Higher-level EV value for EV 3 and input 140
+set fmri(evg140.3) -5.470011543
+
+# Higher-level EV value for EV 3 and input 141
+set fmri(evg141.3) 5.450922531
+
+# Higher-level EV value for EV 3 and input 142
+set fmri(evg142.3) -8.596583888
+
+# Higher-level EV value for EV 3 and input 143
+set fmri(evg143.3) 3.618203615
+
+# Higher-level EV value for EV 3 and input 144
+set fmri(evg144.3) 5.658380325
+
+# Higher-level EV value for EV 3 and input 145
+set fmri(evg145.3) -7.926826058
+
+# Higher-level EV value for EV 3 and input 146
+set fmri(evg146.3) -7.378307345
+
+# Higher-level EV value for EV 3 and input 147
+set fmri(evg147.3) 3.845825072
+
+# Higher-level EV value for EV 3 and input 148
+set fmri(evg148.3) -14.676185
+
+# Higher-level EV value for EV 3 and input 149
+set fmri(evg149.3) -3.429689201
+
+# Higher-level EV value for EV 3 and input 150
+set fmri(evg150.3) 3.376193561
+
+# Higher-level EV value for EV 3 and input 151
+set fmri(evg151.3) -0.324172905
+
+# Higher-level EV value for EV 3 and input 152
+set fmri(evg152.3) -5.008430252
+
+# Higher-level EV value for EV 3 and input 153
+set fmri(evg153.3) 4.134416751
+
+# Higher-level EV value for EV 3 and input 154
+set fmri(evg154.3) 1.299225674
+
+# Higher-level EV value for EV 3 and input 155
+set fmri(evg155.3) 3.837899903
+
+# Higher-level EV value for EV 3 and input 156
+set fmri(evg156.3) -5.319711365
+
+# Higher-level EV value for EV 3 and input 157
+set fmri(evg157.3) -10.18378352
+
+# Higher-level EV value for EV 3 and input 158
+set fmri(evg158.3) -10.05302459
+
+# Higher-level EV value for EV 3 and input 159
+set fmri(evg159.3) 4.784715722
+
+# Higher-level EV value for EV 3 and input 160
+set fmri(evg160.3) 4.96682021
+
+# Higher-level EV value for EV 3 and input 161
+set fmri(evg161.3) 2.006091742
+
+# Higher-level EV value for EV 3 and input 162
+set fmri(evg162.3) -3.99230696
+
+# Higher-level EV value for EV 3 and input 163
+set fmri(evg163.3) -0.993629405
+
+# Higher-level EV value for EV 3 and input 164
+set fmri(evg164.3) -9.403619528
+
+# Higher-level EV value for EV 3 and input 165
+set fmri(evg165.3) -0.041185213
+
+# Higher-level EV value for EV 3 and input 166
+set fmri(evg166.3) -1.173457513
+
+# Higher-level EV value for EV 3 and input 167
+set fmri(evg167.3) -2.718943134
+
+# Higher-level EV value for EV 3 and input 168
+set fmri(evg168.3) -0.487891046
+
+# Higher-level EV value for EV 3 and input 169
+set fmri(evg169.3) 0.246587095
+
+# Higher-level EV value for EV 3 and input 170
+set fmri(evg170.3) 6.754944958
+
+# Higher-level EV value for EV 3 and input 171
+set fmri(evg171.3) -14.5436931
+
+# Higher-level EV value for EV 3 and input 172
+set fmri(evg172.3) -1.487320446
+
+# Higher-level EV value for EV 3 and input 173
+set fmri(evg173.3) 1.051467734
+
+# Higher-level EV value for EV 3 and input 174
+set fmri(evg174.3) -5.705316257
+
+# Higher-level EV value for EV 3 and input 175
+set fmri(evg175.3) -7.011021448
+
+# Higher-level EV value for EV 3 and input 176
+set fmri(evg176.3) -11.22027235
+
+# Higher-level EV value for EV 3 and input 177
+set fmri(evg177.3) -3.708794475
+
+# Higher-level EV value for EV 3 and input 178
+set fmri(evg178.3) 7.078990467
+
+# Higher-level EV value for EV 3 and input 179
+set fmri(evg179.3) -5.848625017
+
+# Higher-level EV value for EV 3 and input 180
+set fmri(evg180.3) -1.979895009
+
+# Higher-level EV value for EV 3 and input 181
+set fmri(evg181.3) -8.12151616
+
+# Higher-level EV value for EV 3 and input 182
+set fmri(evg182.3) -9.780155524
+
+# Higher-level EV value for EV 3 and input 183
+set fmri(evg183.3) -2.311794404
+
+# Higher-level EV value for EV 3 and input 184
+set fmri(evg184.3) -2.413405633
+
+# Higher-level EV value for EV 3 and input 185
+set fmri(evg185.3) -6.791740583
+
+# Higher-level EV value for EV 3 and input 186
+set fmri(evg186.3) -16.89947702
+
+# Higher-level EV value for EV 3 and input 187
+set fmri(evg187.3) -12.38103192
+
+# Higher-level EV value for EV 3 and input 188
+set fmri(evg188.3) -0.763563639
+
+# Higher-level EV value for EV 3 and input 189
+set fmri(evg189.3) -3.797742688
+
+# Higher-level EV value for EV 3 and input 190
+set fmri(evg190.3) 2.67056561
+
+# Higher-level EV value for EV 3 and input 191
+set fmri(evg191.3) -5.629998038
+
+# Higher-level EV value for EV 3 and input 192
+set fmri(evg192.3) 2.997244758
+
+# Higher-level EV value for EV 3 and input 193
+set fmri(evg193.3) 1.5516482
+
+# Higher-level EV value for EV 3 and input 194
+set fmri(evg194.3) 2.312010509
+
+# Higher-level EV value for EV 3 and input 195
+set fmri(evg195.3) -0.517096844
+
+# Higher-level EV value for EV 3 and input 196
+set fmri(evg196.3) -7.072956846
+
+# Higher-level EV value for EV 3 and input 197
+set fmri(evg197.3) 6.783961335
+
+# Higher-level EV value for EV 3 and input 198
+set fmri(evg198.3) -2.467154404
+
+# Higher-level EV value for EV 3 and input 199
+set fmri(evg199.3) -8.814075644
+
+# Higher-level EV value for EV 3 and input 200
+set fmri(evg200.3) -0.19402163
+
+# Higher-level EV value for EV 3 and input 201
+set fmri(evg201.3) 7.61363155
+
+# Higher-level EV value for EV 3 and input 202
+set fmri(evg202.3) -12.22287341
+
+# Higher-level EV value for EV 3 and input 203
+set fmri(evg203.3) 0.450761821
+
+# Higher-level EV value for EV 3 and input 204
+set fmri(evg204.3) -0.000488395
+
+# Higher-level EV value for EV 3 and input 205
+set fmri(evg205.3) -2.609395099
+
+# Higher-level EV value for EV 3 and input 206
+set fmri(evg206.3) 14.24878295
+
+# Higher-level EV value for EV 3 and input 207
+set fmri(evg207.3) -5.140472041
+
+# Higher-level EV value for EV 3 and input 208
+set fmri(evg208.3) 7.105193117
+
+# Higher-level EV value for EV 3 and input 209
+set fmri(evg209.3) -7.885422474
+
+# Higher-level EV value for EV 3 and input 210
+set fmri(evg210.3) 4.034949387
+
+# Higher-level EV value for EV 3 and input 211
+set fmri(evg211.3) 3.308525603
+
+# Higher-level EV value for EV 3 and input 212
+set fmri(evg212.3) -16.09556682
+
+# EV 4 title
+set fmri(evtitle4) "fdmean"
+
+# Basic waveform shape (EV 4)
+# 0 : Square
+# 1 : Sinusoid
+# 2 : Custom (1 entry per volume)
+# 3 : Custom (3 column format)
+# 4 : Interaction
+# 10 : Empty (all zeros)
+set fmri(shape4) 2
+
+# Convolution (EV 4)
+# 0 : None
+# 1 : Gaussian
+# 2 : Gamma
+# 3 : Double-Gamma HRF
+# 4 : Gamma basis functions
+# 5 : Sine basis functions
+# 6 : FIR basis functions
+# 8 : Alternate Double-Gamma
+set fmri(convolve4) 0
+
+# Convolve phase (EV 4)
+set fmri(convolve_phase4) 0
+
+# Apply temporal filtering (EV 4)
+set fmri(tempfilt_yn4) 0
+
+# Add temporal derivative (EV 4)
+set fmri(deriv_yn4) 0
+
+# Custom EV file (EV 4)
+set fmri(custom4) "dummy"
+
+# Orthogonalise EV 4 wrt EV 0
+set fmri(ortho4.0) 0
+
+# Orthogonalise EV 4 wrt EV 1
+set fmri(ortho4.1) 0
+
+# Orthogonalise EV 4 wrt EV 2
+set fmri(ortho4.2) 0
+
+# Orthogonalise EV 4 wrt EV 3
+set fmri(ortho4.3) 0
+
+# Orthogonalise EV 4 wrt EV 4
+set fmri(ortho4.4) 0
+
+# Orthogonalise EV 4 wrt EV 5
+set fmri(ortho4.5) 0
+
+# Orthogonalise EV 4 wrt EV 6
+set fmri(ortho4.6) 0
+
+# Higher-level EV value for EV 4 and input 1
+set fmri(evg1.4) -0.113636449
+
+# Higher-level EV value for EV 4 and input 2
+set fmri(evg2.4) -0.110257016
+
+# Higher-level EV value for EV 4 and input 3
+set fmri(evg3.4) -0.002862006
+
+# Higher-level EV value for EV 4 and input 4
+set fmri(evg4.4) -0.04368857
+
+# Higher-level EV value for EV 4 and input 5
+set fmri(evg5.4) -0.008169417
+
+# Higher-level EV value for EV 4 and input 6
+set fmri(evg6.4) -0.108157442
+
+# Higher-level EV value for EV 4 and input 7
+set fmri(evg7.4) 0.135617577
+
+# Higher-level EV value for EV 4 and input 8
+set fmri(evg8.4) -0.068637819
+
+# Higher-level EV value for EV 4 and input 9
+set fmri(evg9.4) -0.046505506
+
+# Higher-level EV value for EV 4 and input 10
+set fmri(evg10.4) -0.049208438
+
+# Higher-level EV value for EV 4 and input 11
+set fmri(evg11.4) 0.095390628
+
+# Higher-level EV value for EV 4 and input 12
+set fmri(evg12.4) -0.053458553
+
+# Higher-level EV value for EV 4 and input 13
+set fmri(evg13.4) 0.35130653
+
+# Higher-level EV value for EV 4 and input 14
+set fmri(evg14.4) -0.089007983
+
+# Higher-level EV value for EV 4 and input 15
+set fmri(evg15.4) -0.056216605
+
+# Higher-level EV value for EV 4 and input 16
+set fmri(evg16.4) -0.024020011
+
+# Higher-level EV value for EV 4 and input 17
+set fmri(evg17.4) -0.089315978
+
+# Higher-level EV value for EV 4 and input 18
+set fmri(evg18.4) 0.125651859
+
+# Higher-level EV value for EV 4 and input 19
+set fmri(evg19.4) 0.254255701
+
+# Higher-level EV value for EV 4 and input 20
+set fmri(evg20.4) 0.051475452
+
+# Higher-level EV value for EV 4 and input 21
+set fmri(evg21.4) 0.081785147
+
+# Higher-level EV value for EV 4 and input 22
+set fmri(evg22.4) -0.022379233
+
+# Higher-level EV value for EV 4 and input 23
+set fmri(evg23.4) 0.06760749
+
+# Higher-level EV value for EV 4 and input 24
+set fmri(evg24.4) -0.018716037
+
+# Higher-level EV value for EV 4 and input 25
+set fmri(evg25.4) 0.080344469
+
+# Higher-level EV value for EV 4 and input 26
+set fmri(evg26.4) 0.026375014
+
+# Higher-level EV value for EV 4 and input 27
+set fmri(evg27.4) 0.218646953
+
+# Higher-level EV value for EV 4 and input 28
+set fmri(evg28.4) 0.010330006
+
+# Higher-level EV value for EV 4 and input 29
+set fmri(evg29.4) 0.150738395
+
+# Higher-level EV value for EV 4 and input 30
+set fmri(evg30.4) 0.083219173
+
+# Higher-level EV value for EV 4 and input 31
+set fmri(evg31.4) 0.053990926
+
+# Higher-level EV value for EV 4 and input 32
+set fmri(evg32.4) 0.039080482
+
+# Higher-level EV value for EV 4 and input 33
+set fmri(evg33.4) -0.032844443
+
+# Higher-level EV value for EV 4 and input 34
+set fmri(evg34.4) -0.024213216
+
+# Higher-level EV value for EV 4 and input 35
+set fmri(evg35.4) -0.09394517
+
+# Higher-level EV value for EV 4 and input 36
+set fmri(evg36.4) -0.003621746
+
+# Higher-level EV value for EV 4 and input 37
+set fmri(evg37.4) -0.070774758
+
+# Higher-level EV value for EV 4 and input 38
+set fmri(evg38.4) -0.00463086
+
+# Higher-level EV value for EV 4 and input 39
+set fmri(evg39.4) -0.049043686
+
+# Higher-level EV value for EV 4 and input 40
+set fmri(evg40.4) -0.049258724
+
+# Higher-level EV value for EV 4 and input 41
+set fmri(evg41.4) -0.109919872
+
+# Higher-level EV value for EV 4 and input 42
+set fmri(evg42.4) -0.038010143
+
+# Higher-level EV value for EV 4 and input 43
+set fmri(evg43.4) 0.003257584
+
+# Higher-level EV value for EV 4 and input 44
+set fmri(evg44.4) 0.144033046
+
+# Higher-level EV value for EV 4 and input 45
+set fmri(evg45.4) 0.045723417
+
+# Higher-level EV value for EV 4 and input 46
+set fmri(evg46.4) 0.111847006
+
+# Higher-level EV value for EV 4 and input 47
+set fmri(evg47.4) -0.027223668
+
+# Higher-level EV value for EV 4 and input 48
+set fmri(evg48.4) -0.074232252
+
+# Higher-level EV value for EV 4 and input 49
+set fmri(evg49.4) 0.055637629
+
+# Higher-level EV value for EV 4 and input 50
+set fmri(evg50.4) -0.075125174
+
+# Higher-level EV value for EV 4 and input 51
+set fmri(evg51.4) -0.05112342
+
+# Higher-level EV value for EV 4 and input 52
+set fmri(evg52.4) 0.06100229
+
+# Higher-level EV value for EV 4 and input 53
+set fmri(evg53.4) 0.017054101
+
+# Higher-level EV value for EV 4 and input 54
+set fmri(evg54.4) -0.096871887
+
+# Higher-level EV value for EV 4 and input 55
+set fmri(evg55.4) -0.034191647
+
+# Higher-level EV value for EV 4 and input 56
+set fmri(evg56.4) 0.029780375
+
+# Higher-level EV value for EV 4 and input 57
+set fmri(evg57.4) -0.043414724
+
+# Higher-level EV value for EV 4 and input 58
+set fmri(evg58.4) -0.011557907
+
+# Higher-level EV value for EV 4 and input 59
+set fmri(evg59.4) -0.100875451
+
+# Higher-level EV value for EV 4 and input 60
+set fmri(evg60.4) 0.02553429
+
+# Higher-level EV value for EV 4 and input 61
+set fmri(evg61.4) 0.056360338
+
+# Higher-level EV value for EV 4 and input 62
+set fmri(evg62.4) -0.004919746
+
+# Higher-level EV value for EV 4 and input 63
+set fmri(evg63.4) -0.088685641
+
+# Higher-level EV value for EV 4 and input 64
+set fmri(evg64.4) 0.043099223
+
+# Higher-level EV value for EV 4 and input 65
+set fmri(evg65.4) -0.017849915
+
+# Higher-level EV value for EV 4 and input 66
+set fmri(evg66.4) -0.072405987
+
+# Higher-level EV value for EV 4 and input 67
+set fmri(evg67.4) 0.096021692
+
+# Higher-level EV value for EV 4 and input 68
+set fmri(evg68.4) -0.098282547
+
+# Higher-level EV value for EV 4 and input 69
+set fmri(evg69.4) -0.019217854
+
+# Higher-level EV value for EV 4 and input 70
+set fmri(evg70.4) -0.112998722
+
+# Higher-level EV value for EV 4 and input 71
+set fmri(evg71.4) 0.122118874
+
+# Higher-level EV value for EV 4 and input 72
+set fmri(evg72.4) -0.074246683
+
+# Higher-level EV value for EV 4 and input 73
+set fmri(evg73.4) 0.017519079
+
+# Higher-level EV value for EV 4 and input 74
+set fmri(evg74.4) -0.067234664
+
+# Higher-level EV value for EV 4 and input 75
+set fmri(evg75.4) 0.047488866
+
+# Higher-level EV value for EV 4 and input 76
+set fmri(evg76.4) -0.043393973
+
+# Higher-level EV value for EV 4 and input 77
+set fmri(evg77.4) -0.02845225
+
+# Higher-level EV value for EV 4 and input 78
+set fmri(evg78.4) -0.119213973
+
+# Higher-level EV value for EV 4 and input 79
+set fmri(evg79.4) 0.157834901
+
+# Higher-level EV value for EV 4 and input 80
+set fmri(evg80.4) -0.022998126
+
+# Higher-level EV value for EV 4 and input 81
+set fmri(evg81.4) 0.061831955
+
+# Higher-level EV value for EV 4 and input 82
+set fmri(evg82.4) -0.087551409
+
+# Higher-level EV value for EV 4 and input 83
+set fmri(evg83.4) -0.066546953
+
+# Higher-level EV value for EV 4 and input 84
+set fmri(evg84.4) 0.011644433
+
+# Higher-level EV value for EV 4 and input 85
+set fmri(evg85.4) -0.094316102
+
+# Higher-level EV value for EV 4 and input 86
+set fmri(evg86.4) -0.097681114
+
+# Higher-level EV value for EV 4 and input 87
+set fmri(evg87.4) 0.041741221
+
+# Higher-level EV value for EV 4 and input 88
+set fmri(evg88.4) -0.05466159
+
+# Higher-level EV value for EV 4 and input 89
+set fmri(evg89.4) -0.098095904
+
+# Higher-level EV value for EV 4 and input 90
+set fmri(evg90.4) 0.124039648
+
+# Higher-level EV value for EV 4 and input 91
+set fmri(evg91.4) 0.007431081
+
+# Higher-level EV value for EV 4 and input 92
+set fmri(evg92.4) -0.132867518
+
+# Higher-level EV value for EV 4 and input 93
+set fmri(evg93.4) -0.015085324
+
+# Higher-level EV value for EV 4 and input 94
+set fmri(evg94.4) -0.013749767
+
+# Higher-level EV value for EV 4 and input 95
+set fmri(evg95.4) -0.054908406
+
+# Higher-level EV value for EV 4 and input 96
+set fmri(evg96.4) -0.129892621
+
+# Higher-level EV value for EV 4 and input 97
+set fmri(evg97.4) -0.063694082
+
+# Higher-level EV value for EV 4 and input 98
+set fmri(evg98.4) 0.130183149
+
+# Higher-level EV value for EV 4 and input 99
+set fmri(evg99.4) -0.099378266
+
+# Higher-level EV value for EV 4 and input 100
+set fmri(evg100.4) 0.002740448
+
+# Higher-level EV value for EV 4 and input 101
+set fmri(evg101.4) -0.030262084
+
+# Higher-level EV value for EV 4 and input 102
+set fmri(evg102.4) 0.092629304
+
+# Higher-level EV value for EV 4 and input 103
+set fmri(evg103.4) -0.062457581
+
+# Higher-level EV value for EV 4 and input 104
+set fmri(evg104.4) 0.116214973
+
+# Higher-level EV value for EV 4 and input 105
+set fmri(evg105.4) -0.086480776
+
+# Higher-level EV value for EV 4 and input 106
+set fmri(evg106.4) 0.050888303
+
+# Higher-level EV value for EV 4 and input 107
+set fmri(evg107.4) -0.07266718
+
+# Higher-level EV value for EV 4 and input 108
+set fmri(evg108.4) -0.108137952
+
+# Higher-level EV value for EV 4 and input 109
+set fmri(evg109.4) -0.056526567
+
+# Higher-level EV value for EV 4 and input 110
+set fmri(evg110.4) -0.003451786
+
+# Higher-level EV value for EV 4 and input 111
+set fmri(evg111.4) 0.04882524
+
+# Higher-level EV value for EV 4 and input 112
+set fmri(evg112.4) -0.022286092
+
+# Higher-level EV value for EV 4 and input 113
+set fmri(evg113.4) -0.052080189
+
+# Higher-level EV value for EV 4 and input 114
+set fmri(evg114.4) 0.032134955
+
+# Higher-level EV value for EV 4 and input 115
+set fmri(evg115.4) -0.04039167
+
+# Higher-level EV value for EV 4 and input 116
+set fmri(evg116.4) 0.406525525
+
+# Higher-level EV value for EV 4 and input 117
+set fmri(evg117.4) 0.334256687
+
+# Higher-level EV value for EV 4 and input 118
+set fmri(evg118.4) 0.104159639
+
+# Higher-level EV value for EV 4 and input 119
+set fmri(evg119.4) -0.006343614
+
+# Higher-level EV value for EV 4 and input 120
+set fmri(evg120.4) -0.040462462
+
+# Higher-level EV value for EV 4 and input 121
+set fmri(evg121.4) 0.087371389
+
+# Higher-level EV value for EV 4 and input 122
+set fmri(evg122.4) 0.111996694
+
+# Higher-level EV value for EV 4 and input 123
+set fmri(evg123.4) 0.071975594
+
+# Higher-level EV value for EV 4 and input 124
+set fmri(evg124.4) -0.078025453
+
+# Higher-level EV value for EV 4 and input 125
+set fmri(evg125.4) 0.070010516
+
+# Higher-level EV value for EV 4 and input 126
+set fmri(evg126.4) -0.046390425
+
+# Higher-level EV value for EV 4 and input 127
+set fmri(evg127.4) 0.044885027
+
+# Higher-level EV value for EV 4 and input 128
+set fmri(evg128.4) -0.020693816
+
+# Higher-level EV value for EV 4 and input 129
+set fmri(evg129.4) -0.090237621
+
+# Higher-level EV value for EV 4 and input 130
+set fmri(evg130.4) 0.076330436
+
+# Higher-level EV value for EV 4 and input 131
+set fmri(evg131.4) 0.171197775
+
+# Higher-level EV value for EV 4 and input 132
+set fmri(evg132.4) 0.081973159
+
+# Higher-level EV value for EV 4 and input 133
+set fmri(evg133.4) -0.035364747
+
+# Higher-level EV value for EV 4 and input 134
+set fmri(evg134.4) 0.235873375
+
+# Higher-level EV value for EV 4 and input 135
+set fmri(evg135.4) 0.298769892
+
+# Higher-level EV value for EV 4 and input 136
+set fmri(evg136.4) -0.1076939
+
+# Higher-level EV value for EV 4 and input 137
+set fmri(evg137.4) 0.042042062
+
+# Higher-level EV value for EV 4 and input 138
+set fmri(evg138.4) -0.054058875
+
+# Higher-level EV value for EV 4 and input 139
+set fmri(evg139.4) 0.068828259
+
+# Higher-level EV value for EV 4 and input 140
+set fmri(evg140.4) -0.058322864
+
+# Higher-level EV value for EV 4 and input 141
+set fmri(evg141.4) -0.13531493
+
+# Higher-level EV value for EV 4 and input 142
+set fmri(evg142.4) 0.248091168
+
+# Higher-level EV value for EV 4 and input 143
+set fmri(evg143.4) -0.095128836
+
+# Higher-level EV value for EV 4 and input 144
+set fmri(evg144.4) -0.079008484
+
+# Higher-level EV value for EV 4 and input 145
+set fmri(evg145.4) 0.126357478
+
+# Higher-level EV value for EV 4 and input 146
+set fmri(evg146.4) 0.03123089
+
+# Higher-level EV value for EV 4 and input 147
+set fmri(evg147.4) -0.084170065
+
+# Higher-level EV value for EV 4 and input 148
+set fmri(evg148.4) 0.169121307
+
+# Higher-level EV value for EV 4 and input 149
+set fmri(evg149.4) -0.048126111
+
+# Higher-level EV value for EV 4 and input 150
+set fmri(evg150.4) -0.092625992
+
+# Higher-level EV value for EV 4 and input 151
+set fmri(evg151.4) -0.057016887
+
+# Higher-level EV value for EV 4 and input 152
+set fmri(evg152.4) -0.079509299
+
+# Higher-level EV value for EV 4 and input 153
+set fmri(evg153.4) -0.059257092
+
+# Higher-level EV value for EV 4 and input 154
+set fmri(evg154.4) -0.113041091
+
+# Higher-level EV value for EV 4 and input 155
+set fmri(evg155.4) 0.050120683
+
+# Higher-level EV value for EV 4 and input 156
+set fmri(evg156.4) 0.095918537
+
+# Higher-level EV value for EV 4 and input 157
+set fmri(evg157.4) -0.063494529
+
+# Higher-level EV value for EV 4 and input 158
+set fmri(evg158.4) 0.131448915
+
+# Higher-level EV value for EV 4 and input 159
+set fmri(evg159.4) -0.124519521
+
+# Higher-level EV value for EV 4 and input 160
+set fmri(evg160.4) -0.10274293
+
+# Higher-level EV value for EV 4 and input 161
+set fmri(evg161.4) -0.024495168
+
+# Higher-level EV value for EV 4 and input 162
+set fmri(evg162.4) -0.012936717
+
+# Higher-level EV value for EV 4 and input 163
+set fmri(evg163.4) -0.053349884
+
+# Higher-level EV value for EV 4 and input 164
+set fmri(evg164.4) -0.048548539
+
+# Higher-level EV value for EV 4 and input 165
+set fmri(evg165.4) -0.040006235
+
+# Higher-level EV value for EV 4 and input 166
+set fmri(evg166.4) -0.085919692
+
+# Higher-level EV value for EV 4 and input 167
+set fmri(evg167.4) 0.055264109
+
+# Higher-level EV value for EV 4 and input 168
+set fmri(evg168.4) 0.055676605
+
+# Higher-level EV value for EV 4 and input 169
+set fmri(evg169.4) 0.00882552
+
+# Higher-level EV value for EV 4 and input 170
+set fmri(evg170.4) -0.075183363
+
+# Higher-level EV value for EV 4 and input 171
+set fmri(evg171.4) 0.243741182
+
+# Higher-level EV value for EV 4 and input 172
+set fmri(evg172.4) -0.013936047
+
+# Higher-level EV value for EV 4 and input 173
+set fmri(evg173.4) -0.100838627
+
+# Higher-level EV value for EV 4 and input 174
+set fmri(evg174.4) -0.0183337
+
+# Higher-level EV value for EV 4 and input 175
+set fmri(evg175.4) -0.000259415
+
+# Higher-level EV value for EV 4 and input 176
+set fmri(evg176.4) 0.038676268
+
+# Higher-level EV value for EV 4 and input 177
+set fmri(evg177.4) 0.089998383
+
+# Higher-level EV value for EV 4 and input 178
+set fmri(evg178.4) -0.010231586
+
+# Higher-level EV value for EV 4 and input 179
+set fmri(evg179.4) 0.033703339
+
+# Higher-level EV value for EV 4 and input 180
+set fmri(evg180.4) 0.022284429
+
+# Higher-level EV value for EV 4 and input 181
+set fmri(evg181.4) 0.003500523
+
+# Higher-level EV value for EV 4 and input 182
+set fmri(evg182.4) 0.090065177
+
+# Higher-level EV value for EV 4 and input 183
+set fmri(evg183.4) -0.091636362
+
+# Higher-level EV value for EV 4 and input 184
+set fmri(evg184.4) -0.08506194
+
+# Higher-level EV value for EV 4 and input 185
+set fmri(evg185.4) 0.076379825
+
+# Higher-level EV value for EV 4 and input 186
+set fmri(evg186.4) 0.081390705
+
+# Higher-level EV value for EV 4 and input 187
+set fmri(evg187.4) 0.478230597
+
+# Higher-level EV value for EV 4 and input 188
+set fmri(evg188.4) -0.118833
+
+# Higher-level EV value for EV 4 and input 189
+set fmri(evg189.4) -0.031133267
+
+# Higher-level EV value for EV 4 and input 190
+set fmri(evg190.4) -0.081981329
+
+# Higher-level EV value for EV 4 and input 191
+set fmri(evg191.4) -0.059459948
+
+# Higher-level EV value for EV 4 and input 192
+set fmri(evg192.4) -0.104765818
+
+# Higher-level EV value for EV 4 and input 193
+set fmri(evg193.4) -0.071389306
+
+# Higher-level EV value for EV 4 and input 194
+set fmri(evg194.4) -0.081563809
+
+# Higher-level EV value for EV 4 and input 195
+set fmri(evg195.4) -0.087164601
+
+# Higher-level EV value for EV 4 and input 196
+set fmri(evg196.4) 0.096713705
+
+# Higher-level EV value for EV 4 and input 197
+set fmri(evg197.4) -0.134224943
+
+# Higher-level EV value for EV 4 and input 198
+set fmri(evg198.4) -0.082956665
+
+# Higher-level EV value for EV 4 and input 199
+set fmri(evg199.4) -0.023309193
+
+# Higher-level EV value for EV 4 and input 200
+set fmri(evg200.4) -0.089083727
+
+# Higher-level EV value for EV 4 and input 201
+set fmri(evg201.4) -0.114617599
+
+# Higher-level EV value for EV 4 and input 202
+set fmri(evg202.4) -0.049145691
+
+# Higher-level EV value for EV 4 and input 203
+set fmri(evg203.4) -0.093229581
+
+# Higher-level EV value for EV 4 and input 204
+set fmri(evg204.4) -0.016451241
+
+# Higher-level EV value for EV 4 and input 205
+set fmri(evg205.4) -0.07899094
+
+# Higher-level EV value for EV 4 and input 206
+set fmri(evg206.4) -0.140317606
+
+# Higher-level EV value for EV 4 and input 207
+set fmri(evg207.4) -0.05256754
+
+# Higher-level EV value for EV 4 and input 208
+set fmri(evg208.4) -0.056384372
+
+# Higher-level EV value for EV 4 and input 209
+set fmri(evg209.4) -0.040735364
+
+# Higher-level EV value for EV 4 and input 210
+set fmri(evg210.4) -0.048569214
+
+# Higher-level EV value for EV 4 and input 211
+set fmri(evg211.4) 0.023581262
+
+# Higher-level EV value for EV 4 and input 212
+set fmri(evg212.4) 0.160398545
+
+# EV 5 title
+set fmri(evtitle5) "study"
+
+# Basic waveform shape (EV 5)
+# 0 : Square
+# 1 : Sinusoid
+# 2 : Custom (1 entry per volume)
+# 3 : Custom (3 column format)
+# 4 : Interaction
+# 10 : Empty (all zeros)
+set fmri(shape5) 2
+
+# Convolution (EV 5)
+# 0 : None
+# 1 : Gaussian
+# 2 : Gamma
+# 3 : Double-Gamma HRF
+# 4 : Gamma basis functions
+# 5 : Sine basis functions
+# 6 : FIR basis functions
+# 8 : Alternate Double-Gamma
+set fmri(convolve5) 0
+
+# Convolve phase (EV 5)
+set fmri(convolve_phase5) 0
+
+# Apply temporal filtering (EV 5)
+set fmri(tempfilt_yn5) 0
+
+# Add temporal derivative (EV 5)
+set fmri(deriv_yn5) 0
+
+# Custom EV file (EV 5)
+set fmri(custom5) "dummy"
+
+# Orthogonalise EV 5 wrt EV 0
+set fmri(ortho5.0) 0
+
+# Orthogonalise EV 5 wrt EV 1
+set fmri(ortho5.1) 0
+
+# Orthogonalise EV 5 wrt EV 2
+set fmri(ortho5.2) 0
+
+# Orthogonalise EV 5 wrt EV 3
+set fmri(ortho5.3) 0
+
+# Orthogonalise EV 5 wrt EV 4
+set fmri(ortho5.4) 0
+
+# Orthogonalise EV 5 wrt EV 5
+set fmri(ortho5.5) 0
+
+# Orthogonalise EV 5 wrt EV 6
+set fmri(ortho5.6) 0
+
+# Higher-level EV value for EV 5 and input 1
+set fmri(evg1.5) 0
+
+# Higher-level EV value for EV 5 and input 2
+set fmri(evg2.5) 0
+
+# Higher-level EV value for EV 5 and input 3
+set fmri(evg3.5) 0
+
+# Higher-level EV value for EV 5 and input 4
+set fmri(evg4.5) 0
+
+# Higher-level EV value for EV 5 and input 5
+set fmri(evg5.5) 0
+
+# Higher-level EV value for EV 5 and input 6
+set fmri(evg6.5) 0
+
+# Higher-level EV value for EV 5 and input 7
+set fmri(evg7.5) 0
+
+# Higher-level EV value for EV 5 and input 8
+set fmri(evg8.5) 0
+
+# Higher-level EV value for EV 5 and input 9
+set fmri(evg9.5) 0
+
+# Higher-level EV value for EV 5 and input 10
+set fmri(evg10.5) 0
+
+# Higher-level EV value for EV 5 and input 11
+set fmri(evg11.5) 0
+
+# Higher-level EV value for EV 5 and input 12
+set fmri(evg12.5) 0
+
+# Higher-level EV value for EV 5 and input 13
+set fmri(evg13.5) 0
+
+# Higher-level EV value for EV 5 and input 14
+set fmri(evg14.5) 0
+
+# Higher-level EV value for EV 5 and input 15
+set fmri(evg15.5) 0
+
+# Higher-level EV value for EV 5 and input 16
+set fmri(evg16.5) 0
+
+# Higher-level EV value for EV 5 and input 17
+set fmri(evg17.5) 0
+
+# Higher-level EV value for EV 5 and input 18
+set fmri(evg18.5) 0
+
+# Higher-level EV value for EV 5 and input 19
+set fmri(evg19.5) 0
+
+# Higher-level EV value for EV 5 and input 20
+set fmri(evg20.5) 0
+
+# Higher-level EV value for EV 5 and input 21
+set fmri(evg21.5) 0
+
+# Higher-level EV value for EV 5 and input 22
+set fmri(evg22.5) 0
+
+# Higher-level EV value for EV 5 and input 23
+set fmri(evg23.5) 0
+
+# Higher-level EV value for EV 5 and input 24
+set fmri(evg24.5) 0
+
+# Higher-level EV value for EV 5 and input 25
+set fmri(evg25.5) 0
+
+# Higher-level EV value for EV 5 and input 26
+set fmri(evg26.5) 0
+
+# Higher-level EV value for EV 5 and input 27
+set fmri(evg27.5) 0
+
+# Higher-level EV value for EV 5 and input 28
+set fmri(evg28.5) 0
+
+# Higher-level EV value for EV 5 and input 29
+set fmri(evg29.5) 0
+
+# Higher-level EV value for EV 5 and input 30
+set fmri(evg30.5) 0
+
+# Higher-level EV value for EV 5 and input 31
+set fmri(evg31.5) 0
+
+# Higher-level EV value for EV 5 and input 32
+set fmri(evg32.5) 0
+
+# Higher-level EV value for EV 5 and input 33
+set fmri(evg33.5) 0
+
+# Higher-level EV value for EV 5 and input 34
+set fmri(evg34.5) 0
+
+# Higher-level EV value for EV 5 and input 35
+set fmri(evg35.5) 0
+
+# Higher-level EV value for EV 5 and input 36
+set fmri(evg36.5) 1
+
+# Higher-level EV value for EV 5 and input 37
+set fmri(evg37.5) 1
+
+# Higher-level EV value for EV 5 and input 38
+set fmri(evg38.5) 1
+
+# Higher-level EV value for EV 5 and input 39
+set fmri(evg39.5) 1
+
+# Higher-level EV value for EV 5 and input 40
+set fmri(evg40.5) 1
+
+# Higher-level EV value for EV 5 and input 41
+set fmri(evg41.5) 1
+
+# Higher-level EV value for EV 5 and input 42
+set fmri(evg42.5) 1
+
+# Higher-level EV value for EV 5 and input 43
+set fmri(evg43.5) 1
+
+# Higher-level EV value for EV 5 and input 44
+set fmri(evg44.5) 1
+
+# Higher-level EV value for EV 5 and input 45
+set fmri(evg45.5) 1
+
+# Higher-level EV value for EV 5 and input 46
+set fmri(evg46.5) 1
+
+# Higher-level EV value for EV 5 and input 47
+set fmri(evg47.5) 1
+
+# Higher-level EV value for EV 5 and input 48
+set fmri(evg48.5) 1
+
+# Higher-level EV value for EV 5 and input 49
+set fmri(evg49.5) 1
+
+# Higher-level EV value for EV 5 and input 50
+set fmri(evg50.5) 1
+
+# Higher-level EV value for EV 5 and input 51
+set fmri(evg51.5) 1
+
+# Higher-level EV value for EV 5 and input 52
+set fmri(evg52.5) 1
+
+# Higher-level EV value for EV 5 and input 53
+set fmri(evg53.5) 1
+
+# Higher-level EV value for EV 5 and input 54
+set fmri(evg54.5) 1
+
+# Higher-level EV value for EV 5 and input 55
+set fmri(evg55.5) 1
+
+# Higher-level EV value for EV 5 and input 56
+set fmri(evg56.5) 1
+
+# Higher-level EV value for EV 5 and input 57
+set fmri(evg57.5) 1
+
+# Higher-level EV value for EV 5 and input 58
+set fmri(evg58.5) 1
+
+# Higher-level EV value for EV 5 and input 59
+set fmri(evg59.5) 1
+
+# Higher-level EV value for EV 5 and input 60
+set fmri(evg60.5) 1
+
+# Higher-level EV value for EV 5 and input 61
+set fmri(evg61.5) 1
+
+# Higher-level EV value for EV 5 and input 62
+set fmri(evg62.5) 1
+
+# Higher-level EV value for EV 5 and input 63
+set fmri(evg63.5) 1
+
+# Higher-level EV value for EV 5 and input 64
+set fmri(evg64.5) 1
+
+# Higher-level EV value for EV 5 and input 65
+set fmri(evg65.5) 1
+
+# Higher-level EV value for EV 5 and input 66
+set fmri(evg66.5) 1
+
+# Higher-level EV value for EV 5 and input 67
+set fmri(evg67.5) 1
+
+# Higher-level EV value for EV 5 and input 68
+set fmri(evg68.5) 1
+
+# Higher-level EV value for EV 5 and input 69
+set fmri(evg69.5) 1
+
+# Higher-level EV value for EV 5 and input 70
+set fmri(evg70.5) 1
+
+# Higher-level EV value for EV 5 and input 71
+set fmri(evg71.5) 1
+
+# Higher-level EV value for EV 5 and input 72
+set fmri(evg72.5) 1
+
+# Higher-level EV value for EV 5 and input 73
+set fmri(evg73.5) 1
+
+# Higher-level EV value for EV 5 and input 74
+set fmri(evg74.5) 1
+
+# Higher-level EV value for EV 5 and input 75
+set fmri(evg75.5) 1
+
+# Higher-level EV value for EV 5 and input 76
+set fmri(evg76.5) 1
+
+# Higher-level EV value for EV 5 and input 77
+set fmri(evg77.5) 1
+
+# Higher-level EV value for EV 5 and input 78
+set fmri(evg78.5) 1
+
+# Higher-level EV value for EV 5 and input 79
+set fmri(evg79.5) 1
+
+# Higher-level EV value for EV 5 and input 80
+set fmri(evg80.5) 1
+
+# Higher-level EV value for EV 5 and input 81
+set fmri(evg81.5) 1
+
+# Higher-level EV value for EV 5 and input 82
+set fmri(evg82.5) 1
+
+# Higher-level EV value for EV 5 and input 83
+set fmri(evg83.5) 1
+
+# Higher-level EV value for EV 5 and input 84
+set fmri(evg84.5) 1
+
+# Higher-level EV value for EV 5 and input 85
+set fmri(evg85.5) 1
+
+# Higher-level EV value for EV 5 and input 86
+set fmri(evg86.5) 1
+
+# Higher-level EV value for EV 5 and input 87
+set fmri(evg87.5) 1
+
+# Higher-level EV value for EV 5 and input 88
+set fmri(evg88.5) 1
+
+# Higher-level EV value for EV 5 and input 89
+set fmri(evg89.5) 1
+
+# Higher-level EV value for EV 5 and input 90
+set fmri(evg90.5) 1
+
+# Higher-level EV value for EV 5 and input 91
+set fmri(evg91.5) 1
+
+# Higher-level EV value for EV 5 and input 92
+set fmri(evg92.5) 1
+
+# Higher-level EV value for EV 5 and input 93
+set fmri(evg93.5) 1
+
+# Higher-level EV value for EV 5 and input 94
+set fmri(evg94.5) 1
+
+# Higher-level EV value for EV 5 and input 95
+set fmri(evg95.5) 1
+
+# Higher-level EV value for EV 5 and input 96
+set fmri(evg96.5) 1
+
+# Higher-level EV value for EV 5 and input 97
+set fmri(evg97.5) 1
+
+# Higher-level EV value for EV 5 and input 98
+set fmri(evg98.5) 1
+
+# Higher-level EV value for EV 5 and input 99
+set fmri(evg99.5) 1
+
+# Higher-level EV value for EV 5 and input 100
+set fmri(evg100.5) 1
+
+# Higher-level EV value for EV 5 and input 101
+set fmri(evg101.5) 1
+
+# Higher-level EV value for EV 5 and input 102
+set fmri(evg102.5) 1
+
+# Higher-level EV value for EV 5 and input 103
+set fmri(evg103.5) 1
+
+# Higher-level EV value for EV 5 and input 104
+set fmri(evg104.5) 1
+
+# Higher-level EV value for EV 5 and input 105
+set fmri(evg105.5) 1
+
+# Higher-level EV value for EV 5 and input 106
+set fmri(evg106.5) 1
+
+# Higher-level EV value for EV 5 and input 107
+set fmri(evg107.5) 1
+
+# Higher-level EV value for EV 5 and input 108
+set fmri(evg108.5) 1
+
+# Higher-level EV value for EV 5 and input 109
+set fmri(evg109.5) 1
+
+# Higher-level EV value for EV 5 and input 110
+set fmri(evg110.5) 1
+
+# Higher-level EV value for EV 5 and input 111
+set fmri(evg111.5) 1
+
+# Higher-level EV value for EV 5 and input 112
+set fmri(evg112.5) 1
+
+# Higher-level EV value for EV 5 and input 113
+set fmri(evg113.5) 1
+
+# Higher-level EV value for EV 5 and input 114
+set fmri(evg114.5) 1
+
+# Higher-level EV value for EV 5 and input 115
+set fmri(evg115.5) 1
+
+# Higher-level EV value for EV 5 and input 116
+set fmri(evg116.5) 1
+
+# Higher-level EV value for EV 5 and input 117
+set fmri(evg117.5) 1
+
+# Higher-level EV value for EV 5 and input 118
+set fmri(evg118.5) 1
+
+# Higher-level EV value for EV 5 and input 119
+set fmri(evg119.5) 1
+
+# Higher-level EV value for EV 5 and input 120
+set fmri(evg120.5) 1
+
+# Higher-level EV value for EV 5 and input 121
+set fmri(evg121.5) 1
+
+# Higher-level EV value for EV 5 and input 122
+set fmri(evg122.5) 1
+
+# Higher-level EV value for EV 5 and input 123
+set fmri(evg123.5) 1
+
+# Higher-level EV value for EV 5 and input 124
+set fmri(evg124.5) 1
+
+# Higher-level EV value for EV 5 and input 125
+set fmri(evg125.5) 1
+
+# Higher-level EV value for EV 5 and input 126
+set fmri(evg126.5) 1
+
+# Higher-level EV value for EV 5 and input 127
+set fmri(evg127.5) 1
+
+# Higher-level EV value for EV 5 and input 128
+set fmri(evg128.5) 1
+
+# Higher-level EV value for EV 5 and input 129
+set fmri(evg129.5) 1
+
+# Higher-level EV value for EV 5 and input 130
+set fmri(evg130.5) 1
+
+# Higher-level EV value for EV 5 and input 131
+set fmri(evg131.5) 1
+
+# Higher-level EV value for EV 5 and input 132
+set fmri(evg132.5) 1
+
+# Higher-level EV value for EV 5 and input 133
+set fmri(evg133.5) 1
+
+# Higher-level EV value for EV 5 and input 134
+set fmri(evg134.5) 1
+
+# Higher-level EV value for EV 5 and input 135
+set fmri(evg135.5) 1
+
+# Higher-level EV value for EV 5 and input 136
+set fmri(evg136.5) 1
+
+# Higher-level EV value for EV 5 and input 137
+set fmri(evg137.5) 1
+
+# Higher-level EV value for EV 5 and input 138
+set fmri(evg138.5) 1
+
+# Higher-level EV value for EV 5 and input 139
+set fmri(evg139.5) 1
+
+# Higher-level EV value for EV 5 and input 140
+set fmri(evg140.5) 1
+
+# Higher-level EV value for EV 5 and input 141
+set fmri(evg141.5) 1
+
+# Higher-level EV value for EV 5 and input 142
+set fmri(evg142.5) 1
+
+# Higher-level EV value for EV 5 and input 143
+set fmri(evg143.5) 1
+
+# Higher-level EV value for EV 5 and input 144
+set fmri(evg144.5) 1
+
+# Higher-level EV value for EV 5 and input 145
+set fmri(evg145.5) 1
+
+# Higher-level EV value for EV 5 and input 146
+set fmri(evg146.5) 1
+
+# Higher-level EV value for EV 5 and input 147
+set fmri(evg147.5) 1
+
+# Higher-level EV value for EV 5 and input 148
+set fmri(evg148.5) 1
+
+# Higher-level EV value for EV 5 and input 149
+set fmri(evg149.5) 1
+
+# Higher-level EV value for EV 5 and input 150
+set fmri(evg150.5) 1
+
+# Higher-level EV value for EV 5 and input 151
+set fmri(evg151.5) 1
+
+# Higher-level EV value for EV 5 and input 152
+set fmri(evg152.5) 1
+
+# Higher-level EV value for EV 5 and input 153
+set fmri(evg153.5) 1
+
+# Higher-level EV value for EV 5 and input 154
+set fmri(evg154.5) 1
+
+# Higher-level EV value for EV 5 and input 155
+set fmri(evg155.5) 1
+
+# Higher-level EV value for EV 5 and input 156
+set fmri(evg156.5) 1
+
+# Higher-level EV value for EV 5 and input 157
+set fmri(evg157.5) 1
+
+# Higher-level EV value for EV 5 and input 158
+set fmri(evg158.5) 1
+
+# Higher-level EV value for EV 5 and input 159
+set fmri(evg159.5) 1
+
+# Higher-level EV value for EV 5 and input 160
+set fmri(evg160.5) 1
+
+# Higher-level EV value for EV 5 and input 161
+set fmri(evg161.5) 1
+
+# Higher-level EV value for EV 5 and input 162
+set fmri(evg162.5) 1
+
+# Higher-level EV value for EV 5 and input 163
+set fmri(evg163.5) 1
+
+# Higher-level EV value for EV 5 and input 164
+set fmri(evg164.5) 1
+
+# Higher-level EV value for EV 5 and input 165
+set fmri(evg165.5) 1
+
+# Higher-level EV value for EV 5 and input 166
+set fmri(evg166.5) 1
+
+# Higher-level EV value for EV 5 and input 167
+set fmri(evg167.5) 1
+
+# Higher-level EV value for EV 5 and input 168
+set fmri(evg168.5) 1
+
+# Higher-level EV value for EV 5 and input 169
+set fmri(evg169.5) 1
+
+# Higher-level EV value for EV 5 and input 170
+set fmri(evg170.5) 1
+
+# Higher-level EV value for EV 5 and input 171
+set fmri(evg171.5) 1
+
+# Higher-level EV value for EV 5 and input 172
+set fmri(evg172.5) 1
+
+# Higher-level EV value for EV 5 and input 173
+set fmri(evg173.5) 1
+
+# Higher-level EV value for EV 5 and input 174
+set fmri(evg174.5) 1
+
+# Higher-level EV value for EV 5 and input 175
+set fmri(evg175.5) 1
+
+# Higher-level EV value for EV 5 and input 176
+set fmri(evg176.5) 1
+
+# Higher-level EV value for EV 5 and input 177
+set fmri(evg177.5) 1
+
+# Higher-level EV value for EV 5 and input 178
+set fmri(evg178.5) 1
+
+# Higher-level EV value for EV 5 and input 179
+set fmri(evg179.5) 1
+
+# Higher-level EV value for EV 5 and input 180
+set fmri(evg180.5) 1
+
+# Higher-level EV value for EV 5 and input 181
+set fmri(evg181.5) 1
+
+# Higher-level EV value for EV 5 and input 182
+set fmri(evg182.5) 1
+
+# Higher-level EV value for EV 5 and input 183
+set fmri(evg183.5) 1
+
+# Higher-level EV value for EV 5 and input 184
+set fmri(evg184.5) 1
+
+# Higher-level EV value for EV 5 and input 185
+set fmri(evg185.5) 1
+
+# Higher-level EV value for EV 5 and input 186
+set fmri(evg186.5) 1
+
+# Higher-level EV value for EV 5 and input 187
+set fmri(evg187.5) 1
+
+# Higher-level EV value for EV 5 and input 188
+set fmri(evg188.5) 1
+
+# Higher-level EV value for EV 5 and input 189
+set fmri(evg189.5) 1
+
+# Higher-level EV value for EV 5 and input 190
+set fmri(evg190.5) 1
+
+# Higher-level EV value for EV 5 and input 191
+set fmri(evg191.5) 1
+
+# Higher-level EV value for EV 5 and input 192
+set fmri(evg192.5) 1
+
+# Higher-level EV value for EV 5 and input 193
+set fmri(evg193.5) 1
+
+# Higher-level EV value for EV 5 and input 194
+set fmri(evg194.5) 1
+
+# Higher-level EV value for EV 5 and input 195
+set fmri(evg195.5) 1
+
+# Higher-level EV value for EV 5 and input 196
+set fmri(evg196.5) 1
+
+# Higher-level EV value for EV 5 and input 197
+set fmri(evg197.5) 1
+
+# Higher-level EV value for EV 5 and input 198
+set fmri(evg198.5) 1
+
+# Higher-level EV value for EV 5 and input 199
+set fmri(evg199.5) 1
+
+# Higher-level EV value for EV 5 and input 200
+set fmri(evg200.5) 1
+
+# Higher-level EV value for EV 5 and input 201
+set fmri(evg201.5) 1
+
+# Higher-level EV value for EV 5 and input 202
+set fmri(evg202.5) 1
+
+# Higher-level EV value for EV 5 and input 203
+set fmri(evg203.5) 1
+
+# Higher-level EV value for EV 5 and input 204
+set fmri(evg204.5) 1
+
+# Higher-level EV value for EV 5 and input 205
+set fmri(evg205.5) 1
+
+# Higher-level EV value for EV 5 and input 206
+set fmri(evg206.5) 1
+
+# Higher-level EV value for EV 5 and input 207
+set fmri(evg207.5) 1
+
+# Higher-level EV value for EV 5 and input 208
+set fmri(evg208.5) 1
+
+# Higher-level EV value for EV 5 and input 209
+set fmri(evg209.5) 1
+
+# Higher-level EV value for EV 5 and input 210
+set fmri(evg210.5) 1
+
+# Higher-level EV value for EV 5 and input 211
+set fmri(evg211.5) 1
+
+# Higher-level EV value for EV 5 and input 212
+set fmri(evg212.5) 1
+
+# EV 6 title
+set fmri(evtitle6) "flip"
+
+# Basic waveform shape (EV 6)
+# 0 : Square
+# 1 : Sinusoid
+# 2 : Custom (1 entry per volume)
+# 3 : Custom (3 column format)
+# 4 : Interaction
+# 10 : Empty (all zeros)
+set fmri(shape6) 2
+
+# Convolution (EV 6)
+# 0 : None
+# 1 : Gaussian
+# 2 : Gamma
+# 3 : Double-Gamma HRF
+# 4 : Gamma basis functions
+# 5 : Sine basis functions
+# 6 : FIR basis functions
+# 8 : Alternate Double-Gamma
+set fmri(convolve6) 0
+
+# Convolve phase (EV 6)
+set fmri(convolve_phase6) 0
+
+# Apply temporal filtering (EV 6)
+set fmri(tempfilt_yn6) 0
+
+# Add temporal derivative (EV 6)
+set fmri(deriv_yn6) 0
+
+# Custom EV file (EV 6)
+set fmri(custom6) "dummy"
+
+# Orthogonalise EV 6 wrt EV 0
+set fmri(ortho6.0) 0
+
+# Orthogonalise EV 6 wrt EV 1
+set fmri(ortho6.1) 0
+
+# Orthogonalise EV 6 wrt EV 2
+set fmri(ortho6.2) 0
+
+# Orthogonalise EV 6 wrt EV 3
+set fmri(ortho6.3) 0
+
+# Orthogonalise EV 6 wrt EV 4
+set fmri(ortho6.4) 0
+
+# Orthogonalise EV 6 wrt EV 5
+set fmri(ortho6.5) 0
+
+# Orthogonalise EV 6 wrt EV 6
+set fmri(ortho6.6) 0
+
+# Higher-level EV value for EV 6 and input 1
+set fmri(evg1.6) 0
+
+# Higher-level EV value for EV 6 and input 2
+set fmri(evg2.6) 0
+
+# Higher-level EV value for EV 6 and input 3
+set fmri(evg3.6) 0
+
+# Higher-level EV value for EV 6 and input 4
+set fmri(evg4.6) 0
+
+# Higher-level EV value for EV 6 and input 5
+set fmri(evg5.6) 0
+
+# Higher-level EV value for EV 6 and input 6
+set fmri(evg6.6) 0
+
+# Higher-level EV value for EV 6 and input 7
+set fmri(evg7.6) 0
+
+# Higher-level EV value for EV 6 and input 8
+set fmri(evg8.6) 0
+
+# Higher-level EV value for EV 6 and input 9
+set fmri(evg9.6) 0
+
+# Higher-level EV value for EV 6 and input 10
+set fmri(evg10.6) 0
+
+# Higher-level EV value for EV 6 and input 11
+set fmri(evg11.6) 0
+
+# Higher-level EV value for EV 6 and input 12
+set fmri(evg12.6) 0
+
+# Higher-level EV value for EV 6 and input 13
+set fmri(evg13.6) 0
+
+# Higher-level EV value for EV 6 and input 14
+set fmri(evg14.6) 0
+
+# Higher-level EV value for EV 6 and input 15
+set fmri(evg15.6) 0
+
+# Higher-level EV value for EV 6 and input 16
+set fmri(evg16.6) 0
+
+# Higher-level EV value for EV 6 and input 17
+set fmri(evg17.6) 0
+
+# Higher-level EV value for EV 6 and input 18
+set fmri(evg18.6) 0
+
+# Higher-level EV value for EV 6 and input 19
+set fmri(evg19.6) 0
+
+# Higher-level EV value for EV 6 and input 20
+set fmri(evg20.6) 0
+
+# Higher-level EV value for EV 6 and input 21
+set fmri(evg21.6) 0
+
+# Higher-level EV value for EV 6 and input 22
+set fmri(evg22.6) 0
+
+# Higher-level EV value for EV 6 and input 23
+set fmri(evg23.6) 0
+
+# Higher-level EV value for EV 6 and input 24
+set fmri(evg24.6) 0
+
+# Higher-level EV value for EV 6 and input 25
+set fmri(evg25.6) 0
+
+# Higher-level EV value for EV 6 and input 26
+set fmri(evg26.6) 0
+
+# Higher-level EV value for EV 6 and input 27
+set fmri(evg27.6) 0
+
+# Higher-level EV value for EV 6 and input 28
+set fmri(evg28.6) 0
+
+# Higher-level EV value for EV 6 and input 29
+set fmri(evg29.6) 0
+
+# Higher-level EV value for EV 6 and input 30
+set fmri(evg30.6) 0
+
+# Higher-level EV value for EV 6 and input 31
+set fmri(evg31.6) 0
+
+# Higher-level EV value for EV 6 and input 32
+set fmri(evg32.6) 0
+
+# Higher-level EV value for EV 6 and input 33
+set fmri(evg33.6) 0
+
+# Higher-level EV value for EV 6 and input 34
+set fmri(evg34.6) 0
+
+# Higher-level EV value for EV 6 and input 35
+set fmri(evg35.6) 0
+
+# Higher-level EV value for EV 6 and input 36
+set fmri(evg36.6) 0
+
+# Higher-level EV value for EV 6 and input 37
+set fmri(evg37.6) 0
+
+# Higher-level EV value for EV 6 and input 38
+set fmri(evg38.6) 0
+
+# Higher-level EV value for EV 6 and input 39
+set fmri(evg39.6) 0
+
+# Higher-level EV value for EV 6 and input 40
+set fmri(evg40.6) 0
+
+# Higher-level EV value for EV 6 and input 41
+set fmri(evg41.6) 0
+
+# Higher-level EV value for EV 6 and input 42
+set fmri(evg42.6) 0
+
+# Higher-level EV value for EV 6 and input 43
+set fmri(evg43.6) 0
+
+# Higher-level EV value for EV 6 and input 44
+set fmri(evg44.6) 0
+
+# Higher-level EV value for EV 6 and input 45
+set fmri(evg45.6) 0
+
+# Higher-level EV value for EV 6 and input 46
+set fmri(evg46.6) 0
+
+# Higher-level EV value for EV 6 and input 47
+set fmri(evg47.6) 0
+
+# Higher-level EV value for EV 6 and input 48
+set fmri(evg48.6) 0
+
+# Higher-level EV value for EV 6 and input 49
+set fmri(evg49.6) 0
+
+# Higher-level EV value for EV 6 and input 50
+set fmri(evg50.6) 0
+
+# Higher-level EV value for EV 6 and input 51
+set fmri(evg51.6) 0
+
+# Higher-level EV value for EV 6 and input 52
+set fmri(evg52.6) 0
+
+# Higher-level EV value for EV 6 and input 53
+set fmri(evg53.6) 0
+
+# Higher-level EV value for EV 6 and input 54
+set fmri(evg54.6) 0
+
+# Higher-level EV value for EV 6 and input 55
+set fmri(evg55.6) 0
+
+# Higher-level EV value for EV 6 and input 56
+set fmri(evg56.6) 0
+
+# Higher-level EV value for EV 6 and input 57
+set fmri(evg57.6) 0
+
+# Higher-level EV value for EV 6 and input 58
+set fmri(evg58.6) 0
+
+# Higher-level EV value for EV 6 and input 59
+set fmri(evg59.6) 1
+
+# Higher-level EV value for EV 6 and input 60
+set fmri(evg60.6) 0
+
+# Higher-level EV value for EV 6 and input 61
+set fmri(evg61.6) 1
+
+# Higher-level EV value for EV 6 and input 62
+set fmri(evg62.6) 0
+
+# Higher-level EV value for EV 6 and input 63
+set fmri(evg63.6) 1
+
+# Higher-level EV value for EV 6 and input 64
+set fmri(evg64.6) 0
+
+# Higher-level EV value for EV 6 and input 65
+set fmri(evg65.6) 0
+
+# Higher-level EV value for EV 6 and input 66
+set fmri(evg66.6) 0
+
+# Higher-level EV value for EV 6 and input 67
+set fmri(evg67.6) 0
+
+# Higher-level EV value for EV 6 and input 68
+set fmri(evg68.6) 0
+
+# Higher-level EV value for EV 6 and input 69
+set fmri(evg69.6) 0
+
+# Higher-level EV value for EV 6 and input 70
+set fmri(evg70.6) 1
+
+# Higher-level EV value for EV 6 and input 71
+set fmri(evg71.6) 0
+
+# Higher-level EV value for EV 6 and input 72
+set fmri(evg72.6) 0
+
+# Higher-level EV value for EV 6 and input 73
+set fmri(evg73.6) 0
+
+# Higher-level EV value for EV 6 and input 74
+set fmri(evg74.6) 1
+
+# Higher-level EV value for EV 6 and input 75
+set fmri(evg75.6) 1
+
+# Higher-level EV value for EV 6 and input 76
+set fmri(evg76.6) 0
+
+# Higher-level EV value for EV 6 and input 77
+set fmri(evg77.6) 0
+
+# Higher-level EV value for EV 6 and input 78
+set fmri(evg78.6) 0
+
+# Higher-level EV value for EV 6 and input 79
+set fmri(evg79.6) 1
+
+# Higher-level EV value for EV 6 and input 80
+set fmri(evg80.6) 1
+
+# Higher-level EV value for EV 6 and input 81
+set fmri(evg81.6) 1
+
+# Higher-level EV value for EV 6 and input 82
+set fmri(evg82.6) 1
+
+# Higher-level EV value for EV 6 and input 83
+set fmri(evg83.6) 0
+
+# Higher-level EV value for EV 6 and input 84
+set fmri(evg84.6) 0
+
+# Higher-level EV value for EV 6 and input 85
+set fmri(evg85.6) 1
+
+# Higher-level EV value for EV 6 and input 86
+set fmri(evg86.6) 1
+
+# Higher-level EV value for EV 6 and input 87
+set fmri(evg87.6) 1
+
+# Higher-level EV value for EV 6 and input 88
+set fmri(evg88.6) 1
+
+# Higher-level EV value for EV 6 and input 89
+set fmri(evg89.6) 1
+
+# Higher-level EV value for EV 6 and input 90
+set fmri(evg90.6) 1
+
+# Higher-level EV value for EV 6 and input 91
+set fmri(evg91.6) 1
+
+# Higher-level EV value for EV 6 and input 92
+set fmri(evg92.6) 1
+
+# Higher-level EV value for EV 6 and input 93
+set fmri(evg93.6) 1
+
+# Higher-level EV value for EV 6 and input 94
+set fmri(evg94.6) 1
+
+# Higher-level EV value for EV 6 and input 95
+set fmri(evg95.6) 1
+
+# Higher-level EV value for EV 6 and input 96
+set fmri(evg96.6) 1
+
+# Higher-level EV value for EV 6 and input 97
+set fmri(evg97.6) 1
+
+# Higher-level EV value for EV 6 and input 98
+set fmri(evg98.6) 1
+
+# Higher-level EV value for EV 6 and input 99
+set fmri(evg99.6) 1
+
+# Higher-level EV value for EV 6 and input 100
+set fmri(evg100.6) 1
+
+# Higher-level EV value for EV 6 and input 101
+set fmri(evg101.6) 1
+
+# Higher-level EV value for EV 6 and input 102
+set fmri(evg102.6) 1
+
+# Higher-level EV value for EV 6 and input 103
+set fmri(evg103.6) 1
+
+# Higher-level EV value for EV 6 and input 104
+set fmri(evg104.6) 1
+
+# Higher-level EV value for EV 6 and input 105
+set fmri(evg105.6) 1
+
+# Higher-level EV value for EV 6 and input 106
+set fmri(evg106.6) 1
+
+# Higher-level EV value for EV 6 and input 107
+set fmri(evg107.6) 1
+
+# Higher-level EV value for EV 6 and input 108
+set fmri(evg108.6) 1
+
+# Higher-level EV value for EV 6 and input 109
+set fmri(evg109.6) 1
+
+# Higher-level EV value for EV 6 and input 110
+set fmri(evg110.6) 1
+
+# Higher-level EV value for EV 6 and input 111
+set fmri(evg111.6) 1
+
+# Higher-level EV value for EV 6 and input 112
+set fmri(evg112.6) 1
+
+# Higher-level EV value for EV 6 and input 113
+set fmri(evg113.6) 1
+
+# Higher-level EV value for EV 6 and input 114
+set fmri(evg114.6) 1
+
+# Higher-level EV value for EV 6 and input 115
+set fmri(evg115.6) 1
+
+# Higher-level EV value for EV 6 and input 116
+set fmri(evg116.6) 1
+
+# Higher-level EV value for EV 6 and input 117
+set fmri(evg117.6) 1
+
+# Higher-level EV value for EV 6 and input 118
+set fmri(evg118.6) 1
+
+# Higher-level EV value for EV 6 and input 119
+set fmri(evg119.6) 1
+
+# Higher-level EV value for EV 6 and input 120
+set fmri(evg120.6) 1
+
+# Higher-level EV value for EV 6 and input 121
+set fmri(evg121.6) 1
+
+# Higher-level EV value for EV 6 and input 122
+set fmri(evg122.6) 1
+
+# Higher-level EV value for EV 6 and input 123
+set fmri(evg123.6) 1
+
+# Higher-level EV value for EV 6 and input 124
+set fmri(evg124.6) 1
+
+# Higher-level EV value for EV 6 and input 125
+set fmri(evg125.6) 1
+
+# Higher-level EV value for EV 6 and input 126
+set fmri(evg126.6) 1
+
+# Higher-level EV value for EV 6 and input 127
+set fmri(evg127.6) 1
+
+# Higher-level EV value for EV 6 and input 128
+set fmri(evg128.6) 1
+
+# Higher-level EV value for EV 6 and input 129
+set fmri(evg129.6) 1
+
+# Higher-level EV value for EV 6 and input 130
+set fmri(evg130.6) 1
+
+# Higher-level EV value for EV 6 and input 131
+set fmri(evg131.6) 1
+
+# Higher-level EV value for EV 6 and input 132
+set fmri(evg132.6) 1
+
+# Higher-level EV value for EV 6 and input 133
+set fmri(evg133.6) 1
+
+# Higher-level EV value for EV 6 and input 134
+set fmri(evg134.6) 1
+
+# Higher-level EV value for EV 6 and input 135
+set fmri(evg135.6) 1
+
+# Higher-level EV value for EV 6 and input 136
+set fmri(evg136.6) 1
+
+# Higher-level EV value for EV 6 and input 137
+set fmri(evg137.6) 1
+
+# Higher-level EV value for EV 6 and input 138
+set fmri(evg138.6) 1
+
+# Higher-level EV value for EV 6 and input 139
+set fmri(evg139.6) 1
+
+# Higher-level EV value for EV 6 and input 140
+set fmri(evg140.6) 1
+
+# Higher-level EV value for EV 6 and input 141
+set fmri(evg141.6) 1
+
+# Higher-level EV value for EV 6 and input 142
+set fmri(evg142.6) 1
+
+# Higher-level EV value for EV 6 and input 143
+set fmri(evg143.6) 1
+
+# Higher-level EV value for EV 6 and input 144
+set fmri(evg144.6) 1
+
+# Higher-level EV value for EV 6 and input 145
+set fmri(evg145.6) 1
+
+# Higher-level EV value for EV 6 and input 146
+set fmri(evg146.6) 1
+
+# Higher-level EV value for EV 6 and input 147
+set fmri(evg147.6) 1
+
+# Higher-level EV value for EV 6 and input 148
+set fmri(evg148.6) 1
+
+# Higher-level EV value for EV 6 and input 149
+set fmri(evg149.6) 1
+
+# Higher-level EV value for EV 6 and input 150
+set fmri(evg150.6) 1
+
+# Higher-level EV value for EV 6 and input 151
+set fmri(evg151.6) 1
+
+# Higher-level EV value for EV 6 and input 152
+set fmri(evg152.6) 1
+
+# Higher-level EV value for EV 6 and input 153
+set fmri(evg153.6) 1
+
+# Higher-level EV value for EV 6 and input 154
+set fmri(evg154.6) 1
+
+# Higher-level EV value for EV 6 and input 155
+set fmri(evg155.6) 1
+
+# Higher-level EV value for EV 6 and input 156
+set fmri(evg156.6) 1
+
+# Higher-level EV value for EV 6 and input 157
+set fmri(evg157.6) 1
+
+# Higher-level EV value for EV 6 and input 158
+set fmri(evg158.6) 1
+
+# Higher-level EV value for EV 6 and input 159
+set fmri(evg159.6) 1
+
+# Higher-level EV value for EV 6 and input 160
+set fmri(evg160.6) 1
+
+# Higher-level EV value for EV 6 and input 161
+set fmri(evg161.6) 1
+
+# Higher-level EV value for EV 6 and input 162
+set fmri(evg162.6) 1
+
+# Higher-level EV value for EV 6 and input 163
+set fmri(evg163.6) 1
+
+# Higher-level EV value for EV 6 and input 164
+set fmri(evg164.6) 1
+
+# Higher-level EV value for EV 6 and input 165
+set fmri(evg165.6) 1
+
+# Higher-level EV value for EV 6 and input 166
+set fmri(evg166.6) 1
+
+# Higher-level EV value for EV 6 and input 167
+set fmri(evg167.6) 1
+
+# Higher-level EV value for EV 6 and input 168
+set fmri(evg168.6) 1
+
+# Higher-level EV value for EV 6 and input 169
+set fmri(evg169.6) 1
+
+# Higher-level EV value for EV 6 and input 170
+set fmri(evg170.6) 1
+
+# Higher-level EV value for EV 6 and input 171
+set fmri(evg171.6) 1
+
+# Higher-level EV value for EV 6 and input 172
+set fmri(evg172.6) 1
+
+# Higher-level EV value for EV 6 and input 173
+set fmri(evg173.6) 1
+
+# Higher-level EV value for EV 6 and input 174
+set fmri(evg174.6) 1
+
+# Higher-level EV value for EV 6 and input 175
+set fmri(evg175.6) 1
+
+# Higher-level EV value for EV 6 and input 176
+set fmri(evg176.6) 1
+
+# Higher-level EV value for EV 6 and input 177
+set fmri(evg177.6) 1
+
+# Higher-level EV value for EV 6 and input 178
+set fmri(evg178.6) 1
+
+# Higher-level EV value for EV 6 and input 179
+set fmri(evg179.6) 1
+
+# Higher-level EV value for EV 6 and input 180
+set fmri(evg180.6) 1
+
+# Higher-level EV value for EV 6 and input 181
+set fmri(evg181.6) 1
+
+# Higher-level EV value for EV 6 and input 182
+set fmri(evg182.6) 1
+
+# Higher-level EV value for EV 6 and input 183
+set fmri(evg183.6) 1
+
+# Higher-level EV value for EV 6 and input 184
+set fmri(evg184.6) 1
+
+# Higher-level EV value for EV 6 and input 185
+set fmri(evg185.6) 1
+
+# Higher-level EV value for EV 6 and input 186
+set fmri(evg186.6) 1
+
+# Higher-level EV value for EV 6 and input 187
+set fmri(evg187.6) 1
+
+# Higher-level EV value for EV 6 and input 188
+set fmri(evg188.6) 1
+
+# Higher-level EV value for EV 6 and input 189
+set fmri(evg189.6) 1
+
+# Higher-level EV value for EV 6 and input 190
+set fmri(evg190.6) 1
+
+# Higher-level EV value for EV 6 and input 191
+set fmri(evg191.6) 1
+
+# Higher-level EV value for EV 6 and input 192
+set fmri(evg192.6) 1
+
+# Higher-level EV value for EV 6 and input 193
+set fmri(evg193.6) 1
+
+# Higher-level EV value for EV 6 and input 194
+set fmri(evg194.6) 1
+
+# Higher-level EV value for EV 6 and input 195
+set fmri(evg195.6) 1
+
+# Higher-level EV value for EV 6 and input 196
+set fmri(evg196.6) 1
+
+# Higher-level EV value for EV 6 and input 197
+set fmri(evg197.6) 1
+
+# Higher-level EV value for EV 6 and input 198
+set fmri(evg198.6) 1
+
+# Higher-level EV value for EV 6 and input 199
+set fmri(evg199.6) 1
+
+# Higher-level EV value for EV 6 and input 200
+set fmri(evg200.6) 1
+
+# Higher-level EV value for EV 6 and input 201
+set fmri(evg201.6) 1
+
+# Higher-level EV value for EV 6 and input 202
+set fmri(evg202.6) 1
+
+# Higher-level EV value for EV 6 and input 203
+set fmri(evg203.6) 1
+
+# Higher-level EV value for EV 6 and input 204
+set fmri(evg204.6) 1
+
+# Higher-level EV value for EV 6 and input 205
+set fmri(evg205.6) 1
+
+# Higher-level EV value for EV 6 and input 206
+set fmri(evg206.6) 1
+
+# Higher-level EV value for EV 6 and input 207
+set fmri(evg207.6) 1
+
+# Higher-level EV value for EV 6 and input 208
+set fmri(evg208.6) 1
+
+# Higher-level EV value for EV 6 and input 209
+set fmri(evg209.6) 1
+
+# Higher-level EV value for EV 6 and input 210
+set fmri(evg210.6) 1
+
+# Higher-level EV value for EV 6 and input 211
+set fmri(evg211.6) 1
+
+# Higher-level EV value for EV 6 and input 212
+set fmri(evg212.6) 1
+
+# Setup Orthogonalisation at higher level?
+set fmri(level2orth) 0
+
+# Group membership for input 1
+set fmri(groupmem.1) 1
+
+# Group membership for input 2
+set fmri(groupmem.2) 1
+
+# Group membership for input 3
+set fmri(groupmem.3) 1
+
+# Group membership for input 4
+set fmri(groupmem.4) 1
+
+# Group membership for input 5
+set fmri(groupmem.5) 1
+
+# Group membership for input 6
+set fmri(groupmem.6) 1
+
+# Group membership for input 7
+set fmri(groupmem.7) 1
+
+# Group membership for input 8
+set fmri(groupmem.8) 1
+
+# Group membership for input 9
+set fmri(groupmem.9) 1
+
+# Group membership for input 10
+set fmri(groupmem.10) 1
+
+# Group membership for input 11
+set fmri(groupmem.11) 1
+
+# Group membership for input 12
+set fmri(groupmem.12) 1
+
+# Group membership for input 13
+set fmri(groupmem.13) 1
+
+# Group membership for input 14
+set fmri(groupmem.14) 1
+
+# Group membership for input 15
+set fmri(groupmem.15) 1
+
+# Group membership for input 16
+set fmri(groupmem.16) 1
+
+# Group membership for input 17
+set fmri(groupmem.17) 1
+
+# Group membership for input 18
+set fmri(groupmem.18) 1
+
+# Group membership for input 19
+set fmri(groupmem.19) 1
+
+# Group membership for input 20
+set fmri(groupmem.20) 1
+
+# Group membership for input 21
+set fmri(groupmem.21) 1
+
+# Group membership for input 22
+set fmri(groupmem.22) 1
+
+# Group membership for input 23
+set fmri(groupmem.23) 1
+
+# Group membership for input 24
+set fmri(groupmem.24) 1
+
+# Group membership for input 25
+set fmri(groupmem.25) 1
+
+# Group membership for input 26
+set fmri(groupmem.26) 1
+
+# Group membership for input 27
+set fmri(groupmem.27) 1
+
+# Group membership for input 28
+set fmri(groupmem.28) 1
+
+# Group membership for input 29
+set fmri(groupmem.29) 1
+
+# Group membership for input 30
+set fmri(groupmem.30) 1
+
+# Group membership for input 31
+set fmri(groupmem.31) 1
+
+# Group membership for input 32
+set fmri(groupmem.32) 1
+
+# Group membership for input 33
+set fmri(groupmem.33) 1
+
+# Group membership for input 34
+set fmri(groupmem.34) 1
+
+# Group membership for input 35
+set fmri(groupmem.35) 1
+
+# Group membership for input 36
+set fmri(groupmem.36) 1
+
+# Group membership for input 37
+set fmri(groupmem.37) 1
+
+# Group membership for input 38
+set fmri(groupmem.38) 1
+
+# Group membership for input 39
+set fmri(groupmem.39) 1
+
+# Group membership for input 40
+set fmri(groupmem.40) 1
+
+# Group membership for input 41
+set fmri(groupmem.41) 1
+
+# Group membership for input 42
+set fmri(groupmem.42) 1
+
+# Group membership for input 43
+set fmri(groupmem.43) 1
+
+# Group membership for input 44
+set fmri(groupmem.44) 1
+
+# Group membership for input 45
+set fmri(groupmem.45) 1
+
+# Group membership for input 46
+set fmri(groupmem.46) 1
+
+# Group membership for input 47
+set fmri(groupmem.47) 1
+
+# Group membership for input 48
+set fmri(groupmem.48) 1
+
+# Group membership for input 49
+set fmri(groupmem.49) 1
+
+# Group membership for input 50
+set fmri(groupmem.50) 1
+
+# Group membership for input 51
+set fmri(groupmem.51) 1
+
+# Group membership for input 52
+set fmri(groupmem.52) 1
+
+# Group membership for input 53
+set fmri(groupmem.53) 1
+
+# Group membership for input 54
+set fmri(groupmem.54) 1
+
+# Group membership for input 55
+set fmri(groupmem.55) 1
+
+# Group membership for input 56
+set fmri(groupmem.56) 1
+
+# Group membership for input 57
+set fmri(groupmem.57) 1
+
+# Group membership for input 58
+set fmri(groupmem.58) 1
+
+# Group membership for input 59
+set fmri(groupmem.59) 1
+
+# Group membership for input 60
+set fmri(groupmem.60) 1
+
+# Group membership for input 61
+set fmri(groupmem.61) 1
+
+# Group membership for input 62
+set fmri(groupmem.62) 1
+
+# Group membership for input 63
+set fmri(groupmem.63) 1
+
+# Group membership for input 64
+set fmri(groupmem.64) 1
+
+# Group membership for input 65
+set fmri(groupmem.65) 1
+
+# Group membership for input 66
+set fmri(groupmem.66) 1
+
+# Group membership for input 67
+set fmri(groupmem.67) 1
+
+# Group membership for input 68
+set fmri(groupmem.68) 1
+
+# Group membership for input 69
+set fmri(groupmem.69) 1
+
+# Group membership for input 70
+set fmri(groupmem.70) 1
+
+# Group membership for input 71
+set fmri(groupmem.71) 1
+
+# Group membership for input 72
+set fmri(groupmem.72) 1
+
+# Group membership for input 73
+set fmri(groupmem.73) 1
+
+# Group membership for input 74
+set fmri(groupmem.74) 1
+
+# Group membership for input 75
+set fmri(groupmem.75) 1
+
+# Group membership for input 76
+set fmri(groupmem.76) 1
+
+# Group membership for input 77
+set fmri(groupmem.77) 1
+
+# Group membership for input 78
+set fmri(groupmem.78) 1
+
+# Group membership for input 79
+set fmri(groupmem.79) 1
+
+# Group membership for input 80
+set fmri(groupmem.80) 1
+
+# Group membership for input 81
+set fmri(groupmem.81) 1
+
+# Group membership for input 82
+set fmri(groupmem.82) 1
+
+# Group membership for input 83
+set fmri(groupmem.83) 1
+
+# Group membership for input 84
+set fmri(groupmem.84) 1
+
+# Group membership for input 85
+set fmri(groupmem.85) 1
+
+# Group membership for input 86
+set fmri(groupmem.86) 1
+
+# Group membership for input 87
+set fmri(groupmem.87) 1
+
+# Group membership for input 88
+set fmri(groupmem.88) 1
+
+# Group membership for input 89
+set fmri(groupmem.89) 1
+
+# Group membership for input 90
+set fmri(groupmem.90) 1
+
+# Group membership for input 91
+set fmri(groupmem.91) 1
+
+# Group membership for input 92
+set fmri(groupmem.92) 1
+
+# Group membership for input 93
+set fmri(groupmem.93) 1
+
+# Group membership for input 94
+set fmri(groupmem.94) 1
+
+# Group membership for input 95
+set fmri(groupmem.95) 1
+
+# Group membership for input 96
+set fmri(groupmem.96) 1
+
+# Group membership for input 97
+set fmri(groupmem.97) 1
+
+# Group membership for input 98
+set fmri(groupmem.98) 1
+
+# Group membership for input 99
+set fmri(groupmem.99) 1
+
+# Group membership for input 100
+set fmri(groupmem.100) 1
+
+# Group membership for input 101
+set fmri(groupmem.101) 1
+
+# Group membership for input 102
+set fmri(groupmem.102) 1
+
+# Group membership for input 103
+set fmri(groupmem.103) 1
+
+# Group membership for input 104
+set fmri(groupmem.104) 1
+
+# Group membership for input 105
+set fmri(groupmem.105) 1
+
+# Group membership for input 106
+set fmri(groupmem.106) 1
+
+# Group membership for input 107
+set fmri(groupmem.107) 1
+
+# Group membership for input 108
+set fmri(groupmem.108) 1
+
+# Group membership for input 109
+set fmri(groupmem.109) 1
+
+# Group membership for input 110
+set fmri(groupmem.110) 1
+
+# Group membership for input 111
+set fmri(groupmem.111) 1
+
+# Group membership for input 112
+set fmri(groupmem.112) 1
+
+# Group membership for input 113
+set fmri(groupmem.113) 1
+
+# Group membership for input 114
+set fmri(groupmem.114) 1
+
+# Group membership for input 115
+set fmri(groupmem.115) 1
+
+# Group membership for input 116
+set fmri(groupmem.116) 1
+
+# Group membership for input 117
+set fmri(groupmem.117) 1
+
+# Group membership for input 118
+set fmri(groupmem.118) 1
+
+# Group membership for input 119
+set fmri(groupmem.119) 1
+
+# Group membership for input 120
+set fmri(groupmem.120) 1
+
+# Group membership for input 121
+set fmri(groupmem.121) 1
+
+# Group membership for input 122
+set fmri(groupmem.122) 1
+
+# Group membership for input 123
+set fmri(groupmem.123) 1
+
+# Group membership for input 124
+set fmri(groupmem.124) 1
+
+# Group membership for input 125
+set fmri(groupmem.125) 1
+
+# Group membership for input 126
+set fmri(groupmem.126) 1
+
+# Group membership for input 127
+set fmri(groupmem.127) 1
+
+# Group membership for input 128
+set fmri(groupmem.128) 1
+
+# Group membership for input 129
+set fmri(groupmem.129) 1
+
+# Group membership for input 130
+set fmri(groupmem.130) 1
+
+# Group membership for input 131
+set fmri(groupmem.131) 1
+
+# Group membership for input 132
+set fmri(groupmem.132) 1
+
+# Group membership for input 133
+set fmri(groupmem.133) 1
+
+# Group membership for input 134
+set fmri(groupmem.134) 1
+
+# Group membership for input 135
+set fmri(groupmem.135) 1
+
+# Group membership for input 136
+set fmri(groupmem.136) 1
+
+# Group membership for input 137
+set fmri(groupmem.137) 1
+
+# Group membership for input 138
+set fmri(groupmem.138) 1
+
+# Group membership for input 139
+set fmri(groupmem.139) 1
+
+# Group membership for input 140
+set fmri(groupmem.140) 1
+
+# Group membership for input 141
+set fmri(groupmem.141) 1
+
+# Group membership for input 142
+set fmri(groupmem.142) 1
+
+# Group membership for input 143
+set fmri(groupmem.143) 1
+
+# Group membership for input 144
+set fmri(groupmem.144) 1
+
+# Group membership for input 145
+set fmri(groupmem.145) 1
+
+# Group membership for input 146
+set fmri(groupmem.146) 1
+
+# Group membership for input 147
+set fmri(groupmem.147) 1
+
+# Group membership for input 148
+set fmri(groupmem.148) 1
+
+# Group membership for input 149
+set fmri(groupmem.149) 1
+
+# Group membership for input 150
+set fmri(groupmem.150) 1
+
+# Group membership for input 151
+set fmri(groupmem.151) 1
+
+# Group membership for input 152
+set fmri(groupmem.152) 1
+
+# Group membership for input 153
+set fmri(groupmem.153) 1
+
+# Group membership for input 154
+set fmri(groupmem.154) 1
+
+# Group membership for input 155
+set fmri(groupmem.155) 1
+
+# Group membership for input 156
+set fmri(groupmem.156) 1
+
+# Group membership for input 157
+set fmri(groupmem.157) 1
+
+# Group membership for input 158
+set fmri(groupmem.158) 1
+
+# Group membership for input 159
+set fmri(groupmem.159) 1
+
+# Group membership for input 160
+set fmri(groupmem.160) 1
+
+# Group membership for input 161
+set fmri(groupmem.161) 1
+
+# Group membership for input 162
+set fmri(groupmem.162) 1
+
+# Group membership for input 163
+set fmri(groupmem.163) 1
+
+# Group membership for input 164
+set fmri(groupmem.164) 1
+
+# Group membership for input 165
+set fmri(groupmem.165) 1
+
+# Group membership for input 166
+set fmri(groupmem.166) 1
+
+# Group membership for input 167
+set fmri(groupmem.167) 1
+
+# Group membership for input 168
+set fmri(groupmem.168) 1
+
+# Group membership for input 169
+set fmri(groupmem.169) 1
+
+# Group membership for input 170
+set fmri(groupmem.170) 1
+
+# Group membership for input 171
+set fmri(groupmem.171) 1
+
+# Group membership for input 172
+set fmri(groupmem.172) 1
+
+# Group membership for input 173
+set fmri(groupmem.173) 1
+
+# Group membership for input 174
+set fmri(groupmem.174) 1
+
+# Group membership for input 175
+set fmri(groupmem.175) 1
+
+# Group membership for input 176
+set fmri(groupmem.176) 1
+
+# Group membership for input 177
+set fmri(groupmem.177) 1
+
+# Group membership for input 178
+set fmri(groupmem.178) 1
+
+# Group membership for input 179
+set fmri(groupmem.179) 1
+
+# Group membership for input 180
+set fmri(groupmem.180) 1
+
+# Group membership for input 181
+set fmri(groupmem.181) 1
+
+# Group membership for input 182
+set fmri(groupmem.182) 1
+
+# Group membership for input 183
+set fmri(groupmem.183) 1
+
+# Group membership for input 184
+set fmri(groupmem.184) 1
+
+# Group membership for input 185
+set fmri(groupmem.185) 1
+
+# Group membership for input 186
+set fmri(groupmem.186) 1
+
+# Group membership for input 187
+set fmri(groupmem.187) 1
+
+# Group membership for input 188
+set fmri(groupmem.188) 1
+
+# Group membership for input 189
+set fmri(groupmem.189) 1
+
+# Group membership for input 190
+set fmri(groupmem.190) 1
+
+# Group membership for input 191
+set fmri(groupmem.191) 1
+
+# Group membership for input 192
+set fmri(groupmem.192) 1
+
+# Group membership for input 193
+set fmri(groupmem.193) 1
+
+# Group membership for input 194
+set fmri(groupmem.194) 1
+
+# Group membership for input 195
+set fmri(groupmem.195) 1
+
+# Group membership for input 196
+set fmri(groupmem.196) 1
+
+# Group membership for input 197
+set fmri(groupmem.197) 1
+
+# Group membership for input 198
+set fmri(groupmem.198) 1
+
+# Group membership for input 199
+set fmri(groupmem.199) 1
+
+# Group membership for input 200
+set fmri(groupmem.200) 1
+
+# Group membership for input 201
+set fmri(groupmem.201) 1
+
+# Group membership for input 202
+set fmri(groupmem.202) 1
+
+# Group membership for input 203
+set fmri(groupmem.203) 1
+
+# Group membership for input 204
+set fmri(groupmem.204) 1
+
+# Group membership for input 205
+set fmri(groupmem.205) 1
+
+# Group membership for input 206
+set fmri(groupmem.206) 1
+
+# Group membership for input 207
+set fmri(groupmem.207) 1
+
+# Group membership for input 208
+set fmri(groupmem.208) 1
+
+# Group membership for input 209
+set fmri(groupmem.209) 1
+
+# Group membership for input 210
+set fmri(groupmem.210) 1
+
+# Group membership for input 211
+set fmri(groupmem.211) 1
+
+# Group membership for input 212
+set fmri(groupmem.212) 1
+
+# Contrast & F-tests mode
+# real : control real EVs
+# orig : control original EVs
+set fmri(con_mode_old) real
+set fmri(con_mode) real
+
+# Display images for contrast_real 1
+set fmri(conpic_real.1) 1
+
+# Title for contrast_real 1
+set fmri(conname_real.1) "group mean"
+
+# Real contrast_real vector 1 element 1
+set fmri(con_real1.1) 1
+
+# Real contrast_real vector 1 element 2
+set fmri(con_real1.2) 0
+
+# Real contrast_real vector 1 element 3
+set fmri(con_real1.3) 0
+
+# Real contrast_real vector 1 element 4
+set fmri(con_real1.4) 0
+
+# Real contrast_real vector 1 element 5
+set fmri(con_real1.5) 0
+
+# Real contrast_real vector 1 element 6
+set fmri(con_real1.6) 0
+
+# Display images for contrast_real 2
+set fmri(conpic_real.2) 1
+
+# Title for contrast_real 2
+set fmri(conname_real.2) "group neg"
+
+# Real contrast_real vector 2 element 1
+set fmri(con_real2.1) -1.0
+
+# Real contrast_real vector 2 element 2
+set fmri(con_real2.2) 0
+
+# Real contrast_real vector 2 element 3
+set fmri(con_real2.3) 0
+
+# Real contrast_real vector 2 element 4
+set fmri(con_real2.4) 0
+
+# Real contrast_real vector 2 element 5
+set fmri(con_real2.5) 0
+
+# Real contrast_real vector 2 element 6
+set fmri(con_real2.6) 0
+
+# Display images for contrast_real 3
+set fmri(conpic_real.3) 1
+
+# Title for contrast_real 3
+set fmri(conname_real.3) "age pos"
+
+# Real contrast_real vector 3 element 1
+set fmri(con_real3.1) 0
+
+# Real contrast_real vector 3 element 2
+set fmri(con_real3.2) 1.0
+
+# Real contrast_real vector 3 element 3
+set fmri(con_real3.3) 0
+
+# Real contrast_real vector 3 element 4
+set fmri(con_real3.4) 0
+
+# Real contrast_real vector 3 element 5
+set fmri(con_real3.5) 0
+
+# Real contrast_real vector 3 element 6
+set fmri(con_real3.6) 0
+
+# Display images for contrast_real 4
+set fmri(conpic_real.4) 1
+
+# Title for contrast_real 4
+set fmri(conname_real.4) "age neg"
+
+# Real contrast_real vector 4 element 1
+set fmri(con_real4.1) 0
+
+# Real contrast_real vector 4 element 2
+set fmri(con_real4.2) -1.0
+
+# Real contrast_real vector 4 element 3
+set fmri(con_real4.3) 0
+
+# Real contrast_real vector 4 element 4
+set fmri(con_real4.4) 0
+
+# Real contrast_real vector 4 element 5
+set fmri(con_real4.5) 0
+
+# Real contrast_real vector 4 element 6
+set fmri(con_real4.6) 0
+
+# Contrast masking - use >0 instead of thresholding?
+set fmri(conmask_zerothresh_yn) 0
+
+# Mask real contrast/F-test 1 with real contrast/F-test 2?
+set fmri(conmask1_2) 0
+
+# Mask real contrast/F-test 1 with real contrast/F-test 3?
+set fmri(conmask1_3) 0
+
+# Mask real contrast/F-test 1 with real contrast/F-test 4?
+set fmri(conmask1_4) 0
+
+# Mask real contrast/F-test 2 with real contrast/F-test 1?
+set fmri(conmask2_1) 0
+
+# Mask real contrast/F-test 2 with real contrast/F-test 3?
+set fmri(conmask2_3) 0
+
+# Mask real contrast/F-test 2 with real contrast/F-test 4?
+set fmri(conmask2_4) 0
+
+# Mask real contrast/F-test 3 with real contrast/F-test 1?
+set fmri(conmask3_1) 0
+
+# Mask real contrast/F-test 3 with real contrast/F-test 2?
+set fmri(conmask3_2) 0
+
+# Mask real contrast/F-test 3 with real contrast/F-test 4?
+set fmri(conmask3_4) 0
+
+# Mask real contrast/F-test 4 with real contrast/F-test 1?
+set fmri(conmask4_1) 0
+
+# Mask real contrast/F-test 4 with real contrast/F-test 2?
+set fmri(conmask4_2) 0
+
+# Mask real contrast/F-test 4 with real contrast/F-test 3?
+set fmri(conmask4_3) 0
+
+# Do contrast masking at all?
+set fmri(conmask1_1) 0
+
+##########################################################
+# Now options that don't appear in the GUI
+
+# Alternative (to BETting) mask image
+set fmri(alternative_mask) ""
+
+# Initial structural space registration initialisation transform
+set fmri(init_initial_highres) ""
+
+# Structural space registration initialisation transform
+set fmri(init_highres) ""
+
+# Standard space registration initialisation transform
+set fmri(init_standard) ""
+
+# For full FEAT analysis: overwrite existing .feat output dir?
+set fmri(overwrite_yn) 0
