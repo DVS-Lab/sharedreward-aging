@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # ensure paths are correct
-maindir=~/work/sharedreward-aging #this should be the only line that has to change if the rest of the script is set up correctly
-scriptdir=$trustdir/code
+maindir=/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging #this should be the only line that has to change if the rest of the script is set up correctly
+scriptdir=$maindir/code
 
 
-mapfile -t myArray < sublist-sr.txt
+mapfile -t myArray < sublist-rf1.txt
 
 
 # grab the first 10 elements

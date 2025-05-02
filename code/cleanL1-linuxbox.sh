@@ -1,21 +1,21 @@
 #!/bin/bash
 
 # load modules and go to workdir
-module load fsl/6.0.7.9
+module load fsl/6.0.2
 source $FSLDIR/etc/fslconf/fsl.sh
 
 # ensure paths are correct
-maindir=/ZPOOL/data/projects/sharedreward-aging #this should be the only line that has to change if the rest of the script is set up correctly
+maindir=/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging #this should be the only line that has to change if the rest of the script is set up correctly
 scriptdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 TASK=sharedreward
-ppi=VS
+ppi="0"
 sm=4
 
 # need to change this to a more targetted list of subjects
 # also should only run this if the inputs exist. add if statements.
 #for sub in `ls -1d ${maindir}/derivatives/fsl/sub-*`; do
-for sub in `cat $scriptdir/sublist-sr.txt`; do
+for sub in `cat $scriptdir/sublist-rf1.txt`; do
 #for sub in 112 134 140 141 143 144 155; do
 		for run in 1 2; do
 	
@@ -27,7 +27,7 @@ for sub in `cat $scriptdir/sublist-sr.txt`; do
         fi
 
 			# set inputs and general outputs (should not need to chage across studies in Smith Lab)
-			MAINOUTPUT=${maindir}/derivatives/fsl/sub-${sub}
+			MAINOUTPUT=${maindir}/derivatives/fsl-updated/sub-${sub}
 	
 			# if network (ecn or dmn), do nppi; otherwise, do activation or seed-based ppi
 			if [ "$ppi" == "ecn" -o  "$ppi" == "dmn" ]; then

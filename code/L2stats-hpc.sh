@@ -1,17 +1,17 @@
 #!/bin/bash
-#PBS -l walltime=12:00:00
-#PBS -N L2stats-aging-ppi
+#PBS -l walltime=03:00:00
+#PBS -N L2stats-aging-act
 #PBS -q normal
 #PBS -m ae
 #PBS -M cooper.sharp@temple.edu
 #PBS -l nodes=1:ppn=28
 
 # load modules and go to workdir
-module load fsl/6.0.2
 source $FSLDIR/etc/fslconf/fsl.sh
 cd $PBS_O_WORKDIR
-logdir=/home/tun31934/work/sharedreward-aging/logs
-maindir=/home/tun31934/work/sharedreward-aging
+
+maindir=/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging
+logdir=/$maindir/logs
 mkdir -p $logdir
 
 rm -f $logdir/cmd_feat_${PBS_JOBID}.txt
@@ -30,7 +30,7 @@ for sub in ${subjects[@]}; do
 
 # --- start EDIT HERE start: exceptions and conditionals for the task
 
-MAINOUTPUT=${maindir}/derivatives/fsl/sub-${sub}
+MAINOUTPUT=${maindir}/derivatives/fsl-updated/sub-${sub}
 
 # ppi has more contrasts than act (phys), so need a different L2 template
 if [ "${type}" == "act" ]; then
@@ -44,14 +44,25 @@ fi
 # --- end EDIT HERE end: exceptions and conditionals for the task; need to exclude bad/missing runs
 
 if [ ${#sub} -eq 3 ]; then
-        INPUT1=${MAINOUTPUT}/L1_task-sharedreward_model-${model}_type-${type}_run-01_sm-${sm}.feat
-        INPUT2=${MAINOUTPUT}/L1_task-sharedreward_model-${model}_type-${type}_run-02_sm-${sm}.feat
+       INPUT1=${MAINOUTPUT}/L1_task-sharedreward_model-${model}_type-${type}_run-01_sm-${sm}.feat
+       INPUT2=${MAINOUTPUT}/L1_task-sharedreward_model-${model}_type-${type}_run-02_sm-${sm}.feat
 elif [ ${#sub} -eq 5 ]; then
         INPUT1=${MAINOUTPUT}/L1_task-sharedreward_model-${model}_type-${type}_run-1_sm-${sm}.feat
         INPUT2=${MAINOUTPUT}/L1_task-sharedreward_model-${model}_type-${type}_run-2_sm-${sm}.feat
 fi
 
+# These lines if PPI, need to make this prettier
+#if [ ${#sub} -eq 3 ]; then
+      #INPUT1=${MAINOUTPUT}/L1_task-sharedreward_model-${model}_type-${type}_seed-${seed}_run-01_sm-${sm}.feat
+      #INPUT2=${MAINOUTPUT}/L1_task-sharedreward_model-${model}_type-${type}_seed-${seed}_run-02_sm-${sm}.feat
+#elif [ ${#sub} -eq 5 ]; then
+       #INPUT1=${MAINOUTPUT}/L1_task-sharedreward_model-${model}_type-${type}_seed-${seed}_run-1_sm-${sm}.feat
+       #INPUT2=${MAINOUTPUT}/L1_task-sharedreward_model-${model}_type-${type}_seed-${seed}_run-2_sm-${sm}.feat
+#fi
+
+
 # check for existing output and re-do if missing/incomplete
+#OUTPUT=${MAINOUTPUT}/L2_task-sharedreward_model-${model}_type-${type}_seed-${seed}_sm-${sm}
 OUTPUT=${MAINOUTPUT}/L2_task-sharedreward_model-${model}_type-${type}_sm-${sm}
 if [ -e ${OUTPUT}.gfeat/cope${NCOPES}.feat/cluster_mask_zstat1.nii.gz ]; then # check last (act) or penultimate>
         echo "skipping existing output"

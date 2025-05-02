@@ -1,29 +1,28 @@
 #!/bin/bash
-#PBS -l walltime=12:00:00
+#PBS -l walltime=3:00:00
 #PBS -N L1stats-aging
 #PBS -q normal
 #PBS -m ae
 #PBS -M cooper.sharp@temple.edu
-#PBS -l nodes=1:ppn=4
+#PBS -l nodes=1:ppn=28
 
 # load modules and go to workdir
-module load fsl/6.0.2
-source $FSLDIR/etc/fslconf/fsl.sh
+# source $FSLDIR/etc/fslconf/fsl.sh
 cd $PBS_O_WORKDIR
 
 # ensure paths are correct
-datadir=~/work/sharedreward-aging #this should be the only line that has to change if the rest of the script is set up correctly
-projectdir=~/work/sharedreward-aging
+datadir=/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging #this should be the only line that has to change if the rest of the script is set up correctly
+projectdir=$datadir
 scriptdir=/$projectdir/code
-bidsdir=/$datadir/ds003745
-logdir=/home/tun31934/work/sharedreward-aging/logs
+bidsdir=/$datadir/bids
+logdir=$datadir/logs
 mkdir -p $logdir
 
 rm -f $logdir/cmd_feat_${PBS_JOBID}.txt
 touch $logdir/cmd_feat_${PBS_JOBID}.txt
 
 TASK=sharedreward
-ppi="0"
+ppi="VS"
 sm=4
 
 # need to change this to a more targeted list of subjects
@@ -39,15 +38,19 @@ for sub in ${subjects[@]}; do
         fi
 
         # set inputs and general outputs (should not need to change across studies in Smith Lab)
-        MAINOUTPUT=${projectdir}/derivatives/fsl/sub-${sub}
+        MAINOUTPUT=${projectdir}/derivatives/fsl-updated/sub-${sub}
         mkdir -p $MAINOUTPUT
 
         # Conditional setting of DATA variable based on the length of sub
         if [ ${#sub} -eq 3 ]; then
-            DATA=${datadir}/derivatives/fmriprep/sub-${sub}/sub-${sub}/func/sub-${sub}_task-${TASK}_run-${run_padded}_space-MNI152NLin6Asym_res-2_desc-preproc_bold.nii.gz
+            DATA=${datadir}/derivatives/fmriprep/sub-${sub}/func/sub-${sub}_task-${TASK}_run-${run_padded}_space-MNI152NLin6Asym_res-2_desc-preproc_bold.nii.gz
         elif [ ${#sub} -eq 5 ]; then
-            DATA=${datadir}/derivatives/fmriprep/sub-${sub}/sub-${sub}/func/sub-${sub}_task-${TASK}_run-${run_padded}_part-mag_space-MNI152NLin6Asym_res-2_desc-preproc_bold.nii.gz
+            DATA=${datadir}/derivatives/fmriprep/sub-${sub}/func/sub-${sub}_task-${TASK}_run-${run_padded}_part-mag_space-MNI152NLin6Asym_res-2_desc-preproc_bold.nii.gz
         fi
+
+        # Different values across projects, so using this to update dynamically. 
+	NVOLUMES=$(fslnvols $DATA)
+        TR_INFO=$(fslval $DATA pixdim4)
 
         # Conditional setting of CONFOUNDEVS based on the length of sub
         if [ ${#sub} -eq 3 ]; then
@@ -60,7 +63,7 @@ for sub in ${subjects[@]}; do
             echo "missing: $CONFOUNDEVS " >> ${projectdir}/re-runL1.log
             continue # exiting/continuing to ensure nothing gets run without confounds
         fi
-        
+
         EVDIR=${projectdir}/derivatives/fsl/EVfiles/sub-${sub}/${TASK}/run-${run} # don't zero-pad here since only 2 runs at most
         if [ ! -d ${projectdir}/derivatives/fsl/EVfiles/sub-${sub}/${TASK} ]; then
             echo "missing EVfiles: $EVDIR " >> ${projectdir}/re-runL1.log
@@ -138,8 +141,6 @@ for sub in ${subjects[@]}; do
             if [ "$ppi" == "0" ]; then
                 TYPE=act
                 OUTPUT=${MAINOUTPUT}/L1_task-${TASK}_model-1_type-${TYPE}_run-${run_padded}_sm-${sm}
-                #REPLACE_NVOLS=$(fslnvols $DATA)
-                #REPLACE_TR=$(fslval $DATA pixdim4)
             else
                 TYPE=ppi
                 OUTPUT=${MAINOUTPUT}/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_run-${run_padded}_sm-${sm}
@@ -153,35 +154,7 @@ for sub in ${subjects[@]}; do
                 rm -rf ${OUTPUT}.feat
             fi
 
-            # create template and run analyses; need to turn film off for two subjects in order to avoid SVD failure
-            if [ ${#sub} -eq 3 ]; then
-                ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_srndna-HPC.fsf
-            elif [ ${sub} == "10777" ] && [ ${TYPE} == "act" ]; then 
-                ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_film-off_rf1-HPC.fsf
-            elif [ ${sub} == "10929" ] && [ ${TYPE} == "act" ]; then
-                ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_film-off_rf1-HPC.fsf
-            elif [ ${sub} == "10369" ] && [ ${TYPE} == "ppi" ]; then
-                ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_film-off_rf1-HPC.fsf
-            elif [ ${sub} == "10585" ] && [ ${TYPE} == "ppi" ]; then
-                ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_film-off_rf1-HPC.fsf
-            elif [ ${sub} == "10718" ] && [ ${TYPE} == "ppi" ]; then
-                ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_film-off_rf1-HPC.fsf
-            elif [ ${sub} == "10720" ] && [ ${TYPE} == "ppi" ]; then
-                ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_film-off_rf1-HPC.fsf
-            elif [ ${sub} == "10777" ] && [ ${TYPE} == "ppi" ]; then
-                ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_film-off_rf1-HPC.fsf
-            elif [ ${sub} == "10812" ] && [ ${TYPE} == "ppi" ]; then
-                ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_film-off_rf1-HPC.fsf
-            elif [ ${sub} == "10858" ] && [ ${TYPE} == "ppi" ]; then
-                ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_film-off_rf1-HPC.fsf
-            elif [ ${sub} == "10958" ] && [ ${TYPE} == "ppi" ]; then
-                ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_film-off_rf1-HPC.fsf
-            elif [ ${sub} == "10977" ] && [ ${TYPE} == "ppi" ]; then
-                ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_film-off_rf1-HPC.fsf
-            else 
-		ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_rf1-HPC.fsf
-            fi
-            
+            ITEMPLATE=${projectdir}/templates/L1_task-${TASK}_model-1_type-${TYPE}_seed-${ppi}_HPC.fsf
             OTEMPLATE=${MAINOUTPUT}/L1_sub-${sub}_task-${TASK}_model-1_seed-${ppi}_run-${run}.fsf
             if [ "$ppi" == "0" ]; then
                 sed -e 's@OUTPUT@'$OUTPUT'@g' \
@@ -190,6 +163,8 @@ for sub in ${subjects[@]}; do
                 -e 's@MISSED_TRIAL@'$MISSED_TRIAL'@g' \
                 -e 's@EV_SHAPE@'$EV_SHAPE'@g' \
                 -e 's@CONFOUNDEVS@'$CONFOUNDEVS'@g' \
+                -e 's@NVOLUMES@'$NVOLUMES'@g' \
+                -e 's@TR_INFO@'"$TR_INFO"'@g' \
                 <$ITEMPLATE> $OTEMPLATE
             else
                 sed -e 's@OUTPUT@'$OUTPUT'@g' \
@@ -200,12 +175,14 @@ for sub in ${subjects[@]}; do
                 -e 's@CONFOUNDEVS@'$CONFOUNDEVS'@g' \
                 -e 's@SMOOTH@'$sm'@g' \
                 -e 's@PPI@'$ppi'@g' \
+                -e 's@NVOLUMES@'$NVOLUMES'@g' \
+                -e 's@TR_INFO@'"$TR_INFO"'@g' \
                 <$ITEMPLATE> $OTEMPLATE
             fi
         fi
-	
+
         echo "feat $OTEMPLATE" >> $logdir/cmd_feat_${PBS_JOBID}.txt
-        
+
     done
 done
 
