@@ -167,15 +167,18 @@ for sub in ${subjects[@]}; do
                 -e 's@TR_INFO@'"$TR_INFO"'@g' \
                 <$ITEMPLATE> $OTEMPLATE
             else
-                sed -e 's@OUTPUT@'$OUTPUT'@g' \
-                -e 's@DATA@'$DATA'@g' \
-                -e 's@EVDIR@'$EVDIR'@g' \
-                -e 's@MISSED_TRIAL@'$MISSED_TRIAL'@g' \
-                -e 's@EV_SHAPE@'$EV_SHAPE'@g' \
-                -e 's@CONFOUNDEVS@'$CONFOUNDEVS'@g' \
-                -e 's@SMOOTH@'$sm'@g' \
-                -e 's@PPI@'$ppi'@g' \
-                -e 's@NVOLUMES@'$NVOLUMES'@g' \
+                PHYS=${MAINOUTPUT}/ts_task-${TASK}_mask-${ppi}_run-${run}.txt
+		MASK=${projectdir}/masks/seed-${ppi}.nii
+		fslmeants -i $DATA -o $PHYS -m $MASK
+		sed -e 's@OUTPUT@'$OUTPUT'@g' \
+		-e 's@DATA@'$DATA'@g' \
+		-e 's@EVDIR@'$EVDIR'@g' \
+		-e 's@MISSED_TRIAL@'$MISSED_TRIAL'@g' \
+		-e 's@EV_SHAPE@'$EV_SHAPE'@g' \
+		-e 's@PHYS@'$PHYS'@g' \
+		-e 's@SMOOTH@'$sm'@g' \
+		-e 's@CONFOUNDEVS@'$CONFOUNDEVS'@g' \
+		-e 's@NVOLUMES@'$NVOLUMES'@g' \
                 -e 's@TR_INFO@'"$TR_INFO"'@g' \
                 <$ITEMPLATE> $OTEMPLATE
             fi
