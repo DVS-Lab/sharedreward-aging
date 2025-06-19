@@ -1,7 +1,7 @@
-/ContrastName1	group mean 
-/ContrastName2	group neg 
-/ContrastName3	age pos 
-/ContrastName4	age neg 
+/ContrastName1	Group pos 
+/ContrastName2	Group neg 
+/ContrastName3	Age pos 
+/ContrastName4	Age neg 
 /NumWaves	6
 /NumContrasts	4
 /PPheights		1.000000e+00	1.000000e+00	7.982622e+01	7.982622e+01

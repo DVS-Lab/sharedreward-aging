@@ -1285,23 +1285,6 @@ set fmri(evg125.1) 1
 # Higher-level EV value for EV 1 and input 126
 set fmri(evg126.1) 1
 
-# Higher-level i(evg121.1) 1
-
-# Higher-level EV value for EV 1 and input 122
-set fmri(evg122.1) 1
-
-# Higher-level EV value for EV 1 and input 123
-set fmri(evg123.1) 1
-
-# Higher-level EV value for EV 1 and input 124
-set fmri(evg124.1) 1
-
-# Higher-level EV value for EV 1 and input 125
-set fmri(evg125.1) 1
-
-# Higher-level EV value for EV 1 and input 126
-set fmri(evg126.1) 1
-
 # Higher-level EV value for EV 1 and input 127
 set fmri(evg127.1) 1
 
@@ -1436,7 +1419,23 @@ set fmri(evg170.1) 1
 
 # Higher-level EV value for EV 1 and input 171
 set fmri(evg171.1) 1
-V 1 and input 177
+
+# Higher-level EV value for EV 1 and input 172
+set fmri(evg172.1) 1
+
+# Higher-level EV value for EV 1 and input 173
+set fmri(evg173.1) 1
+
+# Higher-level EV value for EV 1 and input 174
+set fmri(evg174.1) 1
+
+# Higher-level EV value for EV 1 and input 175
+set fmri(evg175.1) 1
+
+# Higher-level EV value for EV 1 and input 176
+set fmri(evg176.1) 1
+
+# Higher-level EV value for EV 1 and input 177
 set fmri(evg177.1) 1
 
 # Higher-level EV value for EV 1 and input 178
@@ -5233,7 +5232,7 @@ set fmri(con_mode) real
 set fmri(conpic_real.1) 1
 
 # Title for contrast_real 1
-set fmri(conname_real.1) "group mean"
+set fmri(conname_real.1) "Group pos"
 
 # Real contrast_real vector 1 element 1
 set fmri(con_real1.1) 1
@@ -5257,13 +5256,13 @@ set fmri(con_real1.6) 0
 set fmri(conpic_real.2) 1
 
 # Title for contrast_real 2
-set fmri(conname_real.2) "group neg"
+set fmri(conname_real.2) "Group neg"
 
 # Real contrast_real vector 2 element 1
 set fmri(con_real2.1) -1.0
 
 # Real contrast_real vector 2 element 2
-set fmri(con_real2.2) 0
+set fmri(con_real2.2) 0.0
 
 # Real contrast_real vector 2 element 3
 set fmri(con_real2.3) 0
@@ -5281,7 +5280,7 @@ set fmri(con_real2.6) 0
 set fmri(conpic_real.3) 1
 
 # Title for contrast_real 3
-set fmri(conname_real.3) "age pos"
+set fmri(conname_real.3) "Age pos"
 
 # Real contrast_real vector 3 element 1
 set fmri(con_real3.1) 0
@@ -5290,7 +5289,7 @@ set fmri(con_real3.1) 0
 set fmri(con_real3.2) 1.0
 
 # Real contrast_real vector 3 element 3
-set fmri(con_real3.3) 0
+set fmri(con_real3.3) 0.0
 
 # Real contrast_real vector 3 element 4
 set fmri(con_real3.4) 0
@@ -5305,7 +5304,7 @@ set fmri(con_real3.6) 0
 set fmri(conpic_real.4) 1
 
 # Title for contrast_real 4
-set fmri(conname_real.4) "age neg"
+set fmri(conname_real.4) "Age neg"
 
 # Real contrast_real vector 4 element 1
 set fmri(con_real4.1) 0
@@ -5314,10 +5313,10 @@ set fmri(con_real4.1) 0
 set fmri(con_real4.2) -1.0
 
 # Real contrast_real vector 4 element 3
-set fmri(con_real4.3) 0
+set fmri(con_real4.3) 0.0
 
 # Real contrast_real vector 4 element 4
-set fmri(con_real4.4) 0
+set fmri(con_real4.4) 0.0
 
 # Real contrast_real vector 4 element 5
 set fmri(con_real4.5) 0
