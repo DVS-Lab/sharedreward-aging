@@ -8263,7 +8263,7 @@ set fmri(con_real5.1) 0
 set fmri(con_real5.2) 0
 
 # Real contrast_real vector 5 element 3
-set fmri(con_real5.3) 1.0
+set fmri(con_real5.3) 0.0
 
 # Real contrast_real vector 5 element 4
 set fmri(con_real5.4) 0
@@ -8275,7 +8275,7 @@ set fmri(con_real5.5) 0
 set fmri(con_real5.6) 0
 
 # Real contrast_real vector 5 element 7
-set fmri(con_real5.7) 0
+set fmri(con_real5.7) 1.0
 
 # Real contrast_real vector 5 element 8
 set fmri(con_real5.8) 0
@@ -8290,10 +8290,10 @@ set fmri(conname_real.6) "Fwin_minus_Floss_minus_Swin_minus_Sloss_z_demeaned neg
 set fmri(con_real6.1) 0
 
 # Real contrast_real vector 6 element 2
-set fmri(con_real6.2) 0
+set fmri(con_real6.2) 0.0
 
 # Real contrast_real vector 6 element 3
-set fmri(con_real6.3) -1.0
+set fmri(con_real6.3) 0.0
 
 # Real contrast_real vector 6 element 4
 set fmri(con_real6.4) 0
@@ -8305,7 +8305,7 @@ set fmri(con_real6.5) 0
 set fmri(con_real6.6) 0
 
 # Real contrast_real vector 6 element 7
-set fmri(con_real6.7) 0
+set fmri(con_real6.7) -1.0
 
 # Real contrast_real vector 6 element 8
 set fmri(con_real6.8) 0
@@ -8326,7 +8326,7 @@ set fmri(con_real7.2) 0
 set fmri(con_real7.3) 0
 
 # Real contrast_real vector 7 element 4
-set fmri(con_real7.4) 1.0
+set fmri(con_real7.4) 0.0
 
 # Real contrast_real vector 7 element 5
 set fmri(con_real7.5) 0
@@ -8338,7 +8338,7 @@ set fmri(con_real7.6) 0
 set fmri(con_real7.7) 0
 
 # Real contrast_real vector 7 element 8
-set fmri(con_real7.8) 0
+set fmri(con_real7.8) 1.0
 
 # Display images for contrast_real 8
 set fmri(conpic_real.8) 1
@@ -8356,7 +8356,7 @@ set fmri(con_real8.2) 0
 set fmri(con_real8.3) 0
 
 # Real contrast_real vector 8 element 4
-set fmri(con_real8.4) -1.0
+set fmri(con_real8.4) 0.0
 
 # Real contrast_real vector 8 element 5
 set fmri(con_real8.5) 0
@@ -8368,7 +8368,7 @@ set fmri(con_real8.6) 0
 set fmri(con_real8.7) 0
 
 # Real contrast_real vector 8 element 8
-set fmri(con_real8.8) 0
+set fmri(con_real8.8) -1.0
 
 # Contrast masking - use >0 instead of thresholding?
 set fmri(conmask_zerothresh_yn) 0
