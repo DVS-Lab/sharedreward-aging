@@ -2,14 +2,14 @@
 /ContrastName2	group neg 
 /ContrastName3	age pos 
 /ContrastName4	age neg 
-/ContrastName5	Floss_minus_Sloss pos 
-/ContrastName6	Floss_minus_Sloss neg 
-/ContrastName7	age_x_Floss_minus_Sloss pos 
-/ContrastName8	age_x_Floss_minus_Sloss pos 
+/ContrastName5	win_minus_loss 
+/ContrastName6	win_minus_loss 
+/ContrastName7	age_x_win_minus_loss pos 
+/ContrastName8	age_x_win_minus_loss neg 
 /NumWaves	10
 /NumContrasts	8
-/PPheights		1.421976e+00	1.421976e+00	6.987470e+01	6.987470e+01	5.460426e+00	5.460426e+00	1.860797e+02	1.860797e+02
-/RequiredEffect		0.330	0.330	1.009	1.009	1.396	1.396	2.590	2.590
+/PPheights		1.292994e+00	1.292994e+00	7.043045e+01	7.043045e+01	5.114348e+00	5.114348e+00	1.183906e+02	1.183906e+02
+/RequiredEffect		0.299	0.299	1.014	1.014	1.321	1.321	1.759	1.759
 
 /Matrix
 1.000000e+00 0.000000e+00 0.000000e+00 0.000000e+00 0.000000e+00 0.000000e+00 0.000000e+00 0.000000e+00 0.000000e+00 0.000000e+00 

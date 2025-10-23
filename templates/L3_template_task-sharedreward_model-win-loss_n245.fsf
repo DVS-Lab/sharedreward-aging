@@ -5829,7 +5829,7 @@ set fmri(evg244.6) 0.253061224
 set fmri(evg245.6) 0.253061224
 
 # EV 7 title
-set fmri(evtitle7) "Fwin_minus_Swin"
+set fmri(evtitle7) "win_minus_loss"
 
 # Basic waveform shape (EV 7)
 # 0 : Square
@@ -6632,7 +6632,7 @@ set fmri(evg244.7) 0.496899198
 set fmri(evg245.7) 0.091448887
 
 # EV 8 title
-set fmri(evtitle8) "age_x_Fwin_minus_Swin"
+set fmri(evtitle8) "age_x_win_minus_loss"
 
 # Basic waveform shape (EV 8)
 # 0 : Square
@@ -8238,7 +8238,7 @@ set fmri(evg244.9) -0.375510204
 set fmri(evg245.9) 0.624489796
 
 # EV 10 title
-set fmri(evtitle10) "Gender_F"
+set fmri(evtitle10) "gender_F"
 
 # Basic waveform shape (EV 10)
 # 0 : Square
@@ -9932,7 +9932,7 @@ set fmri(con_real4.10) 0
 set fmri(conpic_real.5) 1
 
 # Title for contrast_real 5
-set fmri(conname_real.5) "Fwin_minus_Swin pos"
+set fmri(conname_real.5) "win_minus_loss"
 
 # Real contrast_real vector 5 element 1
 set fmri(con_real5.1) 0
@@ -9968,7 +9968,7 @@ set fmri(con_real5.10) 0
 set fmri(conpic_real.6) 1
 
 # Title for contrast_real 6
-set fmri(conname_real.6) "Fwin_minus_Swin neg"
+set fmri(conname_real.6) "win_minus_loss"
 
 # Real contrast_real vector 6 element 1
 set fmri(con_real6.1) 0
@@ -10004,7 +10004,7 @@ set fmri(con_real6.10) 0
 set fmri(conpic_real.7) 1
 
 # Title for contrast_real 7
-set fmri(conname_real.7) "age_x_Fwin_minus_Swin pos"
+set fmri(conname_real.7) "age_x_win_minus_loss pos"
 
 # Real contrast_real vector 7 element 1
 set fmri(con_real7.1) 0
@@ -10040,7 +10040,7 @@ set fmri(con_real7.10) 0
 set fmri(conpic_real.8) 1
 
 # Title for contrast_real 8
-set fmri(conname_real.8) "age_x_Fwin_minus_Swin pos"
+set fmri(conname_real.8) "age_x_win_minus_loss neg"
 
 # Real contrast_real vector 8 element 1
 set fmri(con_real8.1) 0
