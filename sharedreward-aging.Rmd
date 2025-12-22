@@ -43,10 +43,10 @@ lapply(packages, library, character.only = TRUE)
 
 ## Here is a list of the columns in the spreadsheet, and which covariates they should show results for:
 
-# mask-rsfg_type-nppi_cnum-10_cname-rew-pun (Age X Ratings Interaction Positive; slide 85)
-# mask-dlpfc_type-nppi_cnum-14_cname-rew-pun_F-S (Age Negative; Slide 81)
-# mask-rtpj_type-ppi_seed-VS_cnum-14_cname-rew-pun_F-S (Age X Ratings Interaction Negative; slide 71)
-# mask-mtg_type-act_cnum-17_cname-rew_F-S.txt (Age Positive; slide 87 and 91)
+# mask.rsfg_type.nppi_cnum.10_cname.rew.pun (Age X Ratings Interaction Positive; slide 85)
+# mask.dlpfc_type.nppi_cnum.14_cname.rew.pun_F.S (Age Negative; Slide 81)
+# mask.rtpj_type.ppi_seed.VS_cnum.14_cname.rew.pun_F.S (Age X Ratings Interaction Negative; slide 71)
+# mask.mtg_type.act_cnum.17_cname.rew_F.S.txt (Age Positive; slide 87 and 91)
 
 ```
 
@@ -105,6 +105,56 @@ ggplot(df, aes(
     y = "Partial residuals (DLPFC NPPI)",
     title = "Covariate-adjusted effect of age on DLPFC NPPI"
   )
+
+
+```
+
+```{r}
+
+# Create Dave's 1/var(s) column
+df$`weights_mtg_type.act_cnum.17_cname.rew_F.S.txt` <- 1 / df$`var_mask.mtg_type.act_cnum.17_cname.rew_F.S.txt`
+
+model3 <- lm(`mask.mtg_type.act_cnum.17_cname.rew_F.S.txt` ~ age_demeaned + sex + avg_tsnr_demeaned + avg_fdmean_demeaned + flip_demeaned + study_demeaned, data = df, weights = `weights_mtg_type.act_cnum.17_cname.rew_F.S.txt`)
+
+summary(model3)
+
+
+## Standard Regression Plot
+
+ggplot(
+  df,
+  aes(
+    x = age_demeaned,
+    y = `mask.mtg_type.act_cnum.17_cname.rew_F.S.txt`)
+) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(method = "lm", se = TRUE) +
+  theme_minimal() +
+  labs(
+    x = "Age (demeaned)",
+    y = "MTG Act (Rew F-S)",
+    title = "Linear Regression of MTG ACT on Age"
+  )
+
+# Partial Residuals Plot
+
+df$partial_age <- residuals(model3) +
+  coef(model3)["age_demeaned"] * df$age_demeaned
+
+ggplot(df, aes(
+  x = age_demeaned,
+  y = partial_age,
+  weight = `weights_mtg_type.act_cnum.17_cname.rew_F.S.txt`
+)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(method = "lm", se = TRUE) +
+  theme_minimal() +
+  labs(
+    x = "Age (demeaned)",
+    y = "Partial residuals (MTG ACT)",
+    title = "Covariate-adjusted effect of age on MTG ACT"
+  )
+
 
 
 ```
