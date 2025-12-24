@@ -1,0 +1,131 @@
+---
+title: "SR-Aging_brain-plots"
+author: "Cooper Joseph Sharp"
+date: "2025-10-19"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE, warning = FALSE, message = FALSE,
+  fig.width = 6, fig.height = 6
+)
+options(width = 120)
+```
+
+## 1. Libraries
+
+```{r libraries}
+# Minimal set for what this Rmd currently does
+pkgs <- c("knitr", "readr", "dplyr", "ggplot2")
+
+missing <- pkgs[!vapply(pkgs, requireNamespace, logical(1), quietly = TRUE)]
+if (length(missing) > 0) {
+  stop(
+    "Missing packages: ", paste(missing, collapse = ", "),
+    "\nInstall with: install.packages(c(",
+    paste0('"', missing, '"', collapse = ", "),
+    "))"
+  )
+}
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+
+# Optional (only keep if you add code that uses them)
+# library(correlation)
+# library(MASS)
+# library(ggeffects)
+# library(insight)
+# library(interactions)
+```
+
+## 2. Data Import
+
+```{r import-data}
+# Try a few likely paths depending on whether knit starts in plotting/ or the project root
+candidates <- c(
+  "extractions-retest-copy.csv",
+  "plotting/extractions-retest-copy.csv",
+  "code/plotting/extractions-retest-copy.csv"
+)
+data_path <- candidates[file.exists(candidates)][1]
+if (is.na(data_path)) {
+  stop("Could not find extractions-retest-copy.csv. Tried: ", paste(candidates, collapse = ", "))
+}
+
+df <- readr::read_csv(data_path, show_col_types = FALSE)
+
+# Standardize names so hyphenated columns become dot-style names (e.g., "cope-17" -> "cope.17")
+names(df) <- make.names(names(df), unique = TRUE)
+
+# Make sure sex behaves as a categorical predictor
+if ("sex" %in% names(df)) df$sex <- factor(df$sex)
+```
+
+## 3. Model + Plot
+
+```{r model}
+# Helper: create demeaned versions if they don't already exist
+demean_if_needed <- function(dat, raw, demeaned) {
+  if (demeaned %in% names(dat)) return(dat)
+
+  if (raw %in% names(dat)) {
+    dat[[demeaned]] <- dat[[raw]] - mean(dat[[raw]], na.rm = TRUE)
+    return(dat)
+  }
+
+  stop(
+    "Missing both '", raw, "' and '", demeaned, "'.\n",
+    "Available columns matching '", raw, "':\n  ",
+    paste(grep(raw, names(dat), value = TRUE), collapse = "\n  ")
+  )
+}
+
+# Create demeaned covariates expected by the model (only if needed)
+df <- demean_if_needed(df, "age", "age_demeaned")
+df <- demean_if_needed(df, "avg_tsnr", "avg_tsnr_demeaned")
+df <- demean_if_needed(df, "avg_fdmean", "avg_fdmean_demeaned")
+df <- demean_if_needed(df, "flip", "flip_demeaned")
+df <- demean_if_needed(df, "study", "study_demeaned")
+df <- demean_if_needed(df, "Fwin_minus_Swin_z", "Fwin_minus_Swin_z_demeaned")
+
+# These names match AFTER make.names() is applied above
+resp   <- "brain.nii.gz_model.Fwin.Swin_type.act_cope.17_cname.rew_F.S.txt"
+varcol <- "var_brain.nii.gz_model.Fwin.Swin_type.act_cope.17_cname.rew_F.S.txt"
+
+if (!resp %in% names(df)) {
+  stop(
+    "Response column not found: ", resp, "\nClosest matches:\n  ",
+    paste(grep("brain\\.nii\\.gz.*cope\\.17", names(df), value = TRUE), collapse = "\n  ")
+  )
+}
+if (!varcol %in% names(df)) {
+  stop(
+    "Variance column not found: ", varcol, "\nClosest matches:\n  ",
+    paste(grep("var_brain.*cope\\.17", names(df), value = TRUE), collapse = "\n  ")
+  )
+}
+
+# Create weights as 1/variance (guard against 0)
+w <- 1 / pmax(df[[varcol]], .Machine$double.eps)
+
+model1 <- lm(
+  df[[resp]] ~ age_demeaned + sex + avg_tsnr_demeaned + avg_fdmean_demeaned +
+    flip_demeaned + study_demeaned + Fwin_minus_Swin_z_demeaned +
+    age_demeaned * Fwin_minus_Swin_z_demeaned,
+  data = df,
+  weights = w
+)
+
+summary(model1)
+```
+
+```{r plot}
+ggplot(df, aes(x = age, y = .data[[resp]])) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", se = TRUE) +
+  labs(x = "Age", y = "β", title = "") +
+  theme_minimal()
+```
