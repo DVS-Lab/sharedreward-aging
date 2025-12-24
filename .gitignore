@@ -151,3 +151,4 @@ sub-*.html
 *.log
 
 archive
+.Rproj.user
