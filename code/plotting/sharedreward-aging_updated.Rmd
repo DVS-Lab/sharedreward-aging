@@ -1,0 +1,454 @@
+---
+title: "SR-Aging_brain-plots"
+author: "Cooper Joseph Sharp"
+date: "2025-12-19"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  fig.width = 7,
+  fig.height = 5
+)
+```
+
+## Purpose and note on circularity
+
+These plots are **descriptive** summaries of values extracted from clusters identified in whole-brain analyses.
+Because the cluster definition and the extraction come from the same dataset/effect, the relationships shown here are **selection-biased (circular)** and should not be interpreted as independent effect size estimates.
+
+## 1. Load libraries
+
+```{r libraries}
+packages <- c(
+  "dplyr",
+  "ggplot2",
+  "readr",
+  "tibble"
+)
+
+# Install missing packages (comment out if you prefer not to install during knitting)
+installed <- rownames(installed.packages())
+for (pkg in packages) {
+  if (!pkg %in% installed) {
+    install.packages(pkg, repos = "https://cloud.r-project.org")
+  }
+}
+
+# Load packages
+invisible(lapply(packages, library, character.only = TRUE))
+```
+
+## 2. Data import and preparation
+
+```{r import-data}
+# Read the combined CSV file
+# (If you knit from a different directory, consider using an absolute path or `here::here()`.)
+df <- readr::read_csv("extractions-retest-copy.csv", show_col_types = FALSE)
+
+# Quick sanity checks
+stopifnot(is.data.frame(df))
+```
+
+### 2.1 Helper utilities (weights + plotting)
+
+```{r helpers}
+# Inverse-variance weights with a floor to prevent infinite / extreme weights
+make_invvar_weights <- function(var_vec, var_floor = 1e-6) {
+  1 / pmax(var_vec, var_floor)
+}
+
+# Print a compact weight diagnostic (useful when plots "don't look right")
+summarize_weights <- function(w) {
+  tibble::tibble(
+    n = length(w),
+    n_nonfinite = sum(!is.finite(w)),
+    min = min(w, na.rm = TRUE),
+    p01 = as.numeric(stats::quantile(w, 0.01, na.rm = TRUE)),
+    p05 = as.numeric(stats::quantile(w, 0.05, na.rm = TRUE)),
+    median = stats::median(w, na.rm = TRUE),
+    p95 = as.numeric(stats::quantile(w, 0.95, na.rm = TRUE)),
+    p99 = as.numeric(stats::quantile(w, 0.99, na.rm = TRUE)),
+    max = max(w, na.rm = TRUE)
+  )
+}
+
+# Partial residual (added-variable style) for age_demeaned from a fitted lm()
+partial_residual_age <- function(model, df, x = "age_demeaned") {
+  b <- coef(model)[[x]]
+  stats::residuals(model) + b * df[[x]]
+}
+
+# Raw scatter: unweighted fit
+plot_scatter_raw_unweighted <- function(df, outcome_col, outcome_label) {
+  ggplot(df, aes(x = age_demeaned, y = .data[[outcome_col]])) +
+    geom_point(alpha = 0.55) +
+    geom_smooth(method = "lm", se = TRUE) +
+    theme_minimal() +
+    labs(
+      x = "age_demeaned",
+      y = outcome_label,
+      title = paste0("Raw scatter (unweighted): ", outcome_label),
+      caption = "Selection-biased (circular) visualization; do not treat as an independent effect size."
+    )
+}
+
+# Raw scatter: weighted fit + point size reflects weights
+plot_scatter_raw_weighted <- function(df, outcome_col, weight_col, outcome_label) {
+  ggplot(df, aes(x = age_demeaned, y = .data[[outcome_col]])) +
+    geom_point(aes(size = sqrt(.data[[weight_col]])), alpha = 0.55) +
+    geom_smooth(aes(weight = .data[[weight_col]]), method = "lm", se = TRUE) +
+    scale_size_continuous(guide = "none") +
+    theme_minimal() +
+    labs(
+      x = "age_demeaned",
+      y = outcome_label,
+      title = paste0("Raw scatter (weighted): ", outcome_label),
+      caption = "Point size reflects inverse-variance weight; smooth uses the same weights. Selection-biased (circular)."
+    )
+}
+
+# Added-variable (partial residual) scatter: unweighted
+plot_added_variable_unweighted <- function(model_unw, df, outcome_label) {
+  pr <- partial_residual_age(model_unw, df)
+
+  ggplot(tibble::tibble(age_demeaned = df$age_demeaned, pr = pr),
+         aes(x = age_demeaned, y = pr)) +
+    geom_point(alpha = 0.55) +
+    geom_smooth(method = "lm", se = TRUE) +
+    theme_minimal() +
+    labs(
+      x = "age_demeaned",
+      y = paste0("Partial residuals: ", outcome_label),
+      title = paste0("Added-variable plot (unweighted): ", outcome_label),
+      caption = "Partial residuals are computed from the unweighted model. Selection-biased (circular)."
+    )
+}
+
+# Added-variable (partial residual) scatter: weighted
+plot_added_variable_weighted <- function(model_w, df, weight_col, outcome_label) {
+  pr <- partial_residual_age(model_w, df)
+
+  ggplot(tibble::tibble(age_demeaned = df$age_demeaned, pr = pr, w = df[[weight_col]]),
+         aes(x = age_demeaned, y = pr)) +
+    geom_point(aes(size = sqrt(w)), alpha = 0.55) +
+    geom_smooth(aes(weight = w), method = "lm", se = TRUE) +
+    scale_size_continuous(guide = "none") +
+    theme_minimal() +
+    labs(
+      x = "age_demeaned",
+      y = paste0("Partial residuals: ", outcome_label),
+      title = paste0("Added-variable plot (weighted): ", outcome_label),
+      caption = "Partial residuals and smooth correspond to the weighted model. Selection-biased (circular)."
+    )
+}
+
+
+# Correlation heatmap for a set of variables (coerces factors to numeric codes)
+plot_corr_heatmap <- function(df, cols, title = "Correlation heatmap") {
+  dat <- df[, cols, drop = FALSE]
+
+  # Coerce non-numeric to numeric (factors -> integer codes; characters -> factor -> codes)
+  for (nm in names(dat)) {
+    if (!is.numeric(dat[[nm]])) {
+      dat[[nm]] <- as.numeric(as.factor(dat[[nm]]))
+    }
+  }
+
+  cm <- stats::cor(dat, use = "pairwise.complete.obs")
+  long <- as.data.frame(as.table(cm))
+  names(long) <- c("Var1", "Var2", "r")
+
+  ggplot(long, aes(x = Var1, y = Var2, fill = r)) +
+    geom_tile() +
+    geom_text(aes(label = sprintf("%.2f", r)), size = 3) +
+    coord_fixed() +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+    labs(title = title, x = NULL, y = NULL, fill = "r")
+}
+
+# ---- Sextile (6-bin) summaries + bar plots ----
+
+# Weighted mean / SE for descriptive summaries.
+# Uses an effective sample size (n_eff) and an unbiased-ish weighted variance.
+wtd_mean_se <- function(y, w) {
+  ok <- is.finite(y) & is.finite(w) & (w > 0)
+  y <- y[ok]; w <- w[ok]
+
+  if (length(y) == 0) return(list(mean = NA_real_, se = NA_real_, n = 0))
+
+  mu <- sum(w * y) / sum(w)
+  sw <- sum(w)
+  sw2 <- sum(w^2)
+  n_eff <- if (sw2 > 0) (sw^2 / sw2) else length(y)
+
+  # Denominator for an unbiased-ish weighted variance
+  den <- sw - (sw2 / sw)
+  v <- if (den > 0) sum(w * (y - mu)^2) / den else NA_real_
+  se <- if (is.finite(v) && n_eff > 1) sqrt(v / n_eff) else NA_real_
+
+  list(mean = mu, se = se, n = length(y))
+}
+
+summarize_sextiles <- function(df, y, series_label, w = NULL, x = "age_demeaned", n_bins = 6) {
+  tmp <- tibble::tibble(x = df[[x]], y = y)
+  tmp <- tmp %>%
+    dplyr::filter(is.finite(x), is.finite(y)) %>%
+    dplyr::mutate(bin = dplyr::ntile(x, n_bins))
+
+  if (is.null(w)) {
+    tmp %>%
+      dplyr::group_by(bin) %>%
+      dplyr::summarise(
+        n = dplyr::n(),
+        age_min = min(x),
+        age_max = max(x),
+        x_mean = mean(x),
+        y_mean = mean(y),
+        y_se = stats::sd(y) / sqrt(n),   # SEM
+        .groups = "drop"
+      ) %>%
+      dplyr::mutate(
+        series = series_label,
+        bin_label = paste0(round(age_min, 2), " to ", round(age_max, 2))
+      )
+  } else {
+    # Align weights to the same finite rows used above
+    ok <- is.finite(df[[x]]) & is.finite(y) & is.finite(w) & (w > 0)
+    tmp <- tibble::tibble(x = df[[x]][ok], y = y[ok], w = w[ok]) %>%
+      dplyr::mutate(bin = dplyr::ntile(x, n_bins))
+
+    tmp %>%
+      dplyr::group_by(bin) %>%
+      dplyr::summarise(
+        n = dplyr::n(),
+        age_min = min(x),
+        age_max = max(x),
+        x_mean = mean(x),
+        y_mean = sum(w * y) / sum(w),
+        y_se = sqrt(1 / sum(w)),         # SEM for inverse-variance weighted mean
+        .groups = "drop"
+      ) %>%
+      dplyr::mutate(
+        series = series_label,
+        bin_label = paste0(round(age_min, 2), " to ", round(age_max, 2))
+      )
+  }
+}
+
+
+plot_sextile_bars <- function(summary_df, outcome_label, title_prefix) {
+  # Expect summary_df to contain: bin (1-6), bin_label, y_mean, y_se
+  summary_df$bin <- factor(summary_df$bin, levels = 1:6)
+
+  # Use bin_label for x-axis labels (age ranges within each sextile)
+  bin_labels <- summary_df %>%
+    dplyr::distinct(bin, bin_label) %>%
+    dplyr::arrange(bin)
+
+  ggplot(summary_df, aes(x = bin, y = y_mean)) +
+    geom_col(width = 0.8) +
+    geom_errorbar(aes(ymin = y_mean - y_se, ymax = y_mean + y_se), width = 0.2) +
+    scale_x_discrete(labels = bin_labels$bin_label) +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+    labs(
+      x = "Age sextile (ntile(age_demeaned, 6))",
+      y = outcome_label,
+      title = paste0(title_prefix, ": ", outcome_label),
+      caption = "Bars show mean within sextile; error bars are ±1 SEM. Selection-biased (circular)."
+    )
+}
+
+```
+
+## 3. DLPFC NPPI (rew > pun), Friend–Stranger
+
+**Outcome:** `mask.dlpfc_type.nppi_cnum.14_cname.rew.pun_F.S`  
+**Variance:** `var_mask.dlpfc_type.nppi_cnum.14_cname.rew.pun_F.S`  
+**Main predictor:** `age_demeaned`  
+**Covariates:** `sex + avg_tsnr_demeaned + avg_fdmean_demeaned + flip_demeaned + study_demeaned`
+
+```{r dlpfc-model}
+# ---- DLPFC model (robust to name-repair on import) ----
+# We expect readr::read_csv() may "repair" duplicate column names by appending ...1, ...2, etc.
+# This helper finds the single best-matching column name in df.
+
+find_one_col <- function(pattern, df_names = names(df)) {
+  hits <- grep(pattern, df_names, value = TRUE)
+  if (length(hits) == 1) return(hits)
+  if (length(hits) == 0) stop(paste0("No columns match pattern: ", pattern))
+  stop(paste0("Multiple columns match pattern: ", pattern, "
+", paste(hits, collapse = "
+")))
+}
+
+# Match either exact name OR name with readr's ...<n> suffix.
+# Allow either "." or "-" as the separator because some exports use hyphens.
+outcome_dlpfc <- find_one_col("^mask[.-]dlpfc_type[.-]nppi_cnum[.-]14_cname[.-]rew[.-]pun_F[.-]S([.]{3}[0-9]+)?$")
+var_dlpfc     <- find_one_col("^var_mask[.-]dlpfc_type[.-]nppi_cnum[.-]14_cname[.-]rew[.-]pun_F[.-]S([.]{3}[0-9]+)?$")
+w_dlpfc       <- "weights_dlpfc_type.nppi_cnum.14_cname.rew.pun_F.S"
+
+# Confirm required columns exist (now using detected names)
+needed <- c(outcome_dlpfc, var_dlpfc,
+            "age_demeaned", "sex", "avg_tsnr_demeaned", "avg_fdmean_demeaned",
+            "flip_demeaned", "study_demeaned")
+missing <- setdiff(needed, names(df))
+if (length(missing) > 0) stop(paste("Missing required columns:", paste(missing, collapse = ", ")))
+
+# If sex is coded numerically but should be categorical, convert to factor.
+# (Comment out if you are sure you want a linear numeric effect.)
+if (!is.factor(df$sex)) {
+  u <- sort(unique(df$sex))
+  if (length(u) <= 4) df$sex <- factor(df$sex)
+}
+
+# Create inverse-variance weights with a small floor (prevents Inf weights if variance is ~0)
+df[[w_dlpfc]] <- make_invvar_weights(df[[var_dlpfc]], var_floor = 1e-6)
+
+# Weight diagnostics (helpful if a few observations dominate)
+print(summarize_weights(df[[w_dlpfc]]))
+# Fit model EXACTLY as specified, but with the detected outcome column name
+fml_dlpfc <- as.formula(sprintf(
+  "`%s` ~ age_demeaned + sex + avg_tsnr_demeaned + avg_fdmean_demeaned + flip_demeaned + study_demeaned",
+  outcome_dlpfc
+))
+
+# Weighted and unweighted versions (for side-by-side plots)
+model2_w   <- lm(fml_dlpfc, data = df, weights = df[[w_dlpfc]])
+model2_unw <- lm(fml_dlpfc, data = df)
+
+summary(model2_w)
+summary(model2_unw)
+```
+
+### 3.1 Plots for DLPFC
+
+```{r dlpfc-plots}
+label_dlpfc <- "DLPFC NPPI (rew > pun), F–S"
+
+# 0) Correlation heatmap among outcome + predictors (+ variance + weight)
+plot_corr_heatmap(
+  df,
+  cols = c(outcome_dlpfc, "age_demeaned", "sex", "avg_tsnr_demeaned", "avg_fdmean_demeaned",
+           "flip_demeaned", "study_demeaned", var_dlpfc, w_dlpfc),
+  title = paste0("Correlation heatmap: ", label_dlpfc)
+)
+
+# 1) Raw scatter: unweighted vs weighted
+plot_scatter_raw_unweighted(df, outcome_dlpfc, label_dlpfc)
+plot_scatter_raw_weighted(df, outcome_dlpfc, w_dlpfc, label_dlpfc)
+
+# 2) Added-variable (partial residual) plots: unweighted vs weighted
+plot_added_variable_unweighted(model2_unw, df, label_dlpfc)
+plot_added_variable_weighted(model2_w, df, w_dlpfc, label_dlpfc)
+
+# 3) Bar plots with age binned into sextiles (6 equal bins)
+
+# 3a) Raw outcome bars (unweighted and weighted shown separately)
+sum_raw_unw <- summarize_sextiles(df, y = df[[outcome_dlpfc]], series_label = "Unweighted mean")
+plot_sextile_bars(sum_raw_unw, outcome_label = label_dlpfc, title_prefix = "Sextile binned bars (raw, unweighted)")
+
+sum_raw_w <- summarize_sextiles(df, y = df[[outcome_dlpfc]], series_label = "Weighted mean", w = df[[w_dlpfc]])
+plot_sextile_bars(sum_raw_w, outcome_label = label_dlpfc, title_prefix = "Sextile binned bars (raw, weighted)")
+
+# 3b) Added-variable outcome (partial residuals differ for weighted vs unweighted models)
+pr_unw <- partial_residual_age(model2_unw, df)
+pr_w   <- partial_residual_age(model2_w, df)
+
+sum_pr_unw <- summarize_sextiles(df, y = pr_unw, series_label = "Unweighted model PR")
+plot_sextile_bars(sum_pr_unw, outcome_label = paste0("Partial residuals: ", label_dlpfc),
+                  title_prefix = "Sextile binned bars (added-variable, unweighted)")
+
+sum_pr_w <- summarize_sextiles(df, y = pr_w, series_label = "Weighted model PR", w = df[[w_dlpfc]])
+plot_sextile_bars(sum_pr_w, outcome_label = paste0("Partial residuals: ", label_dlpfc),
+                  title_prefix = "Sextile binned bars (added-variable, weighted)")
+```
+
+## 4. MTG ACT (rew), Friend–Stranger
+
+**Outcome:** `mask.mtg_type.act_cnum.17_cname.rew_F.S.txt`  
+**Variance:** `var_mask.mtg_type.act_cnum.17_cname.rew_F.S.txt`  
+**Main predictor:** `age_demeaned`  
+**Covariates:** `sex + avg_tsnr_demeaned + avg_fdmean_demeaned + flip_demeaned + study_demeaned`
+
+```{r mtg-model}
+# ---- MTG model (robust to name-repair on import) ----
+outcome_mtg <- find_one_col("^mask[.-]mtg_type[.-]act_cnum[.-]17_cname[.-]rew_F[.-]S[.-]txt([.]{3}[0-9]+)?$")
+var_mtg     <- find_one_col("^var_mask[.-]mtg_type[.-]act_cnum[.-]17_cname[.-]rew_F[.-]S[.-]txt([.]{3}[0-9]+)?$")
+w_mtg       <- "weights_mtg_type.act_cnum.17_cname.rew_F.S.txt"
+
+needed_mtg <- c(outcome_mtg, var_mtg,
+                "age_demeaned", "sex", "avg_tsnr_demeaned", "avg_fdmean_demeaned",
+                "flip_demeaned", "study_demeaned")
+missing_mtg <- setdiff(needed_mtg, names(df))
+if (length(missing_mtg) > 0) stop(paste("Missing required columns:", paste(missing_mtg, collapse = ", ")))
+
+df[[w_mtg]] <- make_invvar_weights(df[[var_mtg]], var_floor = 1e-6)
+print(summarize_weights(df[[w_mtg]]))
+fml_mtg <- as.formula(sprintf(
+  "`%s` ~ age_demeaned + sex + avg_tsnr_demeaned + avg_fdmean_demeaned + flip_demeaned + study_demeaned",
+  outcome_mtg
+))
+
+model3_w   <- lm(fml_mtg, data = df, weights = df[[w_mtg]])
+model3_unw <- lm(fml_mtg, data = df)
+
+summary(model3_w)
+summary(model3_unw)
+```
+
+### 4.1 Plots for MTG
+
+```{r mtg-plots}
+label_mtg <- "MTG ACT (rew), F–S"
+
+# 0) Correlation heatmap among outcome + predictors (+ variance + weight)
+plot_corr_heatmap(
+  df,
+  cols = c(outcome_mtg, "age_demeaned", "sex", "avg_tsnr_demeaned", "avg_fdmean_demeaned",
+           "flip_demeaned", "study_demeaned", var_mtg, w_mtg),
+  title = paste0("Correlation heatmap: ", label_mtg)
+)
+
+# 1) Raw scatter: unweighted vs weighted
+plot_scatter_raw_unweighted(df, outcome_mtg, label_mtg)
+plot_scatter_raw_weighted(df, outcome_mtg, w_mtg, label_mtg)
+
+# 2) Added-variable (partial residual) plots: unweighted vs weighted
+plot_added_variable_unweighted(model3_unw, df, label_mtg)
+plot_added_variable_weighted(model3_w, df, w_mtg, label_mtg)
+
+# 3) Bar plots with age binned into sextiles (6 equal bins)
+
+# 3a) Raw outcome bars (unweighted and weighted shown separately)
+sum_raw_unw <- summarize_sextiles(df, y = df[[outcome_mtg]], series_label = "Unweighted mean")
+plot_sextile_bars(sum_raw_unw, outcome_label = label_mtg, title_prefix = "Sextile binned bars (raw, unweighted)")
+
+sum_raw_w <- summarize_sextiles(df, y = df[[outcome_mtg]], series_label = "Weighted mean", w = df[[w_mtg]])
+plot_sextile_bars(sum_raw_w, outcome_label = label_mtg, title_prefix = "Sextile binned bars (raw, weighted)")
+
+# 3b) Added-variable outcome (partial residuals differ for weighted vs unweighted models)
+pr_unw <- partial_residual_age(model3_unw, df)
+pr_w   <- partial_residual_age(model3_w, df)
+
+sum_pr_unw <- summarize_sextiles(df, y = pr_unw, series_label = "Unweighted model PR")
+plot_sextile_bars(sum_pr_unw, outcome_label = paste0("Partial residuals: ", label_mtg),
+                  title_prefix = "Sextile binned bars (added-variable, unweighted)")
+
+sum_pr_w <- summarize_sextiles(df, y = pr_w, series_label = "Weighted model PR", w = df[[w_mtg]])
+plot_sextile_bars(sum_pr_w, outcome_label = paste0("Partial residuals: ", label_mtg),
+                  title_prefix = "Sextile binned bars (added-variable, weighted)")
+```
+
+## 5. Session info
+
+```{r session-info}
+sessionInfo()
+```
