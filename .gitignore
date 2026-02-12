@@ -141,13 +141,19 @@ dmypy.json
 *.json
 ds005123
 ds003745
-derivatives
+fsl
+mriqc
+fmriprep
 sub-*.html
 *.asv
+*.nii.gz
 
 # tmp files
 .~*#
 *.out
 *.log
+*.o*
+*.e*
 
 archive
+
