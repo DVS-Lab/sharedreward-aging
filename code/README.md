@@ -83,3 +83,43 @@ Most scripts assume a specific directory layout and include hard-coded paths (e.
 
 - `transferbids-hpc.sh` — Uses `rsync` to copy selected BIDS subject folders from a local path to an HPC destination (prompts for an AccessNet ID).
 - `transferL1-hpc.sh` — Uses `rsync` to copy fMRIPrep derivatives and `events.tsv` files to an HPC destination (one subject at a time).
+
+## Plotting with R (RStudio / R Markdown)
+
+The `plotting/` subdirectory contains an R Markdown report (`SR-aging-Dave.Rmd`) and its companion data file (`extractions-retest-copy.csv`). The Rmd produces an HTML report when you “Knit” it in RStudio.
+
+### Install R and RStudio
+
+1) **Install R** from CRAN:
+- macOS: download the `.pkg` installer from CRAN. Note that the current CRAN macOS build may require **macOS 11+**; older macOS versions may need an older R installer listed on the same CRAN page.  
+- Windows: download and install the current Windows build from CRAN.
+
+2) **Install RStudio Desktop** from Posit.
+- Current RStudio releases require newer macOS (e.g., **macOS 13+**). If you are on an older macOS (e.g., 10.15/Catalina), use the Posit “macOS and RStudio Desktop version compatibility” table to download a compatible older RStudio build.
+
+### Run the Rmd in RStudio
+
+1) Open the repository in RStudio (recommended: create/open an `.Rproj` at the repo root).
+2) Open `plotting/SR-aging-Dave.Rmd`.
+3) Set your working directory:
+   - In RStudio: **Session → Set Working Directory → To Source File Location** (so `plotting/` becomes the working directory).
+4) Fix the hard-coded CSV path in the Rmd (recommended change):
+   - Replace the current absolute path with:
+   ```r
+   df <- readr::read_csv("extractions-retest-copy.csv")
+   ```
+5) Install required packages (run once in the console):
+   ```r
+   install.packages(c(
+     "tidyverse", "readr", "dplyr", "ggplot2",
+     "correlation", "MASS", "ggeffects", "insight",
+     "interactions", "rmarkdown", "knitr"
+   ))
+   ```
+   Note: the Rmd currently contains `install.packages("insight")` in a code chunk. You may want to delete it or wrap it in a conditional so knitting doesn’t try to re-install packages every time.
+6) Click **Knit** to render the HTML report.
+
+### Troubleshooting (common)
+
+- **Windows package install fails with compiler/toolchain errors:** install the matching **Rtools** for your R version (only needed for packages that must compile from source).
+- **RStudio won’t launch / installer won’t run on macOS:** your macOS version may be older than the current supported versions; use the “compatibility” table to install an older RStudio build, or consider upgrading macOS.

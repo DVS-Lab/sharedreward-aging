@@ -141,13 +141,23 @@ dmypy.json
 *.json
 ds005123
 ds003745
-derivatives
+fsl
+mriqc
+fmriprep
 sub-*.html
 *.asv
+*.nii.gz
 
 # tmp files
 .~*#
 *.out
 *.log
+*.o*
+*.e*
 
 archive
+<<<<<<< HEAD
+
+=======
+.Rproj.user
+>>>>>>> b476088d286ee25a58229907dbfdbb7b1387318e
