@@ -147,6 +147,7 @@ fmriprep
 sub-*.html
 *.asv
 *.nii.gz
+!masks/*.nii.gz
 
 # tmp files
 .~*#
