@@ -7,7 +7,7 @@
 #
 # Usage: ./check_mask_exclusions.sh [bids_exclusions_tsv] [output_tsv]
 #
-# Output: TSV with columns: subject_id, run01_excluded, run02_excluded, exclusion_reason
+# Output: TSV with columns: subject_id, run01_excluded, run02_excluded, run01_coverage, run02_coverage, run01_vmpfc_coverage, run02_vmpfc_coverage, exclusion_reason
 
 set -euo pipefail
 
@@ -16,6 +16,7 @@ basedir="/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging"
 derivdir="$basedir/derivatives/fsl"
 standard_img="$FSLDIR/data/standard/MNI152_T1_2mm_brain_mask_dil.nii.gz"
 cerebellum_mask="$basedir/masks/cerebellum-brainstem_mask.nii.gz"
+vmpfc_mask="$basedir/masks/VMPFC-mask-neurovault-resliced-bin.nii.gz"
 tmpdir="$basedir/scratch/tmp"
 iqr_multiplier=1.5
 
@@ -35,9 +36,12 @@ mkdir -p "$(dirname "$outfile")" "$tmpdir"
 # Get standard voxel count
 standard_voxels=$(fslstats "$standard_img" -V | awk '{print $1}')
 
+# Get VMPFC mask voxel count
+vmpfc_voxels=$(fslstats "$vmpfc_mask" -V | awk '{print $1}')
+
 # --- Step 1: Collect coverage metrics for non-excluded BIDS runs ---
 metrics_tmp=$(mktemp)
-echo "subject_id,run,study,coverage,bids_excluded" > "$metrics_tmp"
+echo "subject_id,run,study,coverage,vmpfc_coverage,bids_excluded" > "$metrics_tmp"
 
 echo "Collecting mask coverage metrics..."
 
@@ -61,36 +65,54 @@ tail -n +2 "$bids_exclusions" | while IFS=$'\t' read -r sub_id run01_excl run02_
     if [[ "$run01_excl" == "0" ]]; then
         mask="$derivdir/sub-${sub_id}/L1_task-sharedreward_model-1_type-act_run-${run01_fmt}_sm-5.feat/mask.nii.gz"
         if [[ -f "$mask" ]]; then
+            # Whole brain coverage (with cerebellum added back)
             tmp_mask="$tmpdir/${sub_id}_run01_temp_mask.nii.gz"
             fslmaths "$mask" -add "$cerebellum_mask" "$tmp_mask"
             mask_voxels=$(fslstats "$tmp_mask" -V | awk '{print $1}')
             coverage=$(echo "scale=6; $mask_voxels / $standard_voxels * 100" | bc)
-            echo "$sub_id,01,$study,$coverage,0" >> "$metrics_tmp"
             rm -f "$tmp_mask"
+            
+            # VMPFC coverage (intersection of functional mask with VMPFC mask)
+            tmp_vmpfc="$tmpdir/${sub_id}_run01_vmpfc_overlap.nii.gz"
+            fslmaths "$mask" -mas "$vmpfc_mask" "$tmp_vmpfc"
+            vmpfc_overlap=$(fslstats "$tmp_vmpfc" -V | awk '{print $1}')
+            vmpfc_cov=$(echo "scale=6; $vmpfc_overlap / $vmpfc_voxels * 100" | bc)
+            rm -f "$tmp_vmpfc"
+            
+            echo "$sub_id,01,$study,$coverage,$vmpfc_cov,0" >> "$metrics_tmp"
         else
             echo "WARNING: Mask not found for sub-${sub_id} run-01 (but BIDS exists)" >&2
-            echo "$sub_id,01,$study,NA,0" >> "$metrics_tmp"
+            echo "$sub_id,01,$study,NA,NA,0" >> "$metrics_tmp"
         fi
     else
-        echo "$sub_id,01,$study,NA,1" >> "$metrics_tmp"
+        echo "$sub_id,01,$study,NA,NA,1" >> "$metrics_tmp"
     fi
 
     # Process run 02
     if [[ "$run02_excl" == "0" ]]; then
         mask="$derivdir/sub-${sub_id}/L1_task-sharedreward_model-1_type-act_run-${run02_fmt}_sm-5.feat/mask.nii.gz"
         if [[ -f "$mask" ]]; then
+            # Whole brain coverage (with cerebellum added back)
             tmp_mask="$tmpdir/${sub_id}_run02_temp_mask.nii.gz"
             fslmaths "$mask" -add "$cerebellum_mask" "$tmp_mask"
             mask_voxels=$(fslstats "$tmp_mask" -V | awk '{print $1}')
             coverage=$(echo "scale=6; $mask_voxels / $standard_voxels * 100" | bc)
-            echo "$sub_id,02,$study,$coverage,0" >> "$metrics_tmp"
             rm -f "$tmp_mask"
+            
+            # VMPFC coverage (intersection of functional mask with VMPFC mask)
+            tmp_vmpfc="$tmpdir/${sub_id}_run02_vmpfc_overlap.nii.gz"
+            fslmaths "$mask" -mas "$vmpfc_mask" "$tmp_vmpfc"
+            vmpfc_overlap=$(fslstats "$tmp_vmpfc" -V | awk '{print $1}')
+            vmpfc_cov=$(echo "scale=6; $vmpfc_overlap / $vmpfc_voxels * 100" | bc)
+            rm -f "$tmp_vmpfc"
+            
+            echo "$sub_id,02,$study,$coverage,$vmpfc_cov,0" >> "$metrics_tmp"
         else
             echo "WARNING: Mask not found for sub-${sub_id} run-02 (but BIDS exists)" >&2
-            echo "$sub_id,02,$study,NA,0" >> "$metrics_tmp"
+            echo "$sub_id,02,$study,NA,NA,0" >> "$metrics_tmp"
         fi
     else
-        echo "$sub_id,02,$study,NA,1" >> "$metrics_tmp"
+        echo "$sub_id,02,$study,NA,NA,1" >> "$metrics_tmp"
     fi
 
 done
@@ -114,10 +136,12 @@ NR == 1 { next }  # Skip header
     run = $2
     study = $3
     coverage = $4
-    bids_excluded = $5
+    vmpfc_coverage = $5
+    bids_excluded = $6
 
     # Store data
     data[sub_id][run]["coverage"] = coverage
+    data[sub_id][run]["vmpfc_coverage"] = vmpfc_coverage
     data[sub_id][run]["bids_excluded"] = bids_excluded
     studies[sub_id] = study
     
@@ -169,26 +193,38 @@ END {
     }
     
     # Output header
-    print "subject_id", "run01_excluded", "run02_excluded", "exclusion_reason"
+    print "subject_id", "run01_excluded", "run02_excluded", "run01_coverage", "run02_coverage", "run01_vmpfc_coverage", "run02_vmpfc_coverage", "exclusion_reason"
     
     # Process each subject
     for (sub_id in studies) {
         s = studies[sub_id]
         run01_excl = "NA"
         run02_excl = "NA"
+        run01_cov = "NA"
+        run02_cov = "NA"
+        run01_vmpfc = "NA"
+        run02_vmpfc = "NA"
         reasons = ""
         
         # Check run 01
         if ("01" in data[sub_id]) {
             if (data[sub_id]["01"]["bids_excluded"] == 1) {
                 run01_excl = "NA"
+                run01_cov = "NA"
+                run01_vmpfc = "NA"
             } else if (data[sub_id]["01"]["coverage"] == "NA") {
                 run01_excl = "NA"
-            } else if (data[sub_id]["01"]["coverage"] < threshold[s]) {
-                run01_excl = 1
-                reasons = "run01_low_coverage"
+                run01_cov = "NA"
+                run01_vmpfc = "NA"
             } else {
-                run01_excl = 0
+                run01_cov = sprintf("%.2f", data[sub_id]["01"]["coverage"])
+                run01_vmpfc = sprintf("%.2f", data[sub_id]["01"]["vmpfc_coverage"])
+                if (data[sub_id]["01"]["coverage"] < threshold[s]) {
+                    run01_excl = 1
+                    reasons = "run01_low_coverage"
+                } else {
+                    run01_excl = 0
+                }
             }
         }
         
@@ -196,18 +232,26 @@ END {
         if ("02" in data[sub_id]) {
             if (data[sub_id]["02"]["bids_excluded"] == 1) {
                 run02_excl = "NA"
+                run02_cov = "NA"
+                run02_vmpfc = "NA"
             } else if (data[sub_id]["02"]["coverage"] == "NA") {
                 run02_excl = "NA"
-            } else if (data[sub_id]["02"]["coverage"] < threshold[s]) {
-                run02_excl = 1
-                if (reasons != "") reasons = reasons ";"
-                reasons = reasons "run02_low_coverage"
+                run02_cov = "NA"
+                run02_vmpfc = "NA"
             } else {
-                run02_excl = 0
+                run02_cov = sprintf("%.2f", data[sub_id]["02"]["coverage"])
+                run02_vmpfc = sprintf("%.2f", data[sub_id]["02"]["vmpfc_coverage"])
+                if (data[sub_id]["02"]["coverage"] < threshold[s]) {
+                    run02_excl = 1
+                    if (reasons != "") reasons = reasons ";"
+                    reasons = reasons "run02_low_coverage"
+                } else {
+                    run02_excl = 0
+                }
             }
         }
         
-        print sub_id, run01_excl, run02_excl, reasons
+        print sub_id, run01_excl, run02_excl, run01_cov, run02_cov, run01_vmpfc, run02_vmpfc, reasons
     }
 }
 ' "$metrics_tmp" | (read -r header; echo "$header"; sort -t$'\t' -k1,1) > "$outfile"
