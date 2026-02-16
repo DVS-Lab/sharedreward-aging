@@ -1,0 +1,58 @@
+#!/bin/bash
+#PBS -l walltime=8:00:00
+#PBS -N L1-aging
+#PBS -q normal
+#PBS -l nodes=1:ppn=28
+
+cd $PBS_O_WORKDIR
+
+umask 0000
+
+# ensure paths are correct
+projectdir=/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging
+scriptdir=$projectdir/code
+bidsdir=$projectdir/bids
+logdir=$projectdir/logs
+mkdir -p $logdir
+
+rm -f $logdir/cmd_L1stats_${PBS_JOBID}.txt
+touch $logdir/cmd_L1stats_${PBS_JOBID}.txt
+
+rm -f L1stats.o*
+rm -f L1stats.e*
+
+task=sharedreward
+
+for sub in ${subjects[@]}; do
+    for run in 1 2; do
+
+        # Zero-padding for run variable in inputs if sub is three characters
+        if [ ${#sub} -eq 3 ]; then
+            run=$(printf "%02d" $run)
+        else
+            run=$run
+        fi
+
+	# set name of script to run
+	scriptname=${scriptdir}/L1stats-hpc.sh
+
+        # Conditional setting of DATA variable based on the length of sub
+        if [ ${#sub} -eq 3 ]; then
+            DATA=${projectdir}/derivatives/fmriprep/sub-${sub}/func/sub-${sub}_task-${task}_run-${run}_space-MNI152NLin6Asym_res-2_desc-preproc_bold.nii.gz
+        elif [ ${#sub} -eq 5 ]; then
+            DATA=${projectdir}/derivatives/fmriprep/sub-${sub}/func/sub-${sub}_task-${task}_run-${run}_part-mag_space-MNI152NLin6Asym_res-2_desc-preproc_bold.nii.gz
+        fi
+
+        if [ -e $DATA ]; then
+            for ppi in "dmn"; do
+                echo "bash ${scriptname} ${sub} ${task} ${run} ${ppi}" >> $logdir/cmd_L1stats_${PBS_JOBID}.txt
+            done
+        else
+            echo "missing: ${DATA}"
+        fi
+
+    done
+done
+
+torque-launch -p "$logdir/chk_L1stats_${PBS_JOBID}.txt" "$logdir/cmd_L1stats_${PBS_JOBID}.txt"
+
