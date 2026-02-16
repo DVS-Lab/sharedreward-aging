@@ -155,7 +155,9 @@ sub-*.html
 *.o*
 *.e*
 
-archive
+derivatives/tedana*
+derivatives/warpkit*
+
 <<<<<<< HEAD
 
 =======
