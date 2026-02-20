@@ -40,7 +40,7 @@ for sub in ${subjects[@]}; do
         if [ ${#sub} -eq 3 ]; then
             DATA=${projectdir}/derivatives/fmriprep/sub-${sub}/func/sub-${sub}_task-${task}_run-${run}_space-MNI152NLin6Asym_res-2_desc-preproc_bold.nii.gz
         elif [ ${#sub} -eq 5 ]; then
-            DATA=${projectdir}/derivatives/fmriprep/sub-${sub}/func/sub-${sub}_task-${task}_run-${run}_part-mag_space-MNI152NLin6Asym_res-2_desc-preproc_bold.nii.gz
+            DATA=${projectdir}/derivatives/fmriprep/sub-${sub}/func/ses-01/sub-${sub}_ses-01_task-${task}_run-${run}_part-mag_space-MNI152NLin6Asym_res-2_desc-preproc_bold.nii.gz
         fi
 
         if [ -e $DATA ]; then

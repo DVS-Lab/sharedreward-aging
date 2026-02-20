@@ -33,14 +33,14 @@ mkdir -p $MAINOUTPUT
 if [ ${#sub} -eq 3 ]; then
     DATA=${projectdir}/derivatives/fmriprep/sub-${sub}/func/sub-${sub}_task-${task}_run-${run}_space-MNI152NLin6Asym_res-2_desc-preproc_bold.nii.gz
 elif [ ${#sub} -eq 5 ]; then
-    DATA=${projectdir}/derivatives/fmriprep/sub-${sub}/func/sub-${sub}_task-${task}_run-${run}_part-mag_space-MNI152NLin6Asym_res-2_desc-preproc_bold.nii.gz
+    DATA=${projectdir}/derivatives/fmriprep/sub-${sub}/ses-01/func/sub-${sub}_ses-01_task-${task}_run-${run}_part-mag_space-MNI152NLin6Asym_res-2_desc-preproc_bold.nii.gz
 fi
 
 # Conditional setting of CONFOUNDEVS based on the length of sub
 if [ ${#sub} -eq 3 ]; then
     CONFOUNDEVS=${projectdir}/derivatives/fsl/confounds/sub-${sub}/sub-${sub}_task-${task}_run-${run}_desc-fslConfounds.tsv
 elif [ ${#sub} -eq 5 ]; then
-    CONFOUNDEVS=${projectdir}/derivatives/fsl/confounds_tedana/sub-${sub}/sub-${sub}_task-${task}_run-${run}_desc-TedanaPlusConfounds.tsv
+    CONFOUNDEVS=${projectdir}/derivatives/fsl/confounds_tedana/sub-${sub}/ses-01/sub-${sub}_ses-01_task-${task}_run-${run}_desc-TedanaPlusConfounds.tsv
 fi
 
 if [ ! -e $CONFOUNDEVS ]; then
@@ -48,13 +48,24 @@ if [ ! -e $CONFOUNDEVS ]; then
     exit # exiting/continuing to ensure nothing gets run without confounds
 fi
 
-EVDIR=${projectdir}/derivatives/fsl/EVfiles/sub-${sub}/${task}/run-${run} # don't zeropad here since only 2 runs at most
-if [ ! -d ${projectdir}/derivatives/fsl/EVfiles/sub-${sub}/${task} ]; then
-    echo "missing EVfiles: $EVDIR " >> ${projectdir}/re-runL1.log
-    exit # skip these since some won't exist yet
+# Add session path for 5-digit subject IDs
+if [ ${#sub} -eq 5 ]; then
+    ses="ses-01"
+    EVDIR=${projectdir}/derivatives/fsl/EVfiles/sub-${sub}/${ses}/${task}/run-${run}
+    evcheck=${projectdir}/derivatives/fsl/EVfiles/sub-${sub}/${ses}/${task}
+else
+    ses=""
+    EVDIR=${projectdir}/derivatives/fsl/EVfiles/sub-${sub}/${task}/run-${run}
+    evcheck=${projectdir}/derivatives/fsl/EVfiles/sub-${sub}/${task}
 fi
 
 # check for empty EVs (extendable to other studies)
+if [ ! -d ${evcheck} ]; then
+    echo "missing EVfiles: $EVDIR " >> ${projectdir}/re-runL1.log
+    exit
+fi
+
+
 MISSED_TRIAL=${EVDIR}_missed_trial.txt
 if [ -e $MISSED_TRIAL ]; then
     EV_SHAPE=3
