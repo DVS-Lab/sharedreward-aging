@@ -48,13 +48,13 @@ def process_run(subject_id, run_num):
     Returns:
         dict with: total_rows, missed_trials, ev_counts, pct_missed
     """
-    # Determine run format based on subject ID length
+    # Determine run format and session path based on subject ID length
     if len(subject_id) == 3:
         run_fmt = f"{int(run_num):02d}"
+        subject_dir = os.path.join(EV_DIR, f"sub-{subject_id}", "sharedreward")
     else:
         run_fmt = str(run_num)
-    
-    subject_dir = os.path.join(EV_DIR, f"sub-{subject_id}", "sharedreward")
+        subject_dir = os.path.join(EV_DIR, f"sub-{subject_id}", "ses-01", "sharedreward")
     
     result = {"total_rows": 0, "missed_trials": 0, "ev_counts": {}, "pct_missed": None}
     

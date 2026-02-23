@@ -18,7 +18,7 @@ from scipy import stats
 
 # --- Configuration ---
 BASE_DIR = "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging"
-RATINGS_DIR = f"{BASE_DIR}/stimuli/logs-reformatted"
+RATINGS_DIR = f"{BASE_DIR}/stimuli/Scan-Card_Guessing_Game/logs-reformatted"
 
 # --- Input/Output ---
 USABLE_CSV = sys.argv[1] if len(sys.argv) > 1 else f"{BASE_DIR}/code/exclusions/usable_subjects.csv"

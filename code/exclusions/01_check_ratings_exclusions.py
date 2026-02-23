@@ -22,7 +22,7 @@ import pandas as pd
 
 # --- Configuration ---
 BASE_DIR = "/gpfs/scratch/tug87422/smithlab-shared/sharedreward-aging"
-RATINGS_DIR = f"{BASE_DIR}/stimuli/logs-reformatted"
+RATINGS_DIR = f"{BASE_DIR}/stimuli/Scan-Card_Guessing_Game/logs-cleaned"
 
 # --- Input/Output ---
 SUBLIST = sys.argv[1] if len(sys.argv) > 1 else f"{BASE_DIR}/code/sublist-all.txt"

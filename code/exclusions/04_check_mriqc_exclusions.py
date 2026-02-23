@@ -38,7 +38,7 @@ def get_mriqc_json(subject_id, run):
     """Find and return path to MRIQC JSON for a subject/run."""
     if len(subject_id) == 5:
         # 5-digit subject format
-        pattern = f"{MRIQC_DIR}/sub-{subject_id}/func/sub-{subject_id}_task-sharedreward_run-{run}_echo-2_part-mag_bold.json"
+        pattern = f"{MRIQC_DIR}/sub-{subject_id}/ses-01/func/sub-{subject_id}_ses-01_task-sharedreward_run-{run}_echo-2_part-mag_bold.json"
     elif len(subject_id) == 3:
         # 3-digit subject format (run is zero-padded)
         run_fmt = f"{int(run):02d}"

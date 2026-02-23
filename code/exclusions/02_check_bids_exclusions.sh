@@ -54,7 +54,7 @@ while read -r sub || [[ -n "$sub" ]]; do
     if [[ "$format" == "three" ]]; then
         expected_run01="$subject_dir/func/${subject_num}_task-sharedreward_run-01_bold.nii.gz"
     else
-        expected_run01="$subject_dir/func/${subject_num}_task-sharedreward_run-1_echo-4_part-mag_bold.nii.gz"
+        expected_run01="$subject_dir/ses-01/func/${subject_num}_ses-01_task-sharedreward_run-1_echo-4_part-mag_bold.nii.gz"
     fi
 
     if [[ ! -f "$expected_run01" ]]; then
@@ -66,7 +66,7 @@ while read -r sub || [[ -n "$sub" ]]; do
     if [[ "$format" == "three" ]]; then
         expected_run02="$subject_dir/func/${subject_num}_task-sharedreward_run-02_bold.nii.gz"
     else
-        expected_run02="$subject_dir/func/${subject_num}_task-sharedreward_run-2_echo-4_part-mag_bold.nii.gz"
+        expected_run02="$subject_dir/ses-01/func/${subject_num}_ses-01_task-sharedreward_run-2_echo-4_part-mag_bold.nii.gz"
     fi
 
     if [[ ! -f "$expected_run02" ]]; then
