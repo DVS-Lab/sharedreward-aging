@@ -158,6 +158,7 @@ sub-*.html
 
 derivatives/tedana*
 derivatives/warpkit*
+code/exclusions/models*
 
 <<<<<<< HEAD
 
