@@ -140,7 +140,7 @@ set fmri(motionevsbeta) ""
 set fmri(scriptevsbeta) ""
 
 # Robust outlier detection in FLAME?
-set fmri(robust_yn) 0
+set fmri(robust_yn) 1
 
 # Higher-level modelling
 # 3 : Fixed effects
