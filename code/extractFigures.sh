@@ -99,6 +99,18 @@ extract_timeseries() {
                 OUT="${figdir}/${ROI}_${model_key}_type-${TYPE}_cope-${copenum}_cname-${copename}.txt"
                 echo "Extracting: ${ROI} | ${model_key} | ${TYPE} | cope-${copenum} (${copename}) -> figure-${fig}"
                 fslmeants -i "$DATA" -o "$OUT" -m "$MASK"
+
+                # Extract variance for weights
+                VAR_DATA="${L3_DIR}/L3_task-${TASK}_type-${TYPE}_cnum-${copenum}_cname-${copename}_${GROUP}.gfeat/cope1.feat/var_filtered_func_data.nii.gz"
+                VAR_OUT="${figdir}/${ROI}_${model_key}_type-${TYPE}_cope-${copenum}_cname-${copename}_var.txt"
+ 
+                if [[ ! -f "$VAR_DATA" ]]; then
+                    echo "WARNING: variance data not found: ${VAR_DATA}"
+                else
+                    echo "Extracting variance: ${ROI} | ${model_key} | ${TYPE} | cope-${copenum} (${copename}) -> figure-${fig}"
+                fslmeants -i "$VAR_DATA" -o "$VAR_OUT" -m "$MASK"
+                fi
+
             done
         done
     done
