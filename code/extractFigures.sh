@@ -33,6 +33,9 @@ ROI_PARAMS["dlpfc"]="${fsldir}/L3act/L3_model-age_task-${TASK}_n${N}_flame1/L3_t
 
 # Cope dictionary: "model_key|copenum" -> copename
 declare -A COPE_PARAMS
+
+COPE_PARAMS["model-age|01"]="C_pun"
+COPE_PARAMS["model-age|02"]="C_rew"
 COPE_PARAMS["model-age|03"]="F_pun"
 COPE_PARAMS["model-age|04"]="F_rew"
 COPE_PARAMS["model-age|05"]="S_pun"
@@ -41,6 +44,9 @@ COPE_PARAMS["model-age|06"]="S_rew"
 # Figure dictionary: "ROI|model_key|TYPE|copenum" -> figure number
 # Any combination not listed here will be skipped with a warning
 declare -A FIGURE_MAP
+
+FIGURE_MAP["dlpfc|model-age|act|01"]="4"
+FIGURE_MAP["dlpfc|model-age|act|02"]="4"
 FIGURE_MAP["dlpfc|model-age|act|03"]="4"
 FIGURE_MAP["dlpfc|model-age|act|04"]="4"
 FIGURE_MAP["dlpfc|model-age|act|05"]="4"
