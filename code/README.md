@@ -9,6 +9,7 @@ Active Phase 0 utilities:
 - `resample_to_rf1_grid.sh` and `check_grid.py`: cubic BOLD/nearest-neighbor mask resampling and exact verification.
 - `measure_smoothness.sh`, `smooth_to_target.sh`, and `compute_tsnr.py`: thin wrappers around the explicitly configured authoritative RF1 implementations, preventing metric drift.
 - `harmonization_report.py`: compact Phase 0 summary; it does not select a target.
+- `run_logged.sh`: local raw log plus a compact Git-trackable record for major Linux2 runs.
 
 Default Temple roots live in `project_config.sh` and can be overridden explicitly. Large data remain outside Git. Use pilot subject lists, conservative fMRIPrep concurrency, and `--dry-run` before expensive processing.
 
