@@ -13,4 +13,9 @@ Active Phase 0 utilities:
 
 Default Temple roots live in `project_config.sh` and can be overridden explicitly. Large data remain outside Git. Use pilot subject lists, conservative fMRIPrep concurrency, and `--dry-run` before expensive processing.
 
+On Linux2, create the dedicated Phase 0 command-line environment from
+`environment-phase0-linux2.yml`. This isolates AFNI, DataLad, and git-annex
+from the base and FSL installations. The fMRIPrep version remains independently
+pinned by the Apptainer wrapper.
+
 Historical scripts/templates remain provenance only. The model-specific full-trial candidate is documented in `templates/README.md`; no pooled L3 is active.

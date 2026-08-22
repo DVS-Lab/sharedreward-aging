@@ -1,0 +1,10 @@
+name: sharedreward-phase0
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - numpy
+  - nibabel
+  - afni=25.0.00
+  - datalad=1.6.0
+  - git-annex
