@@ -1,52 +1,43 @@
-# SRNDNA: Shared Reward Task Data and Analyses
-This repository contains code related to our in prep project related to shared reward and aging. All hypotheses and analysis plans were pre-registered on AsPredicted on 7/26/2018 and data collection commenced on 7/31/2018. Imaging data will be shared via [OpenNeuro][openneuro] when the manuscript is posted on bioRxiv.
+# Shared Reward aging harmonization
 
+This repository owns the project-specific harmonization of RF1 Shared Reward with OpenNeuro `ds003745` version 2.1.1. It does not replace either source dataset and does not copy RF1 FEAT trees.
 
-## A few prerequisites and recommendations
-- Understand BIDS and be comfortable navigating Linux
-- Install [FSL](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FslInstallation)
-- Install [miniconda or anaconda](https://stackoverflow.com/questions/45421163/anaconda-vs-miniconda)
-
-
-## Notes on repository organization and files
-- Raw DICOMS (an input to heudiconv) are private and only accessible locally (Smith Lab Linux: /data/sourcedata)
-- Some of the contents of this repository are not tracked (.gitignore) because the files are large and we do not yet have a nice workflow for datalad. These folders include `/data/sourcedata` (dicoms) and parts of `bids` and `derivatives`.
-- Tracked folders and their contents:
-  - `code`: analysis code
-  - `templates`: fsf template files used for FSL analyses
-  - `masks`: images used as masks, networks, and seed regions in analyses
-  - `stimuli`: psychopy scripts and matlab scripts for delivering stimuli and organizing output
-  - `bids`: bids data (only text files since images need to be obtained from [OpenNeuro][openneuro], as described below)
-  - `derivatives`: derivatives from analysis scripts, but only text files (re-run script to regenerate larger outputs)
-
-
-## Basic commands to reproduce our analyses
-```
-# get code and data (two options for data)
-git clone https://github.com/DVS-Lab/srndna-sharedreward
-cd srndna-sharedreward
-
-rm -rf bids # remove bids subdirectory since it will be replaced below
-# can this be made into a sym link?
-
-datalad clone https://github.com/OpenNeuroDatasets/ds003745.git bids
-# the bids folder is a datalad dataset
-# you can get all of the data with the command below:
-datalad get sub-*
-
-# run preprocessing and generate confounds and timing files for analyses
-bash code/run_fmriprep.sh
-python code/MakeConfounds.py --fmriprepDir="derivatives/fmriprep"
-bash code/run_gen3colfiles.sh
-
-# run statistics
-bash code/run_L1stats.sh
-bash code/run_L2stats.sh
-bash code/run_L3stats.sh
+```text
+ds003745 v2.1.1 raw BIDS        RF1 canonical Linux2 BIDS/derivatives
+          |                                  |
+          v                                  v
+ fMRIPrep 25.2.5                  rf1-sra-sharedreward
+          |                                  |
+          v                                  |
+ RF1-grid resampling                         |
+          |                                  |
+          +--------> model-specific common full-trial EVs
+                             |
+                             v
+                   matched AFNI smoothing
+                             |
+                             v
+                   dataset-specific L1/L2
+                             |
+                             v
+                    harmonization QC
 ```
 
+## Timing boundary
 
-## Acknowledgments
-This work was supported, in part, by grants from the National Institutes of Health (R21-MH113917 and R03-DA046733 to DVS and R15-MH122927 to DSF) and a Pilot Grant from the Scientific Research Network on Decision Neuroscience and Aging [to DVS; Subaward of NIH R24-AG054355 (PI Gregory Samanez-Larkin)]. We thank Victoria Kelly, Nicole Henninger, Dennis Desalme, Ben Muzekari, Isaac Levy, Gemma Goldstein, and Srikar Katta for assistance with participant recruitment and data collection, and Jeffrey Dennison for assistance with data processing. DVS was a Research Fellow of the Public Policy Lab at Temple University during the preparation of the manuscript (2019-2020 academic year).
+The experiments are not temporally identical. ds003745 was organized as 2 runs × 9 partner/valence blocks × 8 trials. Its published `event_<partner>_<feedback>` rows describe recoverable full-trial epochs (usually about 3.5 seconds), accompanied by block rows. Although decision and outcome displays were conceptually distinct, their exact phase boundaries are not assumed recoverable from the published files.
 
-[openneuro]: https://openneuro.org/
+RF1 retains its richer canonical decision/outcome events. Cross-dataset harmonization happens only in this repository as a model-specific derivative:
+
+- ds003745: retain published `event_<partner>_<feedback>` onset/duration;
+- RF1: derive a full-trial epoch from validated decision onset through the matching outcome offset;
+- never rewrite either source BIDS dataset;
+- never manufacture phase-resolved ds003745 timing.
+
+A block-level ds003745 model is scientifically legitimate as a sensitivity analysis, but is not automatically a pooled model because RF1 did not use the same historical block design.
+
+## Phase 0 hard stop
+
+Current work is limited to audit, reproducible acquisition, a small modern fMRIPrep pilot, event/grid/smoothness/tSNR characterization, and candidate target evaluation. No target FWHM is selected and no full-cohort smoothing, L1/L2, or pooled L3 should run before review.
+
+See [code/HARMONIZATION_AUDIT.md](code/HARMONIZATION_AUDIT.md) and [code/README.md](code/README.md). Run static/synthetic checks with `make test`.

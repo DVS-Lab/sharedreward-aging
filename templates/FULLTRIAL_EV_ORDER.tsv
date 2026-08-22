@@ -1,0 +1,11 @@
+ev	trial_type	role
+1	event_computer_punish	substantive
+2	event_computer_reward	substantive
+3	event_friend_punish	substantive
+4	event_friend_reward	substantive
+5	event_stranger_punish	substantive
+6	event_stranger_reward	substantive
+7	event_computer_neutral	substantive
+8	event_friend_neutral	substantive
+9	event_stranger_neutral	substantive
+10	missed_trial	nuisance_optional

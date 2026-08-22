@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)";source "$SCRIPT_DIR/project_config.sh"
+usage(){ echo "Usage: run_fmriprep_ds003745.sh SUBJECT [--dry-run] [--overwrite]" >&2; }
+(( $#>=1 ))||{ usage;exit 2;};sub="${1#sub-}";shift;dry=0;overwrite=0;while(( $# ));do case "$1" in --dry-run)dry=1;shift;;--overwrite)overwrite=1;shift;;-h|--help)usage;exit 0;;*)echo "ERROR: unknown argument: $1" >&2;exit 2;;esac;done
+[[ -d "$DS003745_ROOT/sub-$sub" ]]||{ echo "ERROR: subject not found: $DS003745_ROOT/sub-$sub" >&2;exit 1;};out="$DS003745_FMRIPREP_ROOT/sub-$sub";[[ ! -e "$out"||$overwrite -eq 1 ]]||{ echo "ERROR: output exists; use --overwrite after review: $out" >&2;exit 1;}
+scratch="${SCRATCH_ROOT:-/ZPOOL/data/scratch}/$(whoami)/ds003745-fmriprep-sub-${sub}";cmd=(apptainer run --cleanenv -B "$DS003745_ROOT:/base/bids:ro" -B "$PROJECT_ROOT:/base/project" -B "$TEMPLATEFLOW_HOME:/opt/templateflow" -B "$(dirname "$FS_LICENSE_FILE"):/opts:ro" -B "$scratch:/scratch" "$FMRIPREP_IMAGE" /base/bids /base/project/derivatives/fmriprep participant --participant-label "$sub" --stop-on-first-crash --nprocs "${FMRIPREP_NPROCS:-16}" --omp-nthreads "${FMRIPREP_OMP_NTHREADS:-8}" --mem "${FMRIPREP_MEM_MB:-48000}" --output-spaces MNI152NLin6Asym --fs-license-file "/opts/$(basename "$FS_LICENSE_FILE")" --fs-no-reconall --skip-bids-validation -w /scratch)
+printf 'fMRIPrep 25.2.5 ds003745 command:';printf ' %q' "${cmd[@]}";echo;((dry))&&exit 0
+for f in "$FMRIPREP_IMAGE" "$FS_LICENSE_FILE";do [[ -f "$f" ]]||{ echo "ERROR: missing: $f" >&2;exit 1;};done;mkdir -p "$DS003745_FMRIPREP_ROOT" "$scratch" "$PROJECT_ROOT/logs/runs";"${cmd[@]}" 2>&1|tee "$PROJECT_ROOT/logs/runs/$(date +%Y%m%d-%H%M%S)_ds003745-fmriprep-sub-${sub}.log"
+[[ -f "$DS003745_FMRIPREP_ROOT/sub-${sub}.html" ]]||{ echo 'ERROR: missing HTML report' >&2;exit 1;};find "$out" -name '*task-sharedreward*space-MNI152NLin6Asym*desc-preproc_bold.nii.gz' -print -quit|grep -q .||{ echo 'ERROR: missing Shared Reward MNI BOLD' >&2;exit 1;}

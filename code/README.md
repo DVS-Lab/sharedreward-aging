@@ -1,125 +1,15 @@
-# SharedReward project scripts
+# Code
 
-This folder contains helper scripts for a Shared Reward fMRI project (OpenNeuro-style/BIDS layout) that cover: data download, BIDS event-file generation, preprocessing/QC (fMRIPrep, MRIQC, TE-DENOISE), FSL FEAT modeling (L1/L2/L3), and a few utilities for behavioral/covariate tables.
+Active Phase 0 utilities:
 
-Most scripts assume a specific directory layout and include hard-coded paths (e.g., `/ZPOOL/...` or `/gpfs/...`). Start by editing the path variables near the top of each script to match your environment.
+- `get_ds003745.sh`: clone/pin OpenNeuro ds003745 2.1.1 and selectively retrieve pilot files.
+- `run_fmriprep_ds003745.sh`: fMRIPrep 25.2.5 single-subject wrapper, `MNI152NLin6Asym` only.
+- `convert_harmonized_events.py`: source-preserving common full-trial event derivative for ds003745 or RF1.
+- `summarize_events.py`: per-run timing/count QC.
+- `resample_to_rf1_grid.sh` and `check_grid.py`: cubic BOLD/nearest-neighbor mask resampling and exact verification.
+- `measure_smoothness.sh`, `smooth_to_target.sh`, and `compute_tsnr.py`: thin wrappers around the explicitly configured authoritative RF1 implementations, preventing metric drift.
+- `harmonization_report.py`: compact Phase 0 summary; it does not select a target.
 
-## Data acquisition and BIDS formatting
+Default Temple roots live in `project_config.sh` and can be overridden explicitly. Large data remain outside Git. Use pilot subject lists, conservative fMRIPrep concurrency, and `--dry-run` before expensive processing.
 
-- `get_data.sh` — Installs OpenNeuro datasets via `datalad` (intended for pulling the raw BIDS datasets that the project analyzes).
-- `ds003745-2.1.1.sh` — A long, auto-generated `curl` script that downloads many ds003745 files directly from OpenNeuro/S3 (useful when `datalad` is failing or you only want specific files).
-- `convertSharedReward_BIDS.m` — MATLAB script that converts task log output into BIDS-style `events.tsv` files (and tracks basic counts like trials/misses).
-
-## Preprocessing and denoising
-
-- `fmriprep.sh` — Runs fMRIPrep (via Singularity) for one subject and writes outputs under `derivatives/fmriprep`.
-- `run_fmriprep.sh` — Wrapper that runs `fmriprep.sh` across a subject list with simple concurrency limiting.
-- `fmriprep-hpc.sh` — PBS/Torque job script that builds and launches many fMRIPrep participant commands on an HPC node using `torque-launch`.
-- `sr-fmriprep-hpc.sh` — A project-specific variant of the HPC fMRIPrep launcher (same idea as `fmriprep-hpc.sh`, with paths/settings tuned for this dataset).
-- `run_fmriprep-hpc.sh` — Submits the HPC fMRIPrep launcher in batches (chunks a subject list and `qsub`s multiple jobs).
-
-- `mriqc.sh` — Runs MRIQC (via Singularity) for one subject to generate QC metrics for T1w and task BOLD.
-- `run_mriqc.sh` — Wrapper that runs `mriqc.sh` across a subject list with limited parallel jobs.
-
-- `tedana.sh` — Runs TEDANA for one subject/run using multi-echo fMRIPrep outputs, writes to `derivatives/tedana`, and logs missing inputs.
-- `run_tedana.sh` — Wrapper that runs `tedana.sh` across subjects and both runs with simple concurrency limiting.
-- `genTedanaConfounds.py` — Builds “FSL-ready” confound files by combining selected fMRIPrep regressors with TEDANA component regressors (e.g., rejected components).
-
-## FSL FEAT modeling (Level 1/2/3)
-
-- `L1stats-hpc.sh` — PBS/Torque script that generates FEAT `.fsf` files from templates and runs Level-1 FEAT models (activation and/or seed-based PPI, depending on settings).
-- `run_L1stats-hpc.sh` — Batch-submission helper that chunks a subject list and submits `L1stats-hpc.sh` jobs with `qsub`.
-
-- `L2stats.sh` — Runs Level-2 FEAT (within-subject fixed-effects across runs) for one subject and one analysis “type”, then deletes large intermediate files to save space.
-- `run_L2stats.sh` — Wrapper that runs `L2stats.sh` across a subject list (and optional analysis types) with basic concurrency limiting.
-- `L2stats-hpc.sh` — PBS/Torque version of the Level-2 FEAT runner that assembles `.fsf` files and executes them via `torque-launch`.
-- `run_L2stats-hpc.sh` — Batch-submission helper that chunks subject lists and submits `L2stats-hpc.sh` jobs.
-
-- `L3stats.sh` — Runs a single Level-3 FEAT group analysis for one cope/contrast (driven by template `.fsf` files and a “replace-me” path tag).
-- `run_L3stats.sh` — Wrapper that loops over pre-specified copes/contrasts and runs `L3stats.sh` with basic concurrency limiting.
-- `L3stats-hpc.sh` — PBS/Torque version of Level-3 FEAT that prepares `.fsf` files and launches them via `torque-launch`.
-- `run_L3stats-hpc.sh` — Generates per-cope FEAT jobs for group analysis and writes them out in a launcher-friendly format (intended for HPC execution).
-
-- `L2paths.sh` — Utility that prints the paths to existing Level-1 cope images for a list of subjects (handy when building higher-level input lists).
-- `L3paths.sh` — Utility that prints the paths to subject-level cope images (from L2 `.gfeat` when present, otherwise from L1) for use as Level-3 inputs.
-
-## QC and sanity checks
-
-- `checkmask.sh` — Computes FEAT mask voxel counts for each subject and compares them to a standard MNI brain mask to estimate coverage.
-- `checkzstats.sh` — Runs `fslstats -R` on a list of NIfTI files (e.g., z-stats) to quickly spot extreme or invalid ranges.
-- `cleanL1-linuxbox.sh` — Post-processing cleanup for Level-1 FEAT folders (fixes registration matrices for fMRIPrep-aligned data and deletes large intermediate files).
-
-- `fdmean_conf.py` — Extracts and prints mean framewise displacement from fMRIPrep confounds TSVs, organized by subject/run.
-- `fdmean_avg.py` — Extracts and prints `fd_mean` values from MRIQC JSON outputs (one entry per file/participant/run).
-- `fdmean_outliers.R` — Reads a motion summary CSV and visualizes the distribution/outliers (with a simple SRNDNA vs RF1 split based on subject-ID length).
-
-- `tsnr_stan.sh` — Computes tSNR from preprocessed BOLD in standard space and reports the mean tSNR within a ventral striatum mask.
-
-- `gen_missingevs.sh` — Creates placeholder EV text files (contents `0 0 0`) so FEAT models still run when a condition has no events.
-- `empty_ev_check.py` — Scans EV files and outputs a coded table indicating which EVs contain real events versus placeholders.
-- `missingtrials.py` — Summarizes EV row counts and missed-trial counts per subject/run and writes a CSV that can support exclusion/QC decisions.
-
-- `extract-flip.py` — Extracts FlipAngle values from BIDS JSON sidecars and writes a CSV with a simple “coded” flag for unusual values.
-
-## Anatomical alignment and DeepBrainNet
-
-- `flirt.sh` — Skull-strips each subject’s T1w using the fMRIPrep brain mask and affine-registers it to an MNI template (to create inputs for DeepBrainNet).
-- `run_flirt.sh` — Wrapper that runs `flirt.sh` across a subject list with basic concurrency limiting.
-- `deepbrain.sh` — Runs DeepBrainNet’s testing script on the aligned anatomical images and writes outputs under `derivatives/deepbrain`.
-
-## Behavioral logs and covariates
-
-- `transform_logs.py` — Reformats raw rating-log CSVs into a consistent column structure and writes them into a “reformatted” directory.
-- `gen_covariates.py` — Collects rating logs and merges them with participant metadata (e.g., age) as a starting point for building covariates.
-- `justcombinethem.py` — Joins an existing “combined logs” table to participant metadata and writes an updated combined CSV (e.g., with age included).
-
-- `sr_behavioral.R` — Computes and plots average rating responses (with SEM) by partner condition and trait.
-- `sr_behavioral-age.R` — Creates difference-score variables and sets up summaries intended for age-related behavioral analyses.
-
-- `sharedreward-covariates.ipynb` — Notebook used to assemble, QA-check, and reshape covariate tables that align with group-model input files.
-- `new-covs.ipynb` — Exploratory notebook for testing/visualizing candidate covariates (e.g., distributions, standardization, correlations).
-
-## HPC transfer helpers
-
-- `transferbids-hpc.sh` — Uses `rsync` to copy selected BIDS subject folders from a local path to an HPC destination (prompts for an AccessNet ID).
-- `transferL1-hpc.sh` — Uses `rsync` to copy fMRIPrep derivatives and `events.tsv` files to an HPC destination (one subject at a time).
-
-## Plotting with R (RStudio / R Markdown)
-
-The `plotting/` subdirectory contains an R Markdown report (`SR-aging-Dave.Rmd`) and its companion data file (`extractions-retest-copy.csv`). The Rmd produces an HTML report when you “Knit” it in RStudio.
-
-### Install R and RStudio
-
-1) **Install R** from CRAN:
-- macOS: download the `.pkg` installer from CRAN. Note that the current CRAN macOS build may require **macOS 11+**; older macOS versions may need an older R installer listed on the same CRAN page.  
-- Windows: download and install the current Windows build from CRAN.
-
-2) **Install RStudio Desktop** from Posit.
-- Current RStudio releases require newer macOS (e.g., **macOS 13+**). If you are on an older macOS (e.g., 10.15/Catalina), use the Posit “macOS and RStudio Desktop version compatibility” table to download a compatible older RStudio build.
-
-### Run the Rmd in RStudio
-
-1) Open the repository in RStudio (recommended: create/open an `.Rproj` at the repo root).
-2) Open `plotting/SR-aging-Dave.Rmd`.
-3) Set your working directory:
-   - In RStudio: **Session → Set Working Directory → To Source File Location** (so `plotting/` becomes the working directory).
-4) Fix the hard-coded CSV path in the Rmd (recommended change):
-   - Replace the current absolute path with:
-   ```r
-   df <- readr::read_csv("extractions-retest-copy.csv")
-   ```
-5) Install required packages (run once in the console):
-   ```r
-   install.packages(c(
-     "tidyverse", "readr", "dplyr", "ggplot2",
-     "correlation", "MASS", "ggeffects", "insight",
-     "interactions", "rmarkdown", "knitr"
-   ))
-   ```
-   Note: the Rmd currently contains `install.packages("insight")` in a code chunk. You may want to delete it or wrap it in a conditional so knitting doesn’t try to re-install packages every time.
-6) Click **Knit** to render the HTML report.
-
-### Troubleshooting (common)
-
-- **Windows package install fails with compiler/toolchain errors:** install the matching **Rtools** for your R version (only needed for packages that must compile from source).
-- **RStudio won’t launch / installer won’t run on macOS:** your macOS version may be older than the current supported versions; use the “compatibility” table to install an older RStudio build, or consider upgrading macOS.
+Historical scripts/templates remain provenance only. The model-specific full-trial candidate is documented in `templates/README.md`; no pooled L3 is active.
