@@ -13,9 +13,12 @@ Active Phase 0 utilities:
 
 Default Temple roots live in `project_config.sh` and can be overridden explicitly. Large data remain outside Git. Use pilot subject lists, conservative fMRIPrep concurrency, and `--dry-run` before expensive processing.
 
-On Linux2, create the dedicated Phase 0 command-line environment from
-`environment-phase0-linux2.yml`. This isolates AFNI, DataLad, and git-annex
-from the base and FSL installations. The fMRIPrep version remains independently
-pinned by the Apptainer wrapper.
+On Linux2, create the dedicated Phase 0 Python/DataLad environment from
+`environment-phase0-linux2.yml`, then run `install_phase0_afni.sh` to install
+the complete official AFNI `linux_openmp_64` command distribution into that
+environment without editing shell dotfiles. This isolates DataLad, git-annex,
+and AFNI from the base and FSL installations. The installer records the AFNI
+archive URL and checksum. The fMRIPrep version remains independently pinned by
+the Apptainer wrapper.
 
 Historical scripts/templates remain provenance only. The model-specific full-trial candidate is documented in `templates/README.md`; no pooled L3 is active.
