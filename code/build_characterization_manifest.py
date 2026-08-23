@@ -79,8 +79,37 @@ def unique_nonempty(directory, pattern):
     return (matches[0] if len(matches) == 1 else None), len(matches)
 
 
+def bold_mask_grids_match(bold, mask, affine_atol=1e-5):
+    try:
+        import nibabel as nib
+        import numpy as np
+    except ImportError as error:
+        raise RuntimeError(f"nibabel and numpy are required: {error}") from error
+    bold_image = nib.load(str(bold), mmap=True)
+    mask_image = nib.load(str(mask), mmap=True)
+    return (
+        bold_image.ndim == 4
+        and mask_image.ndim == 3
+        and tuple(bold_image.shape[:3]) == tuple(mask_image.shape)
+        and bool(
+            np.allclose(
+                bold_image.affine,
+                mask_image.affine,
+                rtol=0.0,
+                atol=affine_atol,
+            )
+        )
+    )
+
+
 def add_row(ready, missing, identifiers, paths):
     problems = [name for name, path in paths.items() if not nonempty(path)]
+    if not problems:
+        try:
+            if not bold_mask_grids_match(paths["input_bold"], paths["input_mask"]):
+                problems.append("BOLD-mask geometry")
+        except (OSError, RuntimeError, ValueError):
+            problems.append("unreadable BOLD/mask")
     if problems:
         missing.append({**identifiers, "missing": ",".join(problems)})
     else:

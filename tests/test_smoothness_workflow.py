@@ -29,6 +29,10 @@ class SmoothnessWorkflow(unittest.TestCase):
         self.assertEqual(tail[-1], "line 29")
 
     def test_characterization_manifest_contains_three_required_stages(self):
+        try:
+            import nibabel as nib
+        except ImportError:
+            self.skipTest("nibabel unavailable")
         with tempfile.TemporaryDirectory() as directory:
             directory = Path(directory)
             rf1 = directory / "rf1-fmriprep"
@@ -50,8 +54,18 @@ class SmoothnessWorkflow(unittest.TestCase):
                 / (rf1_stem + "_desc-TedanaPlusConfounds.tsv")
             )
             rf1_confounds.parent.mkdir(parents=True)
-            for path in (rf1_bold, rf1_mask, rf1_confounds):
-                path.write_text("x")
+            affine = np.diag([2.7, 2.7, 2.97, 1.0])
+            nib.save(
+                nib.Nifti1Image(
+                    np.ones((3, 4, 5, 6), dtype=np.float32), affine
+                ),
+                rf1_bold,
+            )
+            nib.save(
+                nib.Nifti1Image(np.ones((3, 4, 5), dtype=np.uint8), affine),
+                rf1_mask,
+            )
+            rf1_confounds.write_text("x")
 
             ds_func = directory / "ds/sub-104/func"
             ds_func.mkdir(parents=True)
@@ -66,14 +80,21 @@ class SmoothnessWorkflow(unittest.TestCase):
             ds_out_bold = directory / "harmonized/bold.nii.gz"
             ds_out_mask = directory / "harmonized/mask.nii.gz"
             ds_out_bold.parent.mkdir()
-            for path in (
-                ds_bold,
-                ds_mask,
-                ds_confounds,
-                ds_out_bold,
-                ds_out_mask,
-            ):
-                path.write_text("x")
+            for bold in (ds_bold, ds_out_bold):
+                nib.save(
+                    nib.Nifti1Image(
+                        np.ones((3, 4, 5, 6), dtype=np.float32), affine
+                    ),
+                    bold,
+                )
+            for mask in (ds_mask, ds_out_mask):
+                nib.save(
+                    nib.Nifti1Image(
+                        np.ones((3, 4, 5), dtype=np.uint8), affine
+                    ),
+                    mask,
+                )
+            ds_confounds.write_text("x")
             ds_manifest = directory / "resampling.tsv"
             ds_manifest.write_text(
                 "subject\trun\tinput_bold\tinput_mask\toutput_bold\toutput_mask\n"
