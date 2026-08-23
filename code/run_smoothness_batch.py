@@ -119,6 +119,14 @@ def command_string(command):
     return " ".join(shlex.quote(part) for part in command)
 
 
+def log_tail(path, lines=20):
+    try:
+        content = path.read_text(errors="replace").splitlines()
+    except OSError as error:
+        return [f"unable to read per-unit log: {error}"]
+    return content[-lines:] or ["per-unit log is empty"]
+
+
 def run_unit(row, args):
     label = unit_label(row)
     output = args.output_dir / f"{label}.tsv"
@@ -222,6 +230,9 @@ def main():
                     f"ERROR: {label}: {status}: {detail} "
                     f"(log: {log_path})"
                 )
+                print(f"LOG TAIL: {label}")
+                for line in log_tail(log_path):
+                    print(f"  {line}")
     print(f"Units scheduled: {len(rows)}")
     print(f"Units newly completed: {completed}")
     print(f"Units verified existing: {verified}")

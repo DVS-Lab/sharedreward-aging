@@ -13,6 +13,21 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class SmoothnessWorkflow(unittest.TestCase):
+    def test_log_tail_is_bounded_and_preserves_diagnostic(self):
+        import importlib.util
+
+        script = ROOT / "code/run_smoothness_batch.py"
+        spec = importlib.util.spec_from_file_location("smoothness_batch", script)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        with tempfile.TemporaryDirectory() as directory:
+            log = Path(directory) / "unit.log"
+            log.write_text("\n".join(f"line {number}" for number in range(30)))
+            tail = module.log_tail(log)
+        self.assertEqual(len(tail), 20)
+        self.assertEqual(tail[0], "line 10")
+        self.assertEqual(tail[-1], "line 29")
+
     def test_characterization_manifest_contains_three_required_stages(self):
         with tempfile.TemporaryDirectory() as directory:
             directory = Path(directory)
