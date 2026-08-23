@@ -11,7 +11,19 @@ if (( ${#subjects[@]} )); then
     # DataLad resolves relative input paths from the process working directory,
     # not from --dataset. Run from the nested dataset so these paths cannot be
     # misinterpreted as children of the analysis repository.
-    cmd=(datalad -C "$DS003745_ROOT" get -d . "sub-${sub}/anat" "sub-${sub}/func/*task-sharedreward*" "sub-${sub}/fmap")
+    sharedreward_bold=(
+      "sub-${sub}/func/sub-${sub}_task-sharedreward_run-01_bold.nii.gz"
+      "sub-${sub}/func/sub-${sub}_task-sharedreward_run-02_bold.nii.gz"
+    )
+    if (( ! dry )); then
+      for path in "${sharedreward_bold[@]}"; do
+        git -C "$DS003745_ROOT" cat-file -e "HEAD:${path}" || {
+          echo "ERROR: pinned ds003745 release lacks expected input: $path" >&2
+          exit 1
+        }
+      done
+    fi
+    cmd=(datalad -C "$DS003745_ROOT" get -d . "sub-${sub}/anat" "${sharedreward_bold[@]}" "sub-${sub}/fmap")
     printf '%q ' "${cmd[@]}"; echo
     (( dry )) || "${cmd[@]}"
   done

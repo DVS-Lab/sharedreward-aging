@@ -13,6 +13,13 @@ Active Phase 0 utilities:
 
 Default Temple roots live in `project_config.sh` and can be overridden explicitly. Large data remain outside Git. Use pilot subject lists, conservative fMRIPrep concurrency, and `--dry-run` before expensive processing.
 
+The pinned OpenNeuro clone under `sourcedata/ds003745` is an independent
+DataLad dataset inside a parent-Git-ignored directory. It is intentionally not
+registered as a Git submodule or DataLad subdataset of this analysis repository.
+This keeps source acquisition reproducible without annexing analysis outputs or
+requiring a large-file content sibling for the GitHub repository. A broader
+`datalad run`/superdataset migration should be a separate, deliberate change.
+
 On Linux2, create the dedicated Phase 0 Python/DataLad environment from
 `environment-phase0-linux2.yml`, then run `install_phase0_afni.sh` to install
 the complete official AFNI `linux_ubuntu_24_64` command distribution into that
