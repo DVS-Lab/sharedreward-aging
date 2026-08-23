@@ -36,12 +36,12 @@ RF1 retains its richer canonical decision/outcome events. Cross-dataset harmoniz
 
 A block-level ds003745 model is scientifically legitimate as a sensitivity analysis, but is not automatically a pooled model because RF1 did not use the same historical block design.
 
-## Phase 0 hard stop
+## Phase 0 smoothing decision
 
-Current work is limited to audit, reproducible acquisition, a small modern fMRIPrep pilot, event/grid/smoothness/tSNR characterization, and candidate target evaluation. No target FWHM is selected and no full-cohort smoothing, L1/L2, or pooled L3 should run before review.
+Phase 0 approved a 6-mm total classic-FWHM target on 2026-08-23 after complete cross-dataset characterization. Production target smoothing may proceed with achieved-smoothness QC; L1/L2 remain gated on complete smoothed inputs, and pooled L3 remains out of scope at this stage.
 
 The ds003745 cohort is resampled with a frozen run-level manifest, identity-grid AFNI `wsinc5` interpolation for continuous BOLD, nearest-neighbor interpolation for masks, per-run grid checks, and an independent cohort audit. The sharper `wsinc5` interpolant is used to minimize interpolation-induced smoothness while moving already-normalized MNI data onto the RF1 grid. Generated imaging remains under ignored `derivatives/harmonized`; only compact run records and QC tables belong in Git.
 
-Baseline smoothness is measured from the exact RF1 analysis inputs and from paired ds003745 inputs before and after RF1-grid resampling. RF1 confounds are referenced from the authoritative `rf1-sra-linux2/derivatives/fsl/confounds_tedana` outputs rather than duplicated here. Both classic Gaussian FWHM and ACF parameters are retained. Matched preprocessing uses classic combined FWHM as the explicit `3dBlurToFWHM` stopping criterion; ACF remains a diagnostic here and should be estimated from first-level residuals when it is used for cluster-based inference. MRIQC may be added as complementary acquisition QC, but it does not replace analysis-input smoothness, tSNR, motion, or coverage characterization.
+Baseline smoothness is measured from the exact RF1 analysis inputs and from paired ds003745 inputs before and after RF1-grid resampling. RF1 confounds are referenced from the authoritative `rf1-sra-linux2/derivatives/fsl/confounds_tedana` outputs rather than duplicated here. Both classic Gaussian FWHM and ACF parameters are retained. Matched preprocessing uses classic combined FWHM as the explicit `3dBlurToFWHM` stopping criterion; ACF remains a diagnostic here and should be estimated from first-level residuals when it is used for cluster-based inference. The 6-mm target is total achieved smoothness, not an added 6-mm kernel. MRIQC may be added as complementary acquisition QC, but it does not replace analysis-input smoothness, tSNR, motion, or coverage characterization.
 
 See [code/HARMONIZATION_AUDIT.md](code/HARMONIZATION_AUDIT.md) and [code/README.md](code/README.md). Run static/synthetic checks with `make test`.

@@ -14,6 +14,6 @@ def main():
    vals=[float(r[field]) for r in rs if r.get(field) not in ('',None,'n/a','NA')]
    if vals:lines.append(f'- {field}: median {statistics.median(vals):.4f}; range {min(vals):.4f}–{max(vals):.4f}; n={len(vals)}')
   warnings=[r.get('warnings','') for r in rs if r.get('warnings','')];lines.append(f'- warning rows: {len(warnings)}');lines.append('')
- lines.extend(['## Gate status','','This report does not select a production target. Review candidate feasibility, acquisition-linked tSNR/motion separation, coverage, and outlier runs before setting `TARGET_FWHM_MM`.',''])
+ lines.extend(['## Gate status','','Production target approved 2026-08-23: 6 mm total classic FWHM. Require complete achieved-smoothness QC before FEAT; ACF remains diagnostic here and should be estimated from model residuals for cluster-based inference.',''])
  a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text('\n'.join(lines));print(f'Report: {a.output}');return 0
 if __name__=='__main__':raise SystemExit(main())

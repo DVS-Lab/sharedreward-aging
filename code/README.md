@@ -13,7 +13,7 @@ Active Phase 0 utilities:
 - `build_resampling_manifest.py`, `run_resampling_batch.py`, and `audit_resampling.py`: deterministic run-level planning, bounded/restartable RF1-grid resampling, and independent cohort completeness QC.
 - `build_characterization_manifest.py`, `run_smoothness_batch.py`, and `audit_smoothness.py`: one frozen cross-dataset input contract, bounded/restartable AFNI baseline measurement, and a consolidated run-level audit table.
 - `measure_smoothness.sh`, `smooth_to_target.sh`, and `compute_tsnr.py`: thin wrappers around the explicitly configured authoritative RF1 implementations, preventing metric drift.
-- `harmonization_report.py`: compact Phase 0 summary; it does not select a target.
+- `harmonization_report.py`: compact Phase 0 summary including the approved target status.
 - `run_logged.sh`: local raw log plus a compact Git-trackable record for major Linux2 runs.
 
 Default Temple roots live in `project_config.sh` and can be overridden explicitly. Large data remain outside Git. Use pilot subject lists, conservative fMRIPrep concurrency, and `--dry-run` before expensive processing.
@@ -87,4 +87,4 @@ nohup bash code/run_logged.sh \
   > logs/phase0-baseline-smoothness-full.nohup 2>&1 </dev/null &
 ```
 
-`run_smoothness_batch.py` delegates every unit to the authoritative RF1 `measure_smoothness.sh`, uses isolated AFNI work directories, writes one atomic result per unit, and verifies existing results before restart skips. Re-running the same command after interruption validates and skips completed units. `audit_smoothness.py` creates the Git-trackable consolidated table used for candidate-target evaluation. It records classic Gaussian and ACF estimates; this stage does not select a target.
+`run_smoothness_batch.py` delegates every unit to the authoritative RF1 `measure_smoothness.sh`, uses isolated AFNI work directories, writes one atomic result per unit, and verifies existing results before restart skips. Re-running the same command after interruption validates and skips completed units. `audit_smoothness.py` creates the Git-trackable consolidated table used for target evaluation. It records classic Gaussian and ACF estimates. Phase 0 approved a 6-mm total classic-FWHM target on 2026-08-23.

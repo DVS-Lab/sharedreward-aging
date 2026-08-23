@@ -29,11 +29,10 @@ RF1 is multi-echo and uses TEDANA-enhanced confounds. ds003745 is single-echo an
 
 ## Spatial/smoothness plan
 
-RF1 defines the common verified grid. ds003745 continuous BOLD is resampled by applying an identity transform with AFNI `wsinc5` interpolation, and masks use nearest-neighbor interpolation, into a separate derivative. Grid equality is tested from dimensions, voxel sizes, orientation, and affine. Baseline and post-resampling smoothness plus tSNR are measured before candidate targets are proposed. Matched preprocessing uses classic combined FWHM as the `3dBlurToFWHM` stopping criterion; ACF is retained as a diagnostic and for later residual-based inferential characterization. Historical 5/6-mm kernels do not select the target.
+RF1 defines the common verified grid. ds003745 continuous BOLD is resampled by applying an identity transform with AFNI `wsinc5` interpolation, and masks use nearest-neighbor interpolation, into a separate derivative. Grid equality is tested from dimensions, voxel sizes, orientation, and affine. Matched preprocessing uses classic combined FWHM as the `3dBlurToFWHM` stopping criterion; ACF is retained as a diagnostic and for later residual-based inferential characterization. Phase 0 approved a 6-mm total classic-FWHM target on 2026-08-23 after all 865 characterization units passed. The target is supported by the measured distributions, voxel dimensions, and expected cross-age anatomical heterogeneity rather than inherited from historical FEAT settings.
 
 ## Decisions deferred
 
-- authoritative common target FWHM;
 - whether a block-level analysis should be a ds003745 sensitivity analysis only;
 - final pooled covariates, including tSNR;
 - pooled L3 design and subject exclusions;
