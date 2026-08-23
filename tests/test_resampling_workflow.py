@@ -187,7 +187,7 @@ class ResamplingWorkflow(unittest.TestCase):
             self.assertEqual(result.returncode, 1)
             self.assertIn("bold_affine", audit.read_text())
 
-    def test_worker_gives_afni_a_nonexistent_temporary_output(self):
+    def test_worker_uses_wsinc5_for_bold_and_nn_for_mask(self):
         try:
             import nibabel as nib
         except ImportError:
@@ -200,51 +200,85 @@ class ResamplingWorkflow(unittest.TestCase):
             fake_resample.write_text(
                 "#!/usr/bin/env bash\n"
                 "set -euo pipefail\n"
-                "input=\"\"; output=\"\"\n"
+                "input=\"\"; output=\"\"; rmode=\"\"\n"
                 "while (( $# )); do\n"
                 "  case \"$1\" in\n"
                 "    -input) input=\"$2\"; shift 2 ;;\n"
                 "    -prefix) output=\"$2\"; shift 2 ;;\n"
+                "    -rmode) rmode=\"$2\"; shift 2 ;;\n"
                 "    *) shift 2 ;;\n"
                 "  esac\n"
                 "done\n"
+                "[[ \"$rmode\" == NN ]] || { echo 'expected NN' >&2; exit 41; }\n"
                 "[[ ! -e \"$output\" ]] || { echo 'prefix exists' >&2; exit 42; }\n"
                 "cp \"$input\" \"$output\"\n"
             )
             fake_resample.chmod(0o755)
+            fake_allineate = fake_bin / "3dAllineate"
+            fake_allineate.write_text(
+                "#!/usr/bin/env bash\n"
+                "set -euo pipefail\n"
+                "input=\"\"; output=\"\"; matrix=\"\"; final=\"\"\n"
+                "while (( $# )); do\n"
+                "  case \"$1\" in\n"
+                "    -input) input=\"$2\"; shift 2 ;;\n"
+                "    -prefix) output=\"$2\"; shift 2 ;;\n"
+                "    -1Dmatrix_apply) matrix=\"$2\"; shift 2 ;;\n"
+                "    -final) final=\"$2\"; shift 2 ;;\n"
+                "    *) shift 2 ;;\n"
+                "  esac\n"
+                "done\n"
+                "[[ \"$matrix\" == IDENTITY ]] || { echo 'expected identity' >&2; exit 43; }\n"
+                "[[ \"$final\" == wsinc5 ]] || { echo 'expected wsinc5' >&2; exit 44; }\n"
+                "[[ ! -e \"$output\" ]] || { echo 'prefix exists' >&2; exit 45; }\n"
+                "cp \"$input\" \"$output\"\n"
+            )
+            fake_allineate.chmod(0o755)
             affine = np.diag([2.7, 2.7, 2.97, 1.0])
             reference = directory / "reference.nii.gz"
+            input_bold = directory / "input_bold.nii.gz"
             input_mask = directory / "input_mask.nii.gz"
+            output_bold = directory / "outputs/output_bold.nii.gz"
             output_mask = directory / "outputs/output_mask.nii.gz"
-            image = nib.Nifti1Image(
+            mask_image = nib.Nifti1Image(
                 np.ones((3, 4, 5), dtype=np.uint8), affine
             )
-            nib.save(image, reference)
-            nib.save(image, input_mask)
+            bold_image = nib.Nifti1Image(
+                np.ones((3, 4, 5, 2), dtype=np.float32), affine
+            )
+            nib.save(mask_image, reference)
+            nib.save(mask_image, input_mask)
+            nib.save(bold_image, input_bold)
             environment = os.environ.copy()
             environment["PATH"] = f"{fake_bin}:{environment['PATH']}"
             environment["REFERENCE_GRID"] = str(reference)
             environment["IMAGING_PYTHON"] = sys.executable
-            subprocess.run(
-                [
-                    "bash",
-                    str(ROOT / "code/resample_to_rf1_grid.sh"),
-                    "--input",
-                    str(input_mask),
-                    "--kind",
-                    "mask",
-                    "--output",
-                    str(output_mask),
-                ],
-                env=environment,
-                check=True,
-                capture_output=True,
-                text=True,
-            )
-            self.assertTrue(output_mask.is_file())
-            self.assertTrue(
-                output_mask.with_name("output_mask_grid.json").is_file()
-            )
+            for kind, input_path, output_path in (
+                ("bold", input_bold, output_bold),
+                ("mask", input_mask, output_mask),
+            ):
+                subprocess.run(
+                    [
+                        "bash",
+                        str(ROOT / "code/resample_to_rf1_grid.sh"),
+                        "--input",
+                        str(input_path),
+                        "--kind",
+                        kind,
+                        "--output",
+                        str(output_path),
+                    ],
+                    env=environment,
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                )
+                self.assertTrue(output_path.is_file())
+                self.assertTrue(
+                    output_path.with_name(
+                        output_path.name.removesuffix(".nii.gz") + "_grid.json"
+                    ).is_file()
+                )
             self.assertFalse(list(output_mask.parent.glob(".resample.*")))
 
 

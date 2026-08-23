@@ -52,7 +52,7 @@ source_dir="${work}/${package}"
     exit 1
 }
 
-for command_name in afni 3dFWHMx 3dresample 3dBlurToFWHM; do
+for command_name in afni 3dFWHMx 3dresample 3dAllineate 3dBlurToFWHM; do
     [[ -x "${source_dir}/${command_name}" ]] || {
         echo "ERROR: downloaded AFNI package lacks: $command_name" >&2
         exit 1

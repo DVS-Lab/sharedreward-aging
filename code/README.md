@@ -9,7 +9,7 @@ Active Phase 0 utilities:
 - `audit_fmriprep_ds003745.py`: audit both Shared Reward runs, masks, confounds, and participant reports; optionally emit a retry manifest.
 - `convert_harmonized_events.py`: source-preserving common full-trial event derivative for ds003745 or RF1.
 - `summarize_events.py`: per-run timing/count QC.
-- `resample_to_rf1_grid.sh` and `check_grid.py`: cubic BOLD/nearest-neighbor mask resampling and exact verification.
+- `resample_to_rf1_grid.sh` and `check_grid.py`: identity-grid `wsinc5` BOLD/nearest-neighbor mask resampling and exact verification.
 - `build_resampling_manifest.py`, `run_resampling_batch.py`, and `audit_resampling.py`: deterministic run-level planning, bounded/restartable RF1-grid resampling, and independent cohort completeness QC.
 - `build_characterization_manifest.py`, `run_smoothness_batch.py`, and `audit_smoothness.py`: one frozen cross-dataset input contract, bounded/restartable AFNI baseline measurement, and a consolidated run-level audit table.
 - `measure_smoothness.sh`, `smooth_to_target.sh`, and `compute_tsnr.py`: thin wrappers around the explicitly configured authoritative RF1 implementations, preventing metric drift.
@@ -47,6 +47,8 @@ its own runtime path.
 Historical scripts/templates remain provenance only. The model-specific full-trial candidate is documented in `templates/README.md`; no pooled L3 is active.
 
 ## RF1-grid resampling
+
+Continuous BOLD is already normalized to MNI152NLin6Asym space. It is moved onto the exact RF1 grid by applying an identity transform with `3dAllineate -final wsinc5`; this avoids introducing an additional spatial transform and reduces interpolation blur relative to cubic interpolation. Binary masks use nearest-neighbor `3dresample`.
 
 After the RF1 reference resource exists and the ds003745 fMRIPrep audit is complete, build the frozen run-level contract before launching any resampling:
 

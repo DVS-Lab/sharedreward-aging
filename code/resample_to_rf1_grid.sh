@@ -32,8 +32,8 @@ done
     exit 2
 }
 case "$kind" in
-    bold) rmode=Cu ;;
-    mask) rmode=NN ;;
+    bold) resampler=3dAllineate ;;
+    mask) resampler=3dresample ;;
     *) echo "ERROR: --kind must be bold or mask" >&2; exit 2 ;;
 esac
 [[ "$input" != "$output" ]] || {
@@ -44,8 +44,8 @@ esac
     echo "ERROR: output exists: $output" >&2
     exit 1
 }
-command -v 3dresample >/dev/null || {
-    echo "ERROR: 3dresample unavailable" >&2
+command -v "$resampler" >/dev/null || {
+    echo "ERROR: $resampler unavailable" >&2
     exit 1
 }
 
@@ -56,11 +56,22 @@ tmp_json="$work/output_grid.json"
 output_json="${output%.nii.gz}_grid.json"
 trap 'rm -rf -- "$work"' EXIT
 
-3dresample \
-    -master "$REFERENCE_GRID" \
-    -rmode "$rmode" \
-    -input "$input" \
-    -prefix "$tmp"
+if [[ "$kind" == bold ]]; then
+    # The data are already in MNI152NLin6Asym space. Apply an identity
+    # transform only to change grids, using AFNI's sharp final interpolant.
+    AFNI_WSINC5_SILENT=YES 3dAllineate \
+        -input "$input" \
+        -master "$REFERENCE_GRID" \
+        -1Dmatrix_apply IDENTITY \
+        -final wsinc5 \
+        -prefix "$tmp"
+else
+    3dresample \
+        -master "$REFERENCE_GRID" \
+        -rmode NN \
+        -input "$input" \
+        -prefix "$tmp"
+fi
 [[ -s "$tmp" ]] || {
     echo "ERROR: resampling produced no output" >&2
     exit 1

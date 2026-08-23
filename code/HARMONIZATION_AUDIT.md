@@ -29,7 +29,7 @@ RF1 is multi-echo and uses TEDANA-enhanced confounds. ds003745 is single-echo an
 
 ## Spatial/smoothness plan
 
-RF1 defines the common verified grid. ds003745 continuous BOLD is resampled with cubic interpolation and masks with nearest-neighbor interpolation into a separate derivative. Grid equality is tested from dimensions, voxel sizes, orientation, and affine. Baseline and post-resampling smoothness plus tSNR are measured before candidate targets are proposed. Historical 5/6-mm kernels do not select the target.
+RF1 defines the common verified grid. ds003745 continuous BOLD is resampled by applying an identity transform with AFNI `wsinc5` interpolation, and masks use nearest-neighbor interpolation, into a separate derivative. Grid equality is tested from dimensions, voxel sizes, orientation, and affine. Baseline and post-resampling smoothness plus tSNR are measured before candidate targets are proposed. Matched preprocessing uses classic combined FWHM as the `3dBlurToFWHM` stopping criterion; ACF is retained as a diagnostic and for later residual-based inferential characterization. Historical 5/6-mm kernels do not select the target.
 
 ## Decisions deferred
 
