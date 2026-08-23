@@ -21,6 +21,11 @@ and AFNI from the base and FSL installations. The installer records the AFNI
 archive URL and checksum. The fMRIPrep version remains independently pinned by
 the Apptainer wrapper.
 
+The Ubuntu 24 host must provide Motif's `libXm.so.4` runtime. Install the
+Ubuntu `libxm4` package (from the Universe repository) before validating AFNI.
+This is a host library required by AFNI's official Ubuntu 24 binaries, not a
+Conda dependency.
+
 For an active Phase 0 shell, prepend `afni-bin` and the environment `bin`
 directory to `PATH`. Do not prepend the Conda environment's `lib` directory to
 `LD_LIBRARY_PATH`: that can override the matching `libmri.so` shipped beside
