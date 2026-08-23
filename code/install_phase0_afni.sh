@@ -4,7 +4,10 @@
 
 set -euo pipefail
 
-package="${AFNI_PACKAGE:-linux_openmp_64}"
+# Linux2 runs Ubuntu 24.04. Use AFNI's matching binary package so the
+# installation does not depend on legacy libraries such as libpng12.
+# AFNI_PACKAGE remains available for an explicit, documented override.
+package="${AFNI_PACKAGE:-linux_ubuntu_24_64}"
 phase0_env="${PHASE0_ENV:-/ZPOOL/data/tools/anaconda/tug87422/envs/sharedreward-phase0}"
 bindir="${AFNI_BIN_DIR:-${phase0_env}/afni-bin}"
 url="https://afni.nimh.nih.gov/pub/dist/tgz/${package}.tgz"

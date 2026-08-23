@@ -15,7 +15,7 @@ Default Temple roots live in `project_config.sh` and can be overridden explicitl
 
 On Linux2, create the dedicated Phase 0 Python/DataLad environment from
 `environment-phase0-linux2.yml`, then run `install_phase0_afni.sh` to install
-the complete official AFNI `linux_openmp_64` command distribution into that
+the complete official AFNI `linux_ubuntu_24_64` command distribution into that
 environment without editing shell dotfiles. This isolates DataLad, git-annex,
 and AFNI from the base and FSL installations. The installer records the AFNI
 archive URL and checksum. The fMRIPrep version remains independently pinned by
@@ -23,7 +23,7 @@ the Apptainer wrapper.
 
 For an active Phase 0 shell, prepend `afni-bin` and the environment `bin`
 directory to `PATH`, and prepend the environment `lib` directory to
-`LD_LIBRARY_PATH`. The latter supplies AFNI's tracked `libXp.so.6`
-compatibility dependency on Linux2.
+`LD_LIBRARY_PATH`. The latter makes the dedicated environment's compatibility
+libraries available to AFNI without changing the system installation.
 
 Historical scripts/templates remain provenance only. The model-specific full-trial candidate is documented in `templates/README.md`; no pooled L3 is active.
