@@ -11,6 +11,7 @@ Active Phase 0 utilities:
 - `summarize_events.py`: per-run timing/count QC.
 - `resample_to_rf1_grid.sh` and `check_grid.py`: cubic BOLD/nearest-neighbor mask resampling and exact verification.
 - `build_resampling_manifest.py`, `run_resampling_batch.py`, and `audit_resampling.py`: deterministic run-level planning, bounded/restartable RF1-grid resampling, and independent cohort completeness QC.
+- `build_characterization_manifest.py`, `run_smoothness_batch.py`, and `audit_smoothness.py`: one frozen cross-dataset input contract, bounded/restartable AFNI baseline measurement, and a consolidated run-level audit table.
 - `measure_smoothness.sh`, `smooth_to_target.sh`, and `compute_tsnr.py`: thin wrappers around the explicitly configured authoritative RF1 implementations, preventing metric drift.
 - `harmonization_report.py`: compact Phase 0 summary; it does not select a target.
 - `run_logged.sh`: local raw log plus a compact Git-trackable record for major Linux2 runs.
@@ -56,3 +57,15 @@ python3 code/build_resampling_manifest.py \
 ```
 
 The complete ds003745 cohort should produce 100 ready run units and zero missing units. Preview, run, and audit through `code/run_logged.sh`; use a unique per-unit log directory for each launch. Existing outputs are checked against the reference and skipped, so an interrupted batch is safely restartable. `--overwrite` is intentionally explicit and should be used only after reviewing an invalid existing derivative.
+
+## Baseline smoothness characterization
+
+After the independent 100-run resampling audit passes, build the cross-dataset manifest. It contains one RF1 pre-resampling row per canonical Shared Reward BOLD, plus paired ds003745 pre-resampling and post-resampling/pre-blur rows:
+
+```bash
+python3 code/build_characterization_manifest.py \
+  --output logs/runlists/phase0-characterization-ready.tsv \
+  --missing-output logs/runlists/phase0-characterization-missing.tsv
+```
+
+The current cohort should produce 865 units: 665 RF1 pre-resampling, 100 ds003745 pre-resampling, and 100 ds003745 post-resampling/pre-blur. `run_smoothness_batch.py` delegates every unit to the authoritative RF1 `measure_smoothness.sh`, uses isolated AFNI work directories, writes one atomic result per unit, and verifies existing results before restart skips. `audit_smoothness.py` creates the Git-trackable consolidated table used for candidate-target evaluation. It records classic Gaussian and ACF estimates; this stage does not select a target.
