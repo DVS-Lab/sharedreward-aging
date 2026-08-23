@@ -4,6 +4,8 @@ Active Phase 0 utilities:
 
 - `get_ds003745.sh`: clone/pin OpenNeuro ds003745 2.1.1 and selectively retrieve pilot files.
 - `run_fmriprep_ds003745.sh`: fMRIPrep 25.2.5 single-subject wrapper, `MNI152NLin6Asym` only.
+- `build_ds003745_runlist.py`: build a deterministic cohort runlist from the pinned participants table, with explicit exclusions.
+- `run_fmriprep_ds003745_batch.sh`: bounded-concurrency, resumable batch wrapper that skips complete outputs and stops on incomplete existing outputs.
 - `convert_harmonized_events.py`: source-preserving common full-trial event derivative for ds003745 or RF1.
 - `summarize_events.py`: per-run timing/count QC.
 - `resample_to_rf1_grid.sh` and `check_grid.py`: cubic BOLD/nearest-neighbor mask resampling and exact verification.
