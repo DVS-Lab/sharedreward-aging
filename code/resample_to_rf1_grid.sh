@@ -50,10 +50,11 @@ command -v 3dresample >/dev/null || {
 }
 
 mkdir -p "$(dirname "$output")"
-tmp="$(mktemp "$(dirname "$output")/.resample.XXXXXX.nii.gz")"
-tmp_json="${tmp%.nii.gz}_grid.json"
+work="$(mktemp -d "$(dirname "$output")/.resample.XXXXXX")"
+tmp="$work/output.nii.gz"
+tmp_json="$work/output_grid.json"
 output_json="${output%.nii.gz}_grid.json"
-trap 'rm -f -- "$tmp" "$tmp_json"' EXIT
+trap 'rm -rf -- "$work"' EXIT
 
 3dresample \
     -master "$REFERENCE_GRID" \

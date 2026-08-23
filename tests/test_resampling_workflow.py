@@ -1,5 +1,7 @@
 import csv
+import os
 import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -184,6 +186,66 @@ class ResamplingWorkflow(unittest.TestCase):
             )
             self.assertEqual(result.returncode, 1)
             self.assertIn("bold_affine", audit.read_text())
+
+    def test_worker_gives_afni_a_nonexistent_temporary_output(self):
+        try:
+            import nibabel as nib
+        except ImportError:
+            self.skipTest("nibabel unavailable")
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            fake_bin = directory / "bin"
+            fake_bin.mkdir()
+            fake_resample = fake_bin / "3dresample"
+            fake_resample.write_text(
+                "#!/usr/bin/env bash\n"
+                "set -euo pipefail\n"
+                "input=\"\"; output=\"\"\n"
+                "while (( $# )); do\n"
+                "  case \"$1\" in\n"
+                "    -input) input=\"$2\"; shift 2 ;;\n"
+                "    -prefix) output=\"$2\"; shift 2 ;;\n"
+                "    *) shift 2 ;;\n"
+                "  esac\n"
+                "done\n"
+                "[[ ! -e \"$output\" ]] || { echo 'prefix exists' >&2; exit 42; }\n"
+                "cp \"$input\" \"$output\"\n"
+            )
+            fake_resample.chmod(0o755)
+            affine = np.diag([2.7, 2.7, 2.97, 1.0])
+            reference = directory / "reference.nii.gz"
+            input_mask = directory / "input_mask.nii.gz"
+            output_mask = directory / "outputs/output_mask.nii.gz"
+            image = nib.Nifti1Image(
+                np.ones((3, 4, 5), dtype=np.uint8), affine
+            )
+            nib.save(image, reference)
+            nib.save(image, input_mask)
+            environment = os.environ.copy()
+            environment["PATH"] = f"{fake_bin}:{environment['PATH']}"
+            environment["REFERENCE_GRID"] = str(reference)
+            environment["IMAGING_PYTHON"] = sys.executable
+            subprocess.run(
+                [
+                    "bash",
+                    str(ROOT / "code/resample_to_rf1_grid.sh"),
+                    "--input",
+                    str(input_mask),
+                    "--kind",
+                    "mask",
+                    "--output",
+                    str(output_mask),
+                ],
+                env=environment,
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+            self.assertTrue(output_mask.is_file())
+            self.assertTrue(
+                output_mask.with_name("output_mask_grid.json").is_file()
+            )
+            self.assertFalse(list(output_mask.parent.glob(".resample.*")))
 
 
 if __name__ == "__main__":
