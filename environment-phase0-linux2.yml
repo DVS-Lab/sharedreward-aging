@@ -5,6 +5,5 @@ dependencies:
   - python=3.11
   - numpy
   - nibabel
-  - xorg-libxp=1.0.4
   - datalad=1.6.0
   - git-annex

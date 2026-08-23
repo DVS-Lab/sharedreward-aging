@@ -22,8 +22,9 @@ archive URL and checksum. The fMRIPrep version remains independently pinned by
 the Apptainer wrapper.
 
 For an active Phase 0 shell, prepend `afni-bin` and the environment `bin`
-directory to `PATH`, and prepend the environment `lib` directory to
-`LD_LIBRARY_PATH`. The latter makes the dedicated environment's compatibility
-libraries available to AFNI without changing the system installation.
+directory to `PATH`. Do not prepend the Conda environment's `lib` directory to
+`LD_LIBRARY_PATH`: that can override the matching `libmri.so` shipped beside
+the official AFNI binaries. The Ubuntu 24 build finds its bundled libraries via
+its own runtime path.
 
 Historical scripts/templates remain provenance only. The model-specific full-trial candidate is documented in `templates/README.md`; no pooled L3 is active.

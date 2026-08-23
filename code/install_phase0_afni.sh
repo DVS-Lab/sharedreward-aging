@@ -24,6 +24,13 @@ done
     exit 1
 }
 
+if [[ -e "${phase0_env}/lib/libmri.so" ]]; then
+    echo "ERROR: stale Conda AFNI library found: ${phase0_env}/lib/libmri.so" >&2
+    echo "Prune/remove the Conda AFNI package before installing the official binaries." >&2
+    echo "Do not add ${phase0_env}/lib to LD_LIBRARY_PATH for AFNI." >&2
+    exit 1
+fi
+
 if [[ -e "$bindir" ]]; then
     echo "ERROR: AFNI installation target already exists: $bindir" >&2
     echo "Review it rather than overwriting it." >&2
