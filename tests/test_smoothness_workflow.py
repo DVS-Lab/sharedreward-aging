@@ -17,6 +17,7 @@ class SmoothnessWorkflow(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             directory = Path(directory)
             rf1 = directory / "rf1-fmriprep"
+            rf1_confounds_root = directory / "rf1-confounds-tedana"
             rf1_func = rf1 / "sub-100/ses-01/func"
             rf1_func.mkdir(parents=True)
             rf1_stem = "sub-100_ses-01_task-sharedreward_run-1"
@@ -28,7 +29,12 @@ class SmoothnessWorkflow(unittest.TestCase):
                 rf1_stem
                 + "_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz"
             )
-            rf1_confounds = rf1_func / (rf1_stem + "_desc-confounds_timeseries.tsv")
+            rf1_confounds = (
+                rf1_confounds_root
+                / "sub-100"
+                / (rf1_stem + "_desc-TedanaPlusConfounds.tsv")
+            )
+            rf1_confounds.parent.mkdir(parents=True)
             for path in (rf1_bold, rf1_mask, rf1_confounds):
                 path.write_text("x")
 
@@ -66,6 +72,8 @@ class SmoothnessWorkflow(unittest.TestCase):
                     str(ROOT / "code/build_characterization_manifest.py"),
                     "--rf1-fmriprep-root",
                     str(rf1),
+                    "--rf1-confounds-root",
+                    str(rf1_confounds_root),
                     "--ds-resampling-manifest",
                     str(ds_manifest),
                     "--output",
@@ -89,6 +97,8 @@ class SmoothnessWorkflow(unittest.TestCase):
                 },
             )
             self.assertIn("Ready characterization units: 3", result.stdout)
+            rf1_row = next(row for row in rows if row["dataset"] == "rf1")
+            self.assertEqual(rf1_row["confounds"], str(rf1_confounds.resolve()))
 
     def test_batch_result_is_atomic_validated_and_restartable(self):
         with tempfile.TemporaryDirectory() as directory:

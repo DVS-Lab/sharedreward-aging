@@ -42,6 +42,6 @@ Current work is limited to audit, reproducible acquisition, a small modern fMRIP
 
 The ds003745 cohort is resampled with a frozen run-level manifest, cubic interpolation for continuous BOLD, nearest-neighbor interpolation for masks, per-run grid checks, and an independent cohort audit. Generated imaging remains under ignored `derivatives/harmonized`; only compact run records and QC tables belong in Git.
 
-Baseline smoothness is measured from the exact RF1 analysis inputs and from paired ds003745 inputs before and after RF1-grid resampling. Both classic Gaussian FWHM and ACF parameters are retained. MRIQC may be added as complementary acquisition QC, but it does not replace analysis-input smoothness, tSNR, motion, or coverage characterization.
+Baseline smoothness is measured from the exact RF1 analysis inputs and from paired ds003745 inputs before and after RF1-grid resampling. RF1 confounds are referenced from the authoritative `rf1-sra-linux2/derivatives/fsl/confounds_tedana` outputs rather than duplicated here. Both classic Gaussian FWHM and ACF parameters are retained. MRIQC may be added as complementary acquisition QC, but it does not replace analysis-input smoothness, tSNR, motion, or coverage characterization.
 
 See [code/HARMONIZATION_AUDIT.md](code/HARMONIZATION_AUDIT.md) and [code/README.md](code/README.md). Run static/synthetic checks with `make test`.

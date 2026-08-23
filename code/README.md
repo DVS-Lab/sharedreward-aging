@@ -68,4 +68,21 @@ python3 code/build_characterization_manifest.py \
   --missing-output logs/runlists/phase0-characterization-missing.tsv
 ```
 
-The current cohort should produce 865 units: 665 RF1 pre-resampling, 100 ds003745 pre-resampling, and 100 ds003745 post-resampling/pre-blur. `run_smoothness_batch.py` delegates every unit to the authoritative RF1 `measure_smoothness.sh`, uses isolated AFNI work directories, writes one atomic result per unit, and verifies existing results before restart skips. `audit_smoothness.py` creates the Git-trackable consolidated table used for candidate-target evaluation. It records classic Gaussian and ACF estimates; this stage does not select a target.
+The RF1 rows reference the authoritative Tedana-plus-confounds files under `rf1-sra-linux2/derivatives/fsl/confounds_tedana`; this repository does not copy them. The current cohort should produce 865 units: 665 RF1 pre-resampling, 100 ds003745 pre-resampling, and 100 ds003745 post-resampling/pre-blur.
+
+Long batches should be launched through both `run_logged.sh` and `nohup`, with an explicit outer launcher log, so they survive an SSH disconnect:
+
+```bash
+nohup bash code/run_logged.sh \
+  --label phase0-baseline-smoothness-full \
+  --include-full-log -- \
+  python3 code/run_smoothness_batch.py \
+    --manifest logs/runlists/phase0-characterization-ready.tsv \
+    --jobs 8 \
+    --output-dir derivatives/qc/smoothness/run-level \
+    --log-dir logs/smoothness-current \
+    --work-root work/phase0-smoothness \
+  > logs/phase0-baseline-smoothness-full.nohup 2>&1 </dev/null &
+```
+
+`run_smoothness_batch.py` delegates every unit to the authoritative RF1 `measure_smoothness.sh`, uses isolated AFNI work directories, writes one atomic result per unit, and verifies existing results before restart skips. Re-running the same command after interruption validates and skips completed units. `audit_smoothness.py` creates the Git-trackable consolidated table used for candidate-target evaluation. It records classic Gaussian and ACF estimates; this stage does not select a target.

@@ -42,6 +42,21 @@ def parse_args():
         ),
     )
     parser.add_argument(
+        "--rf1-confounds-root",
+        type=Path,
+        default=Path(
+            os.environ.get(
+                "RF1_CONFOUNDS_ROOT",
+                "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fsl/"
+                "confounds_tedana",
+            )
+        ),
+        help=(
+            "Authoritative RF1 TedanaPlusConfounds derivative root. "
+            "Files are expected under sub-<ID>/ and are not duplicated here."
+        ),
+    )
+    parser.add_argument(
         "--ds-resampling-manifest",
         type=Path,
         default=ROOT / "logs/runlists/ds003745-resampling-ready.tsv",
@@ -106,6 +121,11 @@ def rf1_rows(args, ready, missing):
             f"task-sharedreward_run-{identifiers['run']}"
         )
         func = bold.parent
+        confounds = (
+            args.rf1_confounds_root
+            / f"sub-{identifiers['subject']}"
+            / f"{stem}_desc-TedanaPlusConfounds.tsv"
+        )
         add_row(
             ready,
             missing,
@@ -114,7 +134,7 @@ def rf1_rows(args, ready, missing):
                 "input_bold": bold,
                 "input_mask": func
                 / f"{stem}_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
-                "confounds": func / f"{stem}_desc-confounds_timeseries.tsv",
+                "confounds": confounds,
             },
         )
 
