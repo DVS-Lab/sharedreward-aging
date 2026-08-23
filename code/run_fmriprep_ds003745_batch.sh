@@ -9,17 +9,19 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 source "$SCRIPT_DIR/project_config.sh"
 
 usage() {
-    echo "Usage: run_fmriprep_ds003745_batch.sh --manifest FILE [--jobs N] [--dry-run]" >&2
+    echo "Usage: run_fmriprep_ds003745_batch.sh --manifest FILE [--jobs N] [--dry-run] [--resume-incomplete]" >&2
 }
 
 manifest=""
 jobs=6
 dry=0
+resume=0
 while (( $# )); do
     case "$1" in
         --manifest) manifest="$2"; shift 2 ;;
         --jobs) jobs="$2"; shift 2 ;;
         --dry-run) dry=1; shift ;;
+        --resume-incomplete) resume=1; shift ;;
         -h|--help) usage; exit 0 ;;
         *) echo "ERROR: unknown argument: $1" >&2; usage; exit 2 ;;
     esac
@@ -62,10 +64,11 @@ for subject in "${subjects[@]}"; do
     fi
     if [[ -s "$report" && "$complete_count" -ge 2 ]]; then
         echo "SKIP COMPLETE: sub-${subject}"
-    elif [[ -e "$output" || -e "$report" ]]; then
+    elif [[ -e "$output" || -e "$report" ]] && (( ! resume )); then
         echo "ERROR: incomplete existing output requires review: sub-${subject}" >&2
         exit 1
     else
+        (( resume )) && [[ -e "$output" || -e "$report" ]] && echo "RESUME INCOMPLETE: sub-${subject}"
         work+=("$subject")
     fi
 done
@@ -82,12 +85,20 @@ printf 'Per-subject resources: nprocs=%s, omp-nthreads=%s, mem=%s MB\n' \
 
 if (( dry )); then
     for subject in "${work[@]}"; do
-        bash "$SCRIPT_DIR/run_fmriprep_ds003745.sh" "$subject" --dry-run
+        args=("$subject" --dry-run)
+        (( resume )) && args+=(--resume)
+        bash "$SCRIPT_DIR/run_fmriprep_ds003745.sh" "${args[@]}"
     done
     exit 0
 fi
 
-printf '%s\n' "${work[@]}" |
-    xargs -P "$jobs" -n 1 bash "$SCRIPT_DIR/run_fmriprep_ds003745.sh"
+if (( resume )); then
+    printf '%s\n' "${work[@]}" |
+        xargs -P "$jobs" -n 1 bash -c \
+            'bash "$1" "$2" --resume' _ "$SCRIPT_DIR/run_fmriprep_ds003745.sh"
+else
+    printf '%s\n' "${work[@]}" |
+        xargs -P "$jobs" -n 1 bash "$SCRIPT_DIR/run_fmriprep_ds003745.sh"
+fi
 
 echo "CHECK PASSED: all scheduled ds003745 fMRIPrep participants completed."
