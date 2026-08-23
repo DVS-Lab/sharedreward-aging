@@ -12,6 +12,7 @@ Active Phase 0 utilities:
 - `resample_to_rf1_grid.sh` and `check_grid.py`: identity-grid `wsinc5` BOLD/nearest-neighbor mask resampling and exact verification.
 - `build_resampling_manifest.py`, `run_resampling_batch.py`, and `audit_resampling.py`: deterministic run-level planning, bounded/restartable RF1-grid resampling, and independent cohort completeness QC.
 - `build_characterization_manifest.py`, `run_smoothness_batch.py`, and `audit_smoothness.py`: one frozen cross-dataset input contract, bounded/restartable AFNI baseline measurement, and a consolidated run-level audit table.
+- `build_target_smoothing_manifest.py`, `run_target_smoothing_batch.py`, and `audit_target_smoothing.py`: the analysis-ready 6-mm contract, bounded/restartable target smoothing, and independent geometry plus achieved-smoothness audit.
 - `measure_smoothness.sh`, `smooth_to_target.sh`, and `compute_tsnr.py`: thin wrappers around the explicitly configured authoritative RF1 implementations, preventing metric drift.
 - `harmonization_report.py`: compact Phase 0 summary including the approved target status.
 - `run_logged.sh`: local raw log plus a compact Git-trackable record for major Linux2 runs.
@@ -88,3 +89,35 @@ nohup bash code/run_logged.sh \
 ```
 
 `run_smoothness_batch.py` delegates every unit to the authoritative RF1 `measure_smoothness.sh`, uses isolated AFNI work directories, writes one atomic result per unit, and verifies existing results before restart skips. Re-running the same command after interruption validates and skips completed units. `audit_smoothness.py` creates the Git-trackable consolidated table used for target evaluation. It records classic Gaussian and ACF estimates. Phase 0 approved a 6-mm total classic-FWHM target on 2026-08-23.
+
+## Production target smoothing
+
+Build the production contract from the frozen characterization manifest. Only RF1 `pre_resample` and ds003745 `post_resample_preblur` rows are selected; each derivative is written in its owning repository.
+
+```bash
+python3 code/build_target_smoothing_manifest.py \
+  --output logs/runlists/target-smoothing-6mm-ready.tsv \
+  --missing-output logs/runlists/target-smoothing-6mm-missing.tsv
+```
+
+The current cohort should contain 765 units: 665 RF1 and 100 ds003745. Launch with bounded AFNI concurrency and an SSH-safe outer log:
+
+```bash
+nohup bash code/run_logged.sh \
+  --label phase0-target-smoothing-6mm-full \
+  --include-full-log -- \
+  python3 code/run_target_smoothing_batch.py \
+    --manifest logs/runlists/target-smoothing-6mm-ready.tsv \
+    --jobs 8 \
+    --log-dir logs/target-smoothing-6mm-current \
+    --work-root work/target-smoothing-6mm \
+  --check \
+  python3 code/audit_target_smoothing.py \
+    --manifest logs/runlists/target-smoothing-6mm-ready.tsv \
+    --output logs/records/target-smoothing-6mm-audit.tsv \
+    --missing-output logs/records/target-smoothing-6mm-missing.tsv \
+    --fail-on-incomplete \
+  > logs/phase0-target-smoothing-6mm-full.nohup 2>&1 </dev/null &
+```
+
+The runner validates existing output/QC pairs before skipping them, so the same command is restartable. Partial or invalid pairs stop with an explicit request to review and use `--overwrite`; they are never silently replaced. The audit requires output/mask geometry agreement and achieved classic combined FWHM within AFNI's documented ±10% approximation tolerance, while retaining the complete ACF diagnostics.

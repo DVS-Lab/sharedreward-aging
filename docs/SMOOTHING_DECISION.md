@@ -26,3 +26,9 @@ Every run is below the 6-mm target and can therefore be blurred upward. `wsinc5`
 ## Gate
 
 Production smoothing may proceed. Every target-smoothed output must retain target-encoded naming and achieved classic/ACF QC. L1 may begin only after the smoothing completeness audit passes. Pooled L3 remains out of scope.
+
+## Pilot achieved values and sensitivity check
+
+The two deliberately difficult pilot runs achieved 5.728 mm classic combined FWHM for RF1 and 5.993 mm for ds003745. Their ACF effective FWHM values were 9.153 and 9.084 mm, respectively. Thus both classic and ACF summaries were closely matched across datasets, while the ACF summary occupied a larger numerical scale. The ACF value is retained as a diagnostic and is not interpreted as the classic preprocessing target.
+
+Before pooled inference, the full-cohort results will be cross-checked with an FSL smoothness estimate appropriate to the final modeling residuals. If that check materially changes the scientific judgment, a separate 5-mm classic sensitivity derivative may be generated. It must use target-encoded paths and must not overwrite the approved 6-mm production derivative. No second smoothing pass will be applied to the 6-mm files.
