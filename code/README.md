@@ -10,6 +10,7 @@ Active Phase 0 utilities:
 - `convert_harmonized_events.py`: source-preserving common full-trial event derivative for ds003745 or RF1.
 - `summarize_events.py`: per-run timing/count QC.
 - `resample_to_rf1_grid.sh` and `check_grid.py`: cubic BOLD/nearest-neighbor mask resampling and exact verification.
+- `build_resampling_manifest.py`, `run_resampling_batch.py`, and `audit_resampling.py`: deterministic run-level planning, bounded/restartable RF1-grid resampling, and independent cohort completeness QC.
 - `measure_smoothness.sh`, `smooth_to_target.sh`, and `compute_tsnr.py`: thin wrappers around the explicitly configured authoritative RF1 implementations, preventing metric drift.
 - `harmonization_report.py`: compact Phase 0 summary; it does not select a target.
 - `run_logged.sh`: local raw log plus a compact Git-trackable record for major Linux2 runs.
@@ -43,3 +44,15 @@ the official AFNI binaries. The Ubuntu 24 build finds its bundled libraries via
 its own runtime path.
 
 Historical scripts/templates remain provenance only. The model-specific full-trial candidate is documented in `templates/README.md`; no pooled L3 is active.
+
+## RF1-grid resampling
+
+After the RF1 reference resource exists and the ds003745 fMRIPrep audit is complete, build the frozen run-level contract before launching any resampling:
+
+```bash
+python3 code/build_resampling_manifest.py \
+  --output logs/runlists/ds003745-resampling-ready.tsv \
+  --missing-output logs/runlists/ds003745-resampling-missing.tsv
+```
+
+The complete ds003745 cohort should produce 100 ready run units and zero missing units. Preview, run, and audit through `code/run_logged.sh`; use a unique per-unit log directory for each launch. Existing outputs are checked against the reference and skipped, so an interrupted batch is safely restartable. `--overwrite` is intentionally explicit and should be used only after reviewing an invalid existing derivative.

@@ -40,4 +40,6 @@ A block-level ds003745 model is scientifically legitimate as a sensitivity analy
 
 Current work is limited to audit, reproducible acquisition, a small modern fMRIPrep pilot, event/grid/smoothness/tSNR characterization, and candidate target evaluation. No target FWHM is selected and no full-cohort smoothing, L1/L2, or pooled L3 should run before review.
 
+The ds003745 cohort is resampled with a frozen run-level manifest, cubic interpolation for continuous BOLD, nearest-neighbor interpolation for masks, per-run grid checks, and an independent cohort audit. Generated imaging remains under ignored `derivatives/harmonized`; only compact run records and QC tables belong in Git.
+
 See [code/HARMONIZATION_AUDIT.md](code/HARMONIZATION_AUDIT.md) and [code/README.md](code/README.md). Run static/synthetic checks with `make test`.
