@@ -1,0 +1,135 @@
+Writing raw log: /ZPOOL/data/projects/sharedreward-aging/logs/runs/20260823-164811_phase0-baseline-smoothness-ds003745-post-wsinc5.log
+Writing run record: /ZPOOL/data/projects/sharedreward-aging/logs/records/20260823-164811_phase0-baseline-smoothness-ds003745-post-wsinc5.md
+RUN START: 20260823-164811
+PROJECT_ROOT: /ZPOOL/data/projects/sharedreward-aging
+GIT: main cf4570d
+HOST: CLA19787.tu.temple.edu
+USER: tug87422
+PWD: /ZPOOL/data/projects/sharedreward-aging
+COMMAND: /ZPOOL/data/tools/anaconda/tug87422/envs/sharedreward-phase0/bin/python code/run_smoothness_batch.py --manifest logs/runlists/ds003745-post-wsinc5-smoothness.tsv --jobs 8 --output-dir derivatives/qc/smoothness/run-level --log-dir logs/smoothness-ds003745-post-wsinc5-current --work-root work/phase0-smoothness --overwrite 
+
+Baseline smoothness plan: 100 unit(s), jobs=8, AFNI threads/job=4, overwrite=true
+Run-level results: derivatives/qc/smoothness/run-level
+Per-unit logs: logs/smoothness-ds003745-post-wsinc5-current
+DONE: ds003745_sub-106_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-106_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-104_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-105_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-105_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-107_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-104_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-107_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-111_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-111_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-110_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-110_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-109_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-109_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-108_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-108_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-112_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-112_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-116_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-113_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-113_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-116_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-115_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-115_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-120_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-120_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-121_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-117_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-117_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-121_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-118_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-118_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-122_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-122_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-124_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-124_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-126_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-125_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-125_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-126_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-127_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-127_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-128_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-128_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-130_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-130_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-129_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-129_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-131_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-131_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-132_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-132_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-134_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-134_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-133_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-133_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-135_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-135_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-136_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-136_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-137_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-137_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-138_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-138_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-140_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-140_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-141_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-141_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-142_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-142_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-143_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-143_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-144_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-145_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-144_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-145_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-147_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-147_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-149_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-149_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-151_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-150_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-150_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-151_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-152_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-152_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-153_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-153_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-155_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-155_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-154_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-156_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-154_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-156_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-157_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-157_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-158_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-158_run-02_stage-post_resample_preblur
+DONE: ds003745_sub-159_run-01_stage-post_resample_preblur
+DONE: ds003745_sub-159_run-02_stage-post_resample_preblur
+Units scheduled: 100
+Units newly completed: 100
+Units verified existing: 0
+Units failed: 0
+CHECK PASSED: every baseline smoothness unit has a validated result.
+
+COMMAND EXIT: 0
+
+CHECK COMMAND: /ZPOOL/data/tools/anaconda/tug87422/envs/sharedreward-phase0/bin/python code/audit_smoothness.py --manifest logs/runlists/phase0-characterization-ready.tsv --result-dir derivatives/qc/smoothness/run-level --output logs/records/phase0-baseline-smoothness.tsv --missing-output logs/records/phase0-baseline-smoothness-missing.tsv --fail-on-incomplete 
+
+Smoothness units checked: 865
+Complete smoothness units: 865
+  ds003745 post_resample_preblur: 100
+  ds003745 pre_resample: 100
+  rf1 pre_resample: 665
+Incomplete smoothness units: 0
+Consolidated table: /ZPOOL/data/projects/sharedreward-aging/logs/records/phase0-baseline-smoothness.tsv
+Missing report: /ZPOOL/data/projects/sharedreward-aging/logs/records/phase0-baseline-smoothness-missing.tsv
+CHECK PASSED: all baseline smoothness results are complete and valid.
+
+CHECK EXIT: 0
+Run record saved: /ZPOOL/data/projects/sharedreward-aging/logs/records/20260823-164811_phase0-baseline-smoothness-ds003745-post-wsinc5.md
