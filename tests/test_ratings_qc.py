@@ -30,6 +30,45 @@ def write_original_ratings(path, values):
 
 
 class RatingsQc(unittest.TestCase):
+    def test_manifest_preserves_source_path_for_annex_symlink(self):
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            annex_object = directory / "annex-object.csv"
+            write_original_ratings(
+                annex_object,
+                [
+                    (1, 0, 3), (1, 1, -3), (2, 0, 2),
+                    (2, 1, -2), (3, 0, 4), (3, 1, -4),
+                ],
+            )
+            source_root = directory / "source"
+            source_dir = source_root / "100"
+            source_dir.mkdir(parents=True)
+            source = source_dir / "sub100_SR-Ratings-2.csv"
+            source.symlink_to(annex_object)
+            target = directory / "targets.tsv"
+            target.write_text("dataset\tsubject\nrf1\t100\n")
+            output = directory / "manifest.tsv"
+            missing = directory / "missing.tsv"
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(ROOT / "code/build_ratings_qc_manifest.py"),
+                    "--target-manifest", str(target),
+                    "--rf1-ratings-root", str(source_root),
+                    "--ratings-map", str(directory / "no-map.tsv"),
+                    "--output", str(output),
+                    "--missing-output", str(missing),
+                ],
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr)
+            with output.open(newline="") as handle:
+                row = next(csv.DictReader(handle, delimiter="\t"))
+            self.assertEqual(row["ratings_file"], str(source.absolute()))
+            self.assertNotIn("annex-object", row["ratings_file"])
+
     def test_original_schema_and_missing_subject_are_audited(self):
         with tempfile.TemporaryDirectory() as directory:
             directory = Path(directory)

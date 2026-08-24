@@ -62,6 +62,11 @@ def nonempty(path):
     return path.is_file() and path.stat().st_size > 0
 
 
+def source_path(path):
+    """Return an absolute source-tree path without dereferencing annex symlinks."""
+    return Path(os.path.abspath(path))
+
+
 def write_tsv(path, fields, rows):
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", newline="") as handle:
@@ -130,7 +135,7 @@ def main():
                         "subject": subject,
                         "problems": "mapped_ratings_file_missing",
                         "candidate_files": ";".join(
-                            str(path.resolve()) for path in discovered
+                            str(source_path(path)) for path in discovered
                         ),
                     }
                 )
@@ -139,11 +144,11 @@ def main():
                 {
                     "dataset": dataset,
                     "subject": subject,
-                    "ratings_file": str(selected.resolve()),
+                    "ratings_file": str(source_path(selected)),
                     "source_resolution": "explicit_map",
                     "candidate_count": len(discovered),
                     "candidate_files": ";".join(
-                        str(path.resolve()) for path in discovered
+                        str(source_path(path)) for path in discovered
                     ),
                 }
             )
@@ -167,12 +172,12 @@ def main():
                 {
                     "dataset": dataset,
                     "subject": subject,
-                    "ratings_file": str(candidates[0].resolve()),
+                    "ratings_file": str(source_path(candidates[0])),
                     "source_resolution": (
                         "unique_empty_source" if not nonempty(candidates[0]) else "unique"
                     ),
                     "candidate_count": 1,
-                    "candidate_files": str(candidates[0].resolve()),
+                    "candidate_files": str(source_path(candidates[0])),
                 }
             )
         else:
@@ -181,7 +186,9 @@ def main():
                     "dataset": dataset,
                     "subject": subject,
                     "problems": f"ambiguous_ratings_files:{len(candidates)}",
-                    "candidate_files": ";".join(str(path.resolve()) for path in candidates),
+                    "candidate_files": ";".join(
+                        str(source_path(path)) for path in candidates
+                    ),
                 }
             )
     write_tsv(args.output, FIELDS, ready)

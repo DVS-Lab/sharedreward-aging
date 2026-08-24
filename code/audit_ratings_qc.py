@@ -7,6 +7,7 @@ import argparse
 import csv
 import hashlib
 import math
+import os
 import statistics
 from collections import defaultdict
 from pathlib import Path
@@ -32,6 +33,11 @@ def sha256(path):
         for block in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(block)
     return digest.hexdigest()
+
+
+def source_path(path):
+    """Return an absolute source-tree path without dereferencing annex symlinks."""
+    return Path(os.path.abspath(path))
 
 
 def integer(value, label):
@@ -207,7 +213,7 @@ def main():
                 {
                     "dataset": unit["dataset"],
                     "subject": unit["subject"],
-                    "ratings_file": str(path.resolve()),
+                    "ratings_file": str(source_path(path)),
                     "source_resolution": source_resolution,
                     "candidate_count": candidate_count,
                     "candidate_files": candidate_files,
@@ -238,7 +244,7 @@ def main():
             row = {
                 "dataset": unit["dataset"],
                 "subject": unit["subject"],
-                "ratings_file": str(path.resolve()),
+                "ratings_file": str(source_path(path)),
                 "source_resolution": source_resolution,
                 "candidate_count": candidate_count,
                 "candidate_files": candidate_files,
