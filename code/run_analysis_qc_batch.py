@@ -23,6 +23,7 @@ REQUIRED_FIELDS = IDENTIFIERS + (
     "input_bold",
     "input_mask",
     "reference_mask",
+    "coverage_mask",
     "confounds",
     "output_json",
 )
@@ -87,6 +88,38 @@ def confound_metrics(path, n_volumes, threshold):
     }
 
 
+def coverage_metrics(run_mask_path, coverage_mask_path):
+    try:
+        import nibabel as nib
+        import numpy as np
+    except ImportError as error:
+        raise ValueError(f"nibabel and numpy are required for coverage: {error}") from error
+    run_image = nib.load(str(run_mask_path), mmap=True)
+    coverage_image = nib.load(str(coverage_mask_path), mmap=True)
+    if run_image.ndim != 3 or coverage_image.ndim != 3:
+        raise ValueError("coverage masks must be 3D")
+    if tuple(run_image.shape) != tuple(coverage_image.shape) or not np.allclose(
+        run_image.affine, coverage_image.affine, rtol=0.0, atol=1e-5
+    ):
+        raise ValueError("run-mask/coverage-mask geometry mismatch")
+    run_data = np.asanyarray(run_image.dataobj) > 0
+    eligible = np.asanyarray(coverage_image.dataobj) > 0
+    denominator = int(eligible.sum())
+    if denominator <= 0:
+        raise ValueError("coverage mask is empty")
+    overlap = int((run_data & eligible).sum())
+    return {
+        "coverage_mask": str(Path(coverage_mask_path).resolve()),
+        "coverage_mask_voxels": denominator,
+        "coverage_overlap_voxels": overlap,
+        "coverage_pct": 100.0 * overlap / denominator,
+        "coverage_definition": (
+            "run mask intersection coverage-eligible TemplateFlow mask / "
+            "coverage-eligible TemplateFlow mask"
+        ),
+    }
+
+
 def validate_result(path, unit):
     data = json.loads(path.read_text())
     contracts = (
@@ -98,6 +131,10 @@ def validate_result(path, unit):
     for result_field, unit_field in contracts:
         if Path(data[result_field]).resolve() != Path(unit[unit_field]).resolve():
             raise ValueError(f"{result_field}_contract")
+    version = int(data.get("qc_definition_version", 1))
+    if version >= 3:
+        if Path(data["coverage_mask"]).resolve() != Path(unit["coverage_mask"]).resolve():
+            raise ValueError("coverage_mask_contract")
     for field in IDENTIFIERS:
         if str(data[field]) != str(unit[field]):
             raise ValueError(f"{field}_contract")
@@ -112,6 +149,10 @@ def validate_result(path, unit):
     for field in positive:
         if float(data[field]) <= 0:
             raise ValueError(f"nonpositive_{field}")
+    if version >= 3:
+        for field in ("coverage_mask_voxels", "coverage_overlap_voxels"):
+            if float(data[field]) <= 0:
+                raise ValueError(f"nonpositive_{field}")
     for field in ("coverage_pct", "valid_coverage_pct"):
         if not 0 < float(data[field]) <= 100:
             raise ValueError(f"invalid_{field}")
@@ -132,15 +173,24 @@ def run_unit(unit, args):
     if output.is_file() and not args.overwrite:
         try:
             data = validate_result(output, unit)
-            if int(data.get("qc_definition_version", 1)) < 2:
+            version = int(data.get("qc_definition_version", 1))
+            if version < 3:
+                if version < 2:
+                    data.update(
+                        confound_metrics(
+                            Path(unit["confounds"]),
+                            int(data["n_volumes"]),
+                            args.high_motion_fd,
+                        )
+                    )
+                data.setdefault("tsnr_reference_coverage_pct", data["coverage_pct"])
+                data.setdefault("tsnr_valid_coverage_pct", data["valid_coverage_pct"])
                 data.update(
-                    confound_metrics(
-                        Path(unit["confounds"]),
-                        int(data["n_volumes"]),
-                        args.high_motion_fd,
+                    coverage_metrics(
+                        Path(unit["input_mask"]), Path(unit["coverage_mask"])
                     )
                 )
-                data["qc_definition_version"] = 2
+                data["qc_definition_version"] = 3
                 temporary = output.with_name(f".{output.name}.upgrade-{os.getpid()}")
                 temporary.write_text(json.dumps(data, indent=2) + "\n")
                 validate_result(temporary, unit)
@@ -193,13 +243,18 @@ def run_unit(unit, args):
             }
         )
         data["confounds"] = str(Path(unit["confounds"]).resolve())
+        data["tsnr_reference_coverage_pct"] = data["coverage_pct"]
+        data["tsnr_valid_coverage_pct"] = data["valid_coverage_pct"]
+        data.update(
+            coverage_metrics(Path(unit["input_mask"]), Path(unit["coverage_mask"]))
+        )
         data.update(
             confound_metrics(
                 Path(unit["confounds"]), int(data["n_volumes"]), args.high_motion_fd
             )
         )
         data["runtime_seconds"] = time.monotonic() - started
-        data["qc_definition_version"] = 2
+        data["qc_definition_version"] = 3
         temp_path.write_text(json.dumps(data, indent=2) + "\n")
         validate_result(temp_path, unit)
         os.replace(temp_path, output)

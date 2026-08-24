@@ -19,6 +19,7 @@ OUTPUT_FIELDS = IDENTIFIERS + (
     "input",
     "mask",
     "reference_mask",
+    "coverage_mask",
     "confounds",
     "confounds_format",
     "confounds_rows",
@@ -29,7 +30,12 @@ OUTPUT_FIELDS = IDENTIFIERS + (
     "reference_mask_voxels",
     "analysis_mask_voxels",
     "valid_voxels",
+    "tsnr_reference_coverage_pct",
+    "tsnr_valid_coverage_pct",
+    "coverage_mask_voxels",
+    "coverage_overlap_voxels",
     "coverage_pct",
+    "coverage_definition",
     "valid_coverage_pct",
     "mean_tsnr",
     "median_tsnr",
@@ -123,6 +129,7 @@ def validate_json(path, unit):
         ("input", "input_bold"),
         ("mask", "input_mask"),
         ("reference_mask", "reference_mask"),
+        ("coverage_mask", "coverage_mask"),
         ("confounds", "confounds"),
     ):
         if Path(data[result_field]).resolve() != Path(unit[manifest_field]).resolve():
@@ -131,7 +138,14 @@ def validate_json(path, unit):
         raise ValueError("confound_volume_contract")
     if data["confounds_format"] != "named_fmriprep_timeseries":
         raise ValueError("confound_format_contract")
-    for field in ("median_tsnr", "mean_tsnr", "n_volumes", "tr_seconds"):
+    for field in (
+        "median_tsnr",
+        "mean_tsnr",
+        "n_volumes",
+        "tr_seconds",
+        "coverage_mask_voxels",
+        "coverage_overlap_voxels",
+    ):
         if float(data[field]) <= 0:
             raise ValueError(f"nonpositive_{field}")
     for field in ("coverage_pct", "valid_coverage_pct"):
@@ -157,6 +171,7 @@ def main():
         "input_bold",
         "input_mask",
         "reference_mask",
+        "coverage_mask",
         "confounds",
         "output_json",
     }

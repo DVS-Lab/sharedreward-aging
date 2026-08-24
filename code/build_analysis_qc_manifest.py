@@ -19,6 +19,7 @@ FIELDS = (
     "input_bold",
     "input_mask",
     "reference_mask",
+    "coverage_mask",
     "confounds",
     "output_json",
 )
@@ -42,11 +43,28 @@ def parse_args():
         type=Path,
         default=Path(
             os.environ.get(
-                "COMMON_ANALYSIS_MASK",
-                ROOT
-                / "resources/tpl-MNI152NLin6Asym_space-RF1Grid_desc-brain_mask.nii.gz",
+                "TSNR_REFERENCE_MASK",
+                os.environ.get(
+                    "COMMON_ANALYSIS_MASK",
+                    ROOT
+                    / "resources/tpl-MNI152NLin6Asym_space-RF1Grid_desc-brain_mask.nii.gz",
+                ),
             )
         ),
+        help="Full fixed TemplateFlow mask used for tSNR summaries.",
+    )
+    parser.add_argument(
+        "--coverage-mask",
+        type=Path,
+        default=Path(
+            os.environ.get(
+                "COVERAGE_ELIGIBLE_MASK",
+                ROOT
+                / "resources/tpl-MNI152NLin6Asym_space-RF1Grid_"
+                "desc-coverageEligible_mask.nii.gz",
+            )
+        ),
+        help="Fixed coverage denominator after the historical inferior exemption.",
     )
     parser.add_argument(
         "--qc-root",
@@ -106,6 +124,7 @@ def main():
         (args.target_manifest, "target manifest"),
         (args.characterization_manifest, "characterization manifest"),
         (args.reference_mask, "common analysis mask"),
+        (args.coverage_mask, "coverage-eligible mask"),
     ):
         if not nonempty(path):
             raise SystemExit(f"ERROR: {label} not found or empty: {path}")
@@ -148,6 +167,7 @@ def main():
             "input_bold": Path(row["output_bold"]),
             "input_mask": Path(row["input_mask"]),
             "reference_mask": args.reference_mask,
+            "coverage_mask": args.coverage_mask,
             "confounds": confounds.get(key, Path("missing-confounds.tsv")),
         }
         problems = [name for name, path in paths.items() if not nonempty(path)]

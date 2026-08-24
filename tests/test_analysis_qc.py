@@ -75,6 +75,11 @@ class AnalysisQc(unittest.TestCase):
             self.assertEqual(json.loads(metadata.read_text())["interpolation"], "nearest-neighbor")
 
     def test_batch_and_audit_preserve_tsnr_motion_coverage_contract(self):
+        try:
+            import nibabel as nib
+            import numpy as np
+        except ImportError:
+            self.skipTest("nibabel unavailable")
         with tempfile.TemporaryDirectory() as directory:
             directory = Path(directory)
             fake_root = directory / "rf1"
@@ -95,9 +100,21 @@ class AnalysisQc(unittest.TestCase):
                 "'mean_tsnr':50.0,'median_tsnr':45.0};Path(a.output_json).write_text(json.dumps(o))\n"
             )
             files = {}
-            for name in ("bold", "mask", "reference"):
+            files["bold"] = directory / "bold.nii.gz"
+            files["bold"].write_text("bold")
+            affine = np.eye(4)
+            run_mask = np.zeros((5, 5, 4), dtype=np.uint8)
+            run_mask.reshape(-1)[:90] = 1
+            reference = np.ones((5, 5, 4), dtype=np.uint8)
+            coverage = np.zeros((5, 5, 4), dtype=np.uint8)
+            coverage.reshape(-1)[:80] = 1
+            for name, data in (
+                ("mask", run_mask),
+                ("reference", reference),
+                ("coverage", coverage),
+            ):
                 files[name] = directory / f"{name}.nii.gz"
-                files[name].write_text(name)
+                nib.save(nib.Nifti1Image(data, affine), files[name])
             confounds = directory / "confounds.tsv"
             confounds.write_text(
                 "framewise_displacement\tstd_dvars\n"
@@ -106,8 +123,8 @@ class AnalysisQc(unittest.TestCase):
             output = directory / "qc.json"
             manifest = directory / "manifest.tsv"
             manifest.write_text(
-                "dataset\tsubject\tsession\trun\tinput_bold\tinput_mask\treference_mask\tconfounds\toutput_json\n"
-                f"rf1\t100\t01\t1\t{files['bold']}\t{files['mask']}\t{files['reference']}\t{confounds}\t{output}\n"
+                "dataset\tsubject\tsession\trun\tinput_bold\tinput_mask\treference_mask\tcoverage_mask\tconfounds\toutput_json\n"
+                f"rf1\t100\t01\t1\t{files['bold']}\t{files['mask']}\t{files['reference']}\t{files['coverage']}\t{confounds}\t{output}\n"
             )
             environment = os.environ.copy()
             environment["RF1_SHAREDREWARD_ROOT"] = str(fake_root)
@@ -130,6 +147,9 @@ class AnalysisQc(unittest.TestCase):
             result = json.loads(output.read_text())
             self.assertEqual(result["confounds_format"], "named_fmriprep_timeseries")
             self.assertEqual(result["confounds_rows"], 3)
+            self.assertEqual(result["coverage_mask_voxels"], 80)
+            self.assertEqual(result["coverage_overlap_voxels"], 80)
+            self.assertEqual(result["coverage_pct"], 100.0)
             self.assertEqual(result["mean_fd_mm"], 0.35)
             self.assertEqual(result["high_motion_volumes"], 1)
             self.assertAlmostEqual(result["high_motion_fraction"], 1 / 3)
@@ -163,6 +183,52 @@ class AnalysisQc(unittest.TestCase):
             self.assertEqual(rows[0]["median_tsnr"], "45.0")
             self.assertEqual(rows[0]["qc_flags"], "")
             self.assertIn("CHECK PASSED", audit.stdout)
+
+    def test_coverage_eligible_mask_subtracts_resampled_exemption(self):
+        try:
+            import nibabel as nib
+            import numpy as np
+        except ImportError:
+            self.skipTest("nibabel unavailable")
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            template = directory / "template.nii.gz"
+            exemption = directory / "exemption.nii.gz"
+            reference = directory / "reference.nii.gz"
+            resampled = directory / "resampled.nii.gz"
+            eligible = directory / "eligible.nii.gz"
+            metadata = directory / "eligible.json"
+            affine = np.eye(4)
+            nib.save(nib.Nifti1Image(np.ones((3, 3, 3)), affine), template)
+            exemption_data = np.zeros((3, 3, 3))
+            exemption_data[0, :, :] = 1
+            nib.save(nib.Nifti1Image(exemption_data, affine), exemption)
+            nib.save(nib.Nifti1Image(np.zeros((3, 3, 3)), affine), reference)
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(ROOT / "code/create_coverage_eligible_mask.py"),
+                    "--template-mask",
+                    str(template),
+                    "--exemption-mask",
+                    str(exemption),
+                    "--reference-grid",
+                    str(reference),
+                    "--resampled-exemption-output",
+                    str(resampled),
+                    "--eligible-mask-output",
+                    str(eligible),
+                    "--json-output",
+                    str(metadata),
+                ],
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            self.assertEqual(int(np.asanyarray(nib.load(resampled).dataobj).sum()), 9)
+            self.assertEqual(int(np.asanyarray(nib.load(eligible).dataobj).sum()), 18)
+            provenance = json.loads(metadata.read_text())
+            self.assertEqual(provenance["coverage_formula"], "run_mask_intersection_eligible_mask / eligible_mask")
 
 
 if __name__ == "__main__":

@@ -16,8 +16,10 @@ Active Phase 0 utilities:
 - `smooth_with_feat_susan.sh`, `build_susan_comparison_manifest.py`, `run_susan_comparison.py`, and `audit_susan_comparison.py`: a non-production control reproducing FEAT's 6-mm SUSAN stage and measuring baseline, AFNI total-target, and SUSAN fixed-kernel outputs with the same AFNI estimator.
 - `plot_smoothness_comparison.py`: the tracked mean ± run-level SEM comparison of baseline, AFNI-total-target, and FEAT-equivalent SUSAN smoothness.
 - `create_common_analysis_mask.py`: nearest-neighbor resampling of the TemplateFlow MNI152NLin6Asym brain mask onto the exact RF1 reference grid.
+- `create_coverage_eligible_mask.py`: provenance-tracked RF1-grid resampling of the historical cerebellum/brainstem exemption and construction of the fixed eligible coverage denominator.
 - `build_analysis_qc_manifest.py`, `run_analysis_qc_batch.py`, `audit_analysis_qc.py`, and `plot_analysis_qc.py`: frozen/restartable post-smoothing tSNR, motion, fixed-mask coverage, review flags, subject summaries, and plots.
 - `build_event_qc_manifest.py`, `run_event_qc_batch.py`, and `audit_event_qc.py`: source-preserving full-trial conversion, condition counts, missed-trial exclusions, and run-to-subject usability aggregation.
+- `build_ratings_qc_manifest.py` and `audit_ratings_qc.py`: explicit ratings-source resolution, six-cell validation, raw means/counts, provenance hashes, and subject-level ratings rules.
 - `measure_smoothness.sh`, `smooth_to_target.sh`, and `compute_tsnr.py`: thin wrappers around the explicitly configured authoritative RF1 implementations, preventing metric drift. tSNR uses the fixed common-mask/run-mask intersection and reports coverage against the fixed mask.
 - `harmonization_report.py`: compact Phase 0 summary including the approved target status.
 - `run_logged.sh`: local raw log plus a compact Git-trackable record for major Linux2 runs.
@@ -194,7 +196,9 @@ nohup bash code/run_logged.sh \
 
 ## Post-smoothing tSNR, motion, and coverage QC
 
-The production tSNR definition is voxelwise temporal mean divided by sample temporal standard deviation (`ddof=1`). It is measured from the approved `desc-smoothToFWHM6_bold` file that will enter FEAT. Summary statistics use the intersection of each run's fMRIPrep brain mask and one fixed TemplateFlow MNI152NLin6Asym brain mask resampled by nearest neighbor to the exact RF1 grid. `coverage_pct` is the intersection voxel count divided by the fixed common-mask voxel count; it is not calculated against each run's own denominator. Motion is read from the named fMRIPrep `desc-confounds_timeseries.tsv`, not from RF1's intentionally headerless Tedana-plus-confounds FEAT matrix. The latter remains the nuisance input to L1 and is not duplicated here.
+The production tSNR definition is voxelwise temporal mean divided by sample temporal standard deviation (`ddof=1`). It is measured from the approved `desc-smoothToFWHM6_bold` file that will enter FEAT. Summary statistics use the intersection of each run's fMRIPrep brain mask and one fixed full TemplateFlow MNI152NLin6Asym brain mask resampled by nearest neighbor to the exact RF1 grid.
+
+Coverage has a distinct denominator because the historical Shared Reward workflow explicitly exempted inferior cerebellum and posterior brainstem. `create_coverage_eligible_mask.py` nearest-neighbor resamples the tracked `masks/cerebellum-brainstem_mask.nii.gz` to the RF1 grid and creates `TemplateFlow brain AND NOT exemption`. `coverage_pct` is run-mask overlap divided by this eligible mask. The exemption is not applied to tSNR or silently promoted to a statistical analysis mask. Motion is read from the named fMRIPrep `desc-confounds_timeseries.tsv`, not from RF1's intentionally headerless Tedana-plus-confounds FEAT matrix. The latter remains the nuisance input to L1 and is not duplicated here.
 
 Create the non-participant common mask once. Review the `find` result before running the command; it must identify the TemplateFlow `MNI152NLin6Asym` brain mask rather than a different template:
 
@@ -209,8 +213,16 @@ test -n "$template_mask" && test -f "$template_mask"
 python3 code/create_common_analysis_mask.py \
   --source-mask "$template_mask" \
   --reference-grid "$REFERENCE_GRID" \
-  --output "$COMMON_ANALYSIS_MASK" \
+  --output "$TSNR_REFERENCE_MASK" \
   --json-output resources/tpl-MNI152NLin6Asym_space-RF1Grid_desc-brain_mask.json
+
+python3 code/create_coverage_eligible_mask.py \
+  --template-mask "$TSNR_REFERENCE_MASK" \
+  --exemption-mask masks/cerebellum-brainstem_mask.nii.gz \
+  --reference-grid "$REFERENCE_GRID" \
+  --resampled-exemption-output "$COVERAGE_EXEMPTION_MASK" \
+  --eligible-mask-output "$COVERAGE_ELIGIBLE_MASK" \
+  --json-output resources/tpl-MNI152NLin6Asym_space-RF1Grid_desc-coverageEligible_mask.json
 ```
 
 Build the 765-run QC contract, then launch it through `nohup`. The batch reads each smoothed 4D input once, delegates tSNR to the authoritative RF1 implementation, requires one confound row per BOLD volume, and calculates FD>0.5-mm volume fractions. It writes small restartable per-run JSON files under ignored `derivatives/qc/`.
@@ -246,7 +258,7 @@ python3 code/plot_analysis_qc.py \
   --output-dir qc
 ```
 
-The tracked `qc/` outputs and compact `logs/records/` tables should be committed after review. Large per-run JSON derivatives stay ignored.
+The runner upgrades version-1/2 QC JSONs to the corrected coverage contract by rereading the small 3D run mask and eligible mask only; it does not reread an already-measured 4D BOLD file. The tracked `qc/` outputs and compact `logs/records/` tables should be committed after review. Large per-run JSON derivatives stay ignored.
 
 ## Full-trial event and missed-trial QC
 
@@ -277,3 +289,23 @@ nohup bash code/run_logged.sh \
 ```
 
 The resulting run-level imaging and event tables remain separate evidence. A later explicit cohort-selection step must combine them before building L1 manifests; neither audit silently deletes data.
+
+## Ratings QC
+
+Ratings exclusions are subject-level and apply to both runs. The modern audit preserves the historical rules while removing the unsafe row-position heuristic: exclude for missing/empty ratings, identical ratings across all conditions, or aggregate loss ratings strictly greater than aggregate win ratings. Equality is allowed. Every selected source must contain all six partner (`1`, `2`, `3`) × trait/outcome (`0` win, `1` loss) cells. Raw cell means/counts and the source SHA-256 are retained.
+
+First retrieve the ds003745 ratings files through DataLad. Then build the discovery manifest. Exactly one source is required per subject; multiple candidates are written to the missing/ambiguous report and must be resolved with an explicit `--ratings-map` rather than by dropping rows or choosing a filename implicitly.
+
+```bash
+python3 code/build_ratings_qc_manifest.py \
+  --output logs/runlists/ratings-qc-ready.tsv \
+  --missing-output logs/runlists/ratings-qc-missing.tsv
+
+python3 code/audit_ratings_qc.py \
+  --manifest logs/runlists/ratings-qc-ready.tsv \
+  --output logs/records/ratings-qc-subject-level.tsv \
+  --missing-output logs/records/ratings-qc-invalid.tsv \
+  --fail-on-incomplete
+```
+
+An explicit resolution map has three tab-separated columns: `dataset`, `subject`, and `ratings_file`. Rebuild the manifest with `--ratings-map logs/runlists/ratings-source-resolutions.tsv` after reviewing ambiguous candidates.
