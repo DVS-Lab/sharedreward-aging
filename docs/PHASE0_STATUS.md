@@ -20,7 +20,8 @@ Status date: 2026-08-24. Production target smoothing is complete at the approved
 | Production target smoothing | Complete and audited: 764 runs pass the common 5.4-6.6 mm tolerance. RF1 sub-10657/ses-01/run-1 reproducibly achieved 5.280 mm under both default and all-volume retries and is the sole bounded exception. Zero unresolved failures. |
 | FEAT-equivalent SUSAN control | Complete: 765/765 runs and 2,295/2,295 method measurements. Nominal 6-mm SUSAN yielded mean total classic FWHM of 8.260 mm (ds003745) and 7.919 mm (RF1), versus 5.775 and 5.852 mm for the approved AFNI total target. Production remains AFNI target smoothing with FEAT smoothing zero. |
 | tSNR | Shared definition and fixed-mask implementation established (temporal mean/sample temporal SD from the final smoothed FEAT input); 765-run execution pending. |
-| Motion/coverage/outliers | Restartable run-level workflow and review-only flags implemented. Coverage uses a fixed TemplateFlow brain mask on the RF1 grid, intersected with each run mask. Real 765-run results pending. |
+| Motion/coverage/outliers | Restartable run-level workflow and review-only flags implemented. Coverage uses a fixed TemplateFlow brain mask on the RF1 grid, intersected with each run mask. Motion uses named fMRIPrep confounds rather than the headerless FEAT nuisance matrix. Default flags match the dataset-specific 1.5×IQR tSNR/mean-FD/coverage scheme; fixed descriptive cutoffs are opt-in. Real 765-run results pending. |
+| Missed trials | Modern model-specific event QC implemented. The registered rule excludes runs only above 25% missed trials, keeps exactly 25%, and excludes a participant only when no usable runs remain. Full-cohort results pending. |
 | Target recommendation | Approved: 6 mm total classic FWHM. Rationale: approximately twice the 2.7–2.97 mm voxel dimensions, accommodates cross-age anatomical heterogeneity, and remains the upper acceptable bound for spatial specificity in small regions. |
 | Template decisions | Authoritative RF1 activation is 14 EVs/34 contrasts/0-mm FEAT smoothing. The inherited `C_neu` temporal-filter flag remains pending explicit review. Historical aging vectors are not authoritative. |
 | Pooled temporal model | The common full-trial 10-EV/28-contrast specification remains a reviewed candidate, not yet an active FEAT implementation. A block model is a ds003745 sensitivity candidate, not silently a pooled primary model. |
@@ -32,6 +33,7 @@ On Linux2, after pulling this repository:
 1. create and provenance the fixed TemplateFlow common analysis mask on the exact RF1 grid;
 2. run the 765-run post-smoothing tSNR, motion, and coverage workflow and review—not automatically exclude—flagged runs;
 3. generate and inspect the tSNR/motion/coverage plots and subject-level table;
-4. explicitly approve and promote the common full-trial model before replacing the historical aging L1/L2 scripts;
-5. retain the target-encoded derivatives and keep FEAT smoothing at zero;
-6. cross-check final-model residual smoothness with FSL before pooled inference and keep pooled L3 out of scope until dataset-specific L1/L2 outputs and QC are complete.
+4. run full-trial event QC, apply the >25%-missed run rule, and inspect zero-count conditions;
+5. explicitly approve and promote the common full-trial model before replacing the historical aging L1/L2 scripts;
+6. retain the target-encoded derivatives and keep FEAT smoothing at zero;
+7. cross-check final-model residual smoothness with FSL before pooled inference and keep pooled L3 out of scope until dataset-specific L1/L2 outputs and QC are complete.

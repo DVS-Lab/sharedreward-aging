@@ -12,6 +12,28 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class AnalysisQc(unittest.TestCase):
+    def test_rf1_motion_qc_uses_named_fmriprep_table_not_feat_matrix(self):
+        sys.path.insert(0, str(ROOT / "code"))
+        try:
+            from build_analysis_qc_manifest import motion_confounds_path
+        finally:
+            sys.path.pop(0)
+        row = {
+            "dataset": "rf1",
+            "input_bold": (
+                "/upstream/fmriprep/sub-100/ses-01/func/"
+                "sub-100_ses-01_task-sharedreward_run-1_part-mag_"
+                "space-MNI152NLin6Asym_desc-preproc_bold.nii.gz"
+            ),
+            "confounds": "/upstream/fsl/confounds_tedana/headerless.tsv",
+        }
+        self.assertEqual(
+            str(motion_confounds_path(row)),
+            "/upstream/fmriprep/sub-100/ses-01/func/"
+            "sub-100_ses-01_task-sharedreward_run-1_part-mag_"
+            "desc-confounds_timeseries.tsv",
+        )
+
     def test_common_mask_uses_reference_grid_and_nearest_neighbor(self):
         try:
             import nibabel as nib
@@ -106,6 +128,8 @@ class AnalysisQc(unittest.TestCase):
             )
             self.assertEqual(batch.returncode, 0, batch.stdout + batch.stderr)
             result = json.loads(output.read_text())
+            self.assertEqual(result["confounds_format"], "named_fmriprep_timeseries")
+            self.assertEqual(result["confounds_rows"], 3)
             self.assertEqual(result["mean_fd_mm"], 0.35)
             self.assertEqual(result["high_motion_volumes"], 1)
             self.assertAlmostEqual(result["high_motion_fraction"], 1 / 3)
@@ -137,7 +161,7 @@ class AnalysisQc(unittest.TestCase):
             with run_output.open(newline="") as handle:
                 rows = list(csv.DictReader(handle, delimiter="\t"))
             self.assertEqual(rows[0]["median_tsnr"], "45.0")
-            self.assertIn("high_motion_fraction_above_20pct", rows[0]["qc_flags"])
+            self.assertEqual(rows[0]["qc_flags"], "")
             self.assertIn("CHECK PASSED", audit.stdout)
 
 

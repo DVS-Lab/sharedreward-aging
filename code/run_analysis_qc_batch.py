@@ -73,6 +73,7 @@ def confound_metrics(path, n_volumes, threshold):
     )
     return {
         "confounds_rows": len(rows),
+        "confounds_format": "named_fmriprep_timeseries",
         "fd_valid_values": len(fd_values),
         "mean_fd_mm": statistics.mean(fd_values),
         "median_fd_mm": statistics.median(fd_values),
@@ -116,6 +117,8 @@ def validate_result(path, unit):
             raise ValueError(f"invalid_{field}")
     if int(data["confounds_rows"]) != int(data["n_volumes"]):
         raise ValueError("confound_volume_contract")
+    if data.get("confounds_format", "named_fmriprep_timeseries") != "named_fmriprep_timeseries":
+        raise ValueError("confound_format_contract")
     return data
 
 
@@ -128,7 +131,21 @@ def run_unit(unit, args):
     log = args.log_dir / f"{label}.log"
     if output.is_file() and not args.overwrite:
         try:
-            validate_result(output, unit)
+            data = validate_result(output, unit)
+            if int(data.get("qc_definition_version", 1)) < 2:
+                data.update(
+                    confound_metrics(
+                        Path(unit["confounds"]),
+                        int(data["n_volumes"]),
+                        args.high_motion_fd,
+                    )
+                )
+                data["qc_definition_version"] = 2
+                temporary = output.with_name(f".{output.name}.upgrade-{os.getpid()}")
+                temporary.write_text(json.dumps(data, indent=2) + "\n")
+                validate_result(temporary, unit)
+                os.replace(temporary, output)
+                return label, "completed", "upgraded QC provenance without rereading BOLD"
             return label, "existing", ""
         except (KeyError, OSError, TypeError, ValueError, json.JSONDecodeError) as error:
             return label, "failed", f"invalid existing output ({error}); review and use --overwrite"
@@ -182,7 +199,7 @@ def run_unit(unit, args):
             )
         )
         data["runtime_seconds"] = time.monotonic() - started
-        data["qc_definition_version"] = 1
+        data["qc_definition_version"] = 2
         temp_path.write_text(json.dumps(data, indent=2) + "\n")
         validate_result(temp_path, unit)
         os.replace(temp_path, output)

@@ -20,6 +20,9 @@ OUTPUT_FIELDS = IDENTIFIERS + (
     "mask",
     "reference_mask",
     "confounds",
+    "confounds_format",
+    "confounds_rows",
+    "fd_valid_values",
     "n_volumes",
     "tr_seconds",
     "run_mask_voxels",
@@ -50,8 +53,16 @@ def parse_args():
     parser.add_argument("--summary-output", required=True, type=Path)
     parser.add_argument("--subject-output", required=True, type=Path)
     parser.add_argument("--missing-output", required=True, type=Path)
-    parser.add_argument("--coverage-warning-pct", type=float, default=90.0)
-    parser.add_argument("--high-motion-warning-fraction", type=float, default=0.20)
+    parser.add_argument(
+        "--coverage-warning-pct",
+        type=float,
+        help="Optional descriptive flag; not part of the preregistered IQR exclusions.",
+    )
+    parser.add_argument(
+        "--high-motion-warning-fraction",
+        type=float,
+        help="Optional descriptive flag; not part of the preregistered IQR exclusions.",
+    )
     parser.add_argument("--iqr-multiplier", type=float, default=1.5)
     parser.add_argument("--fail-on-incomplete", action="store_true")
     parser.add_argument("--fail-on-qc-flags", action="store_true")
@@ -118,6 +129,8 @@ def validate_json(path, unit):
             raise ValueError(f"{result_field}_contract")
     if int(data["confounds_rows"]) != int(data["n_volumes"]):
         raise ValueError("confound_volume_contract")
+    if data["confounds_format"] != "named_fmriprep_timeseries":
+        raise ValueError("confound_format_contract")
     for field in ("median_tsnr", "mean_tsnr", "n_volumes", "tr_seconds"):
         if float(data[field]) <= 0:
             raise ValueError(f"nonpositive_{field}")
@@ -129,9 +142,12 @@ def validate_json(path, unit):
 
 def main():
     args = parse_args()
-    if not 0 < args.coverage_warning_pct <= 100:
+    if args.coverage_warning_pct is not None and not 0 < args.coverage_warning_pct <= 100:
         raise SystemExit("ERROR: --coverage-warning-pct must be in (0, 100]")
-    if not 0 <= args.high_motion_warning_fraction <= 1:
+    if (
+        args.high_motion_warning_fraction is not None
+        and not 0 <= args.high_motion_warning_fraction <= 1
+    ):
         raise SystemExit("ERROR: --high-motion-warning-fraction must be in [0, 1]")
     if args.iqr_multiplier <= 0:
         raise SystemExit("ERROR: --iqr-multiplier must be positive")
@@ -178,9 +194,15 @@ def main():
     flagged = []
     for row in complete:
         flags = []
-        if float(row["coverage_pct"]) < args.coverage_warning_pct:
+        if (
+            args.coverage_warning_pct is not None
+            and float(row["coverage_pct"]) < args.coverage_warning_pct
+        ):
             flags.append(f"coverage_below_{args.coverage_warning_pct:g}pct")
-        if float(row["high_motion_fraction"]) > args.high_motion_warning_fraction:
+        if (
+            args.high_motion_warning_fraction is not None
+            and float(row["high_motion_fraction"]) > args.high_motion_warning_fraction
+        ):
             flags.append(
                 f"high_motion_fraction_above_{100*args.high_motion_warning_fraction:g}pct"
             )

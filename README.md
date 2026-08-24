@@ -46,4 +46,4 @@ Baseline smoothness is measured from the exact RF1 analysis inputs and from pair
 
 The complete 765-run preprocessing control confirmed that FEAT-equivalent nominal 6-mm SUSAN would yield materially greater total smoothness (mean 8.260 mm in ds003745 and 7.919 mm in RF1) than the approved AFNI total target (5.775 and 5.852 mm). Production therefore retains the AFNI-smoothed files and keeps FEAT smoothing at zero. The reproducible numerical summary and mean ± SEM figure are under `qc/`.
 
-See [code/HARMONIZATION_AUDIT.md](code/HARMONIZATION_AUDIT.md) and [code/README.md](code/README.md). Run static/synthetic checks with `make test`.
+See [code/HARMONIZATION_AUDIT.md](code/HARMONIZATION_AUDIT.md), [docs/EXCLUSION_POLICY.md](docs/EXCLUSION_POLICY.md), and [code/README.md](code/README.md). Run static/synthetic checks with `make test`.

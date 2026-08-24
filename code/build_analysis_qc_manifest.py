@@ -84,6 +84,22 @@ def output_path(root, row):
     return Path(*parts) / "func" / name
 
 
+def motion_confounds_path(row):
+    """Return the named fMRIPrep table used for motion QC.
+
+    RF1's characterization manifest intentionally points at the headerless
+    TedanaPlusConfounds matrix consumed by FEAT.  That matrix is not a safe
+    source for named QC metrics.  The corresponding fMRIPrep table lives next
+    to the RF1 BOLD and retains column names and one row per BOLD volume.
+    ds003745 characterization rows already reference that named table.
+    """
+    if row["dataset"] != "rf1":
+        return Path(row["confounds"])
+    bold = Path(row["input_bold"])
+    prefix = bold.name.split("_space-", 1)[0]
+    return bold.parent / f"{prefix}_desc-confounds_timeseries.tsv"
+
+
 def main():
     args = parse_args()
     for path, label in (
@@ -118,7 +134,7 @@ def main():
         key = tuple(row[field] for field in ("dataset", "subject", "session", "run"))
         if key in confounds:
             raise SystemExit(f"ERROR: duplicate analysis-stage confounds unit: {key}")
-        confounds[key] = Path(row["confounds"])
+        confounds[key] = motion_confounds_path(row)
 
     ready, missing = [], []
     seen = set()

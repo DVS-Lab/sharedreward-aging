@@ -17,6 +17,7 @@ Active Phase 0 utilities:
 - `plot_smoothness_comparison.py`: the tracked mean ± run-level SEM comparison of baseline, AFNI-total-target, and FEAT-equivalent SUSAN smoothness.
 - `create_common_analysis_mask.py`: nearest-neighbor resampling of the TemplateFlow MNI152NLin6Asym brain mask onto the exact RF1 reference grid.
 - `build_analysis_qc_manifest.py`, `run_analysis_qc_batch.py`, `audit_analysis_qc.py`, and `plot_analysis_qc.py`: frozen/restartable post-smoothing tSNR, motion, fixed-mask coverage, review flags, subject summaries, and plots.
+- `build_event_qc_manifest.py`, `run_event_qc_batch.py`, and `audit_event_qc.py`: source-preserving full-trial conversion, condition counts, missed-trial exclusions, and run-to-subject usability aggregation.
 - `measure_smoothness.sh`, `smooth_to_target.sh`, and `compute_tsnr.py`: thin wrappers around the explicitly configured authoritative RF1 implementations, preventing metric drift. tSNR uses the fixed common-mask/run-mask intersection and reports coverage against the fixed mask.
 - `harmonization_report.py`: compact Phase 0 summary including the approved target status.
 - `run_logged.sh`: local raw log plus a compact Git-trackable record for major Linux2 runs.
@@ -193,7 +194,7 @@ nohup bash code/run_logged.sh \
 
 ## Post-smoothing tSNR, motion, and coverage QC
 
-The production tSNR definition is voxelwise temporal mean divided by sample temporal standard deviation (`ddof=1`). It is measured from the approved `desc-smoothToFWHM6_bold` file that will enter FEAT. Summary statistics use the intersection of each run's fMRIPrep brain mask and one fixed TemplateFlow MNI152NLin6Asym brain mask resampled by nearest neighbor to the exact RF1 grid. `coverage_pct` is the intersection voxel count divided by the fixed common-mask voxel count; it is not calculated against each run's own denominator.
+The production tSNR definition is voxelwise temporal mean divided by sample temporal standard deviation (`ddof=1`). It is measured from the approved `desc-smoothToFWHM6_bold` file that will enter FEAT. Summary statistics use the intersection of each run's fMRIPrep brain mask and one fixed TemplateFlow MNI152NLin6Asym brain mask resampled by nearest neighbor to the exact RF1 grid. `coverage_pct` is the intersection voxel count divided by the fixed common-mask voxel count; it is not calculated against each run's own denominator. Motion is read from the named fMRIPrep `desc-confounds_timeseries.tsv`, not from RF1's intentionally headerless Tedana-plus-confounds FEAT matrix. The latter remains the nuisance input to L1 and is not duplicated here.
 
 Create the non-participant common mask once. Review the `find` result before running the command; it must identify the TemplateFlow `MNI152NLin6Asym` brain mask rather than a different template:
 
@@ -237,7 +238,7 @@ nohup bash code/run_logged.sh \
   > logs/phase0-analysis-input-qc-full.nohup 2>&1 </dev/null &
 ```
 
-The audit reports but does not automatically exclude review flags: dataset-specific 1.5×IQR low-tSNR/high-FD/low-coverage outliers, coverage below 90%, and more than 20% high-motion volumes. Thresholds and all raw metrics are retained so exclusions can be reviewed scientifically. After a complete audit, create the simple QC plots:
+The default audit reports the preregistration-consistent, dataset-specific 1.5×IQR review flags: low tSNR, high mean FD, and low fixed-mask coverage. FD>0.5-mm counts and fractions remain descriptive columns. Optional fixed coverage/high-motion warning cutoffs may be requested on the command line, but they are not enabled by default and must not be confused with the registered exclusion rules. Thresholds and all raw metrics are retained so exclusions can be reviewed scientifically. Missed-trial exclusions are handled separately from imaging quality: a run is excluded only when more than 25% of its trials are missed. After a complete audit, create the simple QC plots:
 
 ```bash
 python3 code/plot_analysis_qc.py \
@@ -246,3 +247,33 @@ python3 code/plot_analysis_qc.py \
 ```
 
 The tracked `qc/` outputs and compact `logs/records/` tables should be committed after review. Large per-run JSON derivatives stay ignored.
+
+## Full-trial event and missed-trial QC
+
+Event QC is a separate gate from imaging QC. It reads source BIDS events from each owning dataset, writes model-specific full-trial derivatives only under this repository's ignored `derivatives/harmonized/events`, and never edits source BIDS. RF1 full trials span the validated decision onset through matching outcome offset; ds003745 retains the published trial-level onset and duration. A miss is represented as one full-trial nuisance event.
+
+The registered task-compliance rule is strict: exclude a run only when **more than** 25% of its trials are missed. Exactly 25% remains usable. A participant is excluded on this basis only if every available run is excluded. Zero-count substantive conditions are reported explicitly for design review; they are not silently converted into a different scientific exclusion rule.
+
+```bash
+python3 code/build_event_qc_manifest.py \
+  --output logs/runlists/fulltrial-event-qc-ready.tsv \
+  --missing-output logs/runlists/fulltrial-event-qc-missing.tsv
+
+nohup bash code/run_logged.sh \
+  --label phase0-fulltrial-event-qc \
+  --include-full-log -- \
+  python3 code/run_event_qc_batch.py \
+    --manifest logs/runlists/fulltrial-event-qc-ready.tsv \
+    --jobs 16 \
+    --log-dir logs/fulltrial-event-qc-current \
+  --check \
+  python3 code/audit_event_qc.py \
+    --manifest logs/runlists/fulltrial-event-qc-ready.tsv \
+    --output logs/records/fulltrial-event-qc-run-level.tsv \
+    --subject-output logs/records/fulltrial-event-qc-subject-level.tsv \
+    --missing-output logs/records/fulltrial-event-qc-missing.tsv \
+    --fail-on-incomplete \
+  > logs/phase0-fulltrial-event-qc.nohup 2>&1 </dev/null &
+```
+
+The resulting run-level imaging and event tables remain separate evidence. A later explicit cohort-selection step must combine them before building L1 manifests; neither audit silently deletes data.
