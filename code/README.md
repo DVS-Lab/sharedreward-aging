@@ -13,6 +13,7 @@ Active Phase 0 utilities:
 - `build_resampling_manifest.py`, `run_resampling_batch.py`, and `audit_resampling.py`: deterministic run-level planning, bounded/restartable RF1-grid resampling, and independent cohort completeness QC.
 - `build_characterization_manifest.py`, `run_smoothness_batch.py`, and `audit_smoothness.py`: one frozen cross-dataset input contract, bounded/restartable AFNI baseline measurement, and a consolidated run-level audit table.
 - `build_target_smoothing_manifest.py`, `run_target_smoothing_batch.py`, and `audit_target_smoothing.py`: the analysis-ready 6-mm contract, bounded/restartable target smoothing, and independent geometry plus achieved-smoothness audit.
+- `smooth_with_feat_susan.sh`, `build_susan_comparison_manifest.py`, `run_susan_comparison.py`, and `audit_susan_comparison.py`: a non-production control reproducing FEAT's 6-mm SUSAN stage and measuring baseline, AFNI total-target, and SUSAN fixed-kernel outputs with the same AFNI estimator.
 - `measure_smoothness.sh`, `smooth_to_target.sh`, and `compute_tsnr.py`: thin wrappers around the explicitly configured authoritative RF1 implementations, preventing metric drift.
 - `harmonization_report.py`: compact Phase 0 summary including the approved target status.
 - `run_logged.sh`: local raw log plus a compact Git-trackable record for major Linux2 runs.
@@ -121,3 +122,38 @@ nohup bash code/run_logged.sh \
 ```
 
 The runner validates existing output/QC pairs before skipping them, so the same command is restartable. Partial or invalid pairs stop with an explicit request to review and use `--overwrite`; they are never silently replaced. The audit requires output/mask geometry agreement and achieved classic combined FWHM within AFNI's documented ±10% approximation tolerance, while retaining the complete ACF diagnostics.
+
+## AFNI total-target versus FEAT SUSAN control
+
+FEAT's smoothing field is expressed as FWHM, but its generated `susan` command receives spatial sigma in millimeters: `FWHM / sqrt(8 ln 2)`, so 6 mm becomes 2.54777 mm. FEAT also uses a brightness threshold equal to 75% of the masked median, a temporal mean image as the one USAN image, 3D processing, median fallback, and a final brain-mask application. `smooth_with_feat_susan.sh` reproduces that stage directly on the already motion-corrected analysis BOLD; it deliberately does not repeat MCFLIRT, BET, intensity normalization, or temporal filtering.
+
+This is not an equivalence test between two spellings of the same operation. AFNI `3dBlurToFWHM -FWHM 6` targets approximately 6 mm **total measured** classic smoothness. FEAT applies a nominal 6-mm SUSAN kernel to an already smooth image. For an ideal Gaussian kernel, the latter total is approximately `sqrt(baseline^2 + 6^2)`. The pilot measures the nonlinear SUSAN result empirically with the same `3dFWHMx` command used for the AFNI output.
+
+The comparison manifest defaults to the highest-baseline analysis-ready run from each dataset. `--scope all` generalizes the same contract to the full cohort, but should not be launched until the two-run result has been reviewed. Comparison derivatives are target/method encoded and separate from production inputs.
+
+Build and launch the two-run pilot after the 6-mm target manifest exists. The selected runs are currently RF1 sub-11720/ses-01/run-1 and ds003745 sub-118/run-02.
+
+```bash
+python3 code/build_susan_comparison_manifest.py \
+  --target-manifest logs/runlists/target-smoothing-6mm-ready.tsv \
+  --scope pilot \
+  --kernel-fwhm 6 \
+  --output logs/runlists/susan-vs-afni-6mm-pilot.tsv \
+  --missing-output logs/runlists/susan-vs-afni-6mm-pilot-missing.tsv
+
+nohup bash code/run_logged.sh \
+  --label phase0-susan-vs-afni-6mm-pilot \
+  --include-full-log -- \
+  python3 code/run_susan_comparison.py \
+    --manifest logs/runlists/susan-vs-afni-6mm-pilot.tsv \
+    --jobs 2 \
+    --log-dir logs/susan-vs-afni-6mm-pilot \
+    --work-root work/susan-vs-afni-6mm-pilot \
+  --check \
+  python3 code/audit_susan_comparison.py \
+    --manifest logs/runlists/susan-vs-afni-6mm-pilot.tsv \
+    --output logs/records/susan-vs-afni-6mm-pilot.tsv \
+    --missing-output logs/records/susan-vs-afni-6mm-pilot-missing.tsv \
+    --fail-on-incomplete \
+  > logs/phase0-susan-vs-afni-6mm-pilot.nohup 2>&1 </dev/null &
+```
