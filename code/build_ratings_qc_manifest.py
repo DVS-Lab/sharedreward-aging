@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Discover one explicit Shared Reward ratings source per cohort subject."""
+"""Resolve a provenance-tracked Shared Reward ratings source per subject."""
 
 from __future__ import annotations
 
@@ -10,7 +10,14 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-FIELDS = ("dataset", "subject", "ratings_file")
+FIELDS = (
+    "dataset",
+    "subject",
+    "ratings_file",
+    "source_resolution",
+    "candidate_count",
+    "candidate_files",
+)
 
 
 def parse_args():
@@ -36,13 +43,14 @@ def parse_args():
         default=Path(
             os.environ.get(
                 "RF1_RATINGS_ROOT",
-                ROOT / "stimuli/Scan-Card_Guessing_Game/logs-cleaned",
+                "/ZPOOL/data/projects/rf1-sra/stimuli/Scan-Card_Guessing_Game/logs",
             )
         ),
     )
     parser.add_argument(
         "--ratings-map",
         type=Path,
+        default=ROOT / "docs/ratings_source_resolutions.tsv",
         help="Optional explicit dataset/subject/ratings_file map resolving ambiguity.",
     )
     parser.add_argument("--output", required=True, type=Path)
@@ -65,11 +73,11 @@ def write_tsv(path, fields, rows):
 
 
 def load_map(path):
-    if path is None:
+    if path is None or not path.is_file():
         return {}
     with path.open(newline="") as handle:
         rows = list(csv.DictReader(handle, delimiter="\t"))
-    if not rows or not set(FIELDS).issubset(rows[0]):
+    if not rows or not {"dataset", "subject", "ratings_file"}.issubset(rows[0]):
         raise ValueError("ratings map must contain dataset, subject, ratings_file")
     mapping = {}
     for row in rows:
@@ -89,7 +97,7 @@ def discover(root, subject):
     )
     candidates = set()
     for pattern in patterns:
-        candidates.update(path for path in root.glob(pattern) if nonempty(path))
+        candidates.update(path for path in root.glob(pattern) if path.is_file())
     return sorted(candidates)
 
 
@@ -109,29 +117,70 @@ def main():
     ready, missing = [], []
     for dataset, subject in subjects:
         key = (dataset, subject)
+        root = args.ds_ratings_root if dataset == "ds003745" else args.rf1_ratings_root
+        discovered = discover(root, subject)
         if key in mapping:
-            candidates = [mapping[key]] if nonempty(mapping[key]) else []
-            problem = "mapped_ratings_file_missing_or_empty" if not candidates else ""
-        else:
-            root = args.ds_ratings_root if dataset == "ds003745" else args.rf1_ratings_root
-            candidates = discover(root, subject)
-            problem = "missing_or_unretrieved_ratings_file"
-        if len(candidates) == 1:
+            selected = mapping[key]
+            if not selected.is_absolute():
+                selected = root / selected
+            if not selected.is_file():
+                missing.append(
+                    {
+                        "dataset": dataset,
+                        "subject": subject,
+                        "problems": "mapped_ratings_file_missing",
+                        "candidate_files": ";".join(
+                            str(path.resolve()) for path in discovered
+                        ),
+                    }
+                )
+                continue
+            ready.append(
+                {
+                    "dataset": dataset,
+                    "subject": subject,
+                    "ratings_file": str(selected.resolve()),
+                    "source_resolution": "explicit_map",
+                    "candidate_count": len(discovered),
+                    "candidate_files": ";".join(
+                        str(path.resolve()) for path in discovered
+                    ),
+                }
+            )
+            continue
+        candidates = discovered
+        if len(candidates) == 0:
+            # Missing ratings are a registered subject-level exclusion, not an
+            # unresolved pipeline error. The audit records this blank source.
+            ready.append(
+                {
+                    "dataset": dataset,
+                    "subject": subject,
+                    "ratings_file": "",
+                    "source_resolution": "missing",
+                    "candidate_count": 0,
+                    "candidate_files": "",
+                }
+            )
+        elif len(candidates) == 1:
             ready.append(
                 {
                     "dataset": dataset,
                     "subject": subject,
                     "ratings_file": str(candidates[0].resolve()),
+                    "source_resolution": (
+                        "unique_empty_source" if not nonempty(candidates[0]) else "unique"
+                    ),
+                    "candidate_count": 1,
+                    "candidate_files": str(candidates[0].resolve()),
                 }
             )
         else:
-            if len(candidates) > 1:
-                problem = f"ambiguous_ratings_files:{len(candidates)}"
             missing.append(
                 {
                     "dataset": dataset,
                     "subject": subject,
-                    "problems": problem,
+                    "problems": f"ambiguous_ratings_files:{len(candidates)}",
                     "candidate_files": ";".join(str(path.resolve()) for path in candidates),
                 }
             )
@@ -141,7 +190,11 @@ def main():
         ("dataset", "subject", "problems", "candidate_files"),
         missing,
     )
-    print(f"Subjects with one explicit ratings source: {len(ready)}")
+    with_sources = sum(bool(row["ratings_file"]) for row in ready)
+    absent = sum(row["source_resolution"] == "missing" for row in ready)
+    print(f"Cohort subjects represented in ratings manifest: {len(ready)}")
+    print(f"Subjects with a resolved ratings source: {with_sources}")
+    print(f"Subjects with no ratings source (registered exclusion): {absent}")
     print(f"Subjects requiring ratings-source resolution: {len(missing)}")
     print(f"Ready manifest: {args.output.resolve()}")
     print(f"Missing/ambiguous report: {args.missing_output.resolve()}")

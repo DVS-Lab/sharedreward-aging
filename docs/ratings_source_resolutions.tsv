@@ -1,0 +1,2 @@
+dataset	subject	ratings_file	resolution_reason
+rf1	10369	10369/sub10369_SR-Ratings-2.csv	Post-scan/session-2 source; matches the historical workflow's effective selection while avoiding positional row deletion.
