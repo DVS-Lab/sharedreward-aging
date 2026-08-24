@@ -1,0 +1,241 @@
+Writing raw log: /ZPOOL/data/projects/sharedreward-aging/logs/runs/20260823-192201_phase0-target-smoothing-6mm-full.log
+Writing run record: /ZPOOL/data/projects/sharedreward-aging/logs/records/20260823-192201_phase0-target-smoothing-6mm-full.md
+RUN START: 20260823-192201
+PROJECT_ROOT: /ZPOOL/data/projects/sharedreward-aging
+GIT: main e0264d3
+HOST: CLA19787.tu.temple.edu
+USER: tug87422
+PWD: /ZPOOL/data/projects/sharedreward-aging
+COMMAND: /ZPOOL/data/tools/anaconda/tug87422/envs/sharedreward-phase0/bin/python code/run_target_smoothing_batch.py --manifest logs/runlists/target-smoothing-6mm-ready.tsv --jobs 8 --log-dir logs/target-smoothing-6mm-current --work-root work/target-smoothing-6mm 
+
+Target-smoothing plan: 765 unit(s), jobs=8, AFNI threads/job=4, tolerance=±10%, overwrite=false
+Per-unit logs: logs/target-smoothing-6mm-current
+DONE: ds003745_sub-106_run-02
+DONE: ds003745_sub-106_run-01
+DONE: ds003745_sub-105_run-01
+DONE: ds003745_sub-104_run-02
+DONE: ds003745_sub-105_run-02
+DONE: ds003745_sub-107_run-02
+DONE: ds003745_sub-107_run-01
+DONE: ds003745_sub-104_run-01
+DONE: ds003745_sub-109_run-02
+DONE: ds003745_sub-111_run-01
+DONE: ds003745_sub-108_run-02
+DONE: ds003745_sub-109_run-01
+DONE: ds003745_sub-108_run-01
+DONE: ds003745_sub-110_run-02
+DONE: ds003745_sub-111_run-02
+DONE: ds003745_sub-110_run-01
+DONE: ds003745_sub-112_run-01
+DONE: ds003745_sub-112_run-02
+DONE: ds003745_sub-113_run-01
+DONE: ds003745_sub-113_run-02
+VERIFIED EXISTING: ds003745_sub-118_run-02
+DONE: ds003745_sub-115_run-01
+DONE: ds003745_sub-116_run-02
+DONE: ds003745_sub-116_run-01
+DONE: ds003745_sub-115_run-02
+DONE: ds003745_sub-117_run-01
+DONE: ds003745_sub-120_run-01
+DONE: ds003745_sub-120_run-02
+DONE: ds003745_sub-117_run-02
+DONE: ds003745_sub-118_run-01
+DONE: ds003745_sub-121_run-02
+DONE: ds003745_sub-122_run-01
+DONE: ds003745_sub-121_run-01
+DONE: ds003745_sub-124_run-02
+DONE: ds003745_sub-122_run-02
+DONE: ds003745_sub-124_run-01
+DONE: ds003745_sub-127_run-01
+DONE: ds003745_sub-125_run-02
+DONE: ds003745_sub-125_run-01
+DONE: ds003745_sub-126_run-02
+DONE: ds003745_sub-126_run-01
+DONE: ds003745_sub-127_run-02
+DONE: ds003745_sub-128_run-01
+DONE: ds003745_sub-128_run-02
+DONE: ds003745_sub-129_run-01
+DONE: ds003745_sub-129_run-02
+DONE: ds003745_sub-130_run-01
+DONE: ds003745_sub-130_run-02
+DONE: ds003745_sub-131_run-01
+DONE: ds003745_sub-132_run-02
+DONE: ds003745_sub-131_run-02
+DONE: ds003745_sub-133_run-01
+DONE: ds003745_sub-132_run-01
+DONE: ds003745_sub-133_run-02
+DONE: ds003745_sub-134_run-02
+DONE: ds003745_sub-134_run-01
+DONE: ds003745_sub-135_run-01
+DONE: ds003745_sub-135_run-02
+DONE: ds003745_sub-136_run-01
+DONE: ds003745_sub-136_run-02
+DONE: ds003745_sub-137_run-01
+DONE: ds003745_sub-137_run-02
+DONE: ds003745_sub-138_run-02
+DONE: ds003745_sub-138_run-01
+DONE: ds003745_sub-140_run-01
+DONE: ds003745_sub-140_run-02
+DONE: ds003745_sub-141_run-02
+DONE: ds003745_sub-141_run-01
+DONE: ds003745_sub-142_run-01
+DONE: ds003745_sub-143_run-01
+DONE: ds003745_sub-143_run-02
+DONE: ds003745_sub-142_run-02
+DONE: ds003745_sub-144_run-01
+DONE: ds003745_sub-145_run-02
+DONE: ds003745_sub-145_run-01
+DONE: ds003745_sub-144_run-02
+DONE: ds003745_sub-147_run-02
+DONE: ds003745_sub-147_run-01
+DONE: ds003745_sub-149_run-01
+DONE: ds003745_sub-149_run-02
+DONE: ds003745_sub-150_run-01
+DONE: ds003745_sub-150_run-02
+DONE: ds003745_sub-151_run-01
+DONE: ds003745_sub-151_run-02
+DONE: ds003745_sub-153_run-01
+DONE: ds003745_sub-153_run-02
+DONE: ds003745_sub-152_run-02
+DONE: ds003745_sub-152_run-01
+DONE: ds003745_sub-154_run-01
+DONE: ds003745_sub-154_run-02
+DONE: ds003745_sub-155_run-02
+DONE: ds003745_sub-155_run-01
+DONE: ds003745_sub-157_run-01
+DONE: ds003745_sub-157_run-02
+DONE: ds003745_sub-158_run-01
+DONE: ds003745_sub-156_run-01
+DONE: ds003745_sub-156_run-02
+DONE: ds003745_sub-158_run-02
+DONE: ds003745_sub-159_run-01
+DONE: ds003745_sub-159_run-02
+DONE: rf1_sub-10317_ses-01_run-1
+DONE: rf1_sub-10369_ses-01_run-2
+DONE: rf1_sub-10317_ses-01_run-2
+DONE: rf1_sub-10369_ses-01_run-1
+DONE: rf1_sub-10402_ses-01_run-1
+DONE: rf1_sub-10402_ses-01_run-2
+DONE: rf1_sub-10418_ses-01_run-2
+DONE: rf1_sub-10418_ses-01_run-1
+DONE: rf1_sub-10486_ses-01_run-1
+DONE: rf1_sub-10462_ses-01_run-1
+DONE: rf1_sub-10478_ses-01_run-2
+DONE: rf1_sub-10478_ses-01_run-1
+DONE: rf1_sub-10486_ses-01_run-2
+DONE: rf1_sub-10541_ses-01_run-1
+DONE: rf1_sub-10529_ses-01_run-1
+DONE: rf1_sub-10529_ses-01_run-2
+DONE: rf1_sub-10559_ses-01_run-2
+DONE: rf1_sub-10559_ses-01_run-1
+DONE: rf1_sub-10541_ses-01_run-2
+DONE: rf1_sub-10572_ses-01_run-1
+DONE: rf1_sub-10572_ses-01_run-2
+DONE: rf1_sub-10584_ses-01_run-1
+DONE: rf1_sub-10581_ses-01_run-1
+DONE: rf1_sub-10589_ses-01_run-1
+DONE: rf1_sub-10581_ses-01_run-2
+DONE: rf1_sub-10585_ses-01_run-1
+DONE: rf1_sub-10585_ses-01_run-2
+DONE: rf1_sub-10589_ses-01_run-2
+DONE: rf1_sub-10590_ses-01_run-1
+DONE: rf1_sub-10590_ses-01_run-2
+DONE: rf1_sub-10596_ses-01_run-1
+DONE: rf1_sub-10596_ses-01_run-2
+DONE: rf1_sub-10603_ses-01_run-1
+DONE: rf1_sub-10606_ses-01_run-1
+DONE: rf1_sub-10606_ses-01_run-2
+DONE: rf1_sub-10608_ses-01_run-1
+DONE: rf1_sub-10608_ses-01_run-2
+DONE: rf1_sub-10636_ses-01_run-2
+DONE: rf1_sub-10636_ses-01_run-1
+DONE: rf1_sub-10617_ses-01_run-1
+DONE: rf1_sub-10640_ses-01_run-1
+DONE: rf1_sub-10640_ses-01_run-2
+DONE: rf1_sub-10638_ses-01_run-2
+DONE: rf1_sub-10638_ses-01_run-1
+DONE: rf1_sub-10641_ses-01_run-1
+DONE: rf1_sub-10642_ses-01_run-1
+DONE: rf1_sub-10642_ses-01_run-2
+DONE: rf1_sub-10647_ses-01_run-1
+DONE: rf1_sub-10647_ses-01_run-2
+DONE: rf1_sub-10644_ses-01_run-1
+DONE: rf1_sub-10644_ses-01_run-2
+DONE: rf1_sub-10649_ses-01_run-1
+DONE: rf1_sub-10649_ses-01_run-2
+DONE: rf1_sub-10656_ses-01_run-1
+DONE: rf1_sub-10652_ses-01_run-1
+DONE: rf1_sub-10656_ses-01_run-2
+DONE: rf1_sub-10652_ses-01_run-2
+DONE: rf1_sub-10657_ses-01_run-2
+ERROR: rf1_sub-10657_ses-01_run-1: failed: classic combined 5.28041 outside 5.4-6.6 mm (log: logs/target-smoothing-6mm-current/rf1_sub-10657_ses-01_run-1.log)
+   + detrending of blurmaster complete
+  ++ Output dataset /ZPOOL/data/projects/sharedreward-aging/work/target-smoothing-6mm/blur.Jn3PID/smoothed.nii.gz
+  ++ 3dFWHMx: AFNI version=AFNI_26.2.03 (Aug  4 2026) [64-bit]
+  ++ Authored by: The Bob
+  [7m*+ WARNING:[0m Using the 'Classic' Gaussian FWHM is not recommended :(
+   +  The '-acf' method gives a FWHM estimate which is more robust;
+   +  however, assuming the spatial correlation of FMRI noise has
+   +  a Gaussian shape is not a good model.
+  ++ Number of voxels in mask = 101624
+  ++ detrending start: 19 baseline funcs, 255 time points
+   + detrending done (0.00 CPU s thus far)
+  ++ start Classic FWHM calculations
+   + Classic FWHM done (0.00 CPU s thus far)
+  ++ start ACF calculations out to radius = 15.84 mm
+   + ACF done (0.00 CPU s thus far)
+  Smoothness: classic combined=5.28041 mm; ACF effective=7.85496 mm
+  Requested target: 6 mm
+  Runtime: 133 seconds
+  Output: /ZPOOL/data/projects/rf1-sra-sharedreward/derivatives/harmonized/sub-10657/ses-01/func/sub-10657_ses-01_task-sharedreward_run-1_space-MNI152NLin6Asym_desc-smoothToFWHM6_bold.nii.gz
+  QC: /ZPOOL/data/projects/rf1-sra-sharedreward/derivatives/harmonized/sub-10657/ses-01/func/sub-10657_ses-01_task-sharedreward_run-1_space-MNI152NLin6Asym_desc-smoothToFWHM6_bold_smoothness.tsv
+DONE: rf1_sub-10661_ses-01_run-1
+DONE: rf1_sub-10661_ses-01_run-2
+DONE: rf1_sub-10663_ses-01_run-1
+DONE: rf1_sub-10663_ses-01_run-2
+DONE: rf1_sub-10668_ses-01_run-1
+DONE: rf1_sub-10673_ses-01_run-1
+DONE: rf1_sub-10673_ses-01_run-2
+DONE: rf1_sub-10674_ses-01_run-1
+DONE: rf1_sub-10674_ses-01_run-2
+DONE: rf1_sub-10677_ses-01_run-1
+DONE: rf1_sub-10685_ses-01_run-1
+DONE: rf1_sub-10677_ses-01_run-2
+DONE: rf1_sub-10685_ses-01_run-2
+DONE: rf1_sub-10690_ses-01_run-1
+DONE: rf1_sub-10690_ses-01_run-2
+DONE: rf1_sub-10691_ses-01_run-1
+DONE: rf1_sub-10691_ses-01_run-2
+DONE: rf1_sub-10700_ses-01_run-1
+DONE: rf1_sub-10700_ses-01_run-2
+DONE: rf1_sub-10701_ses-01_run-2
+DONE: rf1_sub-10701_ses-01_run-1
+DONE: rf1_sub-10713_ses-01_run-1
+DONE: rf1_sub-10713_ses-01_run-2
+DONE: rf1_sub-10716_ses-01_run-1
+DONE: rf1_sub-10718_ses-01_run-1
+DONE: rf1_sub-10716_ses-01_run-2
+DONE: rf1_sub-10718_ses-01_run-2
+DONE: rf1_sub-10720_ses-01_run-2
+DONE: rf1_sub-10720_ses-01_run-1
+DONE: rf1_sub-10723_ses-01_run-1
+DONE: rf1_sub-10723_ses-01_run-2
+DONE: rf1_sub-10741_ses-01_run-1
+DONE: rf1_sub-10741_ses-01_run-2
+DONE: rf1_sub-10748_ses-01_run-1
+DONE: rf1_sub-10767_ses-01_run-1
+DONE: rf1_sub-10748_ses-01_run-2
+DONE: rf1_sub-10767_ses-01_run-2
+DONE: rf1_sub-10770_ses-01_run-2
+DONE: rf1_sub-10770_ses-01_run-1
+DONE: rf1_sub-10777_ses-01_run-1
+DONE: rf1_sub-10777_ses-01_run-2
+DONE: rf1_sub-10781_ses-01_run-1
+DONE: rf1_sub-10783_ses-01_run-1
+DONE: rf1_sub-10783_ses-01_run-2
+DONE: rf1_sub-10781_ses-01_run-2
+DONE: rf1_sub-10785_ses-01_run-2
+DONE: rf1_sub-10785_ses-01_run-1
+DONE: rf1_sub-10794_ses-01_run-1
+DONE: rf1_sub-10801_ses-01_run-1
+DONE: rf1_sub-10794_ses-01_run-2
