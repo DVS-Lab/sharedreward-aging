@@ -15,8 +15,9 @@ Status date: 2026-08-23. Production target smoothing is approved at 6 mm total c
 | ds003745 grid resampling | All 100 identity-grid `wsinc5` BOLD and nearest-neighbor mask derivatives passed exact RF1-grid verification. |
 | Baseline smoothness | All 865 classic/ACF characterization units passed: 665 RF1 native, 100 ds003745 native, and 100 ds003745 post-`wsinc5`. |
 | Resampling effect on smoothness | `wsinc5` increased ds003745 classic FWHM by 0.259 mm on average, versus 0.717 mm under superseded cubic interpolation. |
-| Candidate targets | Complete. Every analysis-ready run is below 5 mm classic FWHM; 6 mm is attainable for all runs. |
+| Candidate targets | Complete. Every analysis-ready run began below 5 mm classic FWHM. The 6-mm target passed the cohort tolerance for 764 runs; one stable run-specific convergence limit is handled by a tightly bounded, documented exception. |
 | Pilot achieved smoothing | Passed. RF1 achieved 5.728 mm classic/9.153 mm ACF-effective; ds003745 achieved 5.993 mm classic/9.084 mm ACF-effective. The larger ACF scale is retained for sensitivity review and does not replace the classic target. |
+| Production target smoothing | Complete pending one final consolidated audit: 764 runs pass the common 5.4-6.6 mm tolerance. RF1 sub-10657/ses-01/run-1 reproducibly achieved 5.280 mm under both default and all-volume retries and is the sole bounded exception. |
 | tSNR | Shared definition and implementation established (temporal mean/sample temporal SD); real cross-dataset results pending. |
 | Motion/coverage/outliers | Table/report scaffolding implemented; real values pending. |
 | Target recommendation | Approved: 6 mm total classic FWHM. Rationale: approximately twice the 2.7–2.97 mm voxel dimensions, accommodates cross-age anatomical heterogeneity, and remains the upper acceptable bound for spatial specificity in small regions. |
@@ -27,8 +28,8 @@ Status date: 2026-08-23. Production target smoothing is approved at 6 mm total c
 
 On Linux2, after pulling this repository:
 
-1. build the frozen 765-run production smoothing manifest;
-2. launch restartable full-cohort target smoothing through `nohup` and `run_logged.sh`;
+1. run the final consolidated 765-run target-smoothing audit, which must report 764 conventional passes, one accepted bounded exception, and zero unresolved failures;
+2. complete the full-cohort FEAT-equivalent SUSAN comparison as a preprocessing sensitivity check;
 3. require complete geometry, classic, and ACF QC before any L1 launch;
 4. retain the target-encoded derivatives and keep FEAT smoothing at zero;
 5. cross-check final-model residual smoothness with FSL before pooled inference and, only if warranted, create a separate non-overwriting 5-mm sensitivity derivative;

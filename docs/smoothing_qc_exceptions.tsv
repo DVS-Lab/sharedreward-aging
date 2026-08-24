@@ -1,0 +1,2 @@
+dataset	subject	session	run	problem	expected_target_fwhm_mm	accepted_classic_min_mm	accepted_classic_max_mm	rationale	evidence
+rf1	10657	01	1	classic_outside_tolerance	6	5.27	5.29	Stable run-specific convergence limit: default and all-volume overwrite retries reproduced 5.28 mm classic FWHM; no global tolerance was relaxed.	logs/records/20260823-230334_phase0-target-smoothing-6mm-retry-sub-10657-run-1-bmall.md

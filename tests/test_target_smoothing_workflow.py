@@ -172,7 +172,73 @@ class TargetSmoothingWorkflow(unittest.TestCase):
             )
             self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
             self.assertIn("Complete target-smoothed units: 1", result.stdout)
+            self.assertIn("Conventionally passing units: 1", result.stdout)
+            self.assertIn("Accepted QC exceptions: 0", result.stdout)
             self.assertIn("ACF-effective mean=9.0000", result.stdout)
+
+    def test_audit_accepts_only_a_bounded_documented_exception(self):
+        try:
+            import nibabel as nib
+            import numpy as np
+        except ImportError:
+            self.skipTest("nibabel unavailable")
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            affine = np.diag([2.7, 2.7, 2.97, 1.0])
+            source = directory / "source.nii.gz"
+            output = directory / "output.nii.gz"
+            mask = directory / "mask.nii.gz"
+            nib.save(nib.Nifti1Image(np.zeros((3, 4, 5, 6)), affine), source)
+            nib.save(nib.Nifti1Image(np.zeros((3, 4, 5, 6)), affine), output)
+            nib.save(nib.Nifti1Image(np.ones((3, 4, 5)), affine), mask)
+            qc = directory / "qc.tsv"
+            qc.write_text(
+                "input\tmask\tclassic_fwhm_x\tclassic_fwhm_y\tclassic_fwhm_z\tclassic_fwhm_combined\tacf_a\tacf_b\tacf_c\tacf_effective_fwhm\tafni_version\n"
+                f"{output.resolve()}\t{mask.resolve()}\t5.2\t5.3\t5.4\t5.28\t.5\t3\t8\t8\tAFNI_TEST\n"
+            )
+            manifest = directory / "manifest.tsv"
+            manifest.write_text(
+                "dataset\tsubject\tsession\trun\tinput_bold\tinput_mask\toutput_bold\toutput_qc\ttarget_fwhm_mm\n"
+                f"rf1\t10657\t01\t1\t{source}\t{mask}\t{output}\t{qc}\t6\n"
+            )
+            evidence = directory / "evidence.md"
+            evidence.write_text("Independent overwrite retries reproduced the result.\n")
+            exceptions = directory / "exceptions.tsv"
+            exceptions.write_text(
+                "dataset\tsubject\tsession\trun\tproblem\texpected_target_fwhm_mm\taccepted_classic_min_mm\taccepted_classic_max_mm\trationale\tevidence\n"
+                f"rf1\t10657\t01\t1\tclassic_outside_tolerance\t6\t5.27\t5.29\tStable test exception.\t{evidence}\n"
+            )
+            summary = directory / "summary.tsv"
+            missing = directory / "missing.tsv"
+            command = [
+                sys.executable,
+                str(ROOT / "code/audit_target_smoothing.py"),
+                "--manifest",
+                str(manifest),
+                "--output",
+                str(summary),
+                "--missing-output",
+                str(missing),
+                "--exceptions",
+                str(exceptions),
+                "--fail-on-incomplete",
+            ]
+            result = subprocess.run(command, capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            self.assertIn("Conventionally passing units: 0", result.stdout)
+            self.assertIn("Accepted QC exceptions: 1", result.stdout)
+            self.assertIn("ACCEPTED EXCEPTION rf1 sub-10657", result.stdout)
+            with summary.open(newline="") as handle:
+                rows = list(csv.DictReader(handle, delimiter="\t"))
+            self.assertEqual(rows[0]["qc_status"], "accepted_exception")
+
+            qc.write_text(
+                "input\tmask\tclassic_fwhm_x\tclassic_fwhm_y\tclassic_fwhm_z\tclassic_fwhm_combined\tacf_a\tacf_b\tacf_c\tacf_effective_fwhm\tafni_version\n"
+                f"{output.resolve()}\t{mask.resolve()}\t5.1\t5.1\t5.1\t5.10\t.5\t3\t8\t8\tAFNI_TEST\n"
+            )
+            rejected = subprocess.run(command, capture_output=True, text=True)
+            self.assertEqual(rejected.returncode, 1, rejected.stdout + rejected.stderr)
+            self.assertIn("Incomplete target-smoothed units: 1", rejected.stdout)
 
 
 if __name__ == "__main__":
