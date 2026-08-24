@@ -77,7 +77,7 @@ class TargetSmoothingWorkflow(unittest.TestCase):
                 "    --output) output=\"$2\"; shift 2 ;;\n"
                 "    --qc-tsv) qc=\"$2\"; shift 2 ;;\n"
                 "    --target|--work-dir) shift 2 ;;\n"
-                "    --overwrite) shift ;;\n"
+                "    --overwrite|--all-blurmaster) shift ;;\n"
                 "  esac\n"
                 "done\n"
                 "mkdir -p \"$(dirname \"$output\")\" \"$(dirname \"$qc\")\"\n"
@@ -108,6 +108,7 @@ class TargetSmoothingWorkflow(unittest.TestCase):
                 str(directory / "logs"),
                 "--work-root",
                 str(directory / "work"),
+                "--all-blurmaster",
             ]
             environment = os.environ.copy()
             environment["RF1_SHAREDREWARD_ROOT"] = str(fake_root)
@@ -116,6 +117,8 @@ class TargetSmoothingWorkflow(unittest.TestCase):
             )
             self.assertEqual(first.returncode, 0, first.stdout + first.stderr)
             self.assertIn("Units newly completed: 1", first.stdout)
+            logs = "\n".join(path.read_text() for path in (directory / "logs").glob("*.log"))
+            self.assertIn("--all-blurmaster", logs)
             second = subprocess.run(
                 command,
                 env=environment,

@@ -123,6 +123,8 @@ nohup bash code/run_logged.sh \
 
 The runner validates existing output/QC pairs before skipping them, so the same command is restartable. Partial or invalid pairs stop with an explicit request to review and use `--overwrite`; they are never silently replaced. The audit requires output/mask geometry agreement and achieved classic combined FWHM within AFNI's documented ±10% approximation tolerance, while retaining the complete ACF diagnostics.
 
+AFNI normally chooses a subset of blurmaster volumes for speed. If a reviewed run repeatedly passes AFNI's internal stopping rule but the independent all-volume `3dFWHMx` audit falls outside tolerance, a one-row retry may add `--all-blurmaster --overwrite`. This passes AFNI `-bmall`, making convergence use every volume. It is an exception mechanism, not the cohort default; the run record must document its use.
+
 ## AFNI total-target versus FEAT SUSAN control
 
 FEAT's smoothing field is expressed as FWHM, but its generated `susan` command receives spatial sigma in millimeters: `FWHM / sqrt(8 ln 2)`, so 6 mm becomes 2.54777 mm. FEAT also uses a brightness threshold equal to 75% of the masked median, a temporal mean image as the one USAN image, 3D processing, median fallback, and a final brain-mask application. `smooth_with_feat_susan.sh` reproduces that stage directly on the already motion-corrected analysis BOLD; it deliberately does not repeat MCFLIRT, BET, intensity normalization, or temporal filtering.

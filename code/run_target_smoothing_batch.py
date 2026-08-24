@@ -48,6 +48,14 @@ def parse_args():
     )
     parser.add_argument("--tolerance-fraction", type=float, default=0.10)
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument(
+        "--all-blurmaster",
+        action="store_true",
+        help=(
+            "Pass AFNI -bmall so convergence uses every blurmaster volume. "
+            "Reserve for reviewed run-level convergence exceptions."
+        ),
+    )
     parser.add_argument("--overwrite", action="store_true")
     return parser.parse_args()
 
@@ -166,6 +174,8 @@ def run_unit(row, args):
     ]
     if args.overwrite:
         command.append("--overwrite")
+    if args.all_blurmaster:
+        command.append("--all-blurmaster")
     if args.dry_run:
         return label, log_path, "dry-run", command_string(command)
 
@@ -209,6 +219,7 @@ def main():
         f"Target-smoothing plan: {len(rows)} unit(s), jobs={args.jobs}, "
         f"AFNI threads/job={os.environ.get('AFNI_OMP_NUM_THREADS', '4')}, "
         f"tolerance=±{args.tolerance_fraction * 100:g}%, "
+        f"all-blurmaster={str(args.all_blurmaster).lower()}, "
         f"overwrite={str(args.overwrite).lower()}"
     )
     print(f"Per-unit logs: {args.log_dir}")
