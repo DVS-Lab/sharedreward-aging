@@ -20,6 +20,7 @@ Active Phase 0 utilities:
 - `build_analysis_qc_manifest.py`, `run_analysis_qc_batch.py`, `audit_analysis_qc.py`, and `plot_analysis_qc.py`: frozen/restartable post-smoothing tSNR, motion, fixed-mask coverage, review flags, subject summaries, and plots.
 - `build_event_qc_manifest.py`, `run_event_qc_batch.py`, and `audit_event_qc.py`: source-preserving full-trial conversion, condition counts, missed-trial exclusions, and run-to-subject usability aggregation.
 - `build_ratings_qc_manifest.py` and `audit_ratings_qc.py`: explicit ratings-source resolution, six-cell validation, raw means/counts, provenance hashes, and subject-level ratings rules.
+- `build_analysis_cohort.py`: strict inventory reconciliation and separate task-valid versus ratings-qualified L1/L2 manifests. It applies established missing-event, >25%-missed, and curated task exclusions while preserving usable opposite runs; zero-count modeled conditions become explicit review holds.
 - `measure_smoothness.sh`, `smooth_to_target.sh`, and `compute_tsnr.py`: thin wrappers around the explicitly configured authoritative RF1 implementations, preventing metric drift. tSNR uses the fixed common-mask/run-mask intersection and reports coverage against the fixed mask.
 - `harmonization_report.py`: compact Phase 0 summary including the approved target status.
 - `run_logged.sh`: local raw log plus a compact Git-trackable record for major Linux2 runs.
@@ -309,3 +310,24 @@ python3 code/audit_ratings_qc.py \
 ```
 
 An explicit resolution map has three tab-separated columns: `dataset`, `subject`, and `ratings_file`. Rebuild the manifest with `--ratings-map logs/runlists/ratings-source-resolutions.tsv` after reviewing ambiguous candidates.
+
+## Freeze analysis cohorts
+
+After the imaging, event, and ratings audits are current, freeze the analysis inventories. This step reconciles all 765 imaging runs against either a completed event-QC row or an established source-missing row and fails if anything is unaccounted for. `docs/curated_run_exclusions.tsv` supplies provenance-backed task invalidations. Ratings are kept as a separate eligibility layer rather than being allowed to suppress otherwise valid activation/PPI estimation.
+
+```bash
+nohup bash code/run_logged.sh \
+  --label phase0-freeze-analysis-cohorts \
+  --include-full-log -- \
+  "$IMAGING_PYTHON" code/build_analysis_cohort.py \
+  > logs/phase0-freeze-analysis-cohorts.nohup 2>&1 </dev/null &
+```
+
+The outputs are:
+
+- `logs/runlists/L1-task-ready.tsv` and `L2-task-ready.tsv`: task-valid activation/PPI inputs;
+- `logs/runlists/L1-ratings-ready.tsv` and `L2-ratings-ready.tsv`: the task-valid subset passing the historical ratings gate;
+- `logs/runlists/L1-model-review-hold.tsv`: otherwise usable runs with one or more zero-count substantive conditions;
+- `logs/records/analysis-run-dispositions.tsv` and `analysis-subject-dispositions.tsv`: the complete, mutually exclusive disposition audit.
+
+Source-missing and missed-trial exclusions are run-level. A valid opposite run remains in L1 and is the only run listed for that subject's fixed-effects L2. Runs on model review hold do not enter a ready manifest until their design support is explicitly resolved. Imaging IQR flags are retained in the manifests but remain review information rather than automatic exclusions.

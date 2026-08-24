@@ -1,0 +1,2 @@
+dataset	subject	session	run	exclusion_reason	source	note
+rf1	11539	01	*	wrong_friend_photo	Ryan session-note review 2026-08-24	Shared Reward runs 1 and 2 used the wrong friend photo, invalidating the task manipulation.

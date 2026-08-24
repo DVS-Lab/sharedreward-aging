@@ -1,0 +1,766 @@
+dataset	subject	session	run	disposition	task_exclusion_reasons	review_hold_reasons	zero_count_conditions	imaging_qc_flags	ratings_eligible	ratings_exclusion_reason
+ds003745	104		01	task_ready					true	
+ds003745	104		02	task_ready					true	
+ds003745	105		01	task_ready					false	missing_ratings_file
+ds003745	105		02	task_ready					false	missing_ratings_file
+ds003745	106		01	task_ready					false	missing_ratings_file
+ds003745	106		02	task_ready					false	missing_ratings_file
+ds003745	107		01	task_ready					true	
+ds003745	107		02	task_ready					true	
+ds003745	108		01	task_ready					true	
+ds003745	108		02	task_ready					true	
+ds003745	109		01	model_review_hold		model_review_zero_count_conditions	event_friend_neutral		false	missing_ratings_file
+ds003745	109		02	task_excluded	missed_trials_gt_25pct		event_stranger_neutral		false	missing_ratings_file
+ds003745	110		01	task_ready					false	missing_ratings_file
+ds003745	110		02	task_ready					false	missing_ratings_file
+ds003745	111		01	task_excluded	missed_trials_gt_25pct		event_computer_neutral;event_stranger_neutral	low_coverage_iqr_outlier	true	
+ds003745	111		02	model_review_hold		model_review_zero_count_conditions	event_computer_neutral	low_coverage_iqr_outlier	true	
+ds003745	112		01	task_ready					true	
+ds003745	112		02	model_review_hold		model_review_zero_count_conditions	event_computer_neutral		true	
+ds003745	113		01	task_ready					true	
+ds003745	113		02	task_ready					true	
+ds003745	115		01	task_ready					true	
+ds003745	115		02	task_ready					true	
+ds003745	116		01	task_ready					true	
+ds003745	116		02	task_ready					true	
+ds003745	117		01	task_ready					true	
+ds003745	117		02	task_ready					true	
+ds003745	118		01	task_excluded	missed_trials_gt_25pct				true	
+ds003745	118		02	task_excluded	missed_trials_gt_25pct		event_friend_neutral	high_mean_fd_iqr_outlier	true	
+ds003745	120		01	model_review_hold		model_review_zero_count_conditions	event_stranger_neutral	low_coverage_iqr_outlier	true	
+ds003745	120		02	task_ready				high_mean_fd_iqr_outlier;low_coverage_iqr_outlier	true	
+ds003745	121		01	task_ready					true	
+ds003745	121		02	task_ready					true	
+ds003745	122		01	task_ready					true	
+ds003745	122		02	task_ready					true	
+ds003745	124		01	task_ready					true	
+ds003745	124		02	model_review_hold		model_review_zero_count_conditions	event_computer_neutral		true	
+ds003745	125		01	task_ready					true	
+ds003745	125		02	task_ready					true	
+ds003745	126		01	task_ready					false	identical_ratings
+ds003745	126		02	task_ready					false	identical_ratings
+ds003745	127		01	task_ready					false	loss_sum_greater_than_win_sum
+ds003745	127		02	task_ready					false	loss_sum_greater_than_win_sum
+ds003745	128		01	task_ready					true	
+ds003745	128		02	task_ready					true	
+ds003745	129		01	task_excluded	missed_trials_gt_25pct				true	
+ds003745	129		02	task_ready					true	
+ds003745	130		01	task_ready					false	missing_ratings_file
+ds003745	130		02	task_ready					false	missing_ratings_file
+ds003745	131		01	model_review_hold		model_review_zero_count_conditions	event_computer_neutral		false	missing_ratings_file
+ds003745	131		02	task_ready				high_mean_fd_iqr_outlier	false	missing_ratings_file
+ds003745	132		01	model_review_hold		model_review_zero_count_conditions	event_stranger_neutral		false	missing_ratings_file
+ds003745	132		02	model_review_hold		model_review_zero_count_conditions	event_computer_neutral		false	missing_ratings_file
+ds003745	133		01	task_ready					false	missing_ratings_file
+ds003745	133		02	task_ready					false	missing_ratings_file
+ds003745	134		01	task_ready					false	missing_ratings_file
+ds003745	134		02	model_review_hold		model_review_zero_count_conditions	event_friend_neutral		false	missing_ratings_file
+ds003745	135		01	task_excluded	missed_trials_gt_25pct		event_stranger_neutral		false	missing_ratings_file
+ds003745	135		02	task_excluded	missed_trials_gt_25pct		event_computer_neutral		false	missing_ratings_file
+ds003745	136		01	task_ready					true	
+ds003745	136		02	task_ready					true	
+ds003745	137		01	task_ready					true	
+ds003745	137		02	task_ready					true	
+ds003745	138		01	task_excluded	missed_trials_gt_25pct		event_computer_punish;event_friend_neutral;event_stranger_neutral	high_mean_fd_iqr_outlier	true	
+ds003745	138		02	task_excluded	missed_trials_gt_25pct		event_computer_neutral;event_computer_reward;event_friend_punish;event_friend_neutral;event_stranger_punish;event_stranger_neutral	high_mean_fd_iqr_outlier	true	
+ds003745	140		01	model_review_hold		model_review_zero_count_conditions	event_stranger_neutral		false	identical_ratings
+ds003745	140		02	model_review_hold		model_review_zero_count_conditions	event_friend_neutral		false	identical_ratings
+ds003745	141		01	model_review_hold		model_review_zero_count_conditions	event_friend_neutral		true	
+ds003745	141		02	task_ready					true	
+ds003745	142		01	task_ready					true	
+ds003745	142		02	task_ready					true	
+ds003745	143		01	task_ready					false	missing_ratings_file
+ds003745	143		02	model_review_hold		model_review_zero_count_conditions	event_friend_neutral		false	missing_ratings_file
+ds003745	144		01	task_ready					true	
+ds003745	144		02	model_review_hold		model_review_zero_count_conditions	event_friend_neutral		true	
+ds003745	145		01	task_ready				high_mean_fd_iqr_outlier	true	
+ds003745	145		02	task_ready				high_mean_fd_iqr_outlier;low_coverage_iqr_outlier	true	
+ds003745	147		01	task_ready					true	
+ds003745	147		02	task_ready					true	
+ds003745	149		01	task_excluded	missed_trials_gt_25pct			high_mean_fd_iqr_outlier	true	
+ds003745	149		02	task_ready					true	
+ds003745	150		01	task_ready					true	
+ds003745	150		02	task_ready					true	
+ds003745	151		01	task_ready					true	
+ds003745	151		02	task_ready					true	
+ds003745	152		01	task_excluded	missed_trials_gt_25pct				true	
+ds003745	152		02	task_ready				high_mean_fd_iqr_outlier	true	
+ds003745	153		01	task_ready					true	
+ds003745	153		02	task_ready					true	
+ds003745	154		01	task_ready					true	
+ds003745	154		02	task_ready					true	
+ds003745	155		01	task_ready					true	
+ds003745	155		02	model_review_hold		model_review_zero_count_conditions	event_friend_neutral		true	
+ds003745	156		01	task_ready					true	
+ds003745	156		02	task_ready					true	
+ds003745	157		01	task_ready					true	
+ds003745	157		02	task_ready					true	
+ds003745	158		01	task_ready					true	
+ds003745	158		02	task_ready					true	
+ds003745	159		01	task_ready					true	
+ds003745	159		02	task_ready					true	
+rf1	10317	01	1	task_ready					true	
+rf1	10317	01	2	task_ready					true	
+rf1	10369	01	1	task_ready					true	
+rf1	10369	01	2	task_ready					true	
+rf1	10402	01	1	task_ready					true	
+rf1	10402	01	2	task_ready					true	
+rf1	10418	01	1	task_ready					false	missing_ratings_file
+rf1	10418	01	2	task_ready					false	missing_ratings_file
+rf1	10462	01	1	task_ready					true	
+rf1	10478	01	1	task_ready					false	missing_ratings_file
+rf1	10478	01	2	task_ready					false	missing_ratings_file
+rf1	10486	01	1	task_ready					true	
+rf1	10486	01	2	task_ready					true	
+rf1	10529	01	1	task_ready					true	
+rf1	10529	01	2	task_ready					true	
+rf1	10541	01	1	task_ready					true	
+rf1	10541	01	2	task_ready					true	
+rf1	10559	01	1	task_ready					true	
+rf1	10559	01	2	task_ready					true	
+rf1	10572	01	1	task_ready					true	
+rf1	10572	01	2	task_ready					true	
+rf1	10581	01	1	task_ready					false	missing_ratings_file
+rf1	10581	01	2	task_ready					false	missing_ratings_file
+rf1	10584	01	1	task_ready					true	
+rf1	10585	01	1	task_ready					true	
+rf1	10585	01	2	task_ready					true	
+rf1	10589	01	1	task_ready					true	
+rf1	10589	01	2	task_ready					true	
+rf1	10590	01	1	task_ready					true	
+rf1	10590	01	2	task_ready					true	
+rf1	10596	01	1	task_ready					true	
+rf1	10596	01	2	task_ready					true	
+rf1	10603	01	1	task_ready					true	
+rf1	10606	01	1	task_ready					false	missing_ratings_file
+rf1	10606	01	2	task_ready					false	missing_ratings_file
+rf1	10608	01	1	task_ready					true	
+rf1	10608	01	2	task_excluded	missed_trials_gt_25pct		event_stranger_neutral		true	
+rf1	10617	01	1	task_ready					true	
+rf1	10636	01	1	task_ready					true	
+rf1	10636	01	2	task_ready					true	
+rf1	10638	01	1	task_ready					true	
+rf1	10638	01	2	task_ready					true	
+rf1	10640	01	1	task_ready					true	
+rf1	10640	01	2	task_ready					true	
+rf1	10641	01	1	task_ready					true	
+rf1	10642	01	1	task_ready					true	
+rf1	10642	01	2	task_ready					true	
+rf1	10644	01	1	task_ready					true	
+rf1	10644	01	2	task_ready					true	
+rf1	10647	01	1	task_ready					true	
+rf1	10647	01	2	task_ready					true	
+rf1	10649	01	1	task_ready					true	
+rf1	10649	01	2	task_ready					true	
+rf1	10652	01	1	task_ready					true	
+rf1	10652	01	2	task_ready					true	
+rf1	10656	01	1	task_ready					true	
+rf1	10656	01	2	task_ready					true	
+rf1	10657	01	1	task_ready					true	
+rf1	10657	01	2	task_ready					true	
+rf1	10661	01	1	task_ready					true	
+rf1	10661	01	2	task_ready					true	
+rf1	10663	01	1	task_ready					true	
+rf1	10663	01	2	task_ready					true	
+rf1	10668	01	1	task_ready					true	
+rf1	10673	01	1	task_ready					true	
+rf1	10673	01	2	task_ready					true	
+rf1	10674	01	1	task_ready					true	
+rf1	10674	01	2	task_ready					true	
+rf1	10677	01	1	task_ready					true	
+rf1	10677	01	2	task_ready					true	
+rf1	10685	01	1	task_ready					true	
+rf1	10685	01	2	task_ready					true	
+rf1	10690	01	1	task_ready					true	
+rf1	10690	01	2	task_ready					true	
+rf1	10691	01	1	task_ready					true	
+rf1	10691	01	2	task_ready					true	
+rf1	10700	01	1	task_ready					false	missing_ratings_file
+rf1	10700	01	2	task_ready					false	missing_ratings_file
+rf1	10701	01	1	task_ready					true	
+rf1	10701	01	2	task_ready					true	
+rf1	10713	01	1	task_ready					true	
+rf1	10713	01	2	task_ready					true	
+rf1	10716	01	1	task_ready					true	
+rf1	10716	01	2	task_ready					true	
+rf1	10718	01	1	task_ready					true	
+rf1	10718	01	2	task_ready					true	
+rf1	10720	01	1	task_ready					true	
+rf1	10720	01	2	task_ready					true	
+rf1	10723	01	1	task_ready					true	
+rf1	10723	01	2	task_ready					true	
+rf1	10741	01	1	task_ready					true	
+rf1	10741	01	2	task_ready					true	
+rf1	10748	01	1	task_ready					true	
+rf1	10748	01	2	task_ready					true	
+rf1	10767	01	1	task_ready					true	
+rf1	10767	01	2	task_ready					true	
+rf1	10770	01	1	task_ready					true	
+rf1	10770	01	2	task_ready					true	
+rf1	10777	01	1	task_ready					true	
+rf1	10777	01	2	task_ready					true	
+rf1	10781	01	1	task_ready					true	
+rf1	10781	01	2	task_ready					true	
+rf1	10783	01	1	task_ready					true	
+rf1	10783	01	2	task_ready					true	
+rf1	10785	01	1	task_ready					true	
+rf1	10785	01	2	task_ready					true	
+rf1	10794	01	1	task_ready					true	
+rf1	10794	01	2	task_ready					true	
+rf1	10800	01	1	task_ready					true	
+rf1	10800	01	2	task_ready					true	
+rf1	10801	01	1	task_ready					true	
+rf1	10801	01	2	task_ready					true	
+rf1	10802	01	1	task_ready					true	
+rf1	10802	01	2	task_ready					true	
+rf1	10803	01	1	task_ready					false	missing_ratings_file
+rf1	10804	01	1	task_ready					true	
+rf1	10804	01	2	task_ready					true	
+rf1	10806	01	1	task_ready					true	
+rf1	10806	01	2	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	10807	01	1	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	10807	01	2	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	10809	01	1	task_excluded	missed_trials_gt_25pct		event_computer_neutral		true	
+rf1	10809	01	2	task_ready					true	
+rf1	10810	01	1	task_ready					false	missing_ratings_file
+rf1	10810	01	2	task_ready					false	missing_ratings_file
+rf1	10812	01	1	task_ready					true	
+rf1	10812	01	2	task_ready					true	
+rf1	10817	01	1	task_ready					false	missing_ratings_file
+rf1	10817	01	2	task_ready					false	missing_ratings_file
+rf1	10827	01	1	task_ready					false	missing_ratings_file
+rf1	10827	01	2	task_ready					false	missing_ratings_file
+rf1	10831	01	1	task_ready					true	
+rf1	10831	01	2	task_ready					true	
+rf1	10834	01	1	task_ready					false	missing_ratings_file
+rf1	10834	01	2	task_ready					false	missing_ratings_file
+rf1	10838	01	1	task_ready					false	missing_ratings_file
+rf1	10838	01	2	task_ready					false	missing_ratings_file
+rf1	10843	01	1	task_ready					true	
+rf1	10843	01	2	task_ready					true	
+rf1	10850	01	1	task_ready					true	
+rf1	10850	01	2	task_ready					true	
+rf1	10854	01	1	task_ready					true	
+rf1	10854	01	2	task_ready					true	
+rf1	10857	01	1	task_ready					true	
+rf1	10857	01	2	task_ready					true	
+rf1	10858	01	1	task_ready					true	
+rf1	10858	01	2	task_ready					true	
+rf1	10860	01	1	task_ready					false	identical_ratings
+rf1	10860	01	2	task_ready					false	identical_ratings
+rf1	10862	01	1	task_ready					true	
+rf1	10862	01	2	task_ready					true	
+rf1	10863	01	1	task_ready					true	
+rf1	10863	01	2	task_ready					true	
+rf1	10866	01	1	task_ready					false	missing_ratings_file
+rf1	10866	01	2	task_ready					false	missing_ratings_file
+rf1	10875	01	1	task_ready					true	
+rf1	10875	01	2	task_ready					true	
+rf1	10881	01	1	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	10886	01	1	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	10887	01	1	task_ready					true	
+rf1	10887	01	2	task_ready					true	
+rf1	10896	01	1	task_ready					true	
+rf1	10896	01	2	task_ready					true	
+rf1	10897	01	1	task_ready					true	
+rf1	10898	01	1	task_ready					true	
+rf1	10898	01	2	task_ready					true	
+rf1	10908	01	1	task_ready					true	
+rf1	10908	01	2	task_ready					true	
+rf1	10913	01	1	task_ready					false	identical_ratings
+rf1	10913	01	2	task_ready					false	identical_ratings
+rf1	10918	01	1	task_ready					true	
+rf1	10918	01	2	task_ready					true	
+rf1	10919	01	1	task_ready					true	
+rf1	10919	01	2	task_ready					true	
+rf1	10924	01	1	task_ready					true	
+rf1	10924	01	2	task_ready					true	
+rf1	10926	01	1	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	10926	01	2	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	10928	01	1	task_ready					true	
+rf1	10928	01	2	task_ready					true	
+rf1	10929	01	1	task_ready					true	
+rf1	10929	01	2	task_ready					true	
+rf1	10930	01	1	task_ready					true	
+rf1	10930	01	2	task_ready					true	
+rf1	10938	01	1	task_ready					false	identical_ratings
+rf1	10938	01	2	task_ready					false	identical_ratings
+rf1	10940	01	1	task_ready					false	loss_sum_greater_than_win_sum
+rf1	10940	01	2	task_ready					false	loss_sum_greater_than_win_sum
+rf1	10950	01	1	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	10950	01	2	task_ready					true	
+rf1	10951	01	1	task_ready					true	
+rf1	10951	01	2	task_ready					true	
+rf1	10952	01	1	task_ready					true	
+rf1	10952	01	2	task_ready					true	
+rf1	10953	01	1	task_ready					true	
+rf1	10953	01	2	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	10954	01	1	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	10954	01	2	task_excluded	missed_trials_gt_25pct			high_mean_fd_iqr_outlier	true	
+rf1	10956	01	1	task_ready					true	
+rf1	10956	01	2	task_ready					true	
+rf1	10958	01	1	task_ready					true	
+rf1	10958	01	2	task_ready					true	
+rf1	10961	01	1	task_ready					true	
+rf1	10961	01	2	task_ready					true	
+rf1	10964	01	1	task_ready					true	
+rf1	10964	01	2	task_ready					true	
+rf1	10966	01	1	task_ready					true	
+rf1	10966	01	2	task_ready					true	
+rf1	10969	01	1	task_ready					true	
+rf1	10969	01	2	task_ready					true	
+rf1	10974	01	1	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	10974	01	2	task_ready					true	
+rf1	10977	01	1	task_ready					false	missing_ratings_file
+rf1	10977	01	2	task_ready					false	missing_ratings_file
+rf1	10979	01	1	task_ready					true	
+rf1	10979	01	2	task_ready					true	
+rf1	10983	01	1	task_ready					true	
+rf1	10983	01	2	task_ready					true	
+rf1	10984	01	1	task_ready					true	
+rf1	10984	01	2	task_ready					true	
+rf1	10998	01	1	task_ready					true	
+rf1	10998	01	2	task_ready					true	
+rf1	11005	01	1	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	11005	01	2	task_ready				low_tsnr_iqr_outlier;high_mean_fd_iqr_outlier	true	
+rf1	11007	01	1	task_ready					true	
+rf1	11007	01	2	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	11012	01	1	task_ready					true	
+rf1	11012	01	2	task_ready					true	
+rf1	11016	01	1	task_ready					true	
+rf1	11016	01	2	task_ready					true	
+rf1	11021	01	1	task_ready					true	
+rf1	11021	01	2	task_ready					true	
+rf1	11030	01	1	task_ready					true	
+rf1	11030	01	2	task_ready					true	
+rf1	11031	01	1	task_ready					true	
+rf1	11031	01	2	task_ready					true	
+rf1	11036	01	1	task_ready					true	
+rf1	11036	01	2	task_ready					true	
+rf1	11039	01	1	task_ready					true	
+rf1	11039	01	2	task_ready					true	
+rf1	11042	01	1	task_ready					true	
+rf1	11042	01	2	task_ready					true	
+rf1	11053	01	1	task_ready					true	
+rf1	11053	01	2	task_ready					true	
+rf1	11058	01	1	task_ready					true	
+rf1	11058	01	2	task_ready					true	
+rf1	11060	01	1	task_ready					true	
+rf1	11060	01	2	task_ready					true	
+rf1	11063	01	1	task_ready					true	
+rf1	11063	01	2	task_ready					true	
+rf1	11064	01	1	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	11064	01	2	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	11065	01	1	task_ready					true	
+rf1	11065	01	2	task_ready					true	
+rf1	11066	01	1	task_ready					true	
+rf1	11066	01	2	task_ready					true	
+rf1	11068	01	1	task_ready					true	
+rf1	11068	01	2	task_ready					true	
+rf1	11071	01	1	task_ready					false	identical_ratings
+rf1	11071	01	2	task_ready					false	identical_ratings
+rf1	11072	01	1	task_ready					true	
+rf1	11072	01	2	task_ready					true	
+rf1	11074	01	1	task_ready					true	
+rf1	11074	01	2	task_ready					true	
+rf1	11075	01	1	task_ready					true	
+rf1	11075	01	2	task_ready					true	
+rf1	11076	01	1	task_ready					true	
+rf1	11078	01	1	task_ready					true	
+rf1	11078	01	2	task_ready					true	
+rf1	11083	01	1	task_ready					true	
+rf1	11083	01	2	task_ready					true	
+rf1	11084	01	1	task_ready					true	
+rf1	11084	01	2	task_ready					true	
+rf1	11085	01	1	task_ready					false	identical_ratings
+rf1	11085	01	2	task_ready					false	identical_ratings
+rf1	11090	01	1	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	11090	01	2	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	11110	01	1	task_ready					true	
+rf1	11110	01	2	task_ready					true	
+rf1	11113	01	1	task_ready					true	
+rf1	11113	01	2	task_ready					true	
+rf1	11116	01	1	task_ready					true	
+rf1	11116	01	2	task_ready					true	
+rf1	11120	01	1	task_ready					true	
+rf1	11120	01	2	task_ready					true	
+rf1	11125	01	1	task_ready				high_mean_fd_iqr_outlier	false	loss_sum_greater_than_win_sum
+rf1	11125	01	2	task_excluded	missed_trials_gt_25pct		event_computer_neutral	high_mean_fd_iqr_outlier	false	loss_sum_greater_than_win_sum
+rf1	11126	01	1	task_ready					true	
+rf1	11128	01	1	task_ready					true	
+rf1	11128	01	2	task_ready					true	
+rf1	11134	01	1	task_ready					false	loss_sum_greater_than_win_sum
+rf1	11134	01	2	task_ready					false	loss_sum_greater_than_win_sum
+rf1	11139	01	1	task_ready					true	
+rf1	11139	01	2	task_ready					true	
+rf1	11145	01	1	task_ready					true	
+rf1	11145	01	2	task_ready					true	
+rf1	11164	01	1	task_ready					true	
+rf1	11167	01	1	task_ready					true	
+rf1	11167	01	2	task_ready					true	
+rf1	11168	01	1	task_ready					true	
+rf1	11168	01	2	task_ready					true	
+rf1	11171	01	1	task_ready					true	
+rf1	11171	01	2	task_ready					true	
+rf1	11177	01	1	task_ready					true	
+rf1	11177	01	2	task_ready					true	
+rf1	11192	01	1	task_ready					true	
+rf1	11192	01	2	task_ready					true	
+rf1	11193	01	1	task_ready					true	
+rf1	11193	01	2	task_ready					true	
+rf1	11201	01	1	model_review_hold		model_review_zero_count_conditions	event_computer_neutral	high_mean_fd_iqr_outlier	true	
+rf1	11203	01	1	task_ready					false	loss_sum_greater_than_win_sum
+rf1	11203	01	2	task_ready					false	loss_sum_greater_than_win_sum
+rf1	11209	01	1	task_ready					false	loss_sum_greater_than_win_sum
+rf1	11209	01	2	task_ready					false	loss_sum_greater_than_win_sum
+rf1	11227	01	1	task_ready					true	
+rf1	11227	01	2	task_ready					true	
+rf1	11238	01	1	task_ready					true	
+rf1	11238	01	2	task_ready					true	
+rf1	11241	01	1	task_ready					true	
+rf1	11241	01	2	task_ready					true	
+rf1	11246	01	1	task_ready					true	
+rf1	11246	01	2	task_ready					true	
+rf1	11276	01	1	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	11276	01	2	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	11286	01	1	task_ready					true	
+rf1	11301	01	1	task_ready					true	
+rf1	11301	01	2	task_ready					true	
+rf1	11311	01	1	task_ready					true	
+rf1	11311	01	2	task_ready					true	
+rf1	11312	01	1	task_ready					true	
+rf1	11312	01	2	task_ready					true	
+rf1	11316	01	1	task_ready					true	
+rf1	11316	01	2	task_ready					true	
+rf1	11318	01	1	task_ready					true	
+rf1	11318	01	2	task_ready					true	
+rf1	11321	01	1	task_ready					true	
+rf1	11321	01	2	task_ready					true	
+rf1	11325	01	1	task_ready					true	
+rf1	11325	01	2	task_ready					true	
+rf1	11326	01	1	task_ready					true	
+rf1	11326	01	2	task_ready					true	
+rf1	11329	01	1	task_ready					true	
+rf1	11329	01	2	task_ready					true	
+rf1	11330	01	1	task_ready					true	
+rf1	11330	01	2	task_ready					true	
+rf1	11337	01	1	task_ready					true	
+rf1	11337	01	2	task_ready					true	
+rf1	11338	01	1	task_ready					true	
+rf1	11338	01	2	task_ready					true	
+rf1	11340	01	1	task_ready					true	
+rf1	11340	01	2	task_ready					true	
+rf1	11343	01	1	task_ready					true	
+rf1	11343	01	2	task_ready					true	
+rf1	11345	01	1	task_ready					true	
+rf1	11345	01	2	task_ready					true	
+rf1	11348	01	1	task_ready					true	
+rf1	11348	01	2	task_ready					true	
+rf1	11358	01	1	task_ready					true	
+rf1	11358	01	2	task_ready					true	
+rf1	11364	01	1	task_ready					true	
+rf1	11364	01	2	task_ready					true	
+rf1	11367	01	1	task_ready					true	
+rf1	11367	01	2	task_ready					true	
+rf1	11374	01	1	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	11374	01	2	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	11376	01	1	task_ready					true	
+rf1	11376	01	2	task_ready					true	
+rf1	11377	01	1	task_ready					true	
+rf1	11377	01	2	task_ready					true	
+rf1	11387	01	1	task_ready					true	
+rf1	11387	01	2	task_ready					true	
+rf1	11410	01	1	task_ready					true	
+rf1	11410	01	2	task_ready				low_coverage_iqr_outlier	true	
+rf1	11416	01	1	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	11426	01	1	task_ready					true	
+rf1	11430	01	1	task_ready					true	
+rf1	11432	01	1	task_ready					true	
+rf1	11432	01	2	task_ready					true	
+rf1	11433	01	1	task_ready					true	
+rf1	11433	01	2	task_ready					true	
+rf1	11435	01	1	task_ready					true	
+rf1	11435	01	2	task_ready					true	
+rf1	11439	01	1	task_ready					true	
+rf1	11440	01	1	task_ready					true	
+rf1	11440	01	2	task_ready					true	
+rf1	11443	01	1	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	11450	01	1	task_ready					true	
+rf1	11450	01	2	task_excluded	source_excluded_missing_events				true	
+rf1	11451	01	1	task_ready					true	
+rf1	11451	01	2	task_ready					true	
+rf1	11461	01	1	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	11461	01	2	task_ready					true	
+rf1	11462	01	1	task_ready					true	
+rf1	11472	01	1	task_ready				low_coverage_iqr_outlier	false	missing_ratings_file
+rf1	11472	01	2	task_ready					false	missing_ratings_file
+rf1	11492	01	1	task_ready					false	identical_ratings
+rf1	11492	01	2	task_ready					false	identical_ratings
+rf1	11493	01	1	task_ready				high_mean_fd_iqr_outlier	false	loss_sum_greater_than_win_sum
+rf1	11493	01	2	task_ready					false	loss_sum_greater_than_win_sum
+rf1	11498	01	1	task_ready					true	
+rf1	11517	01	1	model_review_hold		model_review_zero_count_conditions	event_stranger_neutral		true	
+rf1	11517	01	2	task_ready					true	
+rf1	11518	01	1	task_ready					true	
+rf1	11518	01	2	task_ready					true	
+rf1	11523	01	1	task_ready					true	
+rf1	11523	01	2	task_ready					true	
+rf1	11526	01	1	task_ready					true	
+rf1	11526	01	2	task_ready					true	
+rf1	11527	01	1	task_ready					true	
+rf1	11527	01	2	task_ready					true	
+rf1	11529	01	1	task_ready					true	
+rf1	11529	01	2	task_ready				low_coverage_iqr_outlier	true	
+rf1	11530	01	1	task_ready					true	
+rf1	11530	01	2	task_ready					true	
+rf1	11532	01	1	task_ready					true	
+rf1	11532	01	2	task_ready					true	
+rf1	11533	01	1	task_ready					true	
+rf1	11533	01	2	task_ready					true	
+rf1	11534	01	1	task_ready					true	
+rf1	11534	01	2	task_ready					true	
+rf1	11535	01	1	task_ready					true	
+rf1	11535	01	2	task_ready					true	
+rf1	11536	01	1	task_ready					true	
+rf1	11536	01	2	task_ready					true	
+rf1	11539	01	1	task_excluded	wrong_friend_photo				false	missing_ratings_file
+rf1	11539	01	2	task_excluded	wrong_friend_photo				false	missing_ratings_file
+rf1	11540	01	1	task_ready					true	
+rf1	11540	01	2	task_ready					true	
+rf1	11542	01	1	task_ready					true	
+rf1	11542	01	2	task_ready					true	
+rf1	11545	01	1	task_ready					true	
+rf1	11545	01	2	task_ready					true	
+rf1	11551	01	1	task_ready					true	
+rf1	11551	01	2	task_ready					true	
+rf1	11559	01	1	task_ready					true	
+rf1	11559	01	2	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	11560	01	1	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	11560	01	2	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	11563	01	1	task_ready					true	
+rf1	11563	01	2	task_ready					true	
+rf1	11570	01	1	task_ready					true	
+rf1	11570	01	2	task_ready					true	
+rf1	11572	01	1	task_ready				low_coverage_iqr_outlier	true	
+rf1	11572	01	2	task_ready				low_coverage_iqr_outlier	true	
+rf1	11579	01	1	task_ready					true	
+rf1	11579	01	2	task_ready					true	
+rf1	11586	01	1	task_ready					true	
+rf1	11587	01	1	task_ready					false	missing_ratings_file
+rf1	11587	01	2	task_ready					false	missing_ratings_file
+rf1	11588	01	1	task_ready					true	
+rf1	11588	01	2	task_ready					true	
+rf1	11591	01	1	task_ready					true	
+rf1	11591	01	2	task_ready					true	
+rf1	11597	01	1	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	11597	01	2	task_ready					true	
+rf1	11598	01	1	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	11598	01	2	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	11599	01	1	task_ready					true	
+rf1	11599	01	2	task_ready					true	
+rf1	11600	01	1	task_ready					true	
+rf1	11600	01	2	task_ready					true	
+rf1	11606	01	1	task_ready					false	loss_sum_greater_than_win_sum
+rf1	11606	01	2	task_ready					false	loss_sum_greater_than_win_sum
+rf1	11614	01	1	task_ready					false	loss_sum_greater_than_win_sum
+rf1	11614	01	2	task_ready					false	loss_sum_greater_than_win_sum
+rf1	11622	01	1	task_ready					true	
+rf1	11622	01	2	task_ready					true	
+rf1	11623	01	1	task_ready					true	
+rf1	11625	01	1	task_ready					true	
+rf1	11625	01	2	task_ready					true	
+rf1	11626	01	1	task_ready					true	
+rf1	11626	01	2	task_ready					true	
+rf1	11628	01	1	task_ready					true	
+rf1	11628	01	2	task_ready					true	
+rf1	11631	01	1	task_ready					true	
+rf1	11631	01	2	task_ready					true	
+rf1	11651	01	1	task_ready					true	
+rf1	11651	01	2	task_ready					true	
+rf1	11660	01	1	task_ready					true	
+rf1	11660	01	2	task_ready					true	
+rf1	11670	01	1	task_ready					true	
+rf1	11670	01	2	task_ready					true	
+rf1	11674	01	1	task_ready					true	
+rf1	11679	01	1	task_ready					true	
+rf1	11679	01	2	task_ready					true	
+rf1	11681	01	1	task_ready					false	missing_ratings_file
+rf1	11681	01	2	task_ready					false	missing_ratings_file
+rf1	11692	01	1	task_ready					true	
+rf1	11692	01	2	task_ready					true	
+rf1	11694	01	1	task_ready					false	missing_ratings_file
+rf1	11701	01	1	task_ready					true	
+rf1	11701	01	2	task_ready					true	
+rf1	11703	01	1	task_ready					true	
+rf1	11703	01	2	task_ready					true	
+rf1	11705	01	1	task_ready					true	
+rf1	11705	01	2	task_ready					true	
+rf1	11709	01	1	task_ready					true	
+rf1	11709	01	2	task_ready					true	
+rf1	11710	01	1	task_ready					true	
+rf1	11710	01	2	task_ready					true	
+rf1	11714	01	1	task_ready					true	
+rf1	11714	01	2	task_ready					true	
+rf1	11719	01	1	task_ready				low_coverage_iqr_outlier	true	
+rf1	11720	01	1	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	11720	01	2	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	11722	01	1	task_ready					true	
+rf1	11722	01	2	task_ready					true	
+rf1	11723	01	1	task_ready					true	
+rf1	11723	01	2	task_ready					true	
+rf1	11736	01	1	task_ready					true	
+rf1	11736	01	2	task_ready					true	
+rf1	11744	01	1	task_ready					true	
+rf1	11744	01	2	task_ready					true	
+rf1	11746	01	1	task_ready					true	
+rf1	11746	01	2	task_ready					true	
+rf1	11748	01	1	task_ready					true	
+rf1	11748	01	2	task_ready					true	
+rf1	11756	01	1	task_ready					true	
+rf1	11756	01	2	task_ready					true	
+rf1	11764	01	1	task_ready					true	
+rf1	11764	01	2	task_ready				low_coverage_iqr_outlier	true	
+rf1	11772	01	1	task_ready					true	
+rf1	11773	01	1	task_ready					true	
+rf1	11773	01	2	task_ready					true	
+rf1	11774	01	1	task_ready					true	
+rf1	11774	01	2	task_ready					true	
+rf1	11784	01	1	task_ready					true	
+rf1	11784	01	2	task_ready					true	
+rf1	11787	01	1	task_ready					true	
+rf1	11787	01	2	task_ready					true	
+rf1	11788	01	1	task_ready					true	
+rf1	11788	01	2	task_ready					true	
+rf1	11789	01	1	task_ready				low_coverage_iqr_outlier	true	
+rf1	11789	01	2	task_ready				low_coverage_iqr_outlier	true	
+rf1	11790	01	1	task_ready					true	
+rf1	11790	01	2	task_ready					true	
+rf1	11793	01	1	task_ready					true	
+rf1	11793	01	2	task_ready					true	
+rf1	11795	01	1	task_ready					true	
+rf1	11795	01	2	task_ready					true	
+rf1	11815	01	1	task_ready					true	
+rf1	11815	01	2	task_ready					true	
+rf1	11822	01	1	task_ready					true	
+rf1	11822	01	2	task_ready				low_coverage_iqr_outlier	true	
+rf1	11823	01	1	task_ready					true	
+rf1	11823	01	2	task_ready					true	
+rf1	11824	01	1	task_ready				low_coverage_iqr_outlier	true	
+rf1	11824	01	2	task_ready					true	
+rf1	11828	01	1	task_ready					true	
+rf1	11828	01	2	task_ready				low_coverage_iqr_outlier	true	
+rf1	11829	01	1	task_excluded	missed_trials_gt_25pct			low_coverage_iqr_outlier	true	
+rf1	11829	01	2	task_ready				low_coverage_iqr_outlier	true	
+rf1	11840	01	1	task_ready					true	
+rf1	11840	01	2	task_ready					true	
+rf1	11847	01	1	task_ready					true	
+rf1	11847	01	2	task_ready					true	
+rf1	11853	01	1	task_ready				low_coverage_iqr_outlier	true	
+rf1	11853	01	2	task_ready				low_coverage_iqr_outlier	true	
+rf1	11854	01	1	task_ready					true	
+rf1	11854	01	2	task_ready					true	
+rf1	11861	01	1	task_ready				low_coverage_iqr_outlier	true	
+rf1	11861	01	2	task_ready					true	
+rf1	11866	01	1	task_ready				low_coverage_iqr_outlier	true	
+rf1	11866	01	2	task_ready				low_coverage_iqr_outlier	true	
+rf1	11867	01	1	task_ready					true	
+rf1	11867	01	2	task_ready				low_coverage_iqr_outlier	true	
+rf1	11870	01	1	task_ready				low_coverage_iqr_outlier	true	
+rf1	11870	01	2	task_ready				low_coverage_iqr_outlier	true	
+rf1	11872	01	1	task_ready					true	
+rf1	11872	01	2	task_ready					true	
+rf1	11876	01	1	task_ready					true	
+rf1	11876	01	2	task_ready					true	
+rf1	11877	01	1	task_ready					true	
+rf1	11877	01	2	task_ready				low_coverage_iqr_outlier	true	
+rf1	11881	01	1	task_ready				low_coverage_iqr_outlier	true	
+rf1	11881	01	2	task_ready				low_coverage_iqr_outlier	true	
+rf1	11885	01	1	task_ready					true	
+rf1	11885	01	2	task_ready					true	
+rf1	11891	01	1	task_ready					true	
+rf1	11891	01	2	task_ready					true	
+rf1	11897	01	1	task_ready					true	
+rf1	11897	01	2	task_ready					true	
+rf1	11900	01	1	task_ready					true	
+rf1	11900	01	2	task_ready					true	
+rf1	11902	01	1	task_ready				low_coverage_iqr_outlier	true	
+rf1	11902	01	2	task_excluded	missed_trials_gt_25pct				true	
+rf1	11909	01	1	task_ready					true	
+rf1	11909	01	2	task_ready					true	
+rf1	11913	01	1	task_ready					true	
+rf1	11913	01	2	task_ready					true	
+rf1	11914	01	1	task_ready					false	identical_ratings
+rf1	11914	01	2	task_ready					false	identical_ratings
+rf1	11920	01	1	task_ready					true	
+rf1	11920	01	2	task_excluded	missed_trials_gt_25pct				true	
+rf1	11922	01	1	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	11922	01	2	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	11923	01	1	task_ready				low_coverage_iqr_outlier	true	
+rf1	11923	01	2	task_ready					true	
+rf1	11924	01	1	task_ready					true	
+rf1	11924	01	2	task_ready					true	
+rf1	11926	01	1	task_ready				low_coverage_iqr_outlier	true	
+rf1	11926	01	2	task_ready					true	
+rf1	11928	01	1	task_ready					true	
+rf1	11928	01	2	task_ready					true	
+rf1	11929	01	1	task_ready					true	
+rf1	11929	01	2	task_ready					true	
+rf1	11931	01	1	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	11931	01	2	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	11935	01	1	task_ready					true	
+rf1	11935	01	2	task_ready					true	
+rf1	11939	01	1	task_ready					true	
+rf1	11939	01	2	task_ready					true	
+rf1	11943	01	1	task_ready					true	
+rf1	11943	01	2	task_ready					true	
+rf1	11949	01	1	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	11949	01	2	task_ready				high_mean_fd_iqr_outlier	true	
+rf1	11960	01	1	task_ready				low_coverage_iqr_outlier	true	
+rf1	11960	01	2	task_ready				low_coverage_iqr_outlier	true	
+rf1	11969	01	1	task_excluded	source_excluded_missing_events				true	
+rf1	11969	01	2	task_excluded	source_excluded_missing_events				true	
+rf1	11974	01	1	task_ready					true	
+rf1	11974	01	2	task_ready					true	
+rf1	11976	01	1	task_ready					true	
+rf1	11976	01	2	task_ready					true	
+rf1	11982	01	1	task_ready					true	
+rf1	11982	01	2	task_ready					true	
+rf1	11984	01	1	task_excluded	source_excluded_missing_events				true	
+rf1	11984	01	2	task_ready					true	
+rf1	12008	01	1	task_ready					true	
+rf1	12008	01	2	task_ready					true	
+rf1	12011	01	1	task_ready					true	
+rf1	12011	01	2	task_ready					true	
+rf1	12013	01	1	task_ready					true	
+rf1	12013	01	2	task_ready					true	
+rf1	12018	01	1	task_ready					true	
+rf1	12018	01	2	task_ready					true	
+rf1	12020	01	1	task_excluded	source_excluded_missing_events				true	
+rf1	12020	01	2	task_ready				low_coverage_iqr_outlier	true	
+rf1	12021	01	1	task_ready					true	
+rf1	12021	01	2	task_ready					true	
+rf1	12031	01	1	task_ready					true	
+rf1	12031	01	2	task_ready					true	
+rf1	12033	01	1	task_ready					true	
+rf1	12033	01	2	task_ready					true	
+rf1	12036	01	1	task_ready					false	identical_ratings
+rf1	12036	01	2	task_excluded	source_excluded_missing_events				false	identical_ratings
+rf1	12037	01	1	task_ready					false	missing_ratings_file
+rf1	12037	01	2	task_excluded	source_excluded_missing_events				false	missing_ratings_file
+rf1	12038	01	1	task_ready					true	
+rf1	12038	01	2	task_ready					true	
+rf1	12039	01	1	task_ready					true	
+rf1	12039	01	2	task_ready					true	
+rf1	12041	01	1	task_excluded	missed_trials_gt_25pct				true	
+rf1	12047	01	1	task_ready					true	
+rf1	12047	01	2	task_ready					true	
+rf1	12049	01	1	task_ready					true	
+rf1	12049	01	2	task_ready					true	
+rf1	12051	01	1	task_ready					true	
+rf1	12051	01	2	task_ready					true	
+rf1	12054	01	1	task_ready				low_coverage_iqr_outlier	true	
+rf1	12054	01	2	task_ready				low_coverage_iqr_outlier	true	
+rf1	12055	01	1	task_ready					true	
+rf1	12055	01	2	task_ready					true	
+rf1	12057	01	1	task_ready					true	
+rf1	12057	01	2	task_ready					true	

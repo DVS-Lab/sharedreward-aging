@@ -1,0 +1,20 @@
+subject	status	analysis_action	recovery_priority	session_note	source
+10418	confirmed_not_collected	ratings_exclusion	none	Ratings completion box was not checked; ratings were likely not collected.	Ryan session-note review 2026-08-24
+10478	no_ratings_information	ratings_exclusion_pending_recovery	medium	Only Shared Reward run 1 restart due to an error was documented; no ratings information.	Ryan session-note review 2026-08-24
+10581	confirmed_not_collected	ratings_exclusion	none	Post-scan ratings were not completed because of time constraints.	Ryan session-note review 2026-08-24
+10606	reported_completed	ratings_exclusion_pending_recovery	high	Session notes indicate post-scan tasks were completed.	Ryan session-note review 2026-08-24
+10700	reported_completed	ratings_exclusion_pending_recovery	high	Session notes indicate post-scan tasks were completed.	Ryan session-note review 2026-08-24
+10803	recoverable_git_history	restore_authoritative_source	high	A valid six-row post-scan file exists in rf1-sra Git history at commit 247d6130d, blob 908135a33726f9e8e3c7cd334fec1bacf0a2c880.	repository-history audit 2026-08-24
+10810	no_session_notes	ratings_exclusion_pending_recovery	medium	No session notes were available.	Ryan session-note review 2026-08-24
+10817	completion_undocumented	ratings_exclusion_pending_recovery	medium	Session notes do not say whether post-scan tasks were completed.	Ryan session-note review 2026-08-24
+10827	reported_completed	ratings_exclusion_pending_recovery	high	Session notes indicate post-scan tasks were completed.	Ryan session-note review 2026-08-24
+10834	completion_undocumented	ratings_exclusion_pending_recovery	medium	Session notes do not say whether post-scan tasks were completed.	Ryan session-note review 2026-08-24
+10838	no_session_notes	ratings_exclusion_pending_recovery	medium	No session notes were available.	Ryan session-note review 2026-08-24
+10866	reported_completed	ratings_exclusion_pending_recovery	high	Session notes indicate post-scan tasks were completed.	Ryan session-note review 2026-08-24
+10977	confirmed_not_collected	ratings_exclusion	none	Post-scan PsychoPy tasks were not run because of a computer image error.	Ryan session-note review 2026-08-24
+11472	no_session_notes	ratings_exclusion_pending_recovery	medium	No session notes were available.	Ryan session-note review 2026-08-24
+11539	task_invalid_wrong_friend_photo	task_exclusion_and_ratings_exclusion	none	Shared Reward runs 1 and 2 and Trust run 1 are unusable because the wrong friend photo was displayed.	Ryan session-note review 2026-08-24
+11587	reported_completed	ratings_exclusion_pending_recovery	high	Session notes indicate post-scan tasks were completed.	Ryan session-note review 2026-08-24
+11681	reported_completed	ratings_exclusion_pending_recovery	high	Session notes indicate post-scan tasks were completed.	Ryan session-note review 2026-08-24
+11694	reported_completed	ratings_exclusion_pending_recovery	high	Session notes indicate post-scan tasks were completed.	Ryan session-note review 2026-08-24
+12037	incomplete_friend_only	ratings_exclusion	none	Post-scan ratings were shown only for the participant's friend, so the required six-cell ratings set is incomplete.	Ryan session-note review 2026-08-24
