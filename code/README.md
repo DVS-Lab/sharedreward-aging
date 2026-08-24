@@ -121,7 +121,7 @@ nohup bash code/run_logged.sh \
   > logs/phase0-target-smoothing-6mm-full.nohup 2>&1 </dev/null &
 ```
 
-The runner validates existing output/QC pairs before skipping them, so the same command is restartable. Partial or invalid pairs stop with an explicit request to review and use `--overwrite`; they are never silently replaced. The audit requires output/mask geometry agreement and achieved classic combined FWHM within AFNI's documented ±10% approximation tolerance, while retaining the complete ACF diagnostics.
+The runner validates existing output/QC pairs before skipping them, so the same command is restartable. Partial or invalid pairs stop with an explicit request to review and use `--overwrite`; they are never silently replaced. The audit requires output/mask geometry agreement and achieved classic combined FWHM within AFNI's documented ±10% approximation tolerance, while retaining the complete ACF diagnostics. A run outside that tolerance can pass only through an exact row in `docs/smoothing_qc_exceptions.tsv`, with the expected target, a narrow accepted measurement range, rationale, and an existing tracked evidence record; this never waives geometry or other QC failures.
 
 AFNI normally chooses a subset of blurmaster volumes for speed. If a reviewed run repeatedly passes AFNI's internal stopping rule but the independent all-volume `3dFWHMx` audit falls outside tolerance, a one-row retry may add `--all-blurmaster --overwrite`. This passes AFNI `-bmall`, making convergence use every volume. It is an exception mechanism, not the cohort default; the run record must document its use.
 
