@@ -14,7 +14,10 @@ Active Phase 0 utilities:
 - `build_characterization_manifest.py`, `run_smoothness_batch.py`, and `audit_smoothness.py`: one frozen cross-dataset input contract, bounded/restartable AFNI baseline measurement, and a consolidated run-level audit table.
 - `build_target_smoothing_manifest.py`, `run_target_smoothing_batch.py`, and `audit_target_smoothing.py`: the analysis-ready 6-mm contract, bounded/restartable target smoothing, and independent geometry plus achieved-smoothness audit.
 - `smooth_with_feat_susan.sh`, `build_susan_comparison_manifest.py`, `run_susan_comparison.py`, and `audit_susan_comparison.py`: a non-production control reproducing FEAT's 6-mm SUSAN stage and measuring baseline, AFNI total-target, and SUSAN fixed-kernel outputs with the same AFNI estimator.
-- `measure_smoothness.sh`, `smooth_to_target.sh`, and `compute_tsnr.py`: thin wrappers around the explicitly configured authoritative RF1 implementations, preventing metric drift.
+- `plot_smoothness_comparison.py`: the tracked mean ± run-level SEM comparison of baseline, AFNI-total-target, and FEAT-equivalent SUSAN smoothness.
+- `create_common_analysis_mask.py`: nearest-neighbor resampling of the TemplateFlow MNI152NLin6Asym brain mask onto the exact RF1 reference grid.
+- `build_analysis_qc_manifest.py`, `run_analysis_qc_batch.py`, `audit_analysis_qc.py`, and `plot_analysis_qc.py`: frozen/restartable post-smoothing tSNR, motion, fixed-mask coverage, review flags, subject summaries, and plots.
+- `measure_smoothness.sh`, `smooth_to_target.sh`, and `compute_tsnr.py`: thin wrappers around the explicitly configured authoritative RF1 implementations, preventing metric drift. tSNR uses the fixed common-mask/run-mask intersection and reports coverage against the fixed mask.
 - `harmonization_report.py`: compact Phase 0 summary including the approved target status.
 - `run_logged.sh`: local raw log plus a compact Git-trackable record for major Linux2 runs.
 
@@ -187,3 +190,59 @@ nohup bash code/run_logged.sh \
     --fail-on-incomplete \
   > logs/phase0-susan-vs-afni-6mm-full.nohup 2>&1 </dev/null &
 ```
+
+## Post-smoothing tSNR, motion, and coverage QC
+
+The production tSNR definition is voxelwise temporal mean divided by sample temporal standard deviation (`ddof=1`). It is measured from the approved `desc-smoothToFWHM6_bold` file that will enter FEAT. Summary statistics use the intersection of each run's fMRIPrep brain mask and one fixed TemplateFlow MNI152NLin6Asym brain mask resampled by nearest neighbor to the exact RF1 grid. `coverage_pct` is the intersection voxel count divided by the fixed common-mask voxel count; it is not calculated against each run's own denominator.
+
+Create the non-participant common mask once. Review the `find` result before running the command; it must identify the TemplateFlow `MNI152NLin6Asym` brain mask rather than a different template:
+
+```bash
+template_mask=$(find "$TEMPLATEFLOW_HOME/tpl-MNI152NLin6Asym" -type f \
+  -name 'tpl-MNI152NLin6Asym_res-02_desc-brain_mask.nii.gz' \
+  | sort | head -n 1)
+
+printf 'Template mask: %s\n' "$template_mask"
+test -n "$template_mask" && test -f "$template_mask"
+
+python3 code/create_common_analysis_mask.py \
+  --source-mask "$template_mask" \
+  --reference-grid "$REFERENCE_GRID" \
+  --output "$COMMON_ANALYSIS_MASK" \
+  --json-output resources/tpl-MNI152NLin6Asym_space-RF1Grid_desc-brain_mask.json
+```
+
+Build the 765-run QC contract, then launch it through `nohup`. The batch reads each smoothed 4D input once, delegates tSNR to the authoritative RF1 implementation, requires one confound row per BOLD volume, and calculates FD>0.5-mm volume fractions. It writes small restartable per-run JSON files under ignored `derivatives/qc/`.
+
+```bash
+python3 code/build_analysis_qc_manifest.py \
+  --output logs/runlists/analysis-qc-ready.tsv \
+  --missing-output logs/runlists/analysis-qc-missing.tsv
+
+nohup bash code/run_logged.sh \
+  --label phase0-analysis-input-qc-full \
+  --include-full-log -- \
+  python3 code/run_analysis_qc_batch.py \
+    --manifest logs/runlists/analysis-qc-ready.tsv \
+    --jobs 8 \
+    --log-dir logs/analysis-qc-current \
+  --check \
+  python3 code/audit_analysis_qc.py \
+    --manifest logs/runlists/analysis-qc-ready.tsv \
+    --output logs/records/analysis-qc-run-level.tsv \
+    --summary-output logs/records/analysis-qc-dataset-summary.tsv \
+    --subject-output logs/records/analysis-qc-subject-level.tsv \
+    --missing-output logs/records/analysis-qc-missing.tsv \
+    --fail-on-incomplete \
+  > logs/phase0-analysis-input-qc-full.nohup 2>&1 </dev/null &
+```
+
+The audit reports but does not automatically exclude review flags: dataset-specific 1.5×IQR low-tSNR/high-FD/low-coverage outliers, coverage below 90%, and more than 20% high-motion volumes. Thresholds and all raw metrics are retained so exclusions can be reviewed scientifically. After a complete audit, create the simple QC plots:
+
+```bash
+python3 code/plot_analysis_qc.py \
+  --input logs/records/analysis-qc-run-level.tsv \
+  --output-dir qc
+```
+
+The tracked `qc/` outputs and compact `logs/records/` tables should be committed after review. Large per-run JSON derivatives stay ignored.

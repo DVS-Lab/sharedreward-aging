@@ -27,4 +27,5 @@ derivatives/*
 *.nii.gz
 !masks/*.nii
 !masks/*.nii.gz
+!resources/*.nii.gz
 sub-*.html

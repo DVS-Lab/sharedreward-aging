@@ -7,6 +7,7 @@ QC_ROOT="${QC_ROOT:-${PROJECT_ROOT}/derivatives/qc}"
 RF1_SHAREDREWARD_ROOT="${RF1_SHAREDREWARD_ROOT:-/ZPOOL/data/projects/rf1-sra-sharedreward}"
 RF1_SRA_LINUX2_ROOT="${RF1_SRA_LINUX2_ROOT:-/ZPOOL/data/projects/rf1-sra-linux2}"
 REFERENCE_GRID="${REFERENCE_GRID:-${RF1_SHAREDREWARD_ROOT}/resources/rf1_MNI152NLin6Asym_reference_grid.nii.gz}"
+COMMON_ANALYSIS_MASK="${COMMON_ANALYSIS_MASK:-${PROJECT_ROOT}/resources/tpl-MNI152NLin6Asym_space-RF1Grid_desc-brain_mask.nii.gz}"
 # Approved 2026-08-23 after complete RF1/ds003745 characterization.
 # This is total measured classic FWHM, not an added 6-mm kernel.
 TARGET_FWHM_MM="${TARGET_FWHM_MM:-6}"
