@@ -1,0 +1,71 @@
+{
+  "description": "Coverage-eligible denominator preserving the historical Shared Reward cerebellum/posterior-brainstem exemption. Formula: RF1-grid TemplateFlow brain mask AND NOT nearest-neighbor-resampled historical exemption mask.",
+  "created_at": "2026-08-24T14:22:11.175648+00:00",
+  "template_mask": "/ZPOOL/data/projects/sharedreward-aging/resources/tpl-MNI152NLin6Asym_space-RF1Grid_desc-brain_mask.nii.gz",
+  "template_mask_sha256": "97c10eef7f0c14c4aa87283eae35a0bd73ea07c471d8b9d2bd2b010efc0d1610",
+  "historical_exemption_mask": "/ZPOOL/data/projects/sharedreward-aging/masks/cerebellum-brainstem_mask.nii.gz",
+  "historical_exemption_mask_sha256": "1335b40c2ad94056cd54c1b41aea100f5063428045c63271f7909432f4e310ed",
+  "reference_grid": "/ZPOOL/data/projects/rf1-sra-sharedreward/resources/rf1_MNI152NLin6Asym_reference_grid.nii.gz",
+  "reference_grid_sha256": "52fd69e09e50ffe857b25a62afb9b8c4fc31f8b3cad9942a6a6874ff5b067bcf",
+  "resampled_exemption_mask": "/ZPOOL/data/projects/sharedreward-aging/resources/tpl-MNI152NLin6Asym_space-RF1Grid_desc-coverageExemption_mask.nii.gz",
+  "resampled_exemption_mask_sha256": "314e7a494d936da01b786a23526365c70e91bca009d10122b9678e01e62d8c90",
+  "eligible_coverage_mask": "/ZPOOL/data/projects/sharedreward-aging/resources/tpl-MNI152NLin6Asym_space-RF1Grid_desc-coverageEligible_mask.nii.gz",
+  "eligible_coverage_mask_sha256": "9f7f1b96b290c2c0cff68917fe12f31d7bf9a8226d0ae962747e79031d5b6956",
+  "shape": [
+    57,
+    70,
+    54
+  ],
+  "zooms_mm": [
+    2.700000047683716,
+    2.700000047683716,
+    2.9700000286102295
+  ],
+  "affine": [
+    [
+      2.700000047683716,
+      0.0,
+      0.0,
+      -74.80000305175781
+    ],
+    [
+      0.0,
+      2.700000047683716,
+      0.0,
+      -109.80000305175781
+    ],
+    [
+      0.0,
+      0.0,
+      2.9700000286102295,
+      -72.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "qform_code": 4,
+  "sform_code": 4,
+  "template_mask_voxels": 84542,
+  "resampled_exemption_voxels": 10429,
+  "exemption_inside_template_voxels": 9203,
+  "eligible_coverage_voxels": 75339,
+  "resampled_exemption_world_extent": {
+    "minimum_mm": [
+      -53.200002670288086,
+      -90.9000027179718,
+      -69.02999997138977
+    ],
+    "maximum_mm": [
+      54.79999923706055,
+      -12.600001335144043,
+      -0.7199993133544922
+    ]
+  },
+  "interpolation": "nearest-neighbor",
+  "coverage_formula": "run_mask_intersection_eligible_mask / eligible_mask",
+  "tsnr_mask_policy": "The full TemplateFlow mask remains the fixed tSNR reference; this eligible mask is used only for historical coverage comparability."
+}
