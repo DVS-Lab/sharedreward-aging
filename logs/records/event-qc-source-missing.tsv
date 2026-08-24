@@ -1,0 +1,8 @@
+dataset	subject	session	run	problems
+rf1	11450	01	2	missing_source_events
+rf1	11969	01	1	missing_source_events
+rf1	11969	01	2	missing_source_events
+rf1	11984	01	1	missing_source_events
+rf1	12020	01	1	missing_source_events
+rf1	12036	01	2	missing_source_events
+rf1	12037	01	2	missing_source_events
