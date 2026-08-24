@@ -129,7 +129,7 @@ FEAT's smoothing field is expressed as FWHM, but its generated `susan` command r
 
 This is not an equivalence test between two spellings of the same operation. AFNI `3dBlurToFWHM -FWHM 6` targets approximately 6 mm **total measured** classic smoothness. FEAT applies a nominal 6-mm SUSAN kernel to an already smooth image. For an ideal Gaussian kernel, the latter total is approximately `sqrt(baseline^2 + 6^2)`. The pilot measures the nonlinear SUSAN result empirically with the same `3dFWHMx` command used for the AFNI output.
 
-The comparison manifest defaults to the highest-baseline analysis-ready run from each dataset. `--scope all` generalizes the same contract to the full cohort, but should not be launched until the two-run result has been reviewed. Comparison derivatives are target/method encoded and separate from production inputs.
+The comparison manifest defaults to the highest-baseline analysis-ready run from each dataset. `--scope all` generalizes the same contract to the 765 analysis-ready inputs: 665 RF1 runs plus 100 post-`wsinc5` ds003745 runs. The 865-row characterization table additionally contains the same 100 ds003745 runs on their unused native fMRIPrep grid; those rows are intentionally excluded from the production-method comparison. Comparison derivatives are target/method encoded and separate from production inputs.
 
 Build and launch the two-run pilot after the 6-mm target manifest exists. The selected runs are currently RF1 sub-11720/ses-01/run-1 and ds003745 sub-118/run-02.
 
@@ -156,4 +156,32 @@ nohup bash code/run_logged.sh \
     --missing-output logs/records/susan-vs-afni-6mm-pilot-missing.tsv \
     --fail-on-incomplete \
   > logs/phase0-susan-vs-afni-6mm-pilot.nohup 2>&1 </dev/null &
+```
+
+After the production AFNI target-smoothing launcher has stopped and its outputs have been reviewed, rebuild with `--scope all`. The expected contract is 765 ready and zero incomplete units. Use a separate log directory and request a compact dataset-level summary in addition to the 2,295 method-level rows:
+
+```bash
+python3 code/build_susan_comparison_manifest.py \
+  --target-manifest logs/runlists/target-smoothing-6mm-ready.tsv \
+  --scope all \
+  --kernel-fwhm 6 \
+  --output logs/runlists/susan-vs-afni-6mm-full.tsv \
+  --missing-output logs/runlists/susan-vs-afni-6mm-full-missing.tsv
+
+nohup bash code/run_logged.sh \
+  --label phase0-susan-vs-afni-6mm-full \
+  --include-full-log -- \
+  python3 code/run_susan_comparison.py \
+    --manifest logs/runlists/susan-vs-afni-6mm-full.tsv \
+    --jobs 8 \
+    --log-dir logs/susan-vs-afni-6mm-full \
+    --work-root work/susan-vs-afni-6mm-full \
+  --check \
+  python3 code/audit_susan_comparison.py \
+    --manifest logs/runlists/susan-vs-afni-6mm-full.tsv \
+    --output logs/records/susan-vs-afni-6mm-full.tsv \
+    --summary-output logs/records/susan-vs-afni-6mm-full-summary.tsv \
+    --missing-output logs/records/susan-vs-afni-6mm-full-missing.tsv \
+    --fail-on-incomplete \
+  > logs/phase0-susan-vs-afni-6mm-full.nohup 2>&1 </dev/null &
 ```

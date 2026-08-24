@@ -75,19 +75,31 @@ class SusanComparison(unittest.TestCase):
                 )
                 images[method], qcs[method] = image, qc
             manifest = directory / "manifest.tsv"
+            metadata = directory / "susan-metadata.tsv"
+            metadata.write_text(
+                "input\tmask\toutput\tkernel_fwhm_mm\tspatial_sigma_mm\tmasked_median\tbrightness_threshold\tfsl_version\n"
+                f"{images['baseline'].resolve()}\t{mask.resolve()}\t{images['susan'].resolve()}\t6\t2.54777\t1000\t750\tFSL_TEST\n"
+            )
             manifest.write_text(
                 "dataset\tsubject\tsession\trun\tbaseline_bold\tinput_mask\tafni_target_bold\tsusan_output_bold\tsusan_metadata\tbaseline_qc\tafni_target_qc\tsusan_output_qc\tkernel_fwhm_mm\n"
-                f"rf1\t100\t01\t1\t{images['baseline']}\t{mask}\t{images['afni']}\t{images['susan']}\tunused\t{qcs['baseline']}\t{qcs['afni']}\t{qcs['susan']}\t6\n"
+                f"rf1\t100\t01\t1\t{images['baseline']}\t{mask}\t{images['afni']}\t{images['susan']}\t{metadata}\t{qcs['baseline']}\t{qcs['afni']}\t{qcs['susan']}\t6\n"
             )
             output, missing = directory / "audit.tsv", directory / "missing.tsv"
+            summary = directory / "summary.tsv"
             result = subprocess.run(
-                [sys.executable, str(ROOT / "code/audit_susan_comparison.py"), "--manifest", str(manifest), "--output", str(output), "--missing-output", str(missing), "--fail-on-incomplete"],
+                [sys.executable, str(ROOT / "code/audit_susan_comparison.py"), "--manifest", str(manifest), "--output", str(output), "--missing-output", str(missing), "--summary-output", str(summary), "--fail-on-incomplete"],
                 capture_output=True, text=True,
             )
             self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
             self.assertIn("AFNI-total-target=6.0000", result.stdout)
             self.assertIn("SUSAN-kernel=7.2000", result.stdout)
             self.assertIn("Gaussian-quadrature expectation=7.2111", result.stdout)
+            with output.open(newline="") as handle:
+                rows = list(csv.DictReader(handle, delimiter="\t"))
+            susan = next(row for row in rows if row["method"] == "fsl_susan_kernel")
+            self.assertEqual(susan["susan_masked_median"], "1000")
+            self.assertEqual(susan["susan_brightness_threshold"], "750")
+            self.assertTrue(summary.is_file())
 
 
 if __name__ == "__main__":
