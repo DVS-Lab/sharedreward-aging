@@ -54,6 +54,11 @@ def parse_args():
     )
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--missing-output", required=True, type=Path)
+    parser.add_argument(
+        "--fail-on-missing",
+        action="store_true",
+        help="Return nonzero when source-event gaps are present.",
+    )
     return parser.parse_args()
 
 
@@ -164,7 +169,12 @@ def main():
             f"INCOMPLETE {row['dataset']} sub-{row['subject']} "
             f"ses-{row['session'] or 'none'} run-{row['run']}: {row['problems']}"
         )
-    return 1 if missing else 0
+    if missing:
+        print(
+            "SOURCE GAPS RECORDED: missing event sources remain excluded from "
+            "the ready manifest."
+        )
+    return 1 if args.fail_on_missing and missing else 0
 
 
 if __name__ == "__main__":

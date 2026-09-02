@@ -293,6 +293,11 @@ nohup bash code/run_logged.sh \
   > logs/phase0-fulltrial-event-qc.nohup 2>&1 </dev/null &
 ```
 
+The build step records established source gaps without failing by default. Add
+`--fail-on-missing` only when an absolutely complete source inventory is expected.
+The cohort freezer consumes both the ready audit and this source-gap table, so it
+cannot silently promote a run with missing events.
+
 The resulting run-level imaging and event tables remain separate evidence. A later explicit cohort-selection step must combine them before building L1 manifests; neither audit silently deletes data.
 
 ## Ratings QC

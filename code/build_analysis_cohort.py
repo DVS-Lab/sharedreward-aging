@@ -87,12 +87,12 @@ def parse_args():
     parser.add_argument(
         "--event-qc",
         type=Path,
-        default=ROOT / "logs/records/event-qc-run-level.tsv",
+        default=ROOT / "logs/records/fulltrial-event-qc-run-level.tsv",
     )
     parser.add_argument(
         "--event-source-missing",
         type=Path,
-        default=ROOT / "logs/records/event-qc-source-missing.tsv",
+        default=ROOT / "logs/runlists/fulltrial-event-qc-missing.tsv",
     )
     parser.add_argument(
         "--ratings-qc",
