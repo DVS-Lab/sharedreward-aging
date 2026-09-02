@@ -21,6 +21,10 @@ Active Phase 0 utilities:
 - `build_event_qc_manifest.py`, `run_event_qc_batch.py`, and `audit_event_qc.py`: source-preserving full-trial conversion, condition counts, missed-trial exclusions, and run-to-subject usability aggregation.
 - `build_ratings_qc_manifest.py` and `audit_ratings_qc.py`: explicit ratings-source resolution, six-cell validation, raw means/counts, provenance hashes, and subject-level ratings rules.
 - `build_analysis_cohort.py`: strict inventory reconciliation and separate task-valid versus ratings-qualified L1/L2 manifests. It applies established missing-event, >25%-missed, and curated task exclusions while preserving usable opposite runs; zero-count modeled conditions become explicit review holds.
+- `build_fsl_confounds_manifest.py`, `generate_fsl_confounds.py`, `run_fsl_confounds_batch.py`, and `audit_fsl_confounds.py`: the single-echo ds003745 nuisance layer matching RF1's fMRIPrep base-column policy while explicitly omitting inapplicable TEDANA ICA regressors.
+- `generate_l1_evs.py`: audited three-column EV generation from the harmonized full-trial derivatives.
+- `render_pooled_fsf.py`, `L1stats.sh`, and `run_L1stats.sh`: narrow transformation of the retained historical FSFs and bounded activation-followed-by-PPI execution.
+- `render_pooled_l2_fsf.py`, `L2stats.sh`, `run_L2stats.sh`, and `audit_outputs.py`: bounded fixed effects, explicit one-run passthrough, and L1/subject-level completeness auditing.
 - `measure_smoothness.sh`, `smooth_to_target.sh`, and `compute_tsnr.py`: thin wrappers around the explicitly configured authoritative RF1 implementations, preventing metric drift. tSNR uses the fixed common-mask/run-mask intersection and reports coverage against the fixed mask.
 - `harmonization_report.py`: compact Phase 0 summary including the approved target status.
 - `run_logged.sh`: local raw log plus a compact Git-trackable record for major Linux2 runs.
@@ -79,7 +83,7 @@ python3 code/build_characterization_manifest.py \
   --missing-output logs/runlists/phase0-characterization-missing.tsv
 ```
 
-The RF1 rows reference the authoritative Tedana-plus-confounds files under `rf1-sra-linux2/derivatives/fsl/confounds_tedana`; this repository does not copy them. The current cohort should produce 865 units: 665 RF1 pre-resampling, 100 ds003745 pre-resampling, and 100 ds003745 post-resampling/pre-blur.
+The RF1 rows reference the authoritative Tedana-plus-confounds files under `rf1-sra-linux2/derivatives/fsl/confounds_tedana`; this repository does not copy them. The current inventory should produce 867 units: 667 RF1 session-01 pre-resampling, 100 ds003745 pre-resampling, and 100 ds003745 post-resampling/pre-blur. RF1 discovery is reconciled to `rf1-sra-linux2/qc/run_qc.tsv`, rather than globbing future sessions into the cohort.
 
 Long batches should be launched through both `run_logged.sh` and `nohup`, with an explicit outer launcher log, so they survive an SSH disconnect:
 
@@ -108,7 +112,7 @@ python3 code/build_target_smoothing_manifest.py \
   --missing-output logs/runlists/target-smoothing-6mm-missing.tsv
 ```
 
-The current cohort should contain 765 units: 665 RF1 and 100 ds003745. Launch with bounded AFNI concurrency and an SSH-safe outer log:
+The current cohort should contain 767 units: 667 RF1 and 100 ds003745. Existing validated outputs are skipped, so the post-August catch-up should schedule only the two new `sub-12032` runs. Launch with bounded AFNI concurrency and an SSH-safe outer log:
 
 ```bash
 nohup bash code/run_logged.sh \
@@ -226,7 +230,7 @@ python3 code/create_coverage_eligible_mask.py \
   --json-output resources/tpl-MNI152NLin6Asym_space-RF1Grid_desc-coverageEligible_mask.json
 ```
 
-Build the 765-run QC contract, then launch it through `nohup`. The batch reads each smoothed 4D input once, delegates tSNR to the authoritative RF1 implementation, requires one confound row per BOLD volume, and calculates FD>0.5-mm volume fractions. It writes small restartable per-run JSON files under ignored `derivatives/qc/`.
+Build the 767-run QC contract, then launch it through `nohup`. The batch reads each smoothed 4D input once, delegates tSNR to the authoritative RF1 implementation, requires one confound row per BOLD volume, and calculates FD>0.5-mm volume fractions. It writes small restartable per-run JSON files under ignored `derivatives/qc/`.
 
 ```bash
 python3 code/build_analysis_qc_manifest.py \
@@ -313,7 +317,7 @@ An explicit resolution map has three tab-separated columns: `dataset`, `subject`
 
 ## Freeze analysis cohorts
 
-After the imaging, event, and ratings audits are current, freeze the analysis inventories. This step reconciles all 765 imaging runs against either a completed event-QC row or an established source-missing row and fails if anything is unaccounted for. `docs/curated_run_exclusions.tsv` supplies provenance-backed task invalidations. Ratings are kept as a separate eligibility layer rather than being allowed to suppress otherwise valid activation/PPI estimation.
+After the imaging, event, ratings, and nuisance audits are current, freeze the analysis inventories. This step reconciles the complete dynamic imaging inventory against either a completed event-QC row or an established source-missing row and fails if anything is unaccounted for. `docs/curated_run_exclusions.tsv` supplies provenance-backed task invalidations. Ratings are kept as a separate eligibility layer rather than being allowed to suppress otherwise valid activation/PPI estimation.
 
 ```bash
 nohup bash code/run_logged.sh \
@@ -330,4 +334,47 @@ The outputs are:
 - `logs/runlists/L1-model-review-hold.tsv`: otherwise usable runs with one or more zero-count substantive conditions;
 - `logs/records/analysis-run-dispositions.tsv` and `analysis-subject-dispositions.tsv`: the complete, mutually exclusive disposition audit.
 
-Source-missing and missed-trial exclusions are run-level. A valid opposite run remains in L1 and is the only run listed for that subject's fixed-effects L2. Runs on model review hold do not enter a ready manifest until their design support is explicitly resolved. Imaging IQR flags are retained in the manifests but remain review information rather than automatic exclusions.
+Source-missing and missed-trial exclusions are run-level. A valid opposite run remains in L1 and is recorded as `l1_passthrough`; only two-run subjects receive fixed effects. Runs on model review hold do not enter a ready manifest. Imaging IQR flags are retained in the manifests but remain review information rather than automatic exclusions.
+
+## Production nuisance, EV, L1, and L2 workflow
+
+RF1 L1 models consume Linux2's existing headerless `TedanaPlusConfounds.tsv` matrices. Build the ds003745 conversion contract from the named confounds used for QC, generate the single-echo matrices, and audit their volume alignment:
+
+```bash
+python3 code/build_fsl_confounds_manifest.py \
+  --output logs/runlists/ds003745-fsl-confounds.tsv
+
+python3 code/run_fsl_confounds_batch.py \
+  --manifest logs/runlists/ds003745-fsl-confounds.tsv \
+  --jobs 8 --log-dir logs/ds003745-fsl-confounds
+
+python3 code/audit_fsl_confounds.py \
+  --manifest logs/runlists/ds003745-fsl-confounds.tsv \
+  --output logs/records/ds003745-fsl-confounds-audit.tsv \
+  --fail-on-incomplete
+```
+
+Rebuild `build_analysis_cohort.py` only after that audit passes. Generate three-column files, then pilot or launch activation and seed PPI in the same worker. Each worker runs activation first and begins PPI only after that activation command succeeds; `--jobs 50` therefore means at most approximately 50 FEAT jobs, not 100.
+
+```bash
+python3 code/generate_l1_evs.py \
+  --manifest logs/runlists/L1-task-ready.tsv
+
+nohup bash code/run_logged.sh \
+  --label pooled-L1-activation-PPI-vs --include-full-log -- \
+  bash code/run_L1stats.sh \
+    --manifest logs/runlists/L1-task-ready.tsv \
+    --ppi-seed vs --jobs 50 --log-dir logs/L1-current \
+  > logs/pooled-L1-activation-PPI-vs.nohup 2>&1 </dev/null &
+```
+
+After both L1 audits pass, run activation and PPI fixed effects together for the two-run rows. `FSLSUB_PARALLEL=1` is enforced inside `L2stats.sh`; `--jobs` remains the only outer concurrency control. One-run rows are reported and intentionally skipped because their L1 cope is already the subject-level estimate.
+
+```bash
+nohup bash code/run_logged.sh \
+  --label pooled-L2-activation-PPI-vs --include-full-log -- \
+  bash code/run_L2stats.sh \
+    --manifest logs/runlists/L2-task-ready.tsv \
+    --ppi-seed vs --jobs 20 --log-dir logs/L2-current \
+  > logs/pooled-L2-activation-PPI-vs.nohup 2>&1 </dev/null &
+```

@@ -1,6 +1,6 @@
 # Shared Reward source gaps
 
-Status date: 2026-08-24. This separates confirmed missing data from recoverable repository history and unresolved RF1 source requests. Missing sources are never synthesized.
+Status date: 2026-09-02. This separates confirmed missing data from recoverable repository history and unresolved RF1 source requests. Missing sources are never synthesized.
 
 ## ds003745 ratings: confirmed absent
 
@@ -31,13 +31,11 @@ The exact notes and actions are tracked in `docs/rf1_ratings_source_notes.tsv`. 
 
 ## RF1 event sources
 
-Seven analysis-ready imaging runs lack canonical BIDS events because their private Shared Reward behavior sources are documented as missing upstream:
+The upstream source-repair work recovered and validated five previously unavailable event files: `sub-11969` runs 1 and 2, `sub-11984` run 1, `sub-12020` run 1, and `sub-12036` run 2. These existing imaging runs regain behavioral eligibility and must be re-audited under the same missed-trial and condition-support rules.
+
+Two analysis-ready imaging runs still lack canonical BIDS events because their private Shared Reward behavior sources remain unavailable upstream:
 
 - `sub-11450`, session 01, run 2
-- `sub-11969`, session 01, runs 1 and 2
-- `sub-11984`, session 01, run 1
-- `sub-12020`, session 01, run 1
-- `sub-12036`, session 01, run 2
 - `sub-12037`, session 01, run 2
 
-These match the already-executed source exclusions in `rf1-sra-linux2/docs/behavior-source-repairs.md`; they are not new repair requests. The imaging-characterization inventory resurfaced them only because it intentionally includes imaging-ready runs regardless of behavioral availability. No new event sources were found, and the available opposite-run files do not justify copying or relabeling behavior. Final task manifests automatically exclude these seven runs. Only `sub-11969` loses both runs; the other participants retain their valid opposite run.
+These are established upstream source gaps, not new repair requests. The imaging-characterization inventory includes imaging-ready runs regardless of behavioral availability, while the final task manifests automatically exclude the two unresolved runs and retain each participant's valid opposite run.

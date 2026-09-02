@@ -6,17 +6,11 @@ from __future__ import annotations
 import argparse
 import csv
 import os
-import re
 from collections import Counter
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-RF1_BOLD_RE = re.compile(
-    r"^sub-(?P<subject>[^_]+)_ses-(?P<session>[^_]+)_"
-    r"task-sharedreward_run-(?P<run>[^_]+)_part-mag_"
-    r"space-MNI152NLin6Asym_desc-preproc_bold\.nii\.gz$"
-)
 FIELDS = (
     "dataset",
     "subject",
@@ -31,6 +25,20 @@ FIELDS = (
 
 def parse_args():
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--rf1-run-qc",
+        type=Path,
+        default=Path(
+            os.environ.get(
+                "RF1_RUN_QC",
+                "/ZPOOL/data/projects/rf1-sra-linux2/qc/run_qc.tsv",
+            )
+        ),
+        help=(
+            "Authoritative rf1-sra-linux2 run inventory. Only complete "
+            "session-01 Shared Reward rows are eligible."
+        ),
+    )
     parser.add_argument(
         "--rf1-fmriprep-root",
         type=Path,
@@ -124,32 +132,47 @@ def add_row(ready, missing, identifiers, paths):
 
 
 def rf1_rows(args, ready, missing):
-    pattern = (
-        "sub-*/ses-*/func/"
-        "sub-*_ses-*_task-sharedreward_run-*_part-mag_"
-        "space-MNI152NLin6Asym_desc-preproc_bold.nii.gz"
-    )
-    bolds = sorted(args.rf1_fmriprep_root.glob(pattern))
-    if not bolds:
-        raise ValueError(
-            f"no canonical RF1 Shared Reward BOLD files: {args.rf1_fmriprep_root}"
+    if not nonempty(args.rf1_run_qc):
+        raise ValueError(f"authoritative RF1 run QC is missing: {args.rf1_run_qc}")
+    with args.rf1_run_qc.open(newline="") as handle:
+        inventory = list(csv.DictReader(handle, delimiter="\t"))
+    required = {"subject", "session", "task", "run", "qc_complete"}
+    if not inventory or not required.issubset(inventory[0]):
+        raise ValueError("authoritative RF1 run QC lacks required columns")
+    selected = [
+        row
+        for row in inventory
+        if row["task"] == "sharedreward"
+        and row["session"] == "01"
+        and row["qc_complete"].strip().lower() == "true"
+    ]
+    if not selected:
+        raise ValueError(f"no complete RF1 session-01 Shared Reward rows: {args.rf1_run_qc}")
+    seen = set()
+    for source in selected:
+        key = (source["subject"], source["session"], str(int(source["run"])))
+        if key in seen:
+            raise ValueError(f"duplicate authoritative RF1 run: {key}")
+        seen.add(key)
+        stem = (
+            f"sub-{key[0]}_ses-{key[1]}_task-sharedreward_run-{key[2]}"
         )
-    for bold in bolds:
-        match = RF1_BOLD_RE.match(bold.name)
-        if not match:
-            raise ValueError(f"unrecognized RF1 BOLD name: {bold}")
+        func = (
+            args.rf1_fmriprep_root
+            / f"sub-{key[0]}"
+            / f"ses-{key[1]}"
+            / "func"
+        )
+        bold = func / (
+            f"{stem}_part-mag_space-MNI152NLin6Asym_desc-preproc_bold.nii.gz"
+        )
         identifiers = {
             "dataset": "rf1",
-            "subject": match.group("subject"),
-            "session": match.group("session"),
-            "run": match.group("run"),
+            "subject": key[0],
+            "session": key[1],
+            "run": key[2],
             "stage": "pre_resample",
         }
-        stem = (
-            f"sub-{identifiers['subject']}_ses-{identifiers['session']}_"
-            f"task-sharedreward_run-{identifiers['run']}"
-        )
-        func = bold.parent
         confounds = (
             args.rf1_confounds_root
             / f"sub-{identifiers['subject']}"

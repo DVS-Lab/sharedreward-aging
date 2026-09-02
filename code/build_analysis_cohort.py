@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import os
 from collections import defaultdict
 from pathlib import Path
 
@@ -38,6 +39,7 @@ L2_FIELDS = (
     "session",
     "n_runs",
     "runs",
+    "subject_level_strategy",
     "ratings_eligible",
     "ratings_exclusion_reason",
 )
@@ -61,6 +63,22 @@ SUBJECT_FIELDS = (
 
 def parse_args():
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--rf1-confounds-root",
+        type=Path,
+        default=Path(
+            os.environ.get(
+                "RF1_CONFOUNDS_ROOT",
+                "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fsl/"
+                "confounds_tedana",
+            )
+        ),
+    )
+    parser.add_argument(
+        "--ds-confounds-root",
+        type=Path,
+        default=ROOT / "derivatives/fsl/confounds_fmriprep",
+    )
     parser.add_argument(
         "--analysis-qc",
         type=Path,
@@ -196,6 +214,24 @@ def is_true(value: str) -> bool:
     return value.strip().lower() == "true"
 
 
+def fsl_confounds_path(args, row: dict[str, str]) -> Path:
+    subject = row["subject"]
+    run = normalize_run(row["run"])
+    if row["dataset"] == "rf1":
+        session = row["session"]
+        return args.rf1_confounds_root / f"sub-{subject}" / (
+            f"sub-{subject}_ses-{session}_task-sharedreward_run-{run}_"
+            "desc-TedanaPlusConfounds.tsv"
+        )
+    if row["dataset"] == "ds003745":
+        run_label = f"{int(run):02d}"
+        return args.ds_confounds_root / f"sub-{subject}" / "func" / (
+            f"sub-{subject}_task-sharedreward_run-{run_label}_"
+            "desc-FSLConfounds.tsv"
+        )
+    raise ValueError(f"unsupported dataset for FSL confounds: {row['dataset']}")
+
+
 def build(args):
     analysis = read_tsv(
         args.analysis_qc,
@@ -295,7 +331,7 @@ def build(args):
             **{field: base[field] for field in IDENTIFIERS},
             "input": base["input"],
             "mask": base["mask"],
-            "confounds": base["confounds"],
+            "confounds": str(fsl_confounds_path(args, base).resolve()),
             "source_events": event["source_events"] if event else "",
             "harmonized_events": event["harmonized_events"] if event else "",
             "missed_trial_fraction": event["missed_trial_fraction"] if event else "",
@@ -304,6 +340,13 @@ def build(args):
             "ratings_eligible": str(rating_eligible).lower(),
             "ratings_exclusion_reason": rating_reason,
         }
+        if disposition == "task_ready":
+            confounds = Path(l1_row["confounds"])
+            if not confounds.is_file() or confounds.stat().st_size == 0:
+                raise ValueError(
+                    "task-ready run lacks its FSL nuisance matrix: "
+                    f"{key}: {confounds}"
+                )
         disposition_row = {
             **{field: base[field] for field in IDENTIFIERS},
             "disposition": disposition,
@@ -343,6 +386,9 @@ def build(args):
             "session": session,
             "n_runs": len(ready_runs),
             "runs": ",".join(ready_runs),
+            "subject_level_strategy": (
+                "fixed_effects" if len(ready_runs) == 2 else "l1_passthrough"
+            ),
             "ratings_eligible": str(rating_eligible).lower(),
             "ratings_exclusion_reason": rating_reason,
         }

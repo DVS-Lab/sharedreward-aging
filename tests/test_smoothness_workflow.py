@@ -66,6 +66,11 @@ class SmoothnessWorkflow(unittest.TestCase):
                 rf1_mask,
             )
             rf1_confounds.write_text("x")
+            rf1_run_qc = directory / "run_qc.tsv"
+            rf1_run_qc.write_text(
+                "subject\tsession\ttask\trun\tqc_complete\n"
+                "100\t01\tsharedreward\t1\tTRUE\n"
+            )
 
             ds_func = directory / "ds/sub-104/func"
             ds_func.mkdir(parents=True)
@@ -106,6 +111,8 @@ class SmoothnessWorkflow(unittest.TestCase):
                 [
                     "python3",
                     str(ROOT / "code/build_characterization_manifest.py"),
+                    "--rf1-run-qc",
+                    str(rf1_run_qc),
                     "--rf1-fmriprep-root",
                     str(rf1),
                     "--rf1-confounds-root",

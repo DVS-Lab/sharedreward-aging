@@ -35,6 +35,8 @@ class CohortTest(unittest.TestCase):
             missing = root / "missing.tsv"
             ratings = root / "ratings.tsv"
             curated = root / "curated.tsv"
+            rf1_confounds = root / "rf1-confounds"
+            ds_confounds = root / "ds-confounds"
             ids = [
                 ("rf1", "11969", "01", "1"),
                 ("rf1", "11969", "01", "2"),
@@ -63,6 +65,13 @@ class CohortTest(unittest.TestCase):
                     for d, s, se, r in ids
                 ],
             )
+            for _dataset, subject, session, run in ids:
+                path = rf1_confounds / f"sub-{subject}" / (
+                    f"sub-{subject}_ses-{session}_task-sharedreward_run-{run}_"
+                    "desc-TedanaPlusConfounds.tsv"
+                )
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text("0\n")
             event_rows = []
             missing_keys = {("rf1", "11969", "01", "1"), ("rf1", "11969", "01", "2"), ("rf1", "12020", "01", "1")}
             for d, s, se, r in ids:
@@ -123,6 +132,8 @@ class CohortTest(unittest.TestCase):
             )
             paths = {name: root / f"{name}.tsv" for name in ("l1_task", "l1_ratings", "l1_review", "dispositions", "l2_task", "l2_ratings", "subjects")}
             args = Namespace(
+                rf1_confounds_root=rf1_confounds,
+                ds_confounds_root=ds_confounds,
                 analysis_qc=analysis,
                 event_qc=events,
                 event_source_missing=missing,
@@ -149,6 +160,7 @@ class CohortTest(unittest.TestCase):
             l2 = {row["subject"]: row for row in read_tsv(paths["l2_task"])}
             self.assertNotIn("11969", l2)
             self.assertEqual(l2["12020"]["runs"], "2")
+            self.assertEqual(l2["12020"]["subject_level_strategy"], "l1_passthrough")
             self.assertNotIn("11539", l2)
             self.assertNotIn("12041", l2)
             self.assertNotIn("11201", l2)
