@@ -186,7 +186,7 @@ class TargetSmoothingWorkflow(unittest.TestCase):
             directory = Path(directory)
             affine = np.diag([2.7, 2.7, 2.97, 1.0])
             source = directory / "source.nii.gz"
-            output = directory / "output.nii.gz"
+            output = directory / "sub-10657_desc-smoothToFWHM6_bold.nii.gz"
             mask = directory / "mask.nii.gz"
             nib.save(nib.Nifti1Image(np.zeros((3, 4, 5, 6)), affine), source)
             nib.save(nib.Nifti1Image(np.zeros((3, 4, 5, 6)), affine), output)
@@ -231,6 +231,26 @@ class TargetSmoothingWorkflow(unittest.TestCase):
             with summary.open(newline="") as handle:
                 rows = list(csv.DictReader(handle, delimiter="\t"))
             self.assertEqual(rows[0]["qc_status"], "accepted_exception")
+
+            restart = subprocess.run(
+                [
+                    sys.executable,
+                    str(ROOT / "code/run_target_smoothing_batch.py"),
+                    "--manifest",
+                    str(manifest),
+                    "--jobs",
+                    "1",
+                    "--log-dir",
+                    str(directory / "restart-logs"),
+                    "--exceptions",
+                    str(exceptions),
+                ],
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(restart.returncode, 0, restart.stdout + restart.stderr)
+            self.assertIn("Units verified existing: 1", restart.stdout)
+            self.assertIn("documented QC exception", restart.stdout)
 
             qc.write_text(
                 "input\tmask\tclassic_fwhm_x\tclassic_fwhm_y\tclassic_fwhm_z\tclassic_fwhm_combined\tacf_a\tacf_b\tacf_c\tacf_effective_fwhm\tafni_version\n"

@@ -11,6 +11,8 @@ import subprocess
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
+from audit_target_smoothing import DEFAULT_EXCEPTIONS, load_exceptions
+
 
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED_FIELDS = (
@@ -47,6 +49,12 @@ def parse_args():
         default=ROOT / "work/target-smoothing",
     )
     parser.add_argument("--tolerance-fraction", type=float, default=0.10)
+    parser.add_argument(
+        "--exceptions",
+        type=Path,
+        default=DEFAULT_EXCEPTIONS,
+        help="Tracked, bounded run-specific QC exceptions used for restart validation.",
+    )
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument(
         "--all-blurmaster",
@@ -98,7 +106,7 @@ def read_manifest(path):
     return rows
 
 
-def validate_result(row, tolerance):
+def validate_result(row, tolerance, exceptions):
     output = Path(row["output_bold"])
     qc = Path(row["output_qc"])
     if not output.is_file() or output.stat().st_size == 0:
@@ -125,10 +133,24 @@ def validate_result(row, tolerance):
     achieved = float(result["classic_fwhm_combined"])
     lower, upper = target * (1 - tolerance), target * (1 + tolerance)
     if not lower <= achieved <= upper:
-        raise ValueError(
-            f"classic combined {achieved:g} outside {lower:g}-{upper:g} mm"
+        key = (
+            row["dataset"],
+            row["subject"],
+            row["session"],
+            row["run"],
+            "classic_outside_tolerance",
         )
-    return result
+        exception = exceptions.get(key)
+        if not (
+            exception is not None
+            and abs(target - exception["target"]) <= 1e-6
+            and exception["accepted_min"] <= achieved <= exception["accepted_max"]
+        ):
+            raise ValueError(
+                f"classic combined {achieved:g} outside {lower:g}-{upper:g} mm"
+            )
+        return result, exception
+    return result, None
 
 
 def command_string(command):
@@ -151,10 +173,13 @@ def run_unit(row, args):
     exists = output.exists() or qc.exists()
     if exists and not args.overwrite:
         try:
-            validate_result(row, args.tolerance_fraction)
+            _, exception = validate_result(
+                row, args.tolerance_fraction, args.exception_rows
+            )
         except ValueError as error:
             return label, log_path, "invalid", f"{error}; review, then use --overwrite"
-        return label, log_path, "verified", ""
+        detail = "documented QC exception" if exception else ""
+        return label, log_path, "verified", detail
 
     command = [
         "bash",
@@ -196,8 +221,11 @@ def run_unit(row, args):
             )
         if result.returncode:
             return label, log_path, "failed", f"exit={result.returncode}"
-        validate_result(row, args.tolerance_fraction)
-        return label, log_path, "completed", ""
+        _, exception = validate_result(
+            row, args.tolerance_fraction, args.exception_rows
+        )
+        detail = "documented QC exception" if exception else ""
+        return label, log_path, "completed", detail
     except Exception as error:
         return label, log_path, "failed", str(error)
 
@@ -214,6 +242,7 @@ def main():
         rows = read_manifest(args.manifest)
     except ValueError as error:
         raise SystemExit(f"ERROR: {error}") from error
+    args.exception_rows = load_exceptions(args.exceptions)
 
     print(
         f"Target-smoothing plan: {len(rows)} unit(s), jobs={args.jobs}, "
@@ -245,10 +274,13 @@ def main():
             label, log_path, status, detail = future.result()
             if status == "completed":
                 completed += 1
-                print(f"DONE: {label}")
+                print(f"DONE: {label}{f' ({detail})' if detail else ''}")
             elif status == "verified":
                 verified += 1
-                print(f"VERIFIED EXISTING: {label}")
+                print(
+                    f"VERIFIED EXISTING: {label}"
+                    f"{f' ({detail})' if detail else ''}"
+                )
             else:
                 failures.append((label, status, detail, log_path))
                 print(f"ERROR: {label}: {status}: {detail} (log: {log_path})")
