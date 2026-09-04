@@ -4,7 +4,7 @@ subject	status	analysis_action	recovery_priority	session_note	source
 10581	confirmed_not_collected	ratings_exclusion	none	Post-scan ratings were not completed because of time constraints.	Ryan session-note review 2026-08-24
 10606	reported_completed	ratings_exclusion_pending_recovery	high	Session notes indicate post-scan tasks were completed.	Ryan session-note review 2026-08-24
 10700	reported_completed	ratings_exclusion_pending_recovery	high	Session notes indicate post-scan tasks were completed.	Ryan session-note review 2026-08-24
-10803	recoverable_git_history	restore_authoritative_source	high	A valid six-row post-scan file exists in rf1-sra Git history at commit 247d6130d, blob 908135a33726f9e8e3c7cd334fec1bacf0a2c880.	repository-history audit 2026-08-24
+10803	restored_from_git_history	rerun_ratings_audit	resolved	The exact six-row post-scan file from commit 247d6130d was restored to current rf1-sra main on 2026-09-04; blob 908135a33726f9e8e3c7cd334fec1bacf0a2c880 is unchanged.	repository-history recovery 2026-09-04
 10810	no_session_notes	ratings_exclusion_pending_recovery	medium	No session notes were available.	Ryan session-note review 2026-08-24
 10817	completion_undocumented	ratings_exclusion_pending_recovery	medium	Session notes do not say whether post-scan tasks were completed.	Ryan session-note review 2026-08-24
 10827	reported_completed	ratings_exclusion_pending_recovery	high	Session notes indicate post-scan tasks were completed.	Ryan session-note review 2026-08-24

@@ -19,6 +19,15 @@ def setting(text, key):
 
 
 class PooledFSFTest(unittest.TestCase):
+    def test_active_templates_disable_per_ev_temporal_filtering(self):
+        for path in ROOT.joinpath("templates").glob("*.fsf"):
+            enabled = re.findall(
+                r"^set fmri\(tempfilt_yn\d+\)\s+1$",
+                path.read_text(),
+                re.MULTILINE,
+            )
+            self.assertEqual(enabled, [], path.name)
+
     def test_activation_is_narrow_fulltrial_contract(self):
         text = MODULE.render(
             "act",
@@ -29,6 +38,7 @@ class PooledFSFTest(unittest.TestCase):
         self.assertEqual(setting(text, "featwatcher_yn"), "0")
         self.assertEqual(setting(text, "evs_orig"), "10")
         self.assertEqual(setting(text, "ncon_orig"), "28")
+        self.assertEqual(setting(text, "tempfilt_yn7"), "0")
         self.assertEqual(setting(text, "convolve10"), "3")
         self.assertEqual(setting(text, "shape10"), "SHAPE_EV")
         self.assertIsNone(setting(text, "evtitle11"))

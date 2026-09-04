@@ -12,11 +12,15 @@ None has an `SR-Ratings` entry in the pinned OpenNeuro ds003745 v2.1.1 download 
 
 ## RF1 ratings
 
-The current `rf1-sra` source tree lacks ratings for 19 analysis-cohort participants:
+Before the 2026-09-04 recovery, the `rf1-sra` source tree lacked ratings for 19 analysis-cohort participants:
 
 `10418, 10478, 10581, 10606, 10700, 10803, 10810, 10817, 10827, 10834, 10838, 10866, 10977, 11472, 11539, 11587, 11681, 11694, 12037`
 
-RF1 `sub-10803` is recoverable internally. A valid six-row post-scan source was added in historical commit `247d6130d` (`10803 Post Scan`) and is retained as Git object `908135a33726f9e8e3c7cd334fec1bacf0a2c880`, but it is absent from current `main` after later merge/revert activity. Restore it in `rf1-sra` with an explicit provenance note, then rerun the ratings audit.
+RF1 `sub-10803` was recovered on 2026-09-04. The exact six-row post-scan
+source from historical commit `247d6130d` (`10803 Post Scan`) was restored to
+the current `rf1-sra` tree without modifying its contents; its Git blob remains
+`908135a33726f9e8e3c7cd334fec1bacf0a2c880`. Rerun the ratings audit before
+freezing the ratings-qualified cohort.
 
 The remaining 18 participants have no Shared Reward ratings object anywhere in the local full `rf1-sra` history. Ryan's 2026-08-24 review of session notes resolves the recovery priority:
 

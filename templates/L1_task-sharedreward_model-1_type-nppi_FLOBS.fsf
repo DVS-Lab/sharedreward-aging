@@ -1237,7 +1237,7 @@ set fmri(convolve7) 7
 set fmri(convolve_phase7) 0
 
 # Apply temporal filtering (EV 7)
-set fmri(tempfilt_yn7) 1
+set fmri(tempfilt_yn7) 0
 
 # Add temporal derivative (EV 7)
 set fmri(deriv_yn7) 0
@@ -24866,4 +24866,3 @@ set fmri(init_standard) ""
 
 # For full FEAT analysis: overwrite existing .feat output dir?
 set fmri(overwrite_yn) 1
-
