@@ -14,7 +14,7 @@ echo 'PASS: bash syntax'
 
 python_scripts=(
     audit_analysis_qc.py audit_event_qc.py audit_fmriprep_ds003745.py
-    audit_fsl_confounds.py audit_outputs.py audit_ratings_qc.py
+    audit_fsl_confounds.py audit_outputs.py audit_ratings_qc.py model_provenance.py
     audit_resampling.py audit_smoothness.py audit_target_smoothing.py
     audit_susan_comparison.py build_analysis_cohort.py
     build_analysis_qc_manifest.py build_characterization_manifest.py
@@ -24,13 +24,13 @@ python_scripts=(
     build_target_smoothing_manifest.py check_grid.py compute_tsnr.py
     convert_harmonized_events.py create_common_analysis_mask.py
     create_coverage_eligible_mask.py generate_fsl_confounds.py
-    generate_l1_evs.py harmonization_report.py plot_analysis_qc.py
+    generate_l1_evs.py harmonization_report.py plot_analysis_qc.py recover_sub144_analysis.py
     plot_coverage_mosaics.py plot_smoothness_comparison.py
     read_l1_manifest.py read_l2_manifest.py render_pooled_fsf.py
     render_pooled_l2_fsf.py run_analysis_qc_batch.py
     run_event_qc_batch.py run_fsl_confounds_batch.py
     run_resampling_batch.py run_smoothness_batch.py
-    run_susan_comparison.py run_target_smoothing_batch.py summarize_events.py
+    run_susan_comparison.py run_target_smoothing_batch.py summarize_events.py verify_neutral_feat_design.py
 )
 python_paths=()
 for script in "${python_scripts[@]}"; do python_paths+=("$ROOT/code/$script"); done

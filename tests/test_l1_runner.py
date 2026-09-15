@@ -39,7 +39,8 @@ class L1RunnerTest(unittest.TestCase):
                 "event_computer_neutral", "event_friend_neutral", "event_stranger_neutral",
             )
             for condition in conditions:
-                (ev_dir / f"{condition}.txt").write_text("0\t1\t1\n")
+                text = "" if condition == "event_computer_neutral" else "0\t1\t1\n"
+                (ev_dir / f"{condition}.txt").write_text(text)
             (ev_dir / "missed_trial.txt").write_text("")
             env = {
                 **os.environ,
@@ -58,6 +59,9 @@ class L1RunnerTest(unittest.TestCase):
             self.assertNotIn("TR_INFO", activation_text)
             self.assertIn("set fmri(smooth) 0", activation_text)
             self.assertIn("set fmri(shape10) 10", activation_text)
+            self.assertIn("set fmri(shape7) 10", activation_text)
+            self.assertIn("set fmri(shape8) 3", activation_text)
+            self.assertIn("set fmri(ncon_orig) 22", activation_text)
             activation_feat = unit_dir / "L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat"
             activation_feat.mkdir()
             (activation_feat / "mask.nii.gz").write_text("mask")
@@ -65,7 +69,10 @@ class L1RunnerTest(unittest.TestCase):
             ppi = unit_dir / "L1_ds003745_sub-104_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1.fsf"
             ppi_text = ppi.read_text()
             self.assertNotIn("PHYS", ppi_text)
-            self.assertIn("set fmri(ncon_orig) 29", ppi_text)
+            self.assertIn("set fmri(shape7) 10", ppi_text)
+            self.assertIn("set fmri(shape18) 10", ppi_text)
+            self.assertIn("set fmri(shape19) 4", ppi_text)
+            self.assertIn("set fmri(ncon_orig) 23", ppi_text)
 
 
 if __name__ == "__main__":

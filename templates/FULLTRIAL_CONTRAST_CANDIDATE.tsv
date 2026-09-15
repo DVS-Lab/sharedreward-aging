@@ -1,29 +1,23 @@
 contrast_name	candidate_cope	rf1_authoritative_cope	weights_ev1_to_ev10	notes
-C_pun	1	1	1.0,0,0,0,0,0,0,0,0,0	missed_trial nuisance weight is zero
-C_rew	2	2	0,1.0,0,0,0,0,0,0,0,0	missed_trial nuisance weight is zero
-F_pun	3	3	0,0,1.0,0,0,0,0,0,0,0	missed_trial nuisance weight is zero
-F_rew	4	4	0,0,0,1.0,0,0,0,0,0,0	missed_trial nuisance weight is zero
-S_pun	5	5	0,0,0,0,1.0,0,0,0,0,0	missed_trial nuisance weight is zero
-S_rew	6	6	0,0,0,0,0,1.0,0,0,0,0	missed_trial nuisance weight is zero
-C_neu	7	7	0,0,0,0,0,0,1.0,0,0,0	missed_trial nuisance weight is zero
-F_neu	8	8	0,0,0,0,0,0,0,1.0,0,0	missed_trial nuisance weight is zero
-S_neu	9	9	0,0,0,0,0,0,0,0,1.0,0	missed_trial nuisance weight is zero
-rew-pun	10	10	-1.0,1.0,-1.0,1.0,-1.0,1.0,0,0,0,0	missed_trial nuisance weight is zero
-F-S	11	11	0,0,1.0,1.0,-1.0,-1.0,0,0,0,0	missed_trial nuisance weight is zero
-F-C	12	12	-1.0,-1.0,1.0,1.0,0,0,0,0,0,0	missed_trial nuisance weight is zero
-(F+S)-C	13	13	-2.0,-2.0,1.0,1.0,1.0,1.0,0,0,0,0	missed_trial nuisance weight is zero
-F-S (rew-pun)	14	14	0,0,-1.0,1.0,1.0,-1.0,0,0,0,0	missed_trial nuisance weight is zero
-S-C (rew-pun)	15	15	1.0,-1.0,0,0,-1.0,1.0,0,0,0,0	missed_trial nuisance weight is zero
-F-C (rew-pun)	16	16	1.0,-1.0,-1.0,1.0,0,0,0,0,0,0	missed_trial nuisance weight is zero
-F-S (rew)	17	17	0,0,0,1.0,0,-1.0,0,0,0,0	missed_trial nuisance weight is zero
-S-C (rew)	18	18	0,-1.0,0,0,0,1.0,0,0,0,0	missed_trial nuisance weight is zero
-F-C (rew)	19	19	0,-1.0,0,1.0,0,0,0,0,0,0	missed_trial nuisance weight is zero
-F-S (rew-neu)	20	20	0,0,0.0,1.0,0.0,-1.0,0,-1.0,1.0,0	missed_trial nuisance weight is zero
-S-C (rew-neu)	21	21	0.0,-1.0,0,0,0.0,1.0,1.0,0,-1.0,0	missed_trial nuisance weight is zero
-F-C (rew-neu)	22	22	0.0,-1.0,0.0,1.0,0,0,1.0,-1.0,0,0	missed_trial nuisance weight is zero
-F-(S+C) all	23	23	-1.0,-1.0,2.0,2.0,-1.0,-1.0,0,0,0,0	missed_trial nuisance weight is zero
-F-(S+C) rew	24	24	0,-1.0,0,2.0,0,-1.0,0,0,0,0	missed_trial nuisance weight is zero
-F-(S+C) pun	25	25	-1.0,0,2.0,0,-1.0,0,0,0,0,0	missed_trial nuisance weight is zero
-F-(S+C) rew-pun	26	26	1.0,-1.0,-2.0,2.0,1.0,-1.0,0,0,0,0	missed_trial nuisance weight is zero
-F-S (pun)	27	31	0,0,1.0,0,-1.0,0,0,0,0,0	missed_trial nuisance weight is zero
-F-C (pun)	28	32	-1.0,0,1.0,0,0,0,0,0,0,0	missed_trial nuisance weight is zero
+C_pun	1	1	1.0,0,0,0,0,0,0,0,0,0	neutral and missed-trial nuisance weights are zero
+C_rew	2	2	0,1.0,0,0,0,0,0,0,0,0	neutral and missed-trial nuisance weights are zero
+F_pun	3	3	0,0,1.0,0,0,0,0,0,0,0	neutral and missed-trial nuisance weights are zero
+F_rew	4	4	0,0,0,1.0,0,0,0,0,0,0	neutral and missed-trial nuisance weights are zero
+S_pun	5	5	0,0,0,0,1.0,0,0,0,0,0	neutral and missed-trial nuisance weights are zero
+S_rew	6	6	0,0,0,0,0,1.0,0,0,0,0	neutral and missed-trial nuisance weights are zero
+rew-pun	7	10	-1.0,1.0,-1.0,1.0,-1.0,1.0,0,0,0,0	neutral and missed-trial nuisance weights are zero
+F-S	8	11	0,0,1.0,1.0,-1.0,-1.0,0,0,0,0	neutral and missed-trial nuisance weights are zero
+F-C	9	12	-1.0,-1.0,1.0,1.0,0,0,0,0,0,0	neutral and missed-trial nuisance weights are zero
+(F+S)-C	10	13	-2.0,-2.0,1.0,1.0,1.0,1.0,0,0,0,0	neutral and missed-trial nuisance weights are zero
+F-S (rew-pun)	11	14	0,0,-1.0,1.0,1.0,-1.0,0,0,0,0	neutral and missed-trial nuisance weights are zero
+S-C (rew-pun)	12	15	1.0,-1.0,0,0,-1.0,1.0,0,0,0,0	neutral and missed-trial nuisance weights are zero
+F-C (rew-pun)	13	16	1.0,-1.0,-1.0,1.0,0,0,0,0,0,0	neutral and missed-trial nuisance weights are zero
+F-S (rew)	14	17	0,0,0,1.0,0,-1.0,0,0,0,0	neutral and missed-trial nuisance weights are zero
+S-C (rew)	15	18	0,-1.0,0,0,0,1.0,0,0,0,0	neutral and missed-trial nuisance weights are zero
+F-C (rew)	16	19	0,-1.0,0,1.0,0,0,0,0,0,0	neutral and missed-trial nuisance weights are zero
+F-(S+C) all	17	23	-1.0,-1.0,2.0,2.0,-1.0,-1.0,0,0,0,0	neutral and missed-trial nuisance weights are zero; historical label retained though neutral is not weighted
+F-(S+C) rew	18	24	0,-1.0,0,2.0,0,-1.0,0,0,0,0	neutral and missed-trial nuisance weights are zero
+F-(S+C) pun	19	25	-1.0,0,2.0,0,-1.0,0,0,0,0,0	neutral and missed-trial nuisance weights are zero
+F-(S+C) rew-pun	20	26	1.0,-1.0,-2.0,2.0,1.0,-1.0,0,0,0,0	neutral and missed-trial nuisance weights are zero
+F-S (pun)	21	31	0,0,1.0,0,-1.0,0,0,0,0,0	neutral and missed-trial nuisance weights are zero
+F-C (pun)	22	32	-1.0,0,1.0,0,0,0,0,0,0,0	neutral and missed-trial nuisance weights are zero

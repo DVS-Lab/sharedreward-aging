@@ -20,7 +20,7 @@ Active Phase 0 utilities:
 - `build_analysis_qc_manifest.py`, `run_analysis_qc_batch.py`, `audit_analysis_qc.py`, and `plot_analysis_qc.py`: frozen/restartable post-smoothing tSNR, motion, fixed-mask coverage, review flags, subject summaries, and plots.
 - `build_event_qc_manifest.py`, `run_event_qc_batch.py`, and `audit_event_qc.py`: source-preserving full-trial conversion, condition counts, missed-trial exclusions, and run-to-subject usability aggregation.
 - `build_ratings_qc_manifest.py` and `audit_ratings_qc.py`: explicit ratings-source resolution, six-cell validation, raw means/counts, provenance hashes, and subject-level ratings rules.
-- `build_analysis_cohort.py`: strict inventory reconciliation and separate task-valid versus ratings-qualified L1/L2 manifests. It applies established missing-event, >25%-missed, and curated task exclusions while preserving usable opposite runs; zero-count modeled conditions become explicit review holds.
+- `build_analysis_cohort.py`: strict inventory reconciliation and separate task-valid versus ratings-qualified L1/L2 manifests. It applies established missing-event, >25%-missed, and curated task exclusions while preserving usable opposite runs; neutral-only zero cells remain eligible, while zero reward/punish cells become explicit review holds.
 - `build_fsl_confounds_manifest.py`, `generate_fsl_confounds.py`, `run_fsl_confounds_batch.py`, and `audit_fsl_confounds.py`: the single-echo ds003745 nuisance layer matching RF1's fMRIPrep base-column policy while explicitly omitting inapplicable TEDANA ICA regressors.
 - `generate_l1_evs.py`: audited three-column EV generation from the harmonized full-trial derivatives.
 - `render_pooled_fsf.py`, `L1stats.sh`, and `run_L1stats.sh`: narrow transformation of the retained historical FSFs and bounded activation-followed-by-PPI execution.
@@ -336,12 +336,17 @@ The outputs are:
 
 - `logs/runlists/L1-task-ready.tsv` and `L2-task-ready.tsv`: task-valid activation/PPI inputs;
 - `logs/runlists/L1-ratings-ready.tsv` and `L2-ratings-ready.tsv`: the task-valid subset passing the historical ratings gate;
-- `logs/runlists/L1-model-review-hold.tsv`: otherwise usable runs with one or more zero-count substantive conditions;
+- `logs/runlists/L1-model-review-hold.tsv`: otherwise usable runs with one or more zero-count reward/punish conditions;
 - `logs/records/analysis-run-dispositions.tsv` and `analysis-subject-dispositions.tsv`: the complete, mutually exclusive disposition audit.
 
 Source-missing and missed-trial exclusions are run-level. A valid opposite run remains in L1 and is recorded as `l1_passthrough`; only two-run subjects receive fixed effects. Runs on model review hold do not enter a ready manifest. Imaging IQR flags are retained in the manifests but remain review information rather than automatic exclusions.
 
 ## Production nuisance, EV, L1, and L2 workflow
+
+For the corrected ds003745 sub-144 source and the neutral-contrast migration,
+start with [the guarded recovery runbook](../docs/SUB144_EVENT_RECOVERY.md).
+It preserves imaging preprocessing and archives stale models. Unstamped legacy
+28/29-cope outputs must not be reused with the current 22/23-cope contract.
 
 RF1 L1 models consume Linux2's existing headerless `TedanaPlusConfounds.tsv` matrices. Build the ds003745 conversion contract from the named confounds used for QC, generate the single-echo matrices, and audit their volume alignment:
 

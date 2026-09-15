@@ -1,0 +1,109 @@
+{
+  "feat_model": "/Users/tug87422/fsl/share/fsl/bin/feat_model",
+  "cases": [
+    {
+      "type": "act",
+      "empty_neutral": true,
+      "empty_miss": true,
+      "design_shape": [
+        255,
+        12
+      ],
+      "contrasts": 22,
+      "rank": 8,
+      "maximum_estimability_error": 1.5987211554602254e-14,
+      "stderr": ""
+    },
+    {
+      "type": "ppi",
+      "empty_neutral": true,
+      "empty_miss": true,
+      "design_shape": [
+        255,
+        23
+      ],
+      "contrasts": 23,
+      "rank": 15,
+      "maximum_estimability_error": 5.6570700423859156e-15,
+      "stderr": ""
+    },
+    {
+      "type": "act",
+      "empty_neutral": true,
+      "empty_miss": false,
+      "design_shape": [
+        255,
+        12
+      ],
+      "contrasts": 22,
+      "rank": 9,
+      "maximum_estimability_error": 1.199040866595169e-14,
+      "stderr": ""
+    },
+    {
+      "type": "ppi",
+      "empty_neutral": true,
+      "empty_miss": false,
+      "design_shape": [
+        255,
+        23
+      ],
+      "contrasts": 23,
+      "rank": 17,
+      "maximum_estimability_error": 3.443639109570362e-15,
+      "stderr": ""
+    },
+    {
+      "type": "act",
+      "empty_neutral": false,
+      "empty_miss": true,
+      "design_shape": [
+        255,
+        12
+      ],
+      "contrasts": 22,
+      "rank": 11,
+      "maximum_estimability_error": 1.7319479184152442e-14,
+      "stderr": ""
+    },
+    {
+      "type": "ppi",
+      "empty_neutral": false,
+      "empty_miss": true,
+      "design_shape": [
+        255,
+        23
+      ],
+      "contrasts": 23,
+      "rank": 21,
+      "maximum_estimability_error": 3.774758283725532e-15,
+      "stderr": ""
+    },
+    {
+      "type": "act",
+      "empty_neutral": false,
+      "empty_miss": false,
+      "design_shape": [
+        255,
+        12
+      ],
+      "contrasts": 22,
+      "rank": 12,
+      "maximum_estimability_error": 1.4432899320127035e-14,
+      "stderr": ""
+    },
+    {
+      "type": "ppi",
+      "empty_neutral": false,
+      "empty_miss": false,
+      "design_shape": [
+        255,
+        23
+      ],
+      "contrasts": 23,
+      "rank": 23,
+      "maximum_estimability_error": 7.501522106862227e-15,
+      "stderr": ""
+    }
+  ]
+}

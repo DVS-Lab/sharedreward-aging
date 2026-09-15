@@ -18,9 +18,8 @@ done
 [[ -f "$manifest" ]] || { echo "ERROR: manifest not found: $manifest" >&2; exit 1; }
 [[ "$jobs" =~ ^[1-9][0-9]*$ ]] || { echo "ERROR: --jobs must be positive" >&2; exit 2; }
 units=()
-while IFS= read -r unit || [[ -n "$unit" ]]; do units+=("$unit"); done < <(
-    python3 "${SCRIPT_DIR}/read_l1_manifest.py" "$manifest"
-)
+validated_units="$(python3 "${SCRIPT_DIR}/read_l1_manifest.py" "$manifest")"
+while IFS= read -r unit || [[ -n "$unit" ]]; do [[ -z "$unit" ]] || units+=("$unit"); done <<< "$validated_units"
 (( ${#units[@]} )) || { echo "ERROR: no L1 work units" >&2; exit 1; }
 printf 'Paired L1 plan: %d unit(s), jobs=%d, activation%s\n' "${#units[@]}" "$jobs" "$([[ -n "$ppi_seed" ]] && printf ' + PPI seed-%s' "$ppi_seed")"
 if [[ -n "$log_dir" && "$mode" != dry-run ]]; then mkdir -p "$log_dir"; echo "Per-unit logs: $log_dir"; fi
@@ -36,7 +35,7 @@ run_unit() {
     [[ "$mode" == dry-run ]] && options+=(--dry-run)
     [[ "$mode" == render-only ]] && options+=(--render-only)
     (( overwrite )) && options+=(--overwrite)
-    bash "${SCRIPT_DIR}/L1stats.sh" "${common[@]}" 0 "${options[@]}"
+    bash "${SCRIPT_DIR}/L1stats.sh" "${common[@]}" 0 "${options[@]}" || return $?
     [[ -z "$ppi_seed" ]] || bash "${SCRIPT_DIR}/L1stats.sh" "${common[@]}" "$ppi_seed" "${options[@]}"
 }
 for unit in "${units[@]}"; do

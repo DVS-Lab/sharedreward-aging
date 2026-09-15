@@ -19,7 +19,7 @@ Coverage preserves the historical Shared Reward exemption for inferior cerebellu
 
 ## Missed trials and model structure
 
-Missed-trial fractions are calculated from the model-specific harmonized full-trial events, not from a glob over legacy three-column files. Retained runs model each miss as a single full-trial nuisance EV, spanning the recoverable full trial. The nine partner-by-feedback EVs remain the substantive model. Runs with a zero-count substantive condition are surfaced for design review before L1 and are not silently reclassified.
+Missed-trial fractions are calculated from the model-specific harmonized full-trial events, not from a glob over legacy three-column files. Retained runs model each miss as a single full-trial nuisance EV, spanning the recoverable full trial. The nine partner-by-feedback EVs remain the task model. Neutral trials are modeled but non-inferential under the decision in `NEUTRAL_CONDITION_DECISION.md`: neutral-only zero cells are explicit empty EVs and do not exclude a run. A zero-count reward or punish condition is surfaced for design review before L1.
 
 ## Run-to-subject aggregation
 
@@ -31,7 +31,7 @@ The recurring Shared Reward ratings gate is nevertheless audited alongside cohor
 
 ## Frozen-manifest layers
 
-`code/build_analysis_cohort.py` creates two deliberately separate manifest families. The task-ready L1/L2 manifests apply only task/model validity: established missing-event source exclusions, runs with strictly greater than 25% missed trials, and provenance-backed curated task invalidations. A source-excluded or poor-compliance run does not remove its valid opposite run. Runs with a zero-count substantive condition are held out of the ready manifest pending explicit model review.
+`code/build_analysis_cohort.py` creates two deliberately separate manifest families. The task-ready L1/L2 manifests apply only task/model validity: established missing-event source exclusions, runs with strictly greater than 25% missed trials, and provenance-backed curated task invalidations. A source-excluded or poor-compliance run does not remove its valid opposite run. Neutral-only zero-count conditions remain task-ready; zero-count reward or punish conditions are held out pending explicit model review.
 
 The ratings-qualified manifests are the task-ready subset whose subjects also pass the historical ratings gate. Ratings availability therefore does not determine whether a valid activation/PPI model may be estimated; it determines membership in analyses that require ratings. Imaging IQR flags remain recorded review information and are not automatic exclusions.
 

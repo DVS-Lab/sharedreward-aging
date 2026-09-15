@@ -59,6 +59,9 @@ SUBJECT_FIELDS = (
     "ratings_exclusion_reason",
     "ratings_l2_ready",
 )
+NONINFERENTIAL_ZERO_CONDITIONS = {
+    f"event_{partner}_neutral" for partner in ("computer", "friend", "stranger")
+}
 
 
 def parse_args():
@@ -315,8 +318,14 @@ def build(args):
         else:
             if is_true(event["exclude_run"]):
                 exclusion_reasons.append(event["exclusion_reason"])
-            if event["zero_count_conditions"].strip() and not exclusion_reasons:
-                hold_reasons.append("model_review_zero_count_conditions")
+            zero_conditions = {
+                value
+                for value in event["zero_count_conditions"].split(";")
+                if value
+            }
+            inferential_zeros = zero_conditions - NONINFERENTIAL_ZERO_CONDITIONS
+            if inferential_zeros and not exclusion_reasons:
+                hold_reasons.append("model_review_zero_count_inferential_conditions")
         for curated_row in curated_index.get(key, []):
             exclusion_reasons.append(curated_row["exclusion_reason"].strip())
 

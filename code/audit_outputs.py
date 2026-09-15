@@ -7,6 +7,7 @@ import argparse
 import csv
 import os
 from pathlib import Path
+from model_provenance import validate_model
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -31,18 +32,28 @@ def l2_path(root, row, kind):
 
 
 def cope_count(kind):
-    return 28 if kind == "act" else 29
+    return 22 if kind == "act" else 23
 
 
 def l1_missing(path, ncopes):
     required = ["design.mat", "design.con", "mask.nii.gz", "cluster_mask_zstat1.nii.gz"]
     required.extend(f"stats/cope{number}.nii.gz" for number in range(1, ncopes + 1))
+    required.extend(f"stats/varcope{number}.nii.gz" for number in range(1, ncopes + 1))
     required.extend(f"stats/zstat{number}.nii.gz" for number in range(1, ncopes + 1))
-    return [relative for relative in required if not (path / relative).is_file()]
+    missing = [relative for relative in required if not (path / relative).is_file()]
+    try:
+        validate_model(path, "l1", "act" if ncopes == 22 else path.name.split("type-")[1].split("_run-")[0])
+    except (OSError, ValueError, KeyError) as error:
+        missing.append(f"model_provenance:{error}")
+    return missing
 
 
 def l2_missing(path, ncopes):
     missing = []
+    try:
+        validate_model(path, "l2", "act" if ncopes == 22 else path.name.split("type-")[1].split("_sm-")[0])
+    except (OSError, ValueError, KeyError) as error:
+        missing.append(f"model_provenance:{error}")
     for number in range(1, ncopes + 1):
         prefix = path / f"cope{number}.feat"
         for relative in ("design.mat", "design.con", "stats/cope1.nii.gz", "stats/zstat1.nii.gz", "cluster_mask_zstat1.nii.gz"):

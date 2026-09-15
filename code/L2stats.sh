@@ -3,7 +3,7 @@
 # Combine two eligible Shared Reward runs with FSL fixed effects.
 
 set -euo pipefail
-export FSLSUB_PARALLEL="${FSLSUB_PARALLEL:-1}"
+export FSLSUB_PARALLEL=1
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 # shellcheck source=project_config.sh
 source "${SCRIPT_DIR}/project_config.sh"
@@ -20,6 +20,7 @@ input1="$(l1_output_base "$dataset" "$sub" "$session" "$run1" "$type").feat"
 input2="$(l1_output_base "$dataset" "$sub" "$session" "$run2" "$type").feat"
 for input in "$input1" "$input2"; do
     [[ -f "$input/cluster_mask_zstat1.nii.gz" && -f "$input/stats/cope${ncopes}.nii.gz" ]] || { echo "ERROR: complete L1 input required: $input" >&2; exit 1; }
+    python3 "${SCRIPT_DIR}/model_provenance.py" audit --path "$input" --level l1 --type "$type"
 done
 output="$(l2_output_base "$dataset" "$sub" "$session" "$type")"
 directory="$(unit_directory "$dataset" "$sub" "$session")"
@@ -27,16 +28,30 @@ rendered="${directory}/L2_${dataset}_sub-${sub}_task-sharedreward_model-fulltria
 printf 'L2 plan (fixed effects)\n  dataset: %s\n  run %s: %s\n  run %s: %s\n  output: %s.gfeat\n  FSLSUB_PARALLEL: %s\n' "$dataset" "$run1" "$input1" "$run2" "$input2" "$output" "$FSLSUB_PARALLEL"
 [[ "$mode" == dry-run ]] && exit 0
 gfeat="${output}.gfeat"
+provenance_args=(--level l2 --type "$type" --parent "$input1" --parent "$input2"
+    --input "$input1/pooled-model-inputs.json" --input "$input2/pooled-model-inputs.json"
+    --input "${SCRIPT_DIR}/L2stats.sh" --input "${SCRIPT_DIR}/render_pooled_l2_fsf.py")
+for input in "$input1" "$input2"; do
+    for cope in $(seq "$ncopes"); do
+        provenance_args+=(--image "$input/stats/cope${cope}.nii.gz" --image "$input/stats/varcope${cope}.nii.gz")
+    done
+done
 if [[ -e "$gfeat" ]]; then
     if (( ! overwrite )); then
-        if [[ -f "$gfeat/cope${ncopes}.feat/cluster_mask_zstat1.nii.gz" ]]; then echo "Complete output already exists; skipping: $gfeat"; exit 0; fi
+        if [[ -f "$gfeat/cope${ncopes}.feat/cluster_mask_zstat1.nii.gz" ]]; then
+            python3 "${SCRIPT_DIR}/model_provenance.py" check --path "$gfeat/pooled-model-inputs.json" "${provenance_args[@]}"
+            python3 "${SCRIPT_DIR}/model_provenance.py" audit --path "$gfeat" --level l2 --type "$type"
+            echo "Complete output already exists; skipping: $gfeat"; exit 0
+        fi
         echo "ERROR: incomplete output exists: $gfeat (use --overwrite)." >&2; exit 1
     fi
     case "$gfeat" in "${FSL_DERIVATIVES_ROOT}"/*) rm -rf -- "$gfeat" ;; *) echo "ERROR: refusing removal outside FSL_DERIVATIVES_ROOT" >&2; exit 1 ;; esac
 fi
 mkdir -p "$directory"
+provenance="$(mktemp "${directory}/.L2-inputs.XXXXXX")"
+trap 'rm -f -- "$provenance" "${pooled:-}"' EXIT
+python3 "${SCRIPT_DIR}/model_provenance.py" write --path "$provenance" "${provenance_args[@]}"
 pooled="$(mktemp "${TMPDIR:-/tmp}/sharedreward-l2.XXXXXX.fsf")"
-trap 'rm -f -- "$pooled"' EXIT
 python3 "${SCRIPT_DIR}/render_pooled_l2_fsf.py" --type "$template_type" --output "$pooled"
 sed_escape() { printf '%s' "$1" | sed 's/[&@\\]/\\&/g'; }
 sed -e "s@OUTPUT@$(sed_escape "$output")@g" -e "s@INPUT1@$(sed_escape "$input1")@g" -e "s@INPUT2@$(sed_escape "$input2")@g" "$pooled" > "$rendered"
@@ -50,3 +65,6 @@ for cope in $(seq "$ncopes"); do
     rm -f -- "$cope_dir/stats/res4d.nii.gz" "$cope_dir/stats/corrections.nii.gz" "$cope_dir/stats/threshac1.nii.gz" "$cope_dir/filtered_func_data.nii.gz" "$cope_dir/var_filtered_func_data.nii.gz"
 done
 [[ -f "$gfeat/cope${ncopes}.feat/cluster_mask_zstat1.nii.gz" ]] || { echo "ERROR: fixed-effects output is incomplete: $gfeat" >&2; exit 1; }
+python3 "${SCRIPT_DIR}/model_provenance.py" check --path "$provenance" "${provenance_args[@]}"
+mv -- "$provenance" "$gfeat/pooled-model-inputs.json"
+python3 "${SCRIPT_DIR}/model_provenance.py" audit --path "$gfeat" --level l2 --type "$type"

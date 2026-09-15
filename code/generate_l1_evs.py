@@ -17,6 +17,9 @@ CONDITIONS = tuple(
     for partner in ("computer", "friend", "stranger")
     for outcome in ("punish", "reward", "neutral")
 )
+INFERENTIAL_CONDITIONS = tuple(
+    condition for condition in CONDITIONS if not condition.endswith("_neutral")
+)
 ALL_EVS = CONDITIONS + ("missed_trial",)
 
 
@@ -68,27 +71,27 @@ def main():
                 grouped[event["trial_type"]].append(
                     (float(event["onset"]), float(event["duration"]), 1.0)
                 )
-        empty = [condition for condition in CONDITIONS if not grouped[condition]]
+        empty = [
+            condition for condition in INFERENTIAL_CONDITIONS if not grouped[condition]
+        ]
         if empty:
             raise SystemExit(
-                "ERROR: primary common-design run has empty substantive EVs: "
+                "ERROR: primary common-design run has empty inferential EVs: "
                 f"{unit['dataset']} sub-{unit['subject']} run-{unit['run']}: "
                 + ",".join(empty)
             )
         directory = ev_directory(args.output_root, unit)
         expected = [directory / f"{condition}.txt" for condition in ALL_EVS]
-        if (
-            not args.overwrite
-            and all(path.is_file() for path in expected)
-            and all(path.stat().st_size > 0 for path in expected[:-1])
-        ):
+        contents = ["".join(
+            f"{onset:.6f}\t{duration:.6f}\t{amplitude:.1f}\n"
+            for onset, duration, amplitude in grouped[condition]
+        ) for condition in ALL_EVS]
+        if not args.overwrite and all(path.is_file() for path in expected):
+            if any(path.read_text() != text for path, text in zip(expected, contents)):
+                raise SystemExit(f"ERROR: stale EV content in {directory}; regenerate with --overwrite")
             verified += 1
             continue
-        for condition, path in zip(ALL_EVS, expected):
-            text = "".join(
-                f"{onset:.6f}\t{duration:.6f}\t{amplitude:.1f}\n"
-                for onset, duration, amplitude in grouped[condition]
-            )
+        for path, text in zip(expected, contents):
             atomic_write(path, text)
         generated += 1
     print(f"L1 EV units: {len(manifest)}")

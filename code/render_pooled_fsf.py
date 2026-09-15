@@ -33,13 +33,25 @@ def candidate_contrasts(path: Path) -> list[tuple[str, list[float]]]:
     with path.open(newline="") as handle:
         rows = list(csv.DictReader(handle, delimiter="\t"))
     contrasts = []
-    for row in rows:
+    for number, row in enumerate(rows, 1):
+        if int(row["candidate_cope"]) != number:
+            raise ValueError(f"non-sequential candidate cope: {row['contrast_name']}")
         weights = [float(value) for value in row["weights_ev1_to_ev10"].split(",")]
         if len(weights) != 10:
             raise ValueError(f"invalid candidate contrast: {row['contrast_name']}")
+        if any(weights[6:9]):
+            raise ValueError(
+                f"active contrast weights a non-inferential neutral EV: "
+                f"{row['contrast_name']}"
+            )
+        if weights[9]:
+            raise ValueError(
+                f"active contrast weights the missed-trial nuisance EV: "
+                f"{row['contrast_name']}"
+            )
         contrasts.append((row["contrast_name"], weights))
-    if len(contrasts) != 28:
-        raise ValueError(f"expected 28 candidate contrasts, found {len(contrasts)}")
+    if len(contrasts) != 22:
+        raise ValueError(f"expected 22 primary contrasts, found {len(contrasts)}")
     return contrasts
 
 
@@ -78,6 +90,7 @@ def contrast_block(kind: str, contrasts) -> str:
 
 
 def render(kind: str, source: Path, contrast_path: Path) -> str:
+    contrasts = candidate_contrasts(contrast_path)
     mapping = (
         {number: number for number in range(1, 11)}
         if kind == "act"
@@ -88,7 +101,7 @@ def render(kind: str, source: Path, contrast_path: Path) -> str:
         }
     )
     ev_count = 10 if kind == "act" else 21
-    ncontrasts = 28 if kind == "act" else 29
+    ncontrasts = len(contrasts) + (kind == "ppi")
     rendered = []
     for original in source.read_text().splitlines():
         line = original
@@ -115,12 +128,18 @@ def render(kind: str, source: Path, contrast_path: Path) -> str:
             if old not in mapping:
                 continue
             new = mapping[old]
-            if old == 10 and prefix == "shape":
+            if old in (7, 8, 9) and prefix == "shape":
+                value = f"SHAPE_EV{new}"
+            elif kind == "ppi" and old in (21, 22, 23) and prefix == "shape":
+                value = f"SHAPE_PPI{new}"
+            elif old == 10 and prefix == "shape":
                 value = "SHAPE_EV"
             elif old == 10 and prefix == "convolve":
                 value = "3"
             elif old == 10 and prefix == "custom":
                 value = '"MISSED_TRIAL"'
+            if prefix == "custom":
+                value = value.replace("EVDIR_", "EVDIR")
             rendered.append(f"set fmri({prefix}{new}) {value}")
             continue
         pair = re.match(r"^(interactionsd?|ortho)(\d+)\.(\d+)$", key)
@@ -134,7 +153,6 @@ def render(kind: str, source: Path, contrast_path: Path) -> str:
             rendered.append(f"set fmri({prefix}{first}.{second}) {value}")
             continue
         rendered.append(line)
-    contrasts = candidate_contrasts(contrast_path)
     return "\n".join(rendered) + "\n" + contrast_block(kind, contrasts)
 
 

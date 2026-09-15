@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import os
 from pathlib import Path
 
@@ -19,6 +20,13 @@ FIELDS = (
     "harmonized_events",
     "output_json",
 )
+
+# Authoritative raw-session recovery, srndna-datapaper db67173efd0d6d4ef31800d9ac24ca8d665a20bf.
+# Never silently reuse the duplicated sub-143 events in OpenNeuro 2.1.1.
+SUB144_SHA256 = {
+    "01": "995f6a8987c15c4dc6a85265e7b74b2c462e81e51f712868e0cdc79631495d2d",
+    "02": "058d75fd5afb31cf742b537a79f02247b5e118619bf5ea84726ae934fa233833",
+}
 
 
 def parse_args():
@@ -53,6 +61,11 @@ def parse_args():
         default=ROOT / "derivatives/qc/events/run-level",
     )
     parser.add_argument("--output", required=True, type=Path)
+    parser.add_argument(
+        "--srndna-datapaper-root", type=Path,
+        default=Path(os.environ.get("SRNDNA_DATAPAPER_ROOT", "/ZPOOL/data/projects/srndna-datapaper")),
+        help="Authoritative corrected sub-144 events; raw recovery remains upstream.",
+    )
     parser.add_argument("--missing-output", required=True, type=Path)
     parser.add_argument(
         "--fail-on-missing",
@@ -99,6 +112,18 @@ def source_path(args, row):
         )
     if row["dataset"] == "ds003745":
         prefix = f"sub-{row['subject']}_task-sharedreward_run-{run}"
+        if row["subject"] == "144":
+            candidates = [
+                args.ds003745_root / "sub-144/func" / f"{prefix}_events.tsv",
+                args.srndna_datapaper_root / "bids/sub-144/func" / f"{prefix}_events.tsv",
+            ]
+            for candidate in candidates:
+                if candidate.is_file() and hashlib.sha256(candidate.read_bytes()).hexdigest() == SUB144_SHA256.get(run):
+                    return candidate
+            raise ValueError(
+                f"sub-144 run-{run} requires hash-verified corrected events from srndna-datapaper; "
+                "update that clone and set SRNDNA_DATAPAPER_ROOT. No fallback to old events."
+            )
         return (
             args.ds003745_root
             / f"sub-{row['subject']}"

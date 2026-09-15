@@ -47,6 +47,7 @@ class CohortTest(unittest.TestCase):
                 ("rf1", "11539", "01", "2"),
                 ("rf1", "10606", "01", "1"),
                 ("rf1", "11201", "01", "1"),
+                ("rf1", "11202", "01", "1"),
             ]
             write_tsv(
                 analysis,
@@ -86,7 +87,11 @@ class CohortTest(unittest.TestCase):
                         "source_events": f"source-{s}-{r}",
                         "harmonized_events": f"events-{s}-{r}",
                         "missed_trial_fraction": "0.3" if s == "12041" else "0",
-                        "zero_count_conditions": "event_friend_neutral" if s == "11201" else "",
+                        "zero_count_conditions": (
+                            "event_friend_neutral"
+                            if s == "11201"
+                            else "event_friend_reward" if s == "11202" else ""
+                        ),
                         "exclude_run": "true" if s == "12041" else "false",
                         "exclusion_reason": "missed_trials_gt_25pct" if s == "12041" else "",
                     }
@@ -155,7 +160,11 @@ class CohortTest(unittest.TestCase):
             self.assertIn(("10606", "1"), task)
             self.assertNotIn(("11539", "1"), task)
             self.assertNotIn(("12041", "1"), task)
-            self.assertEqual({row["subject"] for row in read_tsv(paths["l1_review"])}, {"11201"})
+            self.assertIn(("11201", "1"), task)
+            self.assertEqual(
+                {row["subject"] for row in read_tsv(paths["l1_review"])},
+                {"11202"},
+            )
             self.assertNotIn("10606", {row["subject"] for row in read_tsv(paths["l1_ratings"])})
             l2 = {row["subject"]: row for row in read_tsv(paths["l2_task"])}
             self.assertNotIn("11969", l2)
@@ -163,7 +172,8 @@ class CohortTest(unittest.TestCase):
             self.assertEqual(l2["12020"]["subject_level_strategy"], "l1_passthrough")
             self.assertNotIn("11539", l2)
             self.assertNotIn("12041", l2)
-            self.assertNotIn("11201", l2)
+            self.assertEqual(l2["11201"]["subject_level_strategy"], "l1_passthrough")
+            self.assertNotIn("11202", l2)
 
 
 if __name__ == "__main__":

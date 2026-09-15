@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 import os
 import tempfile
@@ -45,6 +46,7 @@ def summarize(rows, unit):
     return {
         **{field: unit[field] for field in IDENTIFIERS},
         "source_events": str(Path(unit["source_events"]).resolve()),
+        "source_sha256": hashlib.sha256(Path(unit["source_events"]).read_bytes()).hexdigest(),
         "harmonized_events": str(Path(unit["harmonized_events"]).resolve()),
         "n_trials": len(rows),
         "n_responded_trials": len(rows) - missed,
@@ -54,7 +56,7 @@ def summarize(rows, unit):
         "zero_count_conditions": [
             condition for condition in CONDITIONS if counts[condition] == 0
         ],
-        "event_qc_definition_version": 1,
+        "event_qc_definition_version": 2,
     }
 
 
@@ -71,6 +73,8 @@ def validate(unit):
         if str(data[field]) != str(expected[field]):
             raise ValueError(f"{field}_contract")
     for field in (
+        "source_sha256",
+        "event_qc_definition_version",
         "n_trials",
         "n_responded_trials",
         "n_missed_trials",

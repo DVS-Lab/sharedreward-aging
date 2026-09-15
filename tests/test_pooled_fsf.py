@@ -37,12 +37,17 @@ class PooledFSFTest(unittest.TestCase):
         self.assertEqual(setting(text, "smooth"), "0")
         self.assertEqual(setting(text, "featwatcher_yn"), "0")
         self.assertEqual(setting(text, "evs_orig"), "10")
-        self.assertEqual(setting(text, "ncon_orig"), "28")
+        self.assertEqual(setting(text, "ncon_orig"), "22")
         self.assertEqual(setting(text, "tempfilt_yn7"), "0")
         self.assertEqual(setting(text, "convolve10"), "3")
         self.assertEqual(setting(text, "shape10"), "SHAPE_EV")
+        self.assertEqual(setting(text, "custom1"), '"EVDIRevent_computer_punish.txt"')
         self.assertIsNone(setting(text, "evtitle11"))
-        self.assertEqual(setting(text, "conname_real.27"), '"F-S (pun)"')
+        self.assertEqual(setting(text, "conname_real.21"), '"F-S (pun)"')
+        self.assertEqual(setting(text, "conname_real.22"), '"F-C (pun)"')
+        for contrast in range(1, 23):
+            for neutral_ev in (7, 8, 9):
+                self.assertEqual(setting(text, f"con_real{contrast}.{neutral_ev}"), "0")
 
     def test_ppi_uses_10_psych_phys_and_10_interactions(self):
         text = MODULE.render(
@@ -52,12 +57,17 @@ class PooledFSFTest(unittest.TestCase):
         )
         self.assertEqual(setting(text, "smooth"), "0")
         self.assertEqual(setting(text, "evs_orig"), "21")
-        self.assertEqual(setting(text, "ncon_orig"), "29")
+        self.assertEqual(setting(text, "ncon_orig"), "23")
         self.assertEqual(setting(text, "evtitle11"), '"phys"')
         self.assertEqual(setting(text, "evtitle21"), '"miss"')
         self.assertIsNone(setting(text, "evtitle22"))
         self.assertEqual(setting(text, "con_real1.12"), "1")
-        self.assertEqual(setting(text, "con_real29.11"), "1")
+        self.assertEqual(setting(text, "con_real23.11"), "1")
+        for contrast in range(1, 23):
+            for neutral_interaction in (18, 19, 20):
+                self.assertEqual(
+                    setting(text, f"con_real{contrast}.{neutral_interaction}"), "0"
+                )
 
 
 if __name__ == "__main__":

@@ -8,6 +8,7 @@ import csv
 import json
 from collections import Counter, defaultdict
 from pathlib import Path
+from run_event_qc_batch import validate as validate_derivatives
 
 
 IDENTIFIERS = ("dataset", "subject", "session", "run")
@@ -52,6 +53,8 @@ def write_tsv(path, fields, rows):
 
 
 def validate(unit):
+    # Includes source hash and re-counts the actual harmonized rows, not just JSON.
+    validate_derivatives(unit)
     output = Path(unit["output_json"])
     events = Path(unit["harmonized_events"])
     if not output.is_file() or not events.is_file():

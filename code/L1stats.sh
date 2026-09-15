@@ -43,17 +43,32 @@ output="$(l1_output_base "$dataset" "$sub" "$session" "$run" "$type")"
 ev_dir="$(ev_directory "$dataset" "$sub" "$session" "$run")"
 missed_ev="${ev_dir}/missed_trial.txt"; missed_shape=10
 [[ -s "$missed_ev" ]] && missed_shape=3
-conditions=(
+required_conditions=(
     event_computer_punish event_computer_reward
     event_friend_punish event_friend_reward
     event_stranger_punish event_stranger_reward
+)
+neutral_conditions=(
     event_computer_neutral event_friend_neutral event_stranger_neutral
 )
 [[ -f "$bold" ]] || { echo "ERROR: BOLD input not found: $bold" >&2; exit 1; }
 [[ -f "$run_mask" ]] || { echo "ERROR: run mask not found: $run_mask" >&2; exit 1; }
 [[ -s "$confounds" ]] || { echo "ERROR: FSL confounds missing or empty: $confounds" >&2; exit 1; }
-for condition in "${conditions[@]}"; do
-    [[ -s "${ev_dir}/${condition}.txt" ]] || { echo "ERROR: substantive EV missing or empty: ${ev_dir}/${condition}.txt" >&2; exit 1; }
+for condition in "${required_conditions[@]}"; do
+    [[ -s "${ev_dir}/${condition}.txt" ]] || { echo "ERROR: inferential EV missing or empty: ${ev_dir}/${condition}.txt" >&2; exit 1; }
+done
+neutral_shapes=()
+neutral_ppi_shapes=()
+for condition in "${neutral_conditions[@]}"; do
+    neutral_ev="${ev_dir}/${condition}.txt"
+    [[ -f "$neutral_ev" ]] || { echo "ERROR: modeled neutral EV file missing: $neutral_ev" >&2; exit 1; }
+    if [[ -s "$neutral_ev" ]]; then
+        neutral_shapes+=(3)
+        neutral_ppi_shapes+=(4)
+    else
+        neutral_shapes+=(10)
+        neutral_ppi_shapes+=(10)
+    fi
 done
 source_template="${PROJECT_ROOT}/templates/L1_task-sharedreward_model-1_type-act_seed-0_HPC.fsf"
 template_type=act
@@ -76,9 +91,20 @@ tr_seconds="$(fslval "$bold" pixdim4)"
 confound_rows="$(awk 'NF {n++} END {print n+0}' "$confounds")"
 [[ "$confound_rows" -eq "$nvolumes" ]] || { echo "ERROR: confound rows ($confound_rows) != BOLD volumes ($nvolumes)" >&2; exit 1; }
 feat_dir="${output}.feat"
+provenance_args=(--level l1 --type "$type" --image "$bold" --image "$run_mask"
+    --input "$confounds" --input "$source_template"
+    --input "${SCRIPT_DIR}/render_pooled_fsf.py"
+    --input "${SCRIPT_DIR}/L1stats.sh"
+    --input "${PROJECT_ROOT}/templates/FULLTRIAL_CONTRAST_CANDIDATE.tsv")
+for condition in "${required_conditions[@]}" "${neutral_conditions[@]}" missed_trial; do
+    provenance_args+=(--input "${ev_dir}/${condition}.txt")
+done
+[[ "$type" == ppi_seed-* ]] && provenance_args+=(--input "${PROJECT_ROOT}/masks/seed-${type#ppi_seed-}.nii.gz")
 if [[ -e "$feat_dir" ]]; then
     if (( ! overwrite )); then
         if [[ -f "$feat_dir/cluster_mask_zstat1.nii.gz" && -f "$feat_dir/stats/cope${ncopes}.nii.gz" ]]; then
+            python3 "${SCRIPT_DIR}/model_provenance.py" check --path "$feat_dir/pooled-model-inputs.json" "${provenance_args[@]}"
+            python3 "${SCRIPT_DIR}/model_provenance.py" audit --path "$feat_dir" --level l1 --type "$type"
             echo "Complete output already exists; skipping: $feat_dir"; exit 0
         fi
         echo "ERROR: incomplete output exists: $feat_dir (use --overwrite)." >&2; exit 1
@@ -86,6 +112,9 @@ if [[ -e "$feat_dir" ]]; then
     case "$feat_dir" in "${FSL_DERIVATIVES_ROOT}"/*) rm -rf -- "$feat_dir" ;; *) echo "ERROR: refusing removal outside FSL_DERIVATIVES_ROOT" >&2; exit 1 ;; esac
 fi
 mkdir -p "$directory"
+provenance="$(mktemp "${directory}/.L1-inputs.XXXXXX")"
+trap 'rm -f -- "$provenance" "${pooled:-}"' EXIT
+python3 "${SCRIPT_DIR}/model_provenance.py" write --path "$provenance" "${provenance_args[@]}"
 
 geometry_signature() {
     local image="$1" key
@@ -126,7 +155,6 @@ fi
 
 rendered="${directory}/L1_${dataset}_sub-${sub}_task-sharedreward_model-fulltrial_type-${type}_run-${run}.fsf"
 pooled="$(mktemp "${TMPDIR:-/tmp}/sharedreward-pooled.XXXXXX.fsf")"
-trap 'rm -f -- "$pooled"' EXIT
 python3 "${SCRIPT_DIR}/render_pooled_fsf.py" --type "$template_type" --source "$source_template" --output "$pooled"
 sed_escape() { printf '%s' "$1" | sed 's/[&@\\]/\\&/g'; }
 sed_args=(
@@ -134,6 +162,12 @@ sed_args=(
     -e "s@DATA@$(sed_escape "$bold")@g"
     -e "s@EVDIR@$(sed_escape "${ev_dir}/")@g"
     -e "s@MISSED_TRIAL@$(sed_escape "$missed_ev")@g"
+    -e "s@SHAPE_EV7@${neutral_shapes[0]}@g"
+    -e "s@SHAPE_EV8@${neutral_shapes[1]}@g"
+    -e "s@SHAPE_EV9@${neutral_shapes[2]}@g"
+    -e "s@SHAPE_PPI18@${neutral_ppi_shapes[0]}@g"
+    -e "s@SHAPE_PPI19@${neutral_ppi_shapes[1]}@g"
+    -e "s@SHAPE_PPI20@${neutral_ppi_shapes[2]}@g"
     -e "s@SHAPE_EV@${missed_shape}@g"
     -e "s@CONFOUNDEVS@$(sed_escape "$confounds")@g"
     -e "s@NVOLUMES@${nvolumes}@g"
@@ -141,7 +175,7 @@ sed_args=(
 )
 [[ -n "$phys" ]] && sed_args+=( -e "s@PHYS@$(sed_escape "$phys")@g" )
 sed "${sed_args[@]}" "$pooled" > "$rendered"
-if grep -En 'OUTPUT|DATA|EVDIR|MISSED_TRIAL|SHAPE_EV|CONFOUNDEVS|NVOLUMES|TR_INFO|PHYS' "$rendered" >/dev/null; then
+if grep -En 'OUTPUT|DATA|EVDIR|MISSED_TRIAL|SHAPE_EV|SHAPE_PPI|CONFOUNDEVS|NVOLUMES|TR_INFO|PHYS' "$rendered" >/dev/null; then
     echo "ERROR: unresolved placeholder in rendered template: $rendered" >&2; exit 1
 fi
 echo "Rendered: $rendered"
@@ -156,3 +190,6 @@ ln -sfn "$feat_dir/mean_func.nii.gz" "$feat_dir/reg/standard.nii.gz"
 rm -f -- "$feat_dir/stats/res4d.nii.gz" "$feat_dir/stats/corrections.nii.gz" \
     "$feat_dir/stats/threshac1.nii.gz" "$feat_dir/filtered_func_data.nii.gz"
 [[ -f "$feat_dir/cluster_mask_zstat1.nii.gz" && -f "$feat_dir/stats/cope${ncopes}.nii.gz" ]] || { echo "ERROR: FEAT output is incomplete: $feat_dir" >&2; exit 1; }
+python3 "${SCRIPT_DIR}/model_provenance.py" check --path "$provenance" "${provenance_args[@]}"
+mv -- "$provenance" "$feat_dir/pooled-model-inputs.json"
+python3 "${SCRIPT_DIR}/model_provenance.py" audit --path "$feat_dir" --level l1 --type "$type"

@@ -12,7 +12,8 @@ done
 [[ -f "$manifest" ]] || { echo "ERROR: manifest not found: $manifest" >&2; exit 1; }
 [[ "$jobs" =~ ^[1-9][0-9]*$ ]] || { echo "ERROR: --jobs must be positive" >&2; exit 2; }
 units=(); passthrough_log="$(mktemp "${TMPDIR:-/tmp}/sharedreward-l2-passthrough.XXXXXX")"; trap 'rm -f -- "$passthrough_log"' EXIT
-while IFS= read -r unit || [[ -n "$unit" ]]; do units+=("$unit"); done < <(python3 "${SCRIPT_DIR}/read_l2_manifest.py" "$manifest" 2>"$passthrough_log")
+validated_units="$(python3 "${SCRIPT_DIR}/read_l2_manifest.py" "$manifest" 2>"$passthrough_log")" || { cat "$passthrough_log" >&2; exit 1; }
+while IFS= read -r unit || [[ -n "$unit" ]]; do [[ -z "$unit" ]] || units+=("$unit"); done <<< "$validated_units"
 passthrough_count="$(awk 'END {print NR+0}' "$passthrough_log")"
 printf 'Paired L2 plan: %d fixed-effects unit(s), %d one-run passthrough(s), jobs=%d, activation%s\n' "${#units[@]}" "$passthrough_count" "$jobs" "$([[ -n "$ppi_seed" ]] && printf ' + PPI seed-%s' "$ppi_seed")"
 if [[ -n "$log_dir" && "$mode" != dry-run ]]; then mkdir -p "$log_dir"; echo "Per-unit logs: $log_dir"; fi
@@ -21,7 +22,7 @@ wait_oldest() { local pid="${pids[0]}" label="${labels[0]}" logfile="${logfiles[
 run_unit() {
     local dataset="$1" sub="$2" session="$3" run1="$4" run2="$5" options=()
     [[ "$mode" == dry-run ]] && options+=(--dry-run); [[ "$mode" == render-only ]] && options+=(--render-only); (( overwrite )) && options+=(--overwrite)
-    bash "${SCRIPT_DIR}/L2stats.sh" "$dataset" "$sub" "$session" act "$run1" "$run2" "${options[@]}"
+    bash "${SCRIPT_DIR}/L2stats.sh" "$dataset" "$sub" "$session" act "$run1" "$run2" "${options[@]}" || return $?
     [[ -z "$ppi_seed" ]] || bash "${SCRIPT_DIR}/L2stats.sh" "$dataset" "$sub" "$session" "ppi_seed-${ppi_seed}" "$run1" "$run2" "${options[@]}"
 }
 for unit in "${units[@]}"; do
