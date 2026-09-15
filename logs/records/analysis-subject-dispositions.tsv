@@ -4,38 +4,38 @@ ds003745	105		2	2	01,02	0		0		true	false	missing_ratings_file	false
 ds003745	106		2	2	01,02	0		0		true	false	missing_ratings_file	false
 ds003745	107		2	2	01,02	0		0		true	true		true
 ds003745	108		2	2	01,02	0		0		true	true		true
-ds003745	109		2	0		1	02	1	01	false	false	missing_ratings_file	false
+ds003745	109		2	1	01	1	02	0		true	false	missing_ratings_file	false
 ds003745	110		2	2	01,02	0		0		true	false	missing_ratings_file	false
-ds003745	111		2	0		1	01	1	02	false	true		false
-ds003745	112		2	1	01	0		1	02	true	true		true
+ds003745	111		2	1	02	1	01	0		true	true		true
+ds003745	112		2	2	01,02	0		0		true	true		true
 ds003745	113		2	2	01,02	0		0		true	true		true
 ds003745	115		2	2	01,02	0		0		true	true		true
 ds003745	116		2	2	01,02	0		0		true	true		true
 ds003745	117		2	2	01,02	0		0		true	true		true
 ds003745	118		2	0		2	01,02	0		false	true		false
-ds003745	120		2	1	02	0		1	01	true	true		true
+ds003745	120		2	2	01,02	0		0		true	true		true
 ds003745	121		2	2	01,02	0		0		true	true		true
 ds003745	122		2	2	01,02	0		0		true	true		true
-ds003745	124		2	1	01	0		1	02	true	true		true
+ds003745	124		2	2	01,02	0		0		true	true		true
 ds003745	125		2	2	01,02	0		0		true	true		true
 ds003745	126		2	2	01,02	0		0		true	false	identical_ratings	false
 ds003745	127		2	2	01,02	0		0		true	false	loss_sum_greater_than_win_sum	false
 ds003745	128		2	2	01,02	0		0		true	true		true
 ds003745	129		2	1	02	1	01	0		true	true		true
 ds003745	130		2	2	01,02	0		0		true	false	missing_ratings_file	false
-ds003745	131		2	1	02	0		1	01	true	false	missing_ratings_file	false
-ds003745	132		2	0		0		2	01,02	false	false	missing_ratings_file	false
+ds003745	131		2	2	01,02	0		0		true	false	missing_ratings_file	false
+ds003745	132		2	2	01,02	0		0		true	false	missing_ratings_file	false
 ds003745	133		2	2	01,02	0		0		true	false	missing_ratings_file	false
-ds003745	134		2	1	01	0		1	02	true	false	missing_ratings_file	false
+ds003745	134		2	2	01,02	0		0		true	false	missing_ratings_file	false
 ds003745	135		2	0		2	01,02	0		false	false	missing_ratings_file	false
 ds003745	136		2	2	01,02	0		0		true	true		true
 ds003745	137		2	2	01,02	0		0		true	true		true
 ds003745	138		2	0		2	01,02	0		false	true		false
-ds003745	140		2	0		0		2	01,02	false	false	identical_ratings	false
-ds003745	141		2	1	02	0		1	01	true	true		true
+ds003745	140		2	2	01,02	0		0		true	false	identical_ratings	false
+ds003745	141		2	2	01,02	0		0		true	true		true
 ds003745	142		2	2	01,02	0		0		true	true		true
-ds003745	143		2	1	01	0		1	02	true	false	missing_ratings_file	false
-ds003745	144		2	1	01	0		1	02	true	true		true
+ds003745	143		2	2	01,02	0		0		true	false	missing_ratings_file	false
+ds003745	144		2	2	01,02	0		0		true	true		true
 ds003745	145		2	2	01,02	0		0		true	true		true
 ds003745	147		2	2	01,02	0		0		true	true		true
 ds003745	149		2	1	02	1	01	0		true	true		true
@@ -44,7 +44,7 @@ ds003745	151		2	2	01,02	0		0		true	true		true
 ds003745	152		2	1	02	1	01	0		true	true		true
 ds003745	153		2	2	01,02	0		0		true	true		true
 ds003745	154		2	2	01,02	0		0		true	true		true
-ds003745	155		2	1	01	0		1	02	true	true		true
+ds003745	155		2	2	01,02	0		0		true	true		true
 ds003745	156		2	2	01,02	0		0		true	true		true
 ds003745	157		2	2	01,02	0		0		true	true		true
 ds003745	158		2	2	01,02	0		0		true	true		true
@@ -210,7 +210,7 @@ rf1	11171	01	2	2	1,2	0		0		true	true		true
 rf1	11177	01	2	2	1,2	0		0		true	true		true
 rf1	11192	01	2	2	1,2	0		0		true	true		true
 rf1	11193	01	2	2	1,2	0		0		true	true		true
-rf1	11201	01	1	0		0		1	1	false	true		false
+rf1	11201	01	1	1	1	0		0		true	true		true
 rf1	11203	01	2	2	1,2	0		0		true	false	loss_sum_greater_than_win_sum	false
 rf1	11209	01	2	2	1,2	0		0		true	false	loss_sum_greater_than_win_sum	false
 rf1	11227	01	2	2	1,2	0		0		true	true		true
@@ -260,7 +260,7 @@ rf1	11472	01	2	2	1,2	0		0		true	false	missing_ratings_file	false
 rf1	11492	01	2	2	1,2	0		0		true	false	identical_ratings	false
 rf1	11493	01	2	2	1,2	0		0		true	false	loss_sum_greater_than_win_sum	false
 rf1	11498	01	1	1	1	0		0		true	true		true
-rf1	11517	01	2	1	2	0		1	1	true	true		true
+rf1	11517	01	2	2	1,2	0		0		true	true		true
 rf1	11518	01	2	2	1,2	0		0		true	true		true
 rf1	11523	01	2	2	1,2	0		0		true	true		true
 rf1	11526	01	2	2	1,2	0		0		true	true		true
@@ -372,20 +372,21 @@ rf1	11939	01	2	2	1,2	0		0		true	true		true
 rf1	11943	01	2	2	1,2	0		0		true	true		true
 rf1	11949	01	2	2	1,2	0		0		true	true		true
 rf1	11960	01	2	2	1,2	0		0		true	true		true
-rf1	11969	01	2	0		2	1,2	0		false	true		false
+rf1	11969	01	2	2	1,2	0		0		true	true		true
 rf1	11974	01	2	2	1,2	0		0		true	true		true
 rf1	11976	01	2	2	1,2	0		0		true	true		true
 rf1	11982	01	2	2	1,2	0		0		true	true		true
-rf1	11984	01	2	1	2	1	1	0		true	true		true
+rf1	11984	01	2	2	1,2	0		0		true	true		true
 rf1	12008	01	2	2	1,2	0		0		true	true		true
 rf1	12011	01	2	2	1,2	0		0		true	true		true
 rf1	12013	01	2	2	1,2	0		0		true	true		true
 rf1	12018	01	2	2	1,2	0		0		true	true		true
-rf1	12020	01	2	1	2	1	1	0		true	true		true
+rf1	12020	01	2	2	1,2	0		0		true	true		true
 rf1	12021	01	2	2	1,2	0		0		true	true		true
 rf1	12031	01	2	2	1,2	0		0		true	true		true
+rf1	12032	01	2	2	1,2	0		0		true	true		true
 rf1	12033	01	2	2	1,2	0		0		true	true		true
-rf1	12036	01	2	1	1	1	2	0		true	false	identical_ratings	false
+rf1	12036	01	2	2	1,2	0		0		true	false	identical_ratings	false
 rf1	12037	01	2	1	1	1	2	0		true	false	missing_ratings_file	false
 rf1	12038	01	2	2	1,2	0		0		true	true		true
 rf1	12039	01	2	2	1,2	0		0		true	true		true
