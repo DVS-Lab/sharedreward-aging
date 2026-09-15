@@ -1,41 +1,59 @@
 # Phase 0 status
 
-Status date: 2026-09-02. Production target smoothing is fixed at the approved 6 mm total classic FWHM. No new full-cohort L1/L2/L3 analysis has been launched.
+Reconciled 2026-09-15. The spatial preprocessing decision is complete and fixed:
+**6 mm total classic FWHM**, with no additional FEAT smoothing. This is not a
+statement that all pooled FEAT models have run. The authoritative execution,
+cohort and review snapshot is [CURRENT_STATUS.md](CURRENT_STATUS.md); the
+[Cooper handoff](COOPER_HANDOFF.md) separates exclusion/design preparation from
+permission to execute final L3 inference.
 
-| Required report item | Current status |
+## Completed work
+
+| Stage | Evidence-backed status |
 |---|---|
-| Modern fMRIPrep | Wrapper pins Linux2's `fmriprep-25.2.5.simg`; ds003745 output is `MNI152NLin6Asym` only, without FreeSurfer. The 50-subject/100-run cohort completed on Linux2 and passed the completeness audit. |
-| Successful ds003745 pilot subjects | The pilot passed and the complete 50-subject cohort was processed. |
-| Historical raw behavioral logs | Not found in the checked local aging or public data-paper repositories. |
-| Phase-resolved ds003745 reconstruction | Not performed and no longer required. Exact phase timing is not supported by the published representation. |
-| Unrecoverable event information | Exact historical decision/outcome phase boundaries. Published full-trial and block timing remains available. |
-| ds003745 public event audit | 50 subjects, 100 runs, 7,200 trials, 900 blocks; all runs have 72 trials and 9 blocks. All 100 model-specific conversions passed. |
-| RF1 reference grid | The signal-free RF1 reference resource was created from the verified modal `MNI152NLin6Asym` grid. |
-| RF1 grid consistency | The upstream fMRIPrep BOLD/mask geometry audit and repair completed; Shared Reward analysis inputs now match the authoritative grid. |
-| ds003745 grid resampling | All 100 identity-grid `wsinc5` BOLD and nearest-neighbor mask derivatives passed exact RF1-grid verification. |
-| Baseline smoothness | The decision audit passed all 865 units: 665 RF1 native, 100 ds003745 native, and 100 ds003745 post-`wsinc5`. The current inventory adds two RF1 runs that use the fixed procedure without reopening the target decision. |
-| Resampling effect on smoothness | `wsinc5` increased ds003745 classic FWHM by 0.259 mm on average, versus 0.717 mm under superseded cubic interpolation. |
-| Candidate targets | Complete. Every analysis-ready run began below 5 mm classic FWHM. The 6-mm target passed the cohort tolerance for 764 runs; one stable run-specific convergence limit is handled by a tightly bounded, documented exception. |
-| Pilot achieved smoothing | Passed. RF1 achieved 5.728 mm classic/9.153 mm ACF-effective; ds003745 achieved 5.993 mm classic/9.084 mm ACF-effective. The larger ACF scale is retained for sensitivity review and does not replace the classic target. |
-| Production target smoothing | Complete and audited: 764 runs pass the common 5.4-6.6 mm tolerance. RF1 sub-10657/ses-01/run-1 reproducibly achieved 5.280 mm under both default and all-volume retries and is the sole bounded exception. Zero unresolved failures. |
-| FEAT-equivalent SUSAN control | Complete: 765/765 runs and 2,295/2,295 method measurements. Nominal 6-mm SUSAN yielded mean total classic FWHM of 8.260 mm (ds003745) and 7.919 mm (RF1), versus 5.775 and 5.852 mm for the approved AFNI total target. Production remains AFNI target smoothing with FEAT smoothing zero. |
-| tSNR | Complete for 765/765 final smoothed FEAT inputs. Mean run-level median tSNR is 133.358 for ds003745 and 108.670 for RF1; the full TemplateFlow mask is the fixed reference. |
-| Motion/coverage/outliers | Complete for 765/765 runs with zero unresolved measurement failures. Motion uses named fMRIPrep confounds rather than the headerless FEAT nuisance matrix. Coverage preserves the historical cerebellum/posterior-brainstem exemption through a fixed TemplateFlow-minus-exemption denominator. Dataset-specific 1.5×IQR rules produced 89 review-flagged runs across 61 subjects: 12 ds003745 runs/8 subjects and 77 RF1 runs/53 subjects. These remain review flags, not automatic exclusions. The 33 RF1 low-coverage flags include 29 runs clustered between 98.43% and 99.15% coverage plus four materially lower runs, so the modern-mask result must be inspected before cohort freezing rather than assumed equivalent to the historical zero-RF1 exclusion count. |
-| Missed trials | The August audit covered 758 runs. Upstream subsequently recovered five event sources and added two valid `sub-12032` runs. Only `sub-11450` run 2 and `sub-12037` run 2 remain source-missing. Rebuild the event audit before freezing final counts; the strict rule remains exclusion only when missed trials are greater than 25%. |
-| Ratings | The 2026-09-02 audit covered 398 subjects and found 49 exclusions. RF1 `sub-10803` has since been restored exactly from Git history, so the ratings audit and qualified-cohort count must be refreshed. The 11 missing ds003745 files are absent from the pinned OpenNeuro inventory and repository history. Session-note review partitions the other RF1 gaps into confirmed non-collection/incompleteness, high-priority reported-complete recovery searches, and unresolved secondary searches; see `docs/SOURCE_GAPS.md` and `docs/rf1_ratings_source_notes.tsv`. |
-| Cohort freezing | Implemented in `code/build_analysis_cohort.py`. It produces task-valid and ratings-qualified L1/subject-level manifests separately and applies the current missing-event, >25%-missed, and curated task exclusions. Neutral-only zero-count runs are eligible under the documented non-inferential neutral rule; zero reward/punish cells remain model-review holds. RF1 `sub-11539` is excluded because the wrong friend photo was displayed in both runs. |
-| Target recommendation | Approved: 6 mm total classic FWHM. Rationale: approximately twice the 2.7–2.97 mm voxel dimensions, accommodates cross-age anatomical heterogeneity, and remains the upper acceptable bound for spatial specificity in small regions. |
-| Template decisions | Authoritative RF1 activation is 14 EVs/34 contrasts/0-mm FEAT smoothing. Every active task EV, including `C_neu`, has per-EV temporal filtering disabled. The isolated historical `C_neu` setting was normalized to 0 by explicit decision on 2026-09-04. Historical aging vectors and archived templates remain provenance, not active model definitions. |
-| Pooled temporal model | Approved and implemented as a deterministic narrow transform of the retained historical FSFs: nine full-trial task EVs, convolved optional missed-trial nuisance, 28 retained activation contrasts (22 neutral-independent primary contrasts), zero FEAT smoothing, and no unsupported decision EVs. Neutral is modeled when observed and explicitly empty when absent; PPI retains all 28 interaction contrasts plus physiology at COPE 29. See `NEUTRAL_CONDITION_DECISION.md`. |
+| ds003745 preprocessing | 50 participants / 100 runs processed on Linux2 with fMRIPrep 25.2.5; no FreeSurfer or multi-echo processing required. |
+| Grid harmonization | Signal-free RF1 modal MNI152NLin6Asym reference established; all 100 ds003745 wsinc5 BOLD / nearest-neighbor mask derivatives passed RF1-grid verification. |
+| Smoothing decision | Initial 865 characterization units = 665 RF1 runs + 100 older runs at two stages. Target fixed at 6 mm total classic FWHM; ACF retained separately. |
+| Original production/control comparison | 765 unique runs; all 2,295 SUSAN/baseline/AFNI measurements complete. Nominal 6-mm SUSAN produced mean total classic FWHM 8.260 mm (ds003745) and 7.919 mm (RF1), versus 5.775 and 5.852 mm for AFNI total-target outputs. No target change is pending. |
+| Incremental 12032 runs | Both reported DONE for smoothing on September 2 and passed the 767-run analysis-input QC audit. They are no longer pending catch-up. |
+| Analysis-input QC | 767/767 measured; 88 flagged runs / 61 participants. tSNR is from final smoothed FEAT input; motion from named fMRIPrep confounds; coverage uses TemplateFlow minus the historical cerebellum/posterior-brainstem exemption. Flags are not automatic exclusions. |
+| Current events | September 15 refreshed 765 event units, with 19 runs strictly >25% missed trials. The two remaining RF1 source gaps are 11450 r2 and 12037 r2. No new neutral-related holds. |
+| ds003745 source correction | Raw logs now exist in srndna-datapaper; guarded sub-144 full-trial recovery and downstream regeneration completed. The old statement that no raw logs were found is historical, not current. Phase-resolved older-dataset reconstruction is not required. |
+| ds003745 FSL nuisance matrices | September 15 audit: 100 complete, zero incomplete. RF1 consumes Linux2's existing TEDANA-plus-confounds without duplication. |
+| Pooled cohort preparation | 744 task-ready runs / 393 subject-sessions; 23 task-excluded runs; zero reward/punish model-review holds. Final scientific and ratings eligibility remain separate. |
+| Pooled v3 pilot | Corrected sub-144 runs 1/2 passed activation and provisional VS-PPI L1 plus both fixed-effects outputs on September 15. Retained contract: 28 activation / 29 PPI contrasts, not the superseded 22/23 version. |
 
-## Next real-data step
+## Evidence still to close, without reprocessing
 
-On Linux2, after pulling this repository:
+The September 2 smoothing catch-up exited 1 for the already-accepted RF1
+10657 r1 convergence exception (approximately 5.280 mm), so its consolidated
+check was skipped. Current code consumes the exact bounded exception table.
+A read-only consolidated 767-run smoothing audit should record closure; do not
+repeat smoothing or relax the global tolerance. This issue is unrelated to the
+newly surfaced scientific question about 10657's friend stimulus.
 
-1. catch up target smoothing and analysis-input QC for the two `sub-12032` runs;
-2. rebuild event and ratings audits from the current upstream sources;
-3. generate and audit the ds003745 FSL nuisance matrices;
-4. rebuild the final task/ratings manifests and generate three-column EVs;
-5. run the cross-dataset activation-plus-PPI pilot, then the paired full L1 batch;
-6. audit L1 and run paired fixed effects for two-run subjects, retaining explicit L1 passthrough for one-run subjects;
-7. cross-check final-model residual smoothness before pooled inference and keep pooled L3 out of scope.
+RF1 10803's exact recovered ratings source passes the current rules, but the
+tracked ratings table is stale. Refresh ratings discovery/audit and then the
+cohort; the recorded 655-run / 346-subject-session ratings-qualified counts
+are not final. Keep the task-ready and ratings-qualified cohorts distinct.
+
+## Next steps, not a restart of Phase 0
+
+1. Close the two evidence refreshes above and carry the upstream 10657, 10668
+   and 11923 scientific-review questions into the final decision ledger.
+2. Review imaging flags and hypothesis-specific exclusions with Cooper/PI;
+   record seed-provenance and scientific PPI decisions separately from the
+   successful provisional VS-PPI implementation test.
+3. Generate/verify the full retained-run EV set, then execute outstanding pooled
+   activation and PPI together using bounded paired concurrency. Do not use
+   RF1-only phase-resolved COPEs as pooled full-trial inputs.
+4. Audit primary L1 outputs, form two-run fixed effects or one-run passthrough
+   from the actual retained runs, and repeat the non-neutral group-readiness
+   audit. Only sub-144 is currently verified under this definitive contract.
+5. Freeze the hypothesis-specific ordered group inputs, covariates, model,
+   statistical mask and inference plan before L3 execution. Do not treat a
+   partial verified-candidate table as a completed cohort.
+
+Underlying records, exact counts and remaining code-integration limits are
+linked in [CURRENT_STATUS.md](CURRENT_STATUS.md). Prior Phase 0 status tables
+and numerical snapshots remain recoverable in Git history.

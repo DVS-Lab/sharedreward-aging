@@ -1,5 +1,8 @@
 # Pre-handoff verification: non-neutral contrasts only
 
+For the completed audit's interpretation, cross-repository provenance and
+remaining scientific reviews, see [CURRENT_STATUS.md](CURRENT_STATUS.md).
+
 Decision reaffirmed 2026-09-15: ignore every contrast containing neutral-condition
 coefficients for planned inference. Preserve all existing contrast slots; do not
 remove or renumber them. `audit_group_readiness.py` selects from the actual tracked

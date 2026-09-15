@@ -1,6 +1,7 @@
 # Harmonization audit
 
-Audit date: 2026-08-22.
+Historical audit date: 2026-08-22. Reconciled 2026-09-15; see
+[current status](../docs/CURRENT_STATUS.md) for execution and outstanding review.
 
 ## Event implementations
 
@@ -8,14 +9,20 @@ The data descriptor identifies Shared Reward as a block design: two runs, nine b
 
 The old `convertSharedReward_BIDS.m` explicitly used `decision_onset` plus `trialDuration`. That is evidence of the intended historical full-trial representation, not proof that exact outcome-phase timing can be reconstructed. Its questioned outcome-onset alternative and `computer_non-faceclea` typo are historical warnings, not instructions for a new source-data rewrite.
 
-The current pooling candidate is an estimand-level full-trial model:
+The approved pooled model is an estimand-level full-trial model:
 
-- ds003745 uses its published trial event rows unchanged;
+- ds003745 uses its published full-trial representation, with the separately
+  documented source correction for sub-144;
 - RF1 derives partner × feedback full-trial rows from validated canonical decision/outcome phase pairs;
 - misses become one full-trial nuisance epoch only when both boundaries are present;
-- source BIDS remains pristine.
+- harmonization itself does not rewrite source BIDS; approved upstream source
+  corrections remain separately documented.
 
-Exact phase-resolved ds003745 events are neither required nor generated. Raw logs were not found in the checked repository or the public `srndna-datapaper` clone; their absence does not block the common full-trial model.
+Exact phase-resolved ds003745 events are neither required nor generated. The
+August search did not locate raw logs, but this is no longer a current absence
+claim: `srndna-datapaper` now tracks raw acquisition logs and guarded sub-144
+full-trial recovery. That recovery does not change the agreed pooled temporal
+model or justify manufacturing phase-resolved events for the older cohort.
 
 ## Historical template drift
 
@@ -36,4 +43,5 @@ RF1 defines the common verified grid. ds003745 continuous BOLD is resampled by a
 - whether a block-level analysis should be a ds003745 sensitivity analysis only;
 - final pooled covariates, including tSNR;
 - pooled L3 design and subject exclusions;
-- PPI harmonization and seed provenance.
+- final seed provenance and PPI hypotheses; the common PPI implementation has
+  passed the sub-144 Linux2 pilot but is not yet a completed whole-cohort analysis.

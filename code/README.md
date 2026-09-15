@@ -1,5 +1,9 @@
 # Code
 
+For execution status, start with [CURRENT_STATUS.md](../docs/CURRENT_STATUS.md).
+Commands below document reusable stages, not a checklist to rerun completed
+preprocessing. Current pooled L3 readiness remains incomplete.
+
 Active Phase 0 utilities:
 
 - `get_ds003745.sh`: clone/pin OpenNeuro ds003745 2.1.1 and selectively retrieve pilot files.
@@ -23,11 +27,13 @@ Active Phase 0 utilities:
 - `build_analysis_cohort.py`: strict inventory reconciliation and separate task-valid versus ratings-qualified L1/L2 manifests. It applies established missing-event, >25%-missed, and curated task exclusions while preserving usable opposite runs; neutral-only zero cells remain eligible, while zero reward/punish cells become explicit review holds.
 - `build_fsl_confounds_manifest.py`, `generate_fsl_confounds.py`, `run_fsl_confounds_batch.py`, and `audit_fsl_confounds.py`: the single-echo ds003745 nuisance layer matching RF1's fMRIPrep base-column policy while explicitly omitting inapplicable TEDANA ICA regressors.
 - `generate_l1_evs.py`: audited three-column EV generation from the harmonized full-trial derivatives.
-- `render_pooled_fsf.py`, `L1stats.sh`, and `run_L1stats.sh`: narrow transformation of the retained historical FSFs and bounded activation-followed-by-PPI execution.
+- `render_pooled_fsf.py`, `L1stats.sh`, and `run_L1stats.sh`: narrow transformation of the retained historical FSFs and bounded paired activation/PPI execution (`--parallel-types` for concurrent types).
 - `render_pooled_l2_fsf.py`, `L2stats.sh`, `run_L2stats.sh`, and `audit_outputs.py`: bounded fixed effects, explicit one-run passthrough, and L1/subject-level completeness auditing.
 - `measure_smoothness.sh`, `smooth_to_target.sh`, and `compute_tsnr.py`: thin wrappers around the explicitly configured authoritative RF1 implementations, preventing metric drift. tSNR uses the fixed common-mask/run-mask intersection and reports coverage against the fixed mask.
 - `harmonization_report.py`: compact Phase 0 summary including the approved target status.
 - `run_logged.sh`: local raw log plus a compact Git-trackable record for major Linux2 runs.
+- `audit_group_readiness.py`: read-only primary-contrast L1/subject verification;
+  excludes neutral contrasts from inference without removing their slots.
 
 Default Temple roots live in `project_config.sh` and can be overridden explicitly. Large data remain outside Git. Use pilot subject lists, conservative fMRIPrep concurrency, and `--dry-run` before expensive processing.
 
@@ -112,7 +118,12 @@ python3 code/build_target_smoothing_manifest.py \
   --missing-output logs/runlists/target-smoothing-6mm-missing.tsv
 ```
 
-The current cohort should contain 767 units: 667 RF1 and 100 ds003745. Existing validated outputs are skipped, so the post-August catch-up should schedule only the two new `sub-12032` runs. Launch with bounded AFNI concurrency and an SSH-safe outer log:
+The current cohort contains 767 units: 667 RF1 and 100 ds003745. The two
+`sub-12032` runs completed catch-up on September 2; do not schedule them again
+merely because an old status document calls them new. The following restartable
+command is for future justified processing, not the next required step. Use the
+read-only audit to close the skipped consolidated smoothing check described in
+the current status index.
 
 ```bash
 nohup bash code/run_logged.sh \
@@ -343,10 +354,11 @@ Source-missing and missed-trial exclusions are run-level. A valid opposite run r
 
 ## Production nuisance, EV, L1, and L2 workflow
 
-For the corrected ds003745 sub-144 source and the neutral-contrast migration,
-start with [the guarded recovery runbook](../docs/SUB144_EVENT_RECOVERY.md).
-It preserves imaging preprocessing and archives stale models. Unstamped legacy
-Reduced 22/23-cope outputs must not be reused with the restored 28/29-cope contract. Preserve original IDs, and audit neutral empty-condition limitations with `audit_l1_contrasts.py`.
+The [guarded sub-144 recovery](../docs/SUB144_EVENT_RECOVERY.md) completed on
+September 15, including real activation/PPI L1 and fixed effects. Do not rerun
+it as a full-cohort launch procedure. Reduced 22/23-cope outputs must not be
+reused with the restored 28/29-cope contract. Preserve original IDs, and audit
+neutral empty-condition limitations with `audit_l1_contrasts.py`.
 
 RF1 L1 models consume Linux2's existing headerless `TedanaPlusConfounds.tsv` matrices. Build the ds003745 conversion contract from the named confounds used for QC, generate the single-echo matrices, and audit their volume alignment:
 
@@ -364,7 +376,11 @@ python3 code/audit_fsl_confounds.py \
   --fail-on-incomplete
 ```
 
-Rebuild `build_analysis_cohort.py` only after that audit passes. Generate three-column files, then pilot or launch activation and seed PPI in the same worker. Each worker runs activation first and begins PPI only after that activation command succeeds; `--jobs 50` therefore means at most approximately 50 FEAT jobs, not 100.
+Rebuild `build_analysis_cohort.py` only after that audit passes, and refresh
+ratings discovery/QC first if ratings sources changed. Generate/verify the full
+three-column set before a cohort launch. Use `--parallel-types` for the requested
+joint activation/PPI workflow; the sequential default remains supported but is
+not the intended joint-launch setting.
 
 Optional `--parallel-types` launches activation and PPI independently within
 each worker at L1 or L2. It waits for both and reports failure if either fails.
@@ -380,7 +396,7 @@ nohup bash code/run_logged.sh \
   --label pooled-L1-activation-PPI-vs --include-full-log -- \
   bash code/run_L1stats.sh \
     --manifest logs/runlists/L1-task-ready.tsv \
-    --ppi-seed vs --jobs 50 --log-dir logs/L1-current \
+    --ppi-seed vs --parallel-types --jobs 25 --log-dir logs/L1-current \
   > logs/pooled-L1-activation-PPI-vs.nohup 2>&1 </dev/null &
 ```
 
@@ -391,6 +407,6 @@ nohup bash code/run_logged.sh \
   --label pooled-L2-activation-PPI-vs --include-full-log -- \
   bash code/run_L2stats.sh \
     --manifest logs/runlists/L2-task-ready.tsv \
-    --ppi-seed vs --jobs 20 --log-dir logs/L2-current \
+    --ppi-seed vs --parallel-types --jobs 10 --log-dir logs/L2-current \
   > logs/pooled-L2-activation-PPI-vs.nohup 2>&1 </dev/null &
 ```

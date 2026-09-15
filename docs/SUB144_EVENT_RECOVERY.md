@@ -1,5 +1,10 @@
 # ds003745 sub-144 event recovery and model restart
 
+Completed on Linux2 on 2026-09-15, including restored-contract activation/PPI
+L1 and fixed effects. This is the recovery provenance/runbook, not the next
+full-cohort command. See [current status](CURRENT_STATUS.md) before executing
+any restart instructions below.
+
 ## Source correction (reviewed 2026-09-14)
 
 The authoritative correction lives in `DVS-Lab/srndna-datapaper`, commit

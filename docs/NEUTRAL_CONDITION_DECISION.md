@@ -38,8 +38,10 @@ mistaken for valid neutral inference or fixed by renumbering the contrast set.
 - `verify_neutral_feat_design.py` tests activation/PPI with neutral present,
   friend-neutral absent and all neutral absent, crossed with missed EV
   present/absent (12 real feat_model cases).
-- Real FEAT poststats and L2 still require the Linux2 pilot; feat_model success
-  alone is not full model validation.
+- Real FEAT poststats and L2 passed for both sub-144 runs and both model types
+  on Linux2 in the [September 15 restored-contract pilot](../logs/records/20260915-091946_sub144-restored-contrasts-L1-L2.md).
+  This goes beyond feat_model validation but does not certify whole-cohort output;
+  see [current status](CURRENT_STATUS.md).
 
 ## Scope and migration
 
@@ -48,8 +50,8 @@ derivative trees: sub-144 runs 1/2, activation/PPI, using the reduced 22/23
 contract. It found no additional L1 FSFs in those trees, including the scanned
 replacement paths. This is not a claim about historical outputs elsewhere.
 
-The scoped recovery archives those incompatible sub-144 outputs recoverably
-and reruns with the corrected events and restored contrast set. No upstream
+The completed scoped recovery archived those incompatible sub-144 outputs
+recoverably and reran with the corrected events and restored contrast set. No upstream
 BIDS, fMRIPrep, resampling or target smoothing is changed. Model provenance is
 versioned `fulltrial-retained-contrasts-v3`; do not retrofit new stamps onto
 old output.
