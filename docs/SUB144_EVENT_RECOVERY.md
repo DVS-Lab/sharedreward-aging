@@ -82,8 +82,11 @@ bash code/run_logged.sh \
 
 After preparation passes, this single detached command repeats the guarded
 preparation and runs sub-144 through both L1 analyses, L1 audits, L2 and final
-audits. Maximum two L1 workers; each runs activation then PPI, not four concurrent
-FEAT jobs. L2 uses one outer worker and `FSLSUB_PARALLEL=1`.
+audits. Activation and VS PPI run concurrently (`--parallel-types`): two L1
+paired workers mean up to four FEAT jobs. L2 starts only after both L1 audits
+pass and runs its activation/PPI pair concurrently, with `FSLSUB_PARALLEL=1`.
+General launchers retain sequential types by default; enabling this option
+doubles their maximum FEAT concurrency relative to `--jobs`.
 
 ```bash
 nohup bash code/run_logged.sh \

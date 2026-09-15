@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
 
-# Run activation followed by seed PPI within each bounded run-level worker.
+# Run paired activation/PPI within each bounded run-level worker.
 
 set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-usage() { echo "Usage: run_L1stats.sh --manifest FILE [--ppi-seed vs|--activation-only] [--jobs N] [--dry-run|--render-only] [--overwrite] [--log-dir DIR]" >&2; }
-manifest=""; ppi_seed=vs; jobs=20; mode=run; overwrite=0; log_dir=""
+usage() { echo "Usage: run_L1stats.sh --manifest FILE [--ppi-seed vs|--activation-only] [--parallel-types] [--jobs N] [--dry-run|--render-only] [--overwrite] [--log-dir DIR]" >&2; }
+manifest=""; ppi_seed=vs; jobs=20; mode=run; overwrite=0; log_dir=""; parallel_types=0
 while (( $# )); do
     case "$1" in
         --manifest) manifest="$2"; shift 2 ;; --ppi-seed) ppi_seed="$(printf '%s' "$2" | tr '[:upper:]' '[:lower:]')"; shift 2 ;;
         --activation-only) ppi_seed=""; shift ;; --jobs) jobs="$2"; shift 2 ;;
+        --parallel-types) parallel_types=1; shift ;;
         --dry-run) mode=dry-run; shift ;; --render-only) mode=render-only; shift ;;
         --overwrite) overwrite=1; shift ;; --log-dir) log_dir="$2"; shift 2 ;;
         -h|--help) usage; exit 0 ;; *) echo "ERROR: unknown argument: $1" >&2; usage; exit 2 ;;
@@ -22,6 +23,7 @@ validated_units="$(python3 "${SCRIPT_DIR}/read_l1_manifest.py" "$manifest")"
 while IFS= read -r unit || [[ -n "$unit" ]]; do [[ -z "$unit" ]] || units+=("$unit"); done <<< "$validated_units"
 (( ${#units[@]} )) || { echo "ERROR: no L1 work units" >&2; exit 1; }
 printf 'Paired L1 plan: %d unit(s), jobs=%d, activation%s\n' "${#units[@]}" "$jobs" "$([[ -n "$ppi_seed" ]] && printf ' + PPI seed-%s' "$ppi_seed")"
+if (( parallel_types )) && [[ -n "$ppi_seed" ]]; then echo "Concurrent analysis types: up to $((2*jobs)) L1 FEAT jobs ($jobs paired workers)."; fi
 if [[ -n "$log_dir" && "$mode" != dry-run ]]; then mkdir -p "$log_dir"; echo "Per-unit logs: $log_dir"; fi
 pids=(); labels=(); logfiles=(); failures=0
 wait_oldest() {
@@ -35,6 +37,14 @@ run_unit() {
     [[ "$mode" == dry-run ]] && options+=(--dry-run)
     [[ "$mode" == render-only ]] && options+=(--render-only)
     (( overwrite )) && options+=(--overwrite)
+    if (( parallel_types )) && [[ -n "$ppi_seed" ]]; then
+        local act_pid ppi_pid model_failures=0
+        bash "${SCRIPT_DIR}/L1stats.sh" "${common[@]}" 0 "${options[@]}" & act_pid=$!
+        bash "${SCRIPT_DIR}/L1stats.sh" "${common[@]}" "$ppi_seed" "${options[@]}" & ppi_pid=$!
+        wait "$act_pid" || model_failures=1
+        wait "$ppi_pid" || model_failures=1
+        return "$model_failures"
+    fi
     bash "${SCRIPT_DIR}/L1stats.sh" "${common[@]}" 0 "${options[@]}" || return $?
     [[ -z "$ppi_seed" ]] || bash "${SCRIPT_DIR}/L1stats.sh" "${common[@]}" "$ppi_seed" "${options[@]}"
 }

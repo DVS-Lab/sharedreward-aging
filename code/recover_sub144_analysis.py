@@ -112,12 +112,12 @@ def main():
         for row in l1_rows:
             output = l1_path(fsl_root, row, kind)
             archive_incomplete(output, l1_missing(output, count), fsl_root, backup)
-    run("run_L1stats.sh", "--manifest", l1, "--ppi-seed", "vs", "--jobs", "2",
+    run("run_L1stats.sh", "--manifest", l1, "--ppi-seed", "vs", "--parallel-types", "--jobs", "2",
         "--log-dir", ROOT / "logs" / f"L1-sub144-{stamp}")
     for kind in ("act", "ppi_seed-vs"):
         run("audit_outputs.py", "--level", "l1", "--manifest", l1, "--type", kind,
             "--output", records / f"sub144-L1-{kind}-completeness.tsv")
-    run("run_L2stats.sh", "--manifest", l2, "--ppi-seed", "vs", "--jobs", "1",
+    run("run_L2stats.sh", "--manifest", l2, "--ppi-seed", "vs", "--parallel-types", "--jobs", "1",
         "--log-dir", ROOT / "logs" / f"L2-sub144-{stamp}")
     for kind in ("act", "ppi_seed-vs"):
         run("audit_outputs.py", "--level", "subject", "--manifest", l2, "--type", kind,

@@ -366,6 +366,12 @@ python3 code/audit_fsl_confounds.py \
 
 Rebuild `build_analysis_cohort.py` only after that audit passes. Generate three-column files, then pilot or launch activation and seed PPI in the same worker. Each worker runs activation first and begins PPI only after that activation command succeeds; `--jobs 50` therefore means at most approximately 50 FEAT jobs, not 100.
 
+Optional `--parallel-types` launches activation and PPI independently within
+each worker at L1 or L2. It waits for both and reports failure if either fails.
+This means **up to twice `--jobs` FEAT processes**; reduce the worker count
+accordingly for full-cohort launches. The scoped sub-144 recovery enables this
+option with two L1 workers (four FEAT jobs maximum) and one L2 worker (two jobs).
+
 ```bash
 python3 code/generate_l1_evs.py \
   --manifest logs/runlists/L1-task-ready.tsv

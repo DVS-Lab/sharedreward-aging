@@ -4,10 +4,10 @@
 
 set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-usage() { echo "Usage: run_L2stats.sh --manifest FILE [--ppi-seed vs|--activation-only] [--jobs N] [--dry-run|--render-only] [--overwrite] [--log-dir DIR]" >&2; }
-manifest=""; ppi_seed=vs; jobs=20; mode=run; overwrite=0; log_dir=""
+usage() { echo "Usage: run_L2stats.sh --manifest FILE [--ppi-seed vs|--activation-only] [--parallel-types] [--jobs N] [--dry-run|--render-only] [--overwrite] [--log-dir DIR]" >&2; }
+manifest=""; ppi_seed=vs; jobs=20; mode=run; overwrite=0; log_dir=""; parallel_types=0
 while (( $# )); do
-    case "$1" in --manifest) manifest="$2"; shift 2 ;; --ppi-seed) ppi_seed="$(printf '%s' "$2" | tr '[:upper:]' '[:lower:]')"; shift 2 ;; --activation-only) ppi_seed=""; shift ;; --jobs) jobs="$2"; shift 2 ;; --dry-run) mode=dry-run; shift ;; --render-only) mode=render-only; shift ;; --overwrite) overwrite=1; shift ;; --log-dir) log_dir="$2"; shift 2 ;; -h|--help) usage; exit 0 ;; *) echo "ERROR: unknown argument: $1" >&2; usage; exit 2 ;; esac
+    case "$1" in --manifest) manifest="$2"; shift 2 ;; --ppi-seed) ppi_seed="$(printf '%s' "$2" | tr '[:upper:]' '[:lower:]')"; shift 2 ;; --activation-only) ppi_seed=""; shift ;; --parallel-types) parallel_types=1; shift ;; --jobs) jobs="$2"; shift 2 ;; --dry-run) mode=dry-run; shift ;; --render-only) mode=render-only; shift ;; --overwrite) overwrite=1; shift ;; --log-dir) log_dir="$2"; shift 2 ;; -h|--help) usage; exit 0 ;; *) echo "ERROR: unknown argument: $1" >&2; usage; exit 2 ;; esac
 done
 [[ -f "$manifest" ]] || { echo "ERROR: manifest not found: $manifest" >&2; exit 1; }
 [[ "$jobs" =~ ^[1-9][0-9]*$ ]] || { echo "ERROR: --jobs must be positive" >&2; exit 2; }
@@ -16,14 +16,23 @@ validated_units="$(python3 "${SCRIPT_DIR}/read_l2_manifest.py" "$manifest" 2>"$p
 while IFS= read -r unit || [[ -n "$unit" ]]; do [[ -z "$unit" ]] || units+=("$unit"); done <<< "$validated_units"
 passthrough_count="$(awk 'END {print NR+0}' "$passthrough_log")"
 printf 'Paired L2 plan: %d fixed-effects unit(s), %d one-run passthrough(s), jobs=%d, activation%s\n' "${#units[@]}" "$passthrough_count" "$jobs" "$([[ -n "$ppi_seed" ]] && printf ' + PPI seed-%s' "$ppi_seed")"
+if (( parallel_types )) && [[ -n "$ppi_seed" ]]; then echo "Concurrent analysis types: up to $((2*jobs)) L2 FEAT jobs ($jobs paired workers)."; fi
 if [[ -n "$log_dir" && "$mode" != dry-run ]]; then mkdir -p "$log_dir"; echo "Per-unit logs: $log_dir"; fi
 pids=(); labels=(); logfiles=(); failures=0
 wait_oldest() { local pid="${pids[0]}" label="${labels[0]}" logfile="${logfiles[0]}"; if ! wait "$pid"; then echo "ERROR: failed paired L2 unit: $label${logfile:+ (log: $logfile)}" >&2; failures=$((failures+1)); else echo "DONE: $label"; fi; pids=("${pids[@]:1}"); labels=("${labels[@]:1}"); logfiles=("${logfiles[@]:1}"); }
 run_unit() {
     local dataset="$1" sub="$2" session="$3" run1="$4" run2="$5" options=()
     [[ "$mode" == dry-run ]] && options+=(--dry-run); [[ "$mode" == render-only ]] && options+=(--render-only); (( overwrite )) && options+=(--overwrite)
-    bash "${SCRIPT_DIR}/L2stats.sh" "$dataset" "$sub" "$session" act "$run1" "$run2" "${options[@]}" || return $?
-    [[ -z "$ppi_seed" ]] || bash "${SCRIPT_DIR}/L2stats.sh" "$dataset" "$sub" "$session" "ppi_seed-${ppi_seed}" "$run1" "$run2" "${options[@]}"
+    if (( parallel_types )) && [[ -n "$ppi_seed" ]]; then
+        local act_pid ppi_pid model_failures=0
+        bash "${SCRIPT_DIR}/L2stats.sh" "$dataset" "$sub" "$session" act "$run1" "$run2" ${options[@]+"${options[@]}"} & act_pid=$!
+        bash "${SCRIPT_DIR}/L2stats.sh" "$dataset" "$sub" "$session" "ppi_seed-${ppi_seed}" "$run1" "$run2" ${options[@]+"${options[@]}"} & ppi_pid=$!
+        wait "$act_pid" || model_failures=1
+        wait "$ppi_pid" || model_failures=1
+        return "$model_failures"
+    fi
+    bash "${SCRIPT_DIR}/L2stats.sh" "$dataset" "$sub" "$session" act "$run1" "$run2" ${options[@]+"${options[@]}"} || return $?
+    [[ -z "$ppi_seed" ]] || bash "${SCRIPT_DIR}/L2stats.sh" "$dataset" "$sub" "$session" "ppi_seed-${ppi_seed}" "$run1" "$run2" ${options[@]+"${options[@]}"}
 }
 for unit in "${units[@]}"; do
     IFS='|' read -r dataset sub session run1 run2 <<< "$unit"; label="${dataset} sub-${sub} ses-${session}"
