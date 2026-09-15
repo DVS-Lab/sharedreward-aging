@@ -185,6 +185,8 @@ echo "Rendered: $rendered"
 [[ "$mode" == render-only ]] && exit 0
 command -v feat >/dev/null || { echo "ERROR: feat is unavailable; load FSL." >&2; exit 1; }
 feat "$rendered"
+python3 "${SCRIPT_DIR}/audit_l1_contrasts.py" --feat-dir "$feat_dir" --type "$type" \
+    --output "$feat_dir/design-contrast-audit.json"
 [[ -n "${FSLDIR:-}" && -f "${FSLDIR}/etc/flirtsch/ident.mat" ]] || { echo "ERROR: FSLDIR/ident.mat unavailable." >&2; exit 1; }
 mkdir -p "$feat_dir/reg"
 ln -sfn "${FSLDIR}/etc/flirtsch/ident.mat" "$feat_dir/reg/example_func2standard.mat"

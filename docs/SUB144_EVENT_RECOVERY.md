@@ -116,15 +116,20 @@ pushing. Never force-push to resolve a concurrent log/code update.
 
 ## Cohort-wide contrast migration is a separate step
 
-The neutral decision changes the pooled contract from 28 activation / 29 PPI
-copes to 22 / 23. Existing old models are not valid merely because their cope22
-or cope23 exists: later cope numbers now refer to different contrasts.
+The September 15 clarification restores the original 28 activation / 29 PPI
+contrasts, including neutral, with their original IDs. The temporary reduced
+22/23 contract renumbered later COPEs and must not be mixed with restored output.
+The inventory found only four L1 FSFs in the scanned derivative trees, all the
+partial sub-144 reduced-contract models. No cohort-wide migration is indicated
+by that inventory. Historical output outside those trees is not inventoried.
 
 New models carry `pooled-model-inputs.json`: content hashes for EVs, confounds,
 templates and relevant code, plus size/mtime fingerprints for large imaging
 inputs. L2 additionally checks parent provenance and cope/varcope fingerprints.
 Workers and audits reject old/missing stamps, changed inputs and wrong contrast
-counts. Do not manufacture stamps for old output. Image fingerprints are not
+counts. L1 also verifies intended and FSL-generated contrast weights and reports
+unsupported neutral hypotheses in design-contrast-audit.json. Do not manufacture
+stamps for old output. Image fingerprints are not
 cryptographic verification of the large image payloads.
 
 Only sub-144 is rerun by the recovery command. After its Linux2 pilot passes,

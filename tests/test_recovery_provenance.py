@@ -77,16 +77,16 @@ class RecoveryTest(unittest.TestCase):
             output = root / "model.feat"; output.mkdir()
             ev = root / "ev.txt"; ev.write_text("0 3.5 1\n")
             image = root / "bold.nii.gz"; image.write_bytes(b"image")
-            (output / "design.con").write_text("/NumContrasts 22\n/Matrix\n")
+            (output / "design.con").write_text("/NumContrasts 28\n/Matrix\n")
             with self.assertRaises(OSError):
                 provenance.validate_model(output, "l1", "act")
             stamp = output / provenance.STAMP
             stamp.write_text(json.dumps(provenance.snapshot("l1", "act", [ev], [image], [])))
             provenance.validate_model(output, "l1", "act")
-            (output / "design.con").write_text("/NumContrasts 28\n/Matrix\n")
+            (output / "design.con").write_text("/NumContrasts 22\n/Matrix\n")
             with self.assertRaisesRegex(ValueError, "contrast count"):
                 provenance.validate_model(output, "l1", "act")
-            (output / "design.con").write_text("/NumContrasts 22\n/Matrix\n")
+            (output / "design.con").write_text("/NumContrasts 28\n/Matrix\n")
             ev.write_text("1 3.5 1\n")
             with self.assertRaisesRegex(ValueError, "inputs changed"):
                 provenance.validate_model(output, "l1", "act")

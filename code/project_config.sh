@@ -40,8 +40,8 @@ analysis_type_from_ppi() {
 
 cope_count_for_type() {
     case "$1" in
-        act) printf '22\n' ;;
-        ppi_seed-*) printf '23\n' ;;
+        act) printf '28\n' ;;
+        ppi_seed-*) printf '29\n' ;;
         *) return 1 ;;
     esac
 }

@@ -346,7 +346,7 @@ Source-missing and missed-trial exclusions are run-level. A valid opposite run r
 For the corrected ds003745 sub-144 source and the neutral-contrast migration,
 start with [the guarded recovery runbook](../docs/SUB144_EVENT_RECOVERY.md).
 It preserves imaging preprocessing and archives stale models. Unstamped legacy
-28/29-cope outputs must not be reused with the current 22/23-cope contract.
+Reduced 22/23-cope outputs must not be reused with the restored 28/29-cope contract. Preserve original IDs, and audit neutral empty-condition limitations with `audit_l1_contrasts.py`.
 
 RF1 L1 models consume Linux2's existing headerless `TedanaPlusConfounds.tsv` matrices. Build the ds003745 conversion contract from the named confounds used for QC, generate the single-echo matrices, and audit their volume alignment:
 

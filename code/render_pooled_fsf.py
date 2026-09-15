@@ -39,19 +39,14 @@ def candidate_contrasts(path: Path) -> list[tuple[str, list[float]]]:
         weights = [float(value) for value in row["weights_ev1_to_ev10"].split(",")]
         if len(weights) != 10:
             raise ValueError(f"invalid candidate contrast: {row['contrast_name']}")
-        if any(weights[6:9]):
-            raise ValueError(
-                f"active contrast weights a non-inferential neutral EV: "
-                f"{row['contrast_name']}"
-            )
         if weights[9]:
             raise ValueError(
                 f"active contrast weights the missed-trial nuisance EV: "
                 f"{row['contrast_name']}"
             )
         contrasts.append((row["contrast_name"], weights))
-    if len(contrasts) != 22:
-        raise ValueError(f"expected 22 primary contrasts, found {len(contrasts)}")
+    if len(contrasts) != 28:
+        raise ValueError(f"expected 28 retained contrasts, found {len(contrasts)}")
     return contrasts
 
 
@@ -70,7 +65,9 @@ def contrast_block(kind: str, contrasts) -> str:
         ]
         vectors.append(("phys", [0.0] * 10 + [1.0] + [0.0] * 10))
         ev_count = 21
-    lines = ["", "# Pooled full-trial contrasts (generated from the tracked TSV contract)"]
+    lines = ["", "# Pooled full-trial contrasts (generated from the tracked TSV contract)",
+             "# FEAT's global contrast-masking switch; not a pairwise mask.",
+             "set fmri(conmask1_1) 0"]
     for contrast_number, (name, weights) in enumerate(vectors, 1):
         if len(weights) != ev_count:
             raise ValueError(f"contrast {name} has {len(weights)} rather than {ev_count} weights")

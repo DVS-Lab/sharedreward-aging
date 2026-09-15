@@ -15,7 +15,7 @@ def main():
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args()
     source = ROOT / f"templates/L2_task-sharedreward_model-1_type-{args.kind}.fsf"
-    ncopes = 22 if args.kind == "act" else 23
+    ncopes = 28 if args.kind == "act" else 29
     lines = []
     for line in source.read_text().splitlines():
         if re.match(r"^set fmri\(smooth\)", line):

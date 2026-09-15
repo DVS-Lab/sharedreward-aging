@@ -8,7 +8,7 @@ import re
 from pathlib import Path
 
 STAMP = "pooled-model-inputs.json"
-CONTRACT = "fulltrial-neutral-nuisance-v2"
+CONTRACT = "fulltrial-retained-contrasts-v3"
 
 
 def fingerprint(path, image=False):
@@ -41,7 +41,7 @@ def validate_stamp(stamp, level, kind, expected=None):
 def validate_model(output, level, kind):
     output = Path(output)
     validate_stamp(output / STAMP, level, kind)
-    n = 22 if kind == "act" else 23
+    n = 28 if kind == "act" else 29
     designs = [(output / "design.con", n)] if level == "l1" else [
         (output / f"cope{i}.feat/design.con", 1) for i in range(1, n + 1)]
     for path, expected in designs:

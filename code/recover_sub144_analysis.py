@@ -103,7 +103,7 @@ def main():
     backup = fsl_root / "replaced-models" / f"sub144-{stamp}"
     # Archive old subject estimates before changing their L1 parents.
     for kind in ("act", "ppi_seed-vs"):
-        count = 22 if kind == "act" else 23
+        count = 28 if kind == "act" else 29
         output = l2_path(fsl_root, l2_rows[0], kind)
         problems = l2_missing(output, count)
         if int(l2_rows[0]["n_runs"]) != 2:

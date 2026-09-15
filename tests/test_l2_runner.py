@@ -28,7 +28,7 @@ class L2RunnerTest(unittest.TestCase):
     def test_runtime_transform_preserves_fixed_effects_and_expands_copes(self):
         with tempfile.TemporaryDirectory() as temporary:
             temporary = Path(temporary)
-            for kind, expected in (("act", 22), ("ppi", 23)):
+            for kind, expected in (("act", 28), ("ppi", 29)):
                 output = temporary / f"{kind}.fsf"
                 subprocess.run(
                     [

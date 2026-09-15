@@ -66,7 +66,8 @@ class L1RunnerTest(unittest.TestCase):
             self.assertIn("set fmri(shape10) 10", activation_text)
             self.assertIn("set fmri(shape7) 10", activation_text)
             self.assertIn("set fmri(shape8) 3", activation_text)
-            self.assertIn("set fmri(ncon_orig) 22", activation_text)
+            self.assertIn("set fmri(ncon_orig) 28", activation_text)
+            self.assertIn("set fmri(conmask1_1) 0", activation_text)
             self.assertIn("set fmri(tr) 2.020000\n", activation_text)
             activation_feat = unit_dir / "L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat"
             activation_feat.mkdir()
@@ -78,7 +79,8 @@ class L1RunnerTest(unittest.TestCase):
             self.assertIn("set fmri(shape7) 10", ppi_text)
             self.assertIn("set fmri(shape18) 10", ppi_text)
             self.assertIn("set fmri(shape19) 4", ppi_text)
-            self.assertIn("set fmri(ncon_orig) 23", ppi_text)
+            self.assertIn("set fmri(ncon_orig) 29", ppi_text)
+            self.assertIn("set fmri(conmask1_1) 0", ppi_text)
             for invalid in ("", "0", "0.000", "-2.02", "nan", "2 3", "2.02 junk"):
                 with self.subTest(invalid_tr=invalid):
                     result = subprocess.run(common + ["vs"] + options,

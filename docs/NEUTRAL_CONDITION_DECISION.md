@@ -1,77 +1,59 @@
-# Neutral-condition inferential decision
+# Neutral-condition decision and retained contrast numbering
 
-Decision date: 2026-09-04.
+Clarified 2026-09-15; supersedes the September 14 contrast-removal implementation.
 
-## Decision
+Neutral is not a primary inferential target because there are too few trials.
+This does **not** mean deleting its contrasts. Retain all 28 original pooled
+activation contrasts, the same 28 PPI interaction contrasts and physiology at
+COPE 29, identically for RF1 and ds003745. The tracked TSV is restored exactly
+to its pre-removal version. COPE 10 is rew-pun; COPEs 27/28 are F-S/F-C (pun).
 
-Neutral trials remain part of the common nine-condition first-level design when
-they are observed, but neutral is not part of the primary inferential contrast
-set. The same rule applies to RF1 and ds003745 and to activation and seed-PPI
-models.
+## Design and empty conditions
 
-A run with zero trials in one or more neutral cells remains eligible. Its empty
-neutral psychological EV, and the corresponding PPI interaction EV, are
-rendered with FEAT shape 10 (empty). The workflow never invents a neutral event
-or substitutes a different trial. A zero-count reward or punish cell remains a
-model-review hold because it is required by the primary contrasts.
+Observed neutral trials remain modeled. Absent neutral psychological EVs and
+their PPI interaction EVs use FEAT shape 10, without fabricated events.
+An otherwise valid run is not excluded for missing neutral. Empty reward or
+punish conditions still require model review.
 
-## Rationale
+Retain the six neutral-weighted contrasts at their original positions:
+7 C_neu, 8 F_neu, 9 S_neu, 20 F-S (rew-neu), 21 S-C (rew-neu),
+22 F-C (rew-neu). These are not approved for inference in the current analysis.
+All other task contrast vectors have zero neutral and missed-trial weights.
 
-Neutral cells have too few trials for stable planned inference, and occasional
-zero cells are an expected consequence of the task realization rather than a
-failure of otherwise valid reward/punish data. The planned questions concern
-reward, punish, partner, and their interactions. Retaining observed neutral
-trials in the design accounts for their task-related variance without claiming
-adequate support for neutral inference. Allowing an explicitly empty neutral EV
-also preserves valid reward/punish information from affected runs without
-fabricating data.
+FSL may automatically zero a single-EV contrast on an empty EV in design.con.
+Its slot and name remain. Mixed comparisons involving that absent EV may retain
+their coefficients while being non-estimable. This is recorded explicitly, not
+mistaken for valid neutral inference or fixed by renumbering the contrast set.
 
-The actual contrast coefficients were audited rather than inferred from their
-labels. Six former contrasts had nonzero neutral weights and were removed from
-the active pooled contract:
+## Enforcement and validation
 
-- `C_neu`, `F_neu`, and `S_neu`;
-- `F-S (rew-neu)`, `S-C (rew-neu)`, and `F-C (rew-neu)`.
+- The renderer retains all 28/29 contrast slots and FEAT's global
+  `conmask1_1=0` switch. That switch was accidentally removed by the pooled
+  renderer, although present in both source templates.
+- `audit_l1_contrasts.py` verifies intended FSF names/weights, actual design.con
+  weights (allowing FSL's documented-in-our-tests empty-EV zeroing), and
+  estimability of primary contrasts. It reports unsupported neutral hypotheses.
+- L1 saves `design-contrast-audit.json` before cleanup; the completeness audit
+  repeats the checks. The report does not authorize neutral group inference.
+- `verify_neutral_feat_design.py` tests activation/PPI with neutral present,
+  friend-neutral absent and all neutral absent, crossed with missed EV
+  present/absent (12 real feat_model cases).
+- Real FEAT poststats and L2 still require the Linux2 pilot; feat_model success
+  alone is not full model validation.
 
-The retained `F-(S+C) all` label is historical: its actual vector weights only
-reward and punish; all three neutral coefficients are zero. The active contract
-therefore contains 22 activation copes. PPI applies those same 22 vectors to the
-interaction EVs and adds one physiological cope, for 23 total.
+## Scope and migration
 
-## Enforcement
+The September 15 inventory found only four L1 FSFs in the two scanned FSL
+derivative trees: sub-144 runs 1/2, activation/PPI, using the reduced 22/23
+contract. It found no additional L1 FSFs in those trees, including the scanned
+replacement paths. This is not a claim about historical outputs elsewhere.
 
-- `templates/FULLTRIAL_CONTRAST_CANDIDATE.tsv` is the shared contrast source
-  for both datasets and both L1 analysis types. Every active vector must have
-  zero weights for neutral and missed-trial EVs.
-- `code/render_pooled_fsf.py` rejects a contrast table that violates that rule.
-- `code/generate_l1_evs.py` permits empty neutral files but rejects empty
-  reward or punish EVs.
-- `code/L1stats.sh` maps empty neutral psychological and PPI interaction EVs to
-  FEAT shape 10 and requires all reward/punish EVs to be nonempty.
-- `code/build_analysis_cohort.py` admits neutral-only zero-count runs and keeps
-  non-neutral zero-count runs on model-review hold.
+The scoped recovery archives those incompatible sub-144 outputs recoverably
+and reruns with the corrected events and restored contrast set. No upstream
+BIDS, fMRIPrep, resampling or target smoothing is changed. Model provenance is
+versioned `fulltrial-retained-contrasts-v3`; do not retrofit new stamps onto
+old output.
 
-If neutral inference is later demanded during review, it will be treated as a
-separate sensitivity analysis with an explicitly supported cohort and contrast
-contract. It will not silently alter the primary model or its cope numbering.
-
-Based on the frozen manifests available when this decision was recorded,
-rebuilding on Linux2 is expected to move all 17 neutral-only holds into the
-task-ready set: 737 L1 runs and 391 subject-sessions (346 two-run fixed-effects
-units and 45 one-run passthroughs). These are expectations to be verified by
-the logged rebuild, not replacements for its generated audit records.
-
-## Validation and migration (2026-09-14)
-
-Real installed FSL `feat_model` was exercised for activation and PPI, with all
-neutral nuisance EVs empty or present and the missed-trial nuisance EV empty or
-present (eight cases). Every matrix was finite and every retained contrast was
-estimable by row-space projection. Empty nuisance columns can make the full
-design rank deficient without making the active contrasts non-estimable.
-The reproducible check is `code/verify_neutral_feat_design.py`; its tracked
-numerical report is `logs/records/20260914-neutral-feat-design.json`.
-This tests design construction, not a completed Linux2 FEAT model or its image QC.
-
-The upstream sub-144 correction and the old-to-new cope migration are described
-in [SUB144_EVENT_RECOVERY.md](SUB144_EVENT_RECOVERY.md). Do not reuse unstamped
-old-contract models or treat the earlier projected cohort counts as current.
+If neutral inference is requested later, choose a support-qualified cohort and
+validate those effects at each level explicitly. The primary contrast numbering
+does not change.
