@@ -24,7 +24,7 @@ class ParallelTypesTest(unittest.TestCase):
                 'for attempt in $(seq 1 100); do\n'
                 f'  if [[ -f "$MARKERS/{act}-started" && -f "$MARKERS/{ppi}-started" ]]; then\n'
                 '    touch "$MARKERS/$kind-finished"\n'
-                f'    [[ "$kind" == "{act}" && "$FAIL_ACT" == 1 ]] && exit 7\n'
+                f'    [[ "$kind" == "{act}" && "$FAIL_ACT" == 1 ]] && {{ echo "TEST_MODEL_FAILURE" >&2; exit 7; }}\n'
                 '    exit 0\n'
                 '  fi\n'
                 '  sleep 0.02\n'
@@ -32,13 +32,16 @@ class ParallelTypesTest(unittest.TestCase):
             )
             manifest = root / "manifest.tsv"; manifest.touch()
             result = subprocess.run(["bash", str(wrapper), "--manifest", str(manifest),
-                                     "--parallel-types", "--jobs", "1"],
+                                     "--parallel-types", "--jobs", "1", "--log-dir", str(root / "logs")],
                                     env={**os.environ, "MARKERS": str(root), "FAIL_ACT": str(int(fail))},
                                     capture_output=True, text=True, timeout=10)
             for kind in (act, ppi):
                 self.assertTrue((root / f"{kind}-finished").exists(), result.stdout + result.stderr)
             self.assertEqual(result.returncode, 1 if fail else 0, result.stdout + result.stderr)
             self.assertIn(f"up to 2 L{level} FEAT jobs", result.stdout)
+            if fail:
+                self.assertIn("TEST_MODEL_FAILURE", result.stderr)
+                self.assertIn("BEGIN FAILED WORKER LOG TAIL", result.stderr)
 
     def test_l1_types_overlap(self):
         self.exercise(1, False)

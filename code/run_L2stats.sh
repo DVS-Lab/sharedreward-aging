@@ -19,7 +19,19 @@ printf 'Paired L2 plan: %d fixed-effects unit(s), %d one-run passthrough(s), job
 if (( parallel_types )) && [[ -n "$ppi_seed" ]]; then echo "Concurrent analysis types: up to $((2*jobs)) L2 FEAT jobs ($jobs paired workers)."; fi
 if [[ -n "$log_dir" && "$mode" != dry-run ]]; then mkdir -p "$log_dir"; echo "Per-unit logs: $log_dir"; fi
 pids=(); labels=(); logfiles=(); failures=0
-wait_oldest() { local pid="${pids[0]}" label="${labels[0]}" logfile="${logfiles[0]}"; if ! wait "$pid"; then echo "ERROR: failed paired L2 unit: $label${logfile:+ (log: $logfile)}" >&2; failures=$((failures+1)); else echo "DONE: $label"; fi; pids=("${pids[@]:1}"); labels=("${labels[@]:1}"); logfiles=("${logfiles[@]:1}"); }
+wait_oldest() {
+    local pid="${pids[0]}" label="${labels[0]}" logfile="${logfiles[0]}"
+    if ! wait "$pid"; then
+        echo "ERROR: failed paired L2 unit: $label${logfile:+ (log: $logfile)}" >&2
+        if [[ -s "$logfile" ]]; then
+            echo "BEGIN FAILED WORKER LOG TAIL: $logfile" >&2
+            tail -n 80 -- "$logfile" >&2 || true
+            echo "END FAILED WORKER LOG TAIL" >&2
+        fi
+        failures=$((failures+1))
+    else echo "DONE: $label"; fi
+    pids=("${pids[@]:1}"); labels=("${labels[@]:1}"); logfiles=("${logfiles[@]:1}")
+}
 run_unit() {
     local dataset="$1" sub="$2" session="$3" run1="$4" run2="$5" options=()
     [[ "$mode" == dry-run ]] && options+=(--dry-run); [[ "$mode" == render-only ]] && options+=(--render-only); (( overwrite )) && options+=(--overwrite)

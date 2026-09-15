@@ -28,7 +28,15 @@ if [[ -n "$log_dir" && "$mode" != dry-run ]]; then mkdir -p "$log_dir"; echo "Pe
 pids=(); labels=(); logfiles=(); failures=0
 wait_oldest() {
     local pid="${pids[0]}" label="${labels[0]}" logfile="${logfiles[0]}"
-    if ! wait "$pid"; then echo "ERROR: failed paired L1 unit: $label${logfile:+ (log: $logfile)}" >&2; failures=$((failures+1)); else echo "DONE: $label"; fi
+    if ! wait "$pid"; then
+        echo "ERROR: failed paired L1 unit: $label${logfile:+ (log: $logfile)}" >&2
+        if [[ -s "$logfile" ]]; then
+            echo "BEGIN FAILED WORKER LOG TAIL: $logfile" >&2
+            tail -n 80 -- "$logfile" >&2 || true
+            echo "END FAILED WORKER LOG TAIL" >&2
+        fi
+        failures=$((failures+1))
+    else echo "DONE: $label"; fi
     pids=("${pids[@]:1}"); labels=("${labels[@]:1}"); logfiles=("${logfiles[@]:1}")
 }
 run_unit() {

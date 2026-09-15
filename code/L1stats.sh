@@ -84,10 +84,13 @@ printf 'L1 plan\n  dataset: %s\n  BOLD: %s\n  confounds: %s\n  EV directory: %s\
 for command in fslnvols fslval; do
     command -v "$command" >/dev/null || { echo "ERROR: $command is unavailable; load FSL." >&2; exit 1; }
 done
-nvolumes="$(fslnvols "$bold")"
-[[ "$nvolumes" =~ ^[0-9]+$ ]] || { echo "ERROR: invalid BOLD volume count: $nvolumes" >&2; exit 1; }
-tr_seconds="$(fslval "$bold" pixdim4)"
-[[ "$tr_seconds" =~ ^[0-9]+([.][0-9]+)?$ ]] || { echo "ERROR: invalid BOLD TR: $tr_seconds" >&2; exit 1; }
+# fslval commonly pads its scalar output. Trim edges, not internal whitespace:
+# deleting all whitespace would incorrectly turn malformed "2 3" into "23".
+trim_scalar() { sed 's/^[[:space:]]*//; s/[[:space:]]*$//'; }
+nvolumes="$(fslnvols "$bold" | trim_scalar)"
+[[ "$nvolumes" =~ ^[0-9]+$ && "$nvolumes" -gt 0 ]] || { echo "ERROR: invalid BOLD volume count: $nvolumes" >&2; exit 1; }
+tr_seconds="$(fslval "$bold" pixdim4 | trim_scalar)"
+[[ "$tr_seconds" =~ ^[0-9]+([.][0-9]+)?$ ]] && awk -v tr="$tr_seconds" 'BEGIN {exit !(tr > 0)}' || { echo "ERROR: invalid BOLD TR: $tr_seconds" >&2; exit 1; }
 confound_rows="$(awk 'NF {n++} END {print n+0}' "$confounds")"
 [[ "$confound_rows" -eq "$nvolumes" ]] || { echo "ERROR: confound rows ($confound_rows) != BOLD volumes ($nvolumes)" >&2; exit 1; }
 feat_dir="${output}.feat"

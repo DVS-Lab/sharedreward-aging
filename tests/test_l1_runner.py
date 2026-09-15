@@ -1,4 +1,5 @@
 import os
+import shutil
 import subprocess
 import tempfile
 import unittest
@@ -14,10 +15,14 @@ class L1RunnerTest(unittest.TestCase):
             root = Path(directory)
             fake_bin = root / "bin"
             fake_bin.mkdir()
-            (fake_bin / "fslnvols").write_text("#!/usr/bin/env bash\necho 2\n")
+            (fake_bin / "fslnvols").write_text(
+                '#!/usr/bin/env bash\n'
+                '[[ -n "${REAL_FSLNVOLS:-}" ]] && exec "$REAL_FSLNVOLS" "$@"\n'
+                "printf '  2 \\t\\r\\n'\n")
             (fake_bin / "fslval").write_text(
                 "#!/usr/bin/env bash\n"
-                "[[ \"$2\" == pixdim4 ]] && { echo 2.0; exit; }\n"
+                '[[ -n "${REAL_FSLVAL:-}" ]] && exec "$REAL_FSLVAL" "$@"\n'
+                '[[ "$2" == pixdim4 ]] && { printf "%s\\n" "${TEST_TR-  2.020000 \t\r}"; exit; }\n'
                 "echo 3\n"
             )
             (fake_bin / "fslmeants").write_text(
@@ -62,6 +67,7 @@ class L1RunnerTest(unittest.TestCase):
             self.assertIn("set fmri(shape7) 10", activation_text)
             self.assertIn("set fmri(shape8) 3", activation_text)
             self.assertIn("set fmri(ncon_orig) 22", activation_text)
+            self.assertIn("set fmri(tr) 2.020000\n", activation_text)
             activation_feat = unit_dir / "L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat"
             activation_feat.mkdir()
             (activation_feat / "mask.nii.gz").write_text("mask")
@@ -73,6 +79,24 @@ class L1RunnerTest(unittest.TestCase):
             self.assertIn("set fmri(shape18) 10", ppi_text)
             self.assertIn("set fmri(shape19) 4", ppi_text)
             self.assertIn("set fmri(ncon_orig) 23", ppi_text)
+            for invalid in ("", "0", "0.000", "-2.02", "nan", "2 3", "2.02 junk"):
+                with self.subTest(invalid_tr=invalid):
+                    result = subprocess.run(common + ["vs"] + options,
+                                            env={**env, "TEST_TR": invalid}, capture_output=True, text=True)
+                    self.assertNotEqual(result.returncode, 0)
+                    self.assertIn("invalid BOLD TR", result.stderr)
+            # When FSL is installed, exercise the actual header-reading path too.
+            real_val, real_nvols = shutil.which("fslval"), shutil.which("fslnvols")
+            if real_val and real_nvols:
+                import nibabel as nib
+                import numpy as np
+                image = nib.Nifti1Image(np.zeros((2, 2, 2, 2), dtype=np.float32), np.eye(4))
+                image.header.set_zooms((1, 1, 1, 2.02))
+                nib.save(image, bold)
+                subprocess.run(common + ["vs"] + options,
+                               env={**env, "REAL_FSLVAL": real_val, "REAL_FSLNVOLS": real_nvols},
+                               check=True, capture_output=True, text=True)
+                self.assertIn("set fmri(tr) 2.020000\n", ppi.read_text())
 
 
 if __name__ == "__main__":
