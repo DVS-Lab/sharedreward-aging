@@ -1,0 +1,96 @@
+{
+  "contract": "fulltrial-retained-contrasts-v3",
+  "primary_cope_ids": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28
+  ],
+  "ignored_neutral_cope_ids": [
+    7,
+    8,
+    9,
+    20,
+    21,
+    22
+  ],
+  "ppi_phys_cope29_in_scope": false,
+  "inputs": [
+    {
+      "path": "/ZPOOL/data/projects/sharedreward-aging/logs/runlists/L1-task-ready.tsv",
+      "sha256": "fd3a6be42f9434aeca9ed1fcc7610c054f6380126a1fce0b4a3de461883f0343"
+    },
+    {
+      "path": "/ZPOOL/data/projects/sharedreward-aging/logs/runlists/L2-task-ready.tsv",
+      "sha256": "f26b44baab74f337f72876364e3423565c315c2fcbb1bcce2f00e89b079dbd3d"
+    },
+    {
+      "path": "/ZPOOL/data/projects/sharedreward-aging/templates/FULLTRIAL_CONTRAST_CANDIDATE.tsv",
+      "sha256": "a02eb07bbba468cd9e2d8bb89574bf033c5de2f454f01db91182fd7f6111ed03"
+    },
+    {
+      "path": "/ZPOOL/data/projects/sharedreward-aging/code/audit_group_readiness.py",
+      "sha256": "c29c77889229b3539ffd07b85dbb90c8574e3d67e454f826060403e7c12dc0ea"
+    }
+  ],
+  "reference": {
+    "path": "/ZPOOL/data/projects/rf1-sra-sharedreward/resources/rf1_MNI152NLin6Asym_reference_grid.nii.gz",
+    "sha256": "52fd69e09e50ffe857b25a62afb9b8c4fc31f8b3cad9942a6a6874ff5b067bcf"
+  },
+  "fsl_root": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl",
+  "expected_runs": 744,
+  "expected_subject_sessions": 393,
+  "counts": {
+    "l1": {
+      "missing": 1484,
+      "verified": 4
+    },
+    "l1_by_dataset_type_status": {
+      "ds003745/act/missing": 87,
+      "ds003745/ppi_seed-vs/missing": 87,
+      "ds003745/act/verified": 2,
+      "ds003745/ppi_seed-vs/verified": 2,
+      "rf1/act/missing": 655,
+      "rf1/ppi_seed-vs/missing": 655
+    },
+    "subject": {
+      "unverified": 784,
+      "verified": 2
+    },
+    "subject_by_dataset_type_status": {
+      "ds003745/act/unverified": 46,
+      "ds003745/ppi_seed-vs/unverified": 46,
+      "ds003745/act/verified": 1,
+      "ds003745/ppi_seed-vs/verified": 1,
+      "rf1/act/unverified": 346,
+      "rf1/ppi_seed-vs/unverified": 346
+    }
+  },
+  "limitations": [
+    "Computational verification is not final QC or cohort approval.",
+    "Ratings, imaging exclusions, covariates, seed provenance and L3 inference require adjudication.",
+    "Image-input provenance uses recorded size/mtime, not full 4D content hashing.",
+    "EVs compared to current harmonized events; this does not re-audit raw behavioral sources.",
+    "Canonical pooled output paths only; absent models may exist elsewhere and require inventory review.",
+    "Unverified models are not an instruction to rerun; review the reported cause first."
+  ],
+  "computational_gate_passed": false
+}

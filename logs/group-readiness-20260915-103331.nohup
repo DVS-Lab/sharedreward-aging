@@ -1,0 +1,33 @@
+Writing raw log: /ZPOOL/data/projects/sharedreward-aging/logs/runs/20260915-103331_group-readiness-20260915-103331.log
+Writing run record: /ZPOOL/data/projects/sharedreward-aging/logs/records/20260915-103331_group-readiness-20260915-103331.md
+RUN START: 20260915-103331
+PROJECT_ROOT: /ZPOOL/data/projects/sharedreward-aging
+GIT: main 9991ef2
+HOST: CLA19787.tu.temple.edu
+USER: tug87422
+PWD: /ZPOOL/data/projects/sharedreward-aging
+COMMAND: /ZPOOL/data/tools/anaconda/tug87422/envs/sharedreward-phase0/bin/python code/audit_group_readiness.py --l1-manifest logs/runlists/L1-task-ready.tsv --subject-manifest logs/runlists/L2-task-ready.tsv --fsl-root /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl --reference /ZPOOL/data/projects/rf1-sra-sharedreward/resources/rf1_MNI152NLin6Asym_reference_grid.nii.gz --report-dir logs/records/group-readiness-20260915-103331 
+
+Read-only audit: 744 retained runs; 393 subject-sessions; both activation/PPI
+Primary COPE IDs: [1, 2, 3, 4, 5, 6, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 23, 24, 25, 26, 27, 28]; neutral-weighted contrasts and PPI phys excluded.
+L1 models checked: 100
+L1 models checked: 200
+L1 models checked: 300
+L1 models checked: 400
+L1 models checked: 500
+L1 models checked: 600
+L1 models checked: 700
+L1 models checked: 800
+L1 models checked: 900
+L1 models checked: 1000
+L1 models checked: 1100
+L1 models checked: 1200
+L1 models checked: 1300
+L1 models checked: 1400
+l1: {'missing': 1484, 'verified': 4}
+subject: {'unverified': 784, 'verified': 2}
+Reports: /ZPOOL/data/projects/sharedreward-aging/logs/records/group-readiness-20260915-103331
+CHECK INCOMPLETE: review reports before handoff; no model files were changed.
+
+COMMAND EXIT: 1
+Run record saved: /ZPOOL/data/projects/sharedreward-aging/logs/records/20260915-103331_group-readiness-20260915-103331.md
