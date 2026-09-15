@@ -1,5 +1,6 @@
 import hashlib
 import json
+import subprocess
 from pathlib import Path
 import sys
 import tempfile
@@ -12,10 +13,31 @@ sys.path.insert(0, str(ROOT / "code"))
 import build_event_qc_manifest as source
 import model_provenance as provenance
 from recover_sub144_analysis import archive_incomplete, select_manifest
+import recover_sub144_analysis as recovery
 from run_event_qc_batch import summarize, validate
 
 
 class RecoveryTest(unittest.TestCase):
+    def test_cohort_preparation_generates_and_audits_confounds_first(self):
+        with patch.object(recovery, "run") as run:
+            root = Path("/synthetic")
+            recovery.prepare_cohort(root / "records", root / "lists", root / "custom-confounds")
+            calls = [call.args for call in run.call_args_list]
+            self.assertEqual([call[0] for call in calls], [
+                "build_fsl_confounds_manifest.py", "run_fsl_confounds_batch.py",
+                "audit_fsl_confounds.py", "build_analysis_cohort.py"])
+            self.assertEqual(calls[0][-1], root / "custom-confounds")
+            self.assertNotIn("--overwrite", calls[1])
+            self.assertIn("--fail-on-incomplete", calls[2])
+            self.assertEqual(calls[3], ("build_analysis_cohort.py", "--ds-confounds-root", root / "custom-confounds"))
+
+    def test_failed_confounds_audit_prevents_cohort_freeze(self):
+        error = subprocess.CalledProcessError(1, "audit_fsl_confounds.py")
+        with patch.object(recovery, "run", side_effect=[None, None, error]) as run:
+            with self.assertRaises(subprocess.CalledProcessError):
+                recovery.prepare_cohort(Path("/records"), Path("/lists"), Path("/confounds"))
+            self.assertEqual(run.call_count, 3)
+
     def test_sub144_requires_verified_repair_but_other_subjects_unchanged(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

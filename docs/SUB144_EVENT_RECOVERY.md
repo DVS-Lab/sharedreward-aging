@@ -32,6 +32,11 @@ on the freshly rebuilt cohort's other exclusions, not these counts alone.
 
 - Refresh the full event-QC inventory, harmonized event tables and their source
   fingerprints; rebuild cohort dispositions with existing QC/exclusion rules.
+- Before rebuilding the full cohort, generate missing ds003745 FSL nuisance
+  matrices from the existing named fMRIPrep confounds and audit volume alignment.
+  Existing matrix/metadata pairs are not overwritten. RF1 uses its upstream
+  matrices unchanged. This prerequisite applies to all ds003745 imaging-QC
+  rows even though only sub-144 FEAT models are being recovered.
 - Generate corrected sub-144 three-column files and select its eligible runs.
 - Rerun paired activation + provisional VS PPI, then two-run fixed effects
   (or one-run passthrough if only one run is eligible), with completeness audits.

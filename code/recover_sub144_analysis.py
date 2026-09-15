@@ -23,6 +23,19 @@ def run(script, *args):
     subprocess.run(command, cwd=ROOT, check=True)
 
 
+def prepare_cohort(records, lists, ds_confounds_root):
+    # The full cohort requires these derived matrices even for a sub-144 pilot.
+    # Reuse the established conversion policy; do not recompute RF1 confounds.
+    manifest = lists / "ds003745-fsl-confounds.tsv"
+    run("build_fsl_confounds_manifest.py", "--output", manifest,
+        "--output-root", ds_confounds_root)
+    run("run_fsl_confounds_batch.py", "--manifest", manifest, "--jobs", "8",
+        "--log-dir", ROOT / "logs/ds003745-fsl-confounds")
+    run("audit_fsl_confounds.py", "--manifest", manifest,
+        "--output", records / "ds003745-fsl-confounds-audit.tsv", "--fail-on-incomplete")
+    run("build_analysis_cohort.py", "--ds-confounds-root", ds_confounds_root)
+
+
 def select_manifest(source, destination, level):
     with source.open(newline="") as handle:
         reader = csv.DictReader(handle, delimiter="\t")
@@ -75,7 +88,7 @@ def main():
         "--output", records / "fulltrial-event-qc-run-level.tsv",
         "--subject-output", records / "fulltrial-event-qc-subject-level.tsv",
         "--missing-output", records / "fulltrial-event-qc-missing.tsv", "--fail-on-incomplete")
-    run("build_analysis_cohort.py")
+    prepare_cohort(records, lists, fsl_root / "confounds_fmriprep")
     l1 = lists / "L1-sub144-recovered.tsv"
     l2 = lists / "L2-sub144-recovered.tsv"
     l1_rows = select_manifest(lists / "L1-task-ready.tsv", l1, "l1")
