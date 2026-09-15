@@ -1,0 +1,38 @@
+
+===== sub-144 run-1 =====
+L1 plan
+  dataset: ds003745
+  BOLD: /ZPOOL/data/projects/sharedreward-aging/derivatives/harmonized/sub-144/func/sub-144_task-sharedreward_run-01_space-MNI152NLin6Asym_desc-smoothToFWHM6_bold.nii.gz
+  confounds: /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/confounds_fmriprep/sub-144/func/sub-144_task-sharedreward_run-01_desc-FSLConfounds.tsv
+  EV directory: /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-1
+  source template: /ZPOOL/data/projects/sharedreward-aging/templates/L1_task-sharedreward_model-1_type-act_seed-0_HPC.fsf
+  output: /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat
+L1 plan
+  dataset: ds003745
+  BOLD: /ZPOOL/data/projects/sharedreward-aging/derivatives/harmonized/sub-144/func/sub-144_task-sharedreward_run-01_space-MNI152NLin6Asym_desc-smoothToFWHM6_bold.nii.gz
+  confounds: /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/confounds_fmriprep/sub-144/func/sub-144_task-sharedreward_run-01_desc-FSLConfounds.tsv
+  EV directory: /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-1
+  source template: /ZPOOL/data/projects/sharedreward-aging/templates/L1_task-sharedreward_model-1_type-ppi_seed-VS_HPC.fsf
+  output: /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat
+  seed: /ZPOOL/data/projects/sharedreward-aging/masks/seed-vs.nii.gz
+ERROR: invalid BOLD TR: 2.020000 
+ERROR: invalid BOLD TR: 2.020000 
+
+===== sub-144 run-2 =====
+L1 plan
+  dataset: ds003745
+  BOLD: /ZPOOL/data/projects/sharedreward-aging/derivatives/harmonized/sub-144/func/sub-144_task-sharedreward_run-02_space-MNI152NLin6Asym_desc-smoothToFWHM6_bold.nii.gz
+  confounds: /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/confounds_fmriprep/sub-144/func/sub-144_task-sharedreward_run-02_desc-FSLConfounds.tsv
+  EV directory: /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-2
+  source template: /ZPOOL/data/projects/sharedreward-aging/templates/L1_task-sharedreward_model-1_type-act_seed-0_HPC.fsf
+  output: /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat
+L1 plan
+  dataset: ds003745
+  BOLD: /ZPOOL/data/projects/sharedreward-aging/derivatives/harmonized/sub-144/func/sub-144_task-sharedreward_run-02_space-MNI152NLin6Asym_desc-smoothToFWHM6_bold.nii.gz
+  confounds: /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/confounds_fmriprep/sub-144/func/sub-144_task-sharedreward_run-02_desc-FSLConfounds.tsv
+  EV directory: /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-2
+  source template: /ZPOOL/data/projects/sharedreward-aging/templates/L1_task-sharedreward_model-1_type-ppi_seed-VS_HPC.fsf
+  output: /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat
+  seed: /ZPOOL/data/projects/sharedreward-aging/masks/seed-vs.nii.gz
+ERROR: invalid BOLD TR: 2.020000 
+ERROR: invalid BOLD TR: 2.020000 
