@@ -1,0 +1,48 @@
+{
+  "l1": [
+    {
+      "dataset": "ds003745",
+      "subject": "144",
+      "session": "",
+      "run": "01",
+      "input": "/ZPOOL/data/projects/sharedreward-aging/derivatives/harmonized/sub-144/func/sub-144_task-sharedreward_run-01_space-MNI152NLin6Asym_desc-smoothToFWHM6_bold.nii.gz",
+      "mask": "/ZPOOL/data/projects/sharedreward-aging/derivatives/harmonized/sub-144/func/sub-144_task-sharedreward_run-01_space-MNI152NLin6Asym_desc-rf1Grid_mask.nii.gz",
+      "confounds": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/confounds_fmriprep/sub-144/func/sub-144_task-sharedreward_run-01_desc-FSLConfounds.tsv",
+      "source_events": "/ZPOOL/data/projects/srndna-datapaper/bids/sub-144/func/sub-144_task-sharedreward_run-01_events.tsv",
+      "harmonized_events": "/ZPOOL/data/projects/sharedreward-aging/derivatives/harmonized/events/ds003745/sub-144/func/sub-144_task-sharedreward_run-01_desc-fullTrial_events.tsv",
+      "missed_trial_fraction": "0.013888888888888888",
+      "zero_count_conditions": "",
+      "imaging_qc_flags": "",
+      "ratings_eligible": "true",
+      "ratings_exclusion_reason": ""
+    },
+    {
+      "dataset": "ds003745",
+      "subject": "144",
+      "session": "",
+      "run": "02",
+      "input": "/ZPOOL/data/projects/sharedreward-aging/derivatives/harmonized/sub-144/func/sub-144_task-sharedreward_run-02_space-MNI152NLin6Asym_desc-smoothToFWHM6_bold.nii.gz",
+      "mask": "/ZPOOL/data/projects/sharedreward-aging/derivatives/harmonized/sub-144/func/sub-144_task-sharedreward_run-02_space-MNI152NLin6Asym_desc-rf1Grid_mask.nii.gz",
+      "confounds": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/confounds_fmriprep/sub-144/func/sub-144_task-sharedreward_run-02_desc-FSLConfounds.tsv",
+      "source_events": "/ZPOOL/data/projects/srndna-datapaper/bids/sub-144/func/sub-144_task-sharedreward_run-02_events.tsv",
+      "harmonized_events": "/ZPOOL/data/projects/sharedreward-aging/derivatives/harmonized/events/ds003745/sub-144/func/sub-144_task-sharedreward_run-02_desc-fullTrial_events.tsv",
+      "missed_trial_fraction": "0.0",
+      "zero_count_conditions": "event_friend_neutral",
+      "imaging_qc_flags": "",
+      "ratings_eligible": "true",
+      "ratings_exclusion_reason": ""
+    }
+  ],
+  "subject": [
+    {
+      "dataset": "ds003745",
+      "subject": "144",
+      "session": "",
+      "n_runs": "2",
+      "runs": "01,02",
+      "subject_level_strategy": "fixed_effects",
+      "ratings_eligible": "true",
+      "ratings_exclusion_reason": ""
+    }
+  ]
+}
