@@ -1,0 +1,1996 @@
+
+===== derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat =====
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat/logs/feat0 ---
+<HTML><HEAD>
+<!--refreshstart-->
+
+<!--refreshstop-->
+<link REL=stylesheet TYPE=text/css href=.files/fsl.css>
+<TITLE>FSL</TITLE></HEAD><BODY><OBJECT data=report.html></OBJECT>
+<h2>Progress Report / Log</h2>
+Started at Tue Sep 15 12:33:37 AM EDT 2026<p>
+Feat main script<br><pre>
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat/logs/feat0_init.e4187252 ---
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat/logs/feat0_init.o4187252 ---
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat/logs/feat1 ---
+
+/bin/cp /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_ds003745_sub-144_task-sharedreward_model-fulltrial_type-act_run-1.fsf design.fsf
+
+/usr/local/fsl/bin/feat_model design
+
+mkdir .files;cp /usr/local/fsl/doc/fsl.css .files;cp -r /usr/local/fsl/doc/images .files/images
+
+/usr/local/fsl/bin/fsl_sub -T 10 -l logs -N feat0_init   /usr/local/fsl/bin/feat /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat/design.fsf -D /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat -I 1 -init
+4187252
+
+/usr/local/fsl/bin/fsl_sub -T 105 -l logs -N feat2_pre -j 4187252  /usr/local/fsl/bin/feat /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat/design.fsf -D /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat -I 1 -prestats
+4192253
+
+/usr/local/fsl/bin/fsl_sub -T 8 -l logs -N feat3_film -j 4192253  /usr/local/fsl/bin/feat /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat/design.fsf -D /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat -I 1 -stats
+7352
+
+/usr/local/fsl/bin/fsl_sub -T 119 -l logs -N feat4_post -j 7352  /usr/local/fsl/bin/feat /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat/design.fsf -D /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat -poststats 0 
+Error submitting job - can't read "fmri(conmask1_1)": no such element in array
+    while executing
+"if { [ catch {
+
+for { set argindex 1 } { $argindex < $argc } { incr argindex 1 } {
+    switch -- [ lindex $argv $argindex ] {
+
+	-I {
+	    incr arginde..."
+    (file "/usr/local/fsl/bin/feat" line 312)
+
+
+FATAL ERROR ENCOUNTERED:
+COMMAND:
+/usr/local/fsl/bin/fsl_sub -T 119 -l logs -N feat4_post -j 7352  /usr/local/fsl/bin/feat /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat/design.fsf -D /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat -poststats 0 
+ERROR MESSAGE:
+child process exited abnormally
+END OF ERROR MESSAGE
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat/logs/feat1a_init ---
+</pre><hr>Initialisation<br><pre>
+
+/usr/local/fsl/bin/fslmaths /ZPOOL/data/projects/sharedreward-aging/derivatives/harmonized/sub-144/func/sub-144_task-sharedreward_run-01_space-MNI152NLin6Asym_desc-smoothToFWHM6_bold prefiltered_func_data -odt float
+Total original volumes = 202
+
+/usr/local/fsl/bin/fslroi prefiltered_func_data example_func 101 1
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat/logs/feat2_pre ---
+</pre><hr>Preprocessing:Stage 1<br><pre>
+</pre><hr>Preprocessing:Stage 2<br><pre>
+
+/usr/local/fsl/bin/fslmaths prefiltered_func_data -Tmean mean_func
+
+/usr/local/fsl/bin/bet2 mean_func mask -f 0.3 -n -m; /usr/local/fsl/bin/immv mask_mask mask
+
+/usr/local/fsl/bin/fslmaths prefiltered_func_data -mas mask prefiltered_func_data_bet
+
+/usr/local/fsl/bin/fslstats prefiltered_func_data_bet -p 2 -p 98
+0.000000 644.452820 
+
+/usr/local/fsl/bin/fslmaths prefiltered_func_data_bet -thr 6.4445282 -Tmin -bin mask -odt char
+
+/usr/local/fsl/bin/fslstats prefiltered_func_data -k mask -p 50
+511.120850 
+
+/usr/local/fsl/bin/fslmaths mask -dilF mask
+
+/usr/local/fsl/bin/fslmaths prefiltered_func_data -mas mask prefiltered_func_data_thresh
+
+/usr/local/fsl/bin/fslmaths prefiltered_func_data_thresh -mul 19.56484459595025 prefiltered_func_data_intnorm
+
+/usr/local/fsl/bin/fslmaths prefiltered_func_data_intnorm filtered_func_data
+
+/usr/local/fsl/bin/fslmaths filtered_func_data -Tmean mean_func
+
+/bin/rm -rf prefiltered_func_data*
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat/logs/feat2_pre.e4192253 ---
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat/logs/feat2_pre.o4192253 ---
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat/logs/feat3_film.e7352 ---
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat/logs/feat3_film.o7352 ---
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat/logs/feat3_stats ---
+</pre><hr>Stats<br><pre>
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-1/event_computer_punish.txt custom_timing_files/ev1.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-1/event_computer_reward.txt custom_timing_files/ev2.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-1/event_friend_punish.txt custom_timing_files/ev3.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-1/event_friend_reward.txt custom_timing_files/ev4.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-1/event_stranger_punish.txt custom_timing_files/ev5.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-1/event_stranger_reward.txt custom_timing_files/ev6.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-1/event_computer_neutral.txt custom_timing_files/ev7.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-1/event_friend_neutral.txt custom_timing_files/ev8.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-1/event_stranger_neutral.txt custom_timing_files/ev9.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-1/missed_trial.txt custom_timing_files/ev10.txt
+
+paste -d  ' '  /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/confounds_fmriprep/sub-144/func/sub-144_task-sharedreward_run-01_desc-FSLConfounds.tsv > confoundevs.txt
+
+/usr/local/fsl/bin/feat_model design confoundevs.txt
+
+/usr/local/fsl/bin/film_gls --in=filtered_func_data --rn=stats --pd=design.mat --thr=100.0 --sa --ms=5 --con=design.con  
+Log directory is: stats
+202
+30
+202
+90052
+Calculating residuals...
+Completed
+Estimating residual autocorrelation...
+Calculating raw AutoCorrs... Completed
+mode = 10023.1
+sig = 1102
+Spatially smoothing auto corr estimates
+.............
+Completed
+Tukey M = 14
+Tukey estimates... Completed
+Completed
+Prewhitening and Computing PEs...
+Percentage done:
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,Completed
+Saving results... 
+Completed
+
+/usr/local/fsl/bin/smoothest -d 171   -m mask -r stats/res4d > stats/smoothness
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat/logs/feat4_post ---
+echo 90052 > thresh_zstat8.vol
+zstat8: DLH=0.537792 VOLUME=90052 RESELS=8.60325
+
+/usr/local/fsl/bin/fslmaths stats/zstat9 -mas mask thresh_zstat9
+
+echo 90052 > thresh_zstat9.vol
+zstat9: DLH=0.537792 VOLUME=90052 RESELS=8.60325
+
+/usr/local/fsl/bin/fslmaths stats/zstat10 -mas mask thresh_zstat10
+
+echo 90052 > thresh_zstat10.vol
+zstat10: DLH=0.537792 VOLUME=90052 RESELS=8.60325
+
+/usr/local/fsl/bin/fslmaths stats/zstat11 -mas mask thresh_zstat11
+
+echo 90052 > thresh_zstat11.vol
+zstat11: DLH=0.537792 VOLUME=90052 RESELS=8.60325
+
+/usr/local/fsl/bin/fslmaths stats/zstat12 -mas mask thresh_zstat12
+
+echo 90052 > thresh_zstat12.vol
+zstat12: DLH=0.537792 VOLUME=90052 RESELS=8.60325
+
+/usr/local/fsl/bin/fslmaths stats/zstat13 -mas mask thresh_zstat13
+
+echo 90052 > thresh_zstat13.vol
+zstat13: DLH=0.537792 VOLUME=90052 RESELS=8.60325
+
+/usr/local/fsl/bin/fslmaths stats/zstat14 -mas mask thresh_zstat14
+
+echo 90052 > thresh_zstat14.vol
+zstat14: DLH=0.537792 VOLUME=90052 RESELS=8.60325
+
+/usr/local/fsl/bin/fslmaths stats/zstat15 -mas mask thresh_zstat15
+
+echo 90052 > thresh_zstat15.vol
+zstat15: DLH=0.537792 VOLUME=90052 RESELS=8.60325
+
+/usr/local/fsl/bin/fslmaths stats/zstat16 -mas mask thresh_zstat16
+
+echo 90052 > thresh_zstat16.vol
+zstat16: DLH=0.537792 VOLUME=90052 RESELS=8.60325
+
+/usr/local/fsl/bin/fslmaths stats/zstat17 -mas mask thresh_zstat17
+
+echo 90052 > thresh_zstat17.vol
+zstat17: DLH=0.537792 VOLUME=90052 RESELS=8.60325
+
+/usr/local/fsl/bin/fslmaths stats/zstat18 -mas mask thresh_zstat18
+
+echo 90052 > thresh_zstat18.vol
+zstat18: DLH=0.537792 VOLUME=90052 RESELS=8.60325
+
+/usr/local/fsl/bin/fslmaths stats/zstat19 -mas mask thresh_zstat19
+
+echo 90052 > thresh_zstat19.vol
+zstat19: DLH=0.537792 VOLUME=90052 RESELS=8.60325
+
+/usr/local/fsl/bin/fslmaths stats/zstat20 -mas mask thresh_zstat20
+
+echo 90052 > thresh_zstat20.vol
+zstat20: DLH=0.537792 VOLUME=90052 RESELS=8.60325
+
+/usr/local/fsl/bin/fslmaths stats/zstat21 -mas mask thresh_zstat21
+
+echo 90052 > thresh_zstat21.vol
+zstat21: DLH=0.537792 VOLUME=90052 RESELS=8.60325
+
+/usr/local/fsl/bin/fslmaths stats/zstat22 -mas mask thresh_zstat22
+
+echo 90052 > thresh_zstat22.vol
+zstat22: DLH=0.537792 VOLUME=90052 RESELS=8.60325
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat1 -t 3.1000000000000005 --othresh=thresh_zstat1 -o cluster_mask_zstat1 --connectivity=26  --olmax=lmax_zstat1.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope1 > cluster_zstat1.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat1 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat2 -t 3.1000000000000005 --othresh=thresh_zstat2 -o cluster_mask_zstat2 --connectivity=26  --olmax=lmax_zstat2.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope2 > cluster_zstat2.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat2 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat3 -t 3.1000000000000005 --othresh=thresh_zstat3 -o cluster_mask_zstat3 --connectivity=26  --olmax=lmax_zstat3.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope3 > cluster_zstat3.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat3 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat4 -t 3.1000000000000005 --othresh=thresh_zstat4 -o cluster_mask_zstat4 --connectivity=26  --olmax=lmax_zstat4.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope4 > cluster_zstat4.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat4 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat5 -t 3.1000000000000005 --othresh=thresh_zstat5 -o cluster_mask_zstat5 --connectivity=26  --olmax=lmax_zstat5.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope5 > cluster_zstat5.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat5 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat6 -t 3.1000000000000005 --othresh=thresh_zstat6 -o cluster_mask_zstat6 --connectivity=26  --olmax=lmax_zstat6.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope6 > cluster_zstat6.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat6 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat7 -t 3.1000000000000005 --othresh=thresh_zstat7 -o cluster_mask_zstat7 --connectivity=26  --olmax=lmax_zstat7.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope7 > cluster_zstat7.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat7 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat8 -t 3.1000000000000005 --othresh=thresh_zstat8 -o cluster_mask_zstat8 --connectivity=26  --olmax=lmax_zstat8.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope8 > cluster_zstat8.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat8 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat9 -t 3.1000000000000005 --othresh=thresh_zstat9 -o cluster_mask_zstat9 --connectivity=26  --olmax=lmax_zstat9.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope9 > cluster_zstat9.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat9 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat10 -t 3.1000000000000005 --othresh=thresh_zstat10 -o cluster_mask_zstat10 --connectivity=26  --olmax=lmax_zstat10.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope10 > cluster_zstat10.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat10 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat11 -t 3.1000000000000005 --othresh=thresh_zstat11 -o cluster_mask_zstat11 --connectivity=26  --olmax=lmax_zstat11.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope11 > cluster_zstat11.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat11 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat12 -t 3.1000000000000005 --othresh=thresh_zstat12 -o cluster_mask_zstat12 --connectivity=26  --olmax=lmax_zstat12.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope12 > cluster_zstat12.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat12 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat13 -t 3.1000000000000005 --othresh=thresh_zstat13 -o cluster_mask_zstat13 --connectivity=26  --olmax=lmax_zstat13.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope13 > cluster_zstat13.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat13 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat14 -t 3.1000000000000005 --othresh=thresh_zstat14 -o cluster_mask_zstat14 --connectivity=26  --olmax=lmax_zstat14.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope14 > cluster_zstat14.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat14 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat15 -t 3.1000000000000005 --othresh=thresh_zstat15 -o cluster_mask_zstat15 --connectivity=26  --olmax=lmax_zstat15.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope15 > cluster_zstat15.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat15 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat16 -t 3.1000000000000005 --othresh=thresh_zstat16 -o cluster_mask_zstat16 --connectivity=26  --olmax=lmax_zstat16.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope16 > cluster_zstat16.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat16 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat17 -t 3.1000000000000005 --othresh=thresh_zstat17 -o cluster_mask_zstat17 --connectivity=26  --olmax=lmax_zstat17.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope17 > cluster_zstat17.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat17 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat18 -t 3.1000000000000005 --othresh=thresh_zstat18 -o cluster_mask_zstat18 --connectivity=26  --olmax=lmax_zstat18.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope18 > cluster_zstat18.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat18 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat19 -t 3.1000000000000005 --othresh=thresh_zstat19 -o cluster_mask_zstat19 --connectivity=26  --olmax=lmax_zstat19.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope19 > cluster_zstat19.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat19 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat20 -t 3.1000000000000005 --othresh=thresh_zstat20 -o cluster_mask_zstat20 --connectivity=26  --olmax=lmax_zstat20.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope20 > cluster_zstat20.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat20 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat21 -t 3.1000000000000005 --othresh=thresh_zstat21 -o cluster_mask_zstat21 --connectivity=26  --olmax=lmax_zstat21.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope21 > cluster_zstat21.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat21 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat22 -t 3.1000000000000005 --othresh=thresh_zstat22 -o cluster_mask_zstat22 --connectivity=26  --olmax=lmax_zstat22.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope22 > cluster_zstat22.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat22 
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat/logs/feat4_post.e17198 ---
+can't read "fmri(conmask1_1)": no such element in array
+    while executing
+"if { [ catch {
+
+for { set argindex 1 } { $argindex < $argc } { incr argindex 1 } {
+    switch -- [ lindex $argv $argindex ] {
+
+	-I {
+	    incr arginde..."
+    (file "/usr/local/fsl/bin/feat" line 312)
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat/logs/feat4_post.o17198 ---
+Error encountered while running in main feat script, halting.
+can't read "fmri(conmask1_1)": no such element in array
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat/logs/feat9 ---
+</pre><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></BODY></HTML>
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat/report_log.html ---
+/usr/local/fsl/bin/fslmaths stats/zstat11 -mas mask thresh_zstat11
+
+echo 90052 > thresh_zstat11.vol
+zstat11: DLH=0.537792 VOLUME=90052 RESELS=8.60325
+
+/usr/local/fsl/bin/fslmaths stats/zstat12 -mas mask thresh_zstat12
+
+echo 90052 > thresh_zstat12.vol
+zstat12: DLH=0.537792 VOLUME=90052 RESELS=8.60325
+
+/usr/local/fsl/bin/fslmaths stats/zstat13 -mas mask thresh_zstat13
+
+echo 90052 > thresh_zstat13.vol
+zstat13: DLH=0.537792 VOLUME=90052 RESELS=8.60325
+
+/usr/local/fsl/bin/fslmaths stats/zstat14 -mas mask thresh_zstat14
+
+echo 90052 > thresh_zstat14.vol
+zstat14: DLH=0.537792 VOLUME=90052 RESELS=8.60325
+
+/usr/local/fsl/bin/fslmaths stats/zstat15 -mas mask thresh_zstat15
+
+echo 90052 > thresh_zstat15.vol
+zstat15: DLH=0.537792 VOLUME=90052 RESELS=8.60325
+
+/usr/local/fsl/bin/fslmaths stats/zstat16 -mas mask thresh_zstat16
+
+echo 90052 > thresh_zstat16.vol
+zstat16: DLH=0.537792 VOLUME=90052 RESELS=8.60325
+
+/usr/local/fsl/bin/fslmaths stats/zstat17 -mas mask thresh_zstat17
+
+echo 90052 > thresh_zstat17.vol
+zstat17: DLH=0.537792 VOLUME=90052 RESELS=8.60325
+
+/usr/local/fsl/bin/fslmaths stats/zstat18 -mas mask thresh_zstat18
+
+echo 90052 > thresh_zstat18.vol
+zstat18: DLH=0.537792 VOLUME=90052 RESELS=8.60325
+
+/usr/local/fsl/bin/fslmaths stats/zstat19 -mas mask thresh_zstat19
+
+echo 90052 > thresh_zstat19.vol
+zstat19: DLH=0.537792 VOLUME=90052 RESELS=8.60325
+
+/usr/local/fsl/bin/fslmaths stats/zstat20 -mas mask thresh_zstat20
+
+echo 90052 > thresh_zstat20.vol
+zstat20: DLH=0.537792 VOLUME=90052 RESELS=8.60325
+
+/usr/local/fsl/bin/fslmaths stats/zstat21 -mas mask thresh_zstat21
+
+echo 90052 > thresh_zstat21.vol
+zstat21: DLH=0.537792 VOLUME=90052 RESELS=8.60325
+
+/usr/local/fsl/bin/fslmaths stats/zstat22 -mas mask thresh_zstat22
+
+echo 90052 > thresh_zstat22.vol
+zstat22: DLH=0.537792 VOLUME=90052 RESELS=8.60325
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat1 -t 3.1000000000000005 --othresh=thresh_zstat1 -o cluster_mask_zstat1 --connectivity=26  --olmax=lmax_zstat1.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope1 > cluster_zstat1.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat1 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat2 -t 3.1000000000000005 --othresh=thresh_zstat2 -o cluster_mask_zstat2 --connectivity=26  --olmax=lmax_zstat2.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope2 > cluster_zstat2.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat2 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat3 -t 3.1000000000000005 --othresh=thresh_zstat3 -o cluster_mask_zstat3 --connectivity=26  --olmax=lmax_zstat3.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope3 > cluster_zstat3.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat3 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat4 -t 3.1000000000000005 --othresh=thresh_zstat4 -o cluster_mask_zstat4 --connectivity=26  --olmax=lmax_zstat4.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope4 > cluster_zstat4.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat4 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat5 -t 3.1000000000000005 --othresh=thresh_zstat5 -o cluster_mask_zstat5 --connectivity=26  --olmax=lmax_zstat5.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope5 > cluster_zstat5.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat5 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat6 -t 3.1000000000000005 --othresh=thresh_zstat6 -o cluster_mask_zstat6 --connectivity=26  --olmax=lmax_zstat6.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope6 > cluster_zstat6.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat6 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat7 -t 3.1000000000000005 --othresh=thresh_zstat7 -o cluster_mask_zstat7 --connectivity=26  --olmax=lmax_zstat7.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope7 > cluster_zstat7.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat7 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat8 -t 3.1000000000000005 --othresh=thresh_zstat8 -o cluster_mask_zstat8 --connectivity=26  --olmax=lmax_zstat8.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope8 > cluster_zstat8.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat8 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat9 -t 3.1000000000000005 --othresh=thresh_zstat9 -o cluster_mask_zstat9 --connectivity=26  --olmax=lmax_zstat9.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope9 > cluster_zstat9.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat9 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat10 -t 3.1000000000000005 --othresh=thresh_zstat10 -o cluster_mask_zstat10 --connectivity=26  --olmax=lmax_zstat10.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope10 > cluster_zstat10.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat10 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat11 -t 3.1000000000000005 --othresh=thresh_zstat11 -o cluster_mask_zstat11 --connectivity=26  --olmax=lmax_zstat11.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope11 > cluster_zstat11.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat11 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat12 -t 3.1000000000000005 --othresh=thresh_zstat12 -o cluster_mask_zstat12 --connectivity=26  --olmax=lmax_zstat12.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope12 > cluster_zstat12.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat12 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat13 -t 3.1000000000000005 --othresh=thresh_zstat13 -o cluster_mask_zstat13 --connectivity=26  --olmax=lmax_zstat13.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope13 > cluster_zstat13.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat13 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat14 -t 3.1000000000000005 --othresh=thresh_zstat14 -o cluster_mask_zstat14 --connectivity=26  --olmax=lmax_zstat14.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope14 > cluster_zstat14.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat14 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat15 -t 3.1000000000000005 --othresh=thresh_zstat15 -o cluster_mask_zstat15 --connectivity=26  --olmax=lmax_zstat15.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope15 > cluster_zstat15.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat15 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat16 -t 3.1000000000000005 --othresh=thresh_zstat16 -o cluster_mask_zstat16 --connectivity=26  --olmax=lmax_zstat16.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope16 > cluster_zstat16.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat16 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat17 -t 3.1000000000000005 --othresh=thresh_zstat17 -o cluster_mask_zstat17 --connectivity=26  --olmax=lmax_zstat17.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope17 > cluster_zstat17.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat17 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat18 -t 3.1000000000000005 --othresh=thresh_zstat18 -o cluster_mask_zstat18 --connectivity=26  --olmax=lmax_zstat18.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope18 > cluster_zstat18.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat18 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat19 -t 3.1000000000000005 --othresh=thresh_zstat19 -o cluster_mask_zstat19 --connectivity=26  --olmax=lmax_zstat19.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope19 > cluster_zstat19.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat19 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat20 -t 3.1000000000000005 --othresh=thresh_zstat20 -o cluster_mask_zstat20 --connectivity=26  --olmax=lmax_zstat20.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope20 > cluster_zstat20.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat20 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat21 -t 3.1000000000000005 --othresh=thresh_zstat21 -o cluster_mask_zstat21 --connectivity=26  --olmax=lmax_zstat21.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope21 > cluster_zstat21.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat21 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat22 -t 3.1000000000000005 --othresh=thresh_zstat22 -o cluster_mask_zstat22 --connectivity=26  --olmax=lmax_zstat22.txt --scalarname=Z -p 0.05 -d 0.537792 --volume=90052 -c stats/cope22 > cluster_zstat22.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat22 
+can't read "fmri(conmask1_1)": no such element in array
+    while executing
+"if { [ catch {
+
+for { set argindex 1 } { $argindex < $argc } { incr argindex 1 } {
+    switch -- [ lindex $argv $argindex ] {
+
+	-I {
+	    incr arginde..."
+    (file "/usr/local/fsl/bin/feat" line 312)
+Error encountered while running in main feat script, halting.
+can't read "fmri(conmask1_1)": no such element in array
+</pre><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></BODY></HTML>
+
+===== derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat =====
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat/logs/feat0 ---
+<HTML><HEAD>
+<!--refreshstart-->
+
+<!--refreshstop-->
+<link REL=stylesheet TYPE=text/css href=.files/fsl.css>
+<TITLE>FSL</TITLE></HEAD><BODY><OBJECT data=report.html></OBJECT>
+<h2>Progress Report / Log</h2>
+Started at Tue Sep 15 12:33:41 AM EDT 2026<p>
+Feat main script<br><pre>
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat/logs/feat0_init.e4191080 ---
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat/logs/feat0_init.o4191080 ---
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat/logs/feat1 ---
+
+/bin/cp /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_ds003745_sub-144_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1.fsf design.fsf
+
+/usr/local/fsl/bin/feat_model design
+
+mkdir .files;cp /usr/local/fsl/doc/fsl.css .files;cp -r /usr/local/fsl/doc/images .files/images
+
+/usr/local/fsl/bin/fsl_sub -T 10 -l logs -N feat0_init   /usr/local/fsl/bin/feat /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat/design.fsf -D /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat -I 1 -init
+4191080
+
+/usr/local/fsl/bin/fsl_sub -T 105 -l logs -N feat2_pre -j 4191080  /usr/local/fsl/bin/feat /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat/design.fsf -D /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat -I 1 -prestats
+4193968
+
+/usr/local/fsl/bin/fsl_sub -T 10 -l logs -N feat3_film -j 4193968  /usr/local/fsl/bin/feat /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat/design.fsf -D /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat -I 1 -stats
+9625
+
+/usr/local/fsl/bin/fsl_sub -T 119 -l logs -N feat4_post -j 9625  /usr/local/fsl/bin/feat /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat/design.fsf -D /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat -poststats 0 
+Error submitting job - can't read "fmri(conmask1_1)": no such element in array
+    while executing
+"if { [ catch {
+
+for { set argindex 1 } { $argindex < $argc } { incr argindex 1 } {
+    switch -- [ lindex $argv $argindex ] {
+
+	-I {
+	    incr arginde..."
+    (file "/usr/local/fsl/bin/feat" line 312)
+
+
+FATAL ERROR ENCOUNTERED:
+COMMAND:
+/usr/local/fsl/bin/fsl_sub -T 119 -l logs -N feat4_post -j 9625  /usr/local/fsl/bin/feat /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat/design.fsf -D /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat -poststats 0 
+ERROR MESSAGE:
+child process exited abnormally
+END OF ERROR MESSAGE
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat/logs/feat1a_init ---
+</pre><hr>Initialisation<br><pre>
+
+/usr/local/fsl/bin/fslmaths /ZPOOL/data/projects/sharedreward-aging/derivatives/harmonized/sub-144/func/sub-144_task-sharedreward_run-01_space-MNI152NLin6Asym_desc-smoothToFWHM6_bold prefiltered_func_data -odt float
+Total original volumes = 202
+
+/usr/local/fsl/bin/fslroi prefiltered_func_data example_func 101 1
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat/logs/feat2_pre ---
+</pre><hr>Preprocessing:Stage 1<br><pre>
+</pre><hr>Preprocessing:Stage 2<br><pre>
+
+/usr/local/fsl/bin/fslmaths prefiltered_func_data -Tmean mean_func
+
+/usr/local/fsl/bin/bet2 mean_func mask -f 0.3 -n -m; /usr/local/fsl/bin/immv mask_mask mask
+
+/usr/local/fsl/bin/fslmaths prefiltered_func_data -mas mask prefiltered_func_data_bet
+
+/usr/local/fsl/bin/fslstats prefiltered_func_data_bet -p 2 -p 98
+0.000000 644.452820 
+
+/usr/local/fsl/bin/fslmaths prefiltered_func_data_bet -thr 6.4445282 -Tmin -bin mask -odt char
+
+/usr/local/fsl/bin/fslstats prefiltered_func_data -k mask -p 50
+511.120850 
+
+/usr/local/fsl/bin/fslmaths mask -dilF mask
+
+/usr/local/fsl/bin/fslmaths prefiltered_func_data -mas mask prefiltered_func_data_thresh
+
+/usr/local/fsl/bin/fslmaths prefiltered_func_data_thresh -mul 19.56484459595025 prefiltered_func_data_intnorm
+
+/usr/local/fsl/bin/fslmaths prefiltered_func_data_intnorm filtered_func_data
+
+/usr/local/fsl/bin/fslmaths filtered_func_data -Tmean mean_func
+
+/bin/rm -rf prefiltered_func_data*
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat/logs/feat2_pre.e4193968 ---
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat/logs/feat2_pre.o4193968 ---
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat/logs/feat3_film.e9625 ---
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat/logs/feat3_film.o9625 ---
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat/logs/feat3_stats ---
+</pre><hr>Stats<br><pre>
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-1/event_computer_punish.txt custom_timing_files/ev1.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-1/event_computer_reward.txt custom_timing_files/ev2.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-1/event_friend_punish.txt custom_timing_files/ev3.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-1/event_friend_reward.txt custom_timing_files/ev4.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-1/event_stranger_punish.txt custom_timing_files/ev5.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-1/event_stranger_reward.txt custom_timing_files/ev6.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-1/event_computer_neutral.txt custom_timing_files/ev7.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-1/event_friend_neutral.txt custom_timing_files/ev8.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-1/event_stranger_neutral.txt custom_timing_files/ev9.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-1/missed_trial.txt custom_timing_files/ev10.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/ts_task-sharedreward_mask-vs_run-1.txt custom_timing_files/ev11.txt
+
+paste -d  ' '  /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/confounds_fmriprep/sub-144/func/sub-144_task-sharedreward_run-01_desc-FSLConfounds.tsv > confoundevs.txt
+
+/usr/local/fsl/bin/feat_model design confoundevs.txt
+
+/usr/local/fsl/bin/film_gls --in=filtered_func_data --rn=stats --pd=design.mat --thr=100.0 --sa --ms=5 --con=design.con  
+Log directory is: stats
+202
+41
+202
+90052
+Calculating residuals...
+Completed
+Estimating residual autocorrelation...
+Calculating raw AutoCorrs... Completed
+mode = 10023.1
+sig = 1102
+Spatially smoothing auto corr estimates
+.............
+Completed
+Tukey M = 14
+Tukey estimates... Completed
+Completed
+Prewhitening and Computing PEs...
+Percentage done:
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,Completed
+Saving results... 
+Completed
+
+/usr/local/fsl/bin/smoothest -d 160   -m mask -r stats/res4d > stats/smoothness
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat/logs/feat4_post ---
+
+echo 90052 > thresh_zstat10.vol
+zstat10: DLH=0.539422 VOLUME=90052 RESELS=8.57891
+
+/usr/local/fsl/bin/fslmaths stats/zstat11 -mas mask thresh_zstat11
+
+echo 90052 > thresh_zstat11.vol
+zstat11: DLH=0.539422 VOLUME=90052 RESELS=8.57891
+
+/usr/local/fsl/bin/fslmaths stats/zstat12 -mas mask thresh_zstat12
+
+echo 90052 > thresh_zstat12.vol
+zstat12: DLH=0.539422 VOLUME=90052 RESELS=8.57891
+
+/usr/local/fsl/bin/fslmaths stats/zstat13 -mas mask thresh_zstat13
+
+echo 90052 > thresh_zstat13.vol
+zstat13: DLH=0.539422 VOLUME=90052 RESELS=8.57891
+
+/usr/local/fsl/bin/fslmaths stats/zstat14 -mas mask thresh_zstat14
+
+echo 90052 > thresh_zstat14.vol
+zstat14: DLH=0.539422 VOLUME=90052 RESELS=8.57891
+
+/usr/local/fsl/bin/fslmaths stats/zstat15 -mas mask thresh_zstat15
+
+echo 90052 > thresh_zstat15.vol
+zstat15: DLH=0.539422 VOLUME=90052 RESELS=8.57891
+
+/usr/local/fsl/bin/fslmaths stats/zstat16 -mas mask thresh_zstat16
+
+echo 90052 > thresh_zstat16.vol
+zstat16: DLH=0.539422 VOLUME=90052 RESELS=8.57891
+
+/usr/local/fsl/bin/fslmaths stats/zstat17 -mas mask thresh_zstat17
+
+echo 90052 > thresh_zstat17.vol
+zstat17: DLH=0.539422 VOLUME=90052 RESELS=8.57891
+
+/usr/local/fsl/bin/fslmaths stats/zstat18 -mas mask thresh_zstat18
+
+echo 90052 > thresh_zstat18.vol
+zstat18: DLH=0.539422 VOLUME=90052 RESELS=8.57891
+
+/usr/local/fsl/bin/fslmaths stats/zstat19 -mas mask thresh_zstat19
+
+echo 90052 > thresh_zstat19.vol
+zstat19: DLH=0.539422 VOLUME=90052 RESELS=8.57891
+
+/usr/local/fsl/bin/fslmaths stats/zstat20 -mas mask thresh_zstat20
+
+echo 90052 > thresh_zstat20.vol
+zstat20: DLH=0.539422 VOLUME=90052 RESELS=8.57891
+
+/usr/local/fsl/bin/fslmaths stats/zstat21 -mas mask thresh_zstat21
+
+echo 90052 > thresh_zstat21.vol
+zstat21: DLH=0.539422 VOLUME=90052 RESELS=8.57891
+
+/usr/local/fsl/bin/fslmaths stats/zstat22 -mas mask thresh_zstat22
+
+echo 90052 > thresh_zstat22.vol
+zstat22: DLH=0.539422 VOLUME=90052 RESELS=8.57891
+
+/usr/local/fsl/bin/fslmaths stats/zstat23 -mas mask thresh_zstat23
+
+echo 90052 > thresh_zstat23.vol
+zstat23: DLH=0.539422 VOLUME=90052 RESELS=8.57891
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat1 -t 3.1000000000000005 --othresh=thresh_zstat1 -o cluster_mask_zstat1 --connectivity=26  --olmax=lmax_zstat1.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope1 > cluster_zstat1.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat1 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat2 -t 3.1000000000000005 --othresh=thresh_zstat2 -o cluster_mask_zstat2 --connectivity=26  --olmax=lmax_zstat2.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope2 > cluster_zstat2.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat2 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat3 -t 3.1000000000000005 --othresh=thresh_zstat3 -o cluster_mask_zstat3 --connectivity=26  --olmax=lmax_zstat3.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope3 > cluster_zstat3.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat3 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat4 -t 3.1000000000000005 --othresh=thresh_zstat4 -o cluster_mask_zstat4 --connectivity=26  --olmax=lmax_zstat4.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope4 > cluster_zstat4.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat4 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat5 -t 3.1000000000000005 --othresh=thresh_zstat5 -o cluster_mask_zstat5 --connectivity=26  --olmax=lmax_zstat5.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope5 > cluster_zstat5.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat5 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat6 -t 3.1000000000000005 --othresh=thresh_zstat6 -o cluster_mask_zstat6 --connectivity=26  --olmax=lmax_zstat6.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope6 > cluster_zstat6.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat6 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat7 -t 3.1000000000000005 --othresh=thresh_zstat7 -o cluster_mask_zstat7 --connectivity=26  --olmax=lmax_zstat7.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope7 > cluster_zstat7.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat7 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat8 -t 3.1000000000000005 --othresh=thresh_zstat8 -o cluster_mask_zstat8 --connectivity=26  --olmax=lmax_zstat8.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope8 > cluster_zstat8.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat8 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat9 -t 3.1000000000000005 --othresh=thresh_zstat9 -o cluster_mask_zstat9 --connectivity=26  --olmax=lmax_zstat9.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope9 > cluster_zstat9.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat9 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat10 -t 3.1000000000000005 --othresh=thresh_zstat10 -o cluster_mask_zstat10 --connectivity=26  --olmax=lmax_zstat10.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope10 > cluster_zstat10.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat10 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat11 -t 3.1000000000000005 --othresh=thresh_zstat11 -o cluster_mask_zstat11 --connectivity=26  --olmax=lmax_zstat11.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope11 > cluster_zstat11.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat11 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat12 -t 3.1000000000000005 --othresh=thresh_zstat12 -o cluster_mask_zstat12 --connectivity=26  --olmax=lmax_zstat12.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope12 > cluster_zstat12.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat12 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat13 -t 3.1000000000000005 --othresh=thresh_zstat13 -o cluster_mask_zstat13 --connectivity=26  --olmax=lmax_zstat13.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope13 > cluster_zstat13.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat13 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat14 -t 3.1000000000000005 --othresh=thresh_zstat14 -o cluster_mask_zstat14 --connectivity=26  --olmax=lmax_zstat14.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope14 > cluster_zstat14.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat14 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat15 -t 3.1000000000000005 --othresh=thresh_zstat15 -o cluster_mask_zstat15 --connectivity=26  --olmax=lmax_zstat15.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope15 > cluster_zstat15.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat15 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat16 -t 3.1000000000000005 --othresh=thresh_zstat16 -o cluster_mask_zstat16 --connectivity=26  --olmax=lmax_zstat16.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope16 > cluster_zstat16.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat16 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat17 -t 3.1000000000000005 --othresh=thresh_zstat17 -o cluster_mask_zstat17 --connectivity=26  --olmax=lmax_zstat17.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope17 > cluster_zstat17.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat17 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat18 -t 3.1000000000000005 --othresh=thresh_zstat18 -o cluster_mask_zstat18 --connectivity=26  --olmax=lmax_zstat18.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope18 > cluster_zstat18.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat18 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat19 -t 3.1000000000000005 --othresh=thresh_zstat19 -o cluster_mask_zstat19 --connectivity=26  --olmax=lmax_zstat19.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope19 > cluster_zstat19.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat19 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat20 -t 3.1000000000000005 --othresh=thresh_zstat20 -o cluster_mask_zstat20 --connectivity=26  --olmax=lmax_zstat20.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope20 > cluster_zstat20.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat20 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat21 -t 3.1000000000000005 --othresh=thresh_zstat21 -o cluster_mask_zstat21 --connectivity=26  --olmax=lmax_zstat21.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope21 > cluster_zstat21.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat21 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat22 -t 3.1000000000000005 --othresh=thresh_zstat22 -o cluster_mask_zstat22 --connectivity=26  --olmax=lmax_zstat22.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope22 > cluster_zstat22.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat22 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat23 -t 3.1000000000000005 --othresh=thresh_zstat23 -o cluster_mask_zstat23 --connectivity=26  --olmax=lmax_zstat23.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope23 > cluster_zstat23.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat23 
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat/logs/feat4_post.e32865 ---
+can't read "fmri(conmask1_1)": no such element in array
+    while executing
+"if { [ catch {
+
+for { set argindex 1 } { $argindex < $argc } { incr argindex 1 } {
+    switch -- [ lindex $argv $argindex ] {
+
+	-I {
+	    incr arginde..."
+    (file "/usr/local/fsl/bin/feat" line 312)
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat/logs/feat4_post.o32865 ---
+Error encountered while running in main feat script, halting.
+can't read "fmri(conmask1_1)": no such element in array
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat/logs/feat9 ---
+</pre><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></BODY></HTML>
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat/report_log.html ---
+
+/usr/local/fsl/bin/fslmaths stats/zstat13 -mas mask thresh_zstat13
+
+echo 90052 > thresh_zstat13.vol
+zstat13: DLH=0.539422 VOLUME=90052 RESELS=8.57891
+
+/usr/local/fsl/bin/fslmaths stats/zstat14 -mas mask thresh_zstat14
+
+echo 90052 > thresh_zstat14.vol
+zstat14: DLH=0.539422 VOLUME=90052 RESELS=8.57891
+
+/usr/local/fsl/bin/fslmaths stats/zstat15 -mas mask thresh_zstat15
+
+echo 90052 > thresh_zstat15.vol
+zstat15: DLH=0.539422 VOLUME=90052 RESELS=8.57891
+
+/usr/local/fsl/bin/fslmaths stats/zstat16 -mas mask thresh_zstat16
+
+echo 90052 > thresh_zstat16.vol
+zstat16: DLH=0.539422 VOLUME=90052 RESELS=8.57891
+
+/usr/local/fsl/bin/fslmaths stats/zstat17 -mas mask thresh_zstat17
+
+echo 90052 > thresh_zstat17.vol
+zstat17: DLH=0.539422 VOLUME=90052 RESELS=8.57891
+
+/usr/local/fsl/bin/fslmaths stats/zstat18 -mas mask thresh_zstat18
+
+echo 90052 > thresh_zstat18.vol
+zstat18: DLH=0.539422 VOLUME=90052 RESELS=8.57891
+
+/usr/local/fsl/bin/fslmaths stats/zstat19 -mas mask thresh_zstat19
+
+echo 90052 > thresh_zstat19.vol
+zstat19: DLH=0.539422 VOLUME=90052 RESELS=8.57891
+
+/usr/local/fsl/bin/fslmaths stats/zstat20 -mas mask thresh_zstat20
+
+echo 90052 > thresh_zstat20.vol
+zstat20: DLH=0.539422 VOLUME=90052 RESELS=8.57891
+
+/usr/local/fsl/bin/fslmaths stats/zstat21 -mas mask thresh_zstat21
+
+echo 90052 > thresh_zstat21.vol
+zstat21: DLH=0.539422 VOLUME=90052 RESELS=8.57891
+
+/usr/local/fsl/bin/fslmaths stats/zstat22 -mas mask thresh_zstat22
+
+echo 90052 > thresh_zstat22.vol
+zstat22: DLH=0.539422 VOLUME=90052 RESELS=8.57891
+
+/usr/local/fsl/bin/fslmaths stats/zstat23 -mas mask thresh_zstat23
+
+echo 90052 > thresh_zstat23.vol
+zstat23: DLH=0.539422 VOLUME=90052 RESELS=8.57891
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat1 -t 3.1000000000000005 --othresh=thresh_zstat1 -o cluster_mask_zstat1 --connectivity=26  --olmax=lmax_zstat1.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope1 > cluster_zstat1.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat1 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat2 -t 3.1000000000000005 --othresh=thresh_zstat2 -o cluster_mask_zstat2 --connectivity=26  --olmax=lmax_zstat2.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope2 > cluster_zstat2.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat2 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat3 -t 3.1000000000000005 --othresh=thresh_zstat3 -o cluster_mask_zstat3 --connectivity=26  --olmax=lmax_zstat3.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope3 > cluster_zstat3.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat3 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat4 -t 3.1000000000000005 --othresh=thresh_zstat4 -o cluster_mask_zstat4 --connectivity=26  --olmax=lmax_zstat4.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope4 > cluster_zstat4.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat4 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat5 -t 3.1000000000000005 --othresh=thresh_zstat5 -o cluster_mask_zstat5 --connectivity=26  --olmax=lmax_zstat5.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope5 > cluster_zstat5.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat5 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat6 -t 3.1000000000000005 --othresh=thresh_zstat6 -o cluster_mask_zstat6 --connectivity=26  --olmax=lmax_zstat6.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope6 > cluster_zstat6.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat6 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat7 -t 3.1000000000000005 --othresh=thresh_zstat7 -o cluster_mask_zstat7 --connectivity=26  --olmax=lmax_zstat7.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope7 > cluster_zstat7.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat7 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat8 -t 3.1000000000000005 --othresh=thresh_zstat8 -o cluster_mask_zstat8 --connectivity=26  --olmax=lmax_zstat8.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope8 > cluster_zstat8.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat8 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat9 -t 3.1000000000000005 --othresh=thresh_zstat9 -o cluster_mask_zstat9 --connectivity=26  --olmax=lmax_zstat9.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope9 > cluster_zstat9.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat9 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat10 -t 3.1000000000000005 --othresh=thresh_zstat10 -o cluster_mask_zstat10 --connectivity=26  --olmax=lmax_zstat10.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope10 > cluster_zstat10.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat10 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat11 -t 3.1000000000000005 --othresh=thresh_zstat11 -o cluster_mask_zstat11 --connectivity=26  --olmax=lmax_zstat11.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope11 > cluster_zstat11.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat11 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat12 -t 3.1000000000000005 --othresh=thresh_zstat12 -o cluster_mask_zstat12 --connectivity=26  --olmax=lmax_zstat12.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope12 > cluster_zstat12.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat12 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat13 -t 3.1000000000000005 --othresh=thresh_zstat13 -o cluster_mask_zstat13 --connectivity=26  --olmax=lmax_zstat13.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope13 > cluster_zstat13.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat13 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat14 -t 3.1000000000000005 --othresh=thresh_zstat14 -o cluster_mask_zstat14 --connectivity=26  --olmax=lmax_zstat14.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope14 > cluster_zstat14.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat14 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat15 -t 3.1000000000000005 --othresh=thresh_zstat15 -o cluster_mask_zstat15 --connectivity=26  --olmax=lmax_zstat15.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope15 > cluster_zstat15.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat15 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat16 -t 3.1000000000000005 --othresh=thresh_zstat16 -o cluster_mask_zstat16 --connectivity=26  --olmax=lmax_zstat16.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope16 > cluster_zstat16.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat16 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat17 -t 3.1000000000000005 --othresh=thresh_zstat17 -o cluster_mask_zstat17 --connectivity=26  --olmax=lmax_zstat17.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope17 > cluster_zstat17.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat17 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat18 -t 3.1000000000000005 --othresh=thresh_zstat18 -o cluster_mask_zstat18 --connectivity=26  --olmax=lmax_zstat18.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope18 > cluster_zstat18.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat18 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat19 -t 3.1000000000000005 --othresh=thresh_zstat19 -o cluster_mask_zstat19 --connectivity=26  --olmax=lmax_zstat19.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope19 > cluster_zstat19.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat19 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat20 -t 3.1000000000000005 --othresh=thresh_zstat20 -o cluster_mask_zstat20 --connectivity=26  --olmax=lmax_zstat20.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope20 > cluster_zstat20.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat20 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat21 -t 3.1000000000000005 --othresh=thresh_zstat21 -o cluster_mask_zstat21 --connectivity=26  --olmax=lmax_zstat21.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope21 > cluster_zstat21.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat21 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat22 -t 3.1000000000000005 --othresh=thresh_zstat22 -o cluster_mask_zstat22 --connectivity=26  --olmax=lmax_zstat22.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope22 > cluster_zstat22.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat22 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat23 -t 3.1000000000000005 --othresh=thresh_zstat23 -o cluster_mask_zstat23 --connectivity=26  --olmax=lmax_zstat23.txt --scalarname=Z -p 0.05 -d 0.539422 --volume=90052 -c stats/cope23 > cluster_zstat23.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat23 
+can't read "fmri(conmask1_1)": no such element in array
+    while executing
+"if { [ catch {
+
+for { set argindex 1 } { $argindex < $argc } { incr argindex 1 } {
+    switch -- [ lindex $argv $argindex ] {
+
+	-I {
+	    incr arginde..."
+    (file "/usr/local/fsl/bin/feat" line 312)
+Error encountered while running in main feat script, halting.
+can't read "fmri(conmask1_1)": no such element in array
+</pre><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></BODY></HTML>
+
+===== derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat =====
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat/logs/feat0 ---
+<HTML><HEAD>
+<!--refreshstart-->
+
+<!--refreshstop-->
+<link REL=stylesheet TYPE=text/css href=.files/fsl.css>
+<TITLE>FSL</TITLE></HEAD><BODY><OBJECT data=report.html></OBJECT>
+<h2>Progress Report / Log</h2>
+Started at Tue Sep 15 12:33:37 AM EDT 2026<p>
+Feat main script<br><pre>
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat/logs/feat0_init.e4185809 ---
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat/logs/feat0_init.o4185809 ---
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat/logs/feat1 ---
+
+/bin/cp /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_ds003745_sub-144_task-sharedreward_model-fulltrial_type-act_run-2.fsf design.fsf
+
+/usr/local/fsl/bin/feat_model design
+Warning: at least one EV is (close to) a linear combination of the others. You probably need to alter your design.
+(Design matrix is rank deficient - ratio of min:max eigenvalues in SVD of matrix is 0)
+ Contrasts involving these combinations will be set to zero.
+
+
+mkdir .files;cp /usr/local/fsl/doc/fsl.css .files;cp -r /usr/local/fsl/doc/images .files/images
+
+/usr/local/fsl/bin/fsl_sub -T 10 -l logs -N feat0_init   /usr/local/fsl/bin/feat /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat/design.fsf -D /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat -I 1 -init
+4185809
+
+/usr/local/fsl/bin/fsl_sub -T 105 -l logs -N feat2_pre -j 4185809  /usr/local/fsl/bin/feat /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat/design.fsf -D /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat -I 1 -prestats
+4191956
+
+/usr/local/fsl/bin/fsl_sub -T 8 -l logs -N feat3_film -j 4191956  /usr/local/fsl/bin/feat /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat/design.fsf -D /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat -I 1 -stats
+7146
+
+/usr/local/fsl/bin/fsl_sub -T 119 -l logs -N feat4_post -j 7146  /usr/local/fsl/bin/feat /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat/design.fsf -D /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat -poststats 0 
+Error submitting job - can't read "fmri(conmask1_1)": no such element in array
+    while executing
+"if { [ catch {
+
+for { set argindex 1 } { $argindex < $argc } { incr argindex 1 } {
+    switch -- [ lindex $argv $argindex ] {
+
+	-I {
+	    incr arginde..."
+    (file "/usr/local/fsl/bin/feat" line 312)
+
+
+FATAL ERROR ENCOUNTERED:
+COMMAND:
+/usr/local/fsl/bin/fsl_sub -T 119 -l logs -N feat4_post -j 7146  /usr/local/fsl/bin/feat /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat/design.fsf -D /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat -poststats 0 
+ERROR MESSAGE:
+child process exited abnormally
+END OF ERROR MESSAGE
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat/logs/feat1a_init ---
+</pre><hr>Initialisation<br><pre>
+
+/usr/local/fsl/bin/fslmaths /ZPOOL/data/projects/sharedreward-aging/derivatives/harmonized/sub-144/func/sub-144_task-sharedreward_run-02_space-MNI152NLin6Asym_desc-smoothToFWHM6_bold prefiltered_func_data -odt float
+Total original volumes = 202
+
+/usr/local/fsl/bin/fslroi prefiltered_func_data example_func 101 1
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat/logs/feat2_pre ---
+</pre><hr>Preprocessing:Stage 1<br><pre>
+</pre><hr>Preprocessing:Stage 2<br><pre>
+
+/usr/local/fsl/bin/fslmaths prefiltered_func_data -Tmean mean_func
+
+/usr/local/fsl/bin/bet2 mean_func mask -f 0.3 -n -m; /usr/local/fsl/bin/immv mask_mask mask
+
+/usr/local/fsl/bin/fslmaths prefiltered_func_data -mas mask prefiltered_func_data_bet
+
+/usr/local/fsl/bin/fslstats prefiltered_func_data_bet -p 2 -p 98
+0.000000 642.617065 
+
+/usr/local/fsl/bin/fslmaths prefiltered_func_data_bet -thr 6.42617065 -Tmin -bin mask -odt char
+
+/usr/local/fsl/bin/fslstats prefiltered_func_data -k mask -p 50
+508.512726 
+
+/usr/local/fsl/bin/fslmaths mask -dilF mask
+
+/usr/local/fsl/bin/fslmaths prefiltered_func_data -mas mask prefiltered_func_data_thresh
+
+/usr/local/fsl/bin/fslmaths prefiltered_func_data_thresh -mul 19.665191230632054 prefiltered_func_data_intnorm
+
+/usr/local/fsl/bin/fslmaths prefiltered_func_data_intnorm filtered_func_data
+
+/usr/local/fsl/bin/fslmaths filtered_func_data -Tmean mean_func
+
+/bin/rm -rf prefiltered_func_data*
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat/logs/feat2_pre.e4191956 ---
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat/logs/feat2_pre.o4191956 ---
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat/logs/feat3_film.e7146 ---
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat/logs/feat3_film.o7146 ---
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat/logs/feat3_stats ---
+</pre><hr>Stats<br><pre>
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-2/event_computer_punish.txt custom_timing_files/ev1.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-2/event_computer_reward.txt custom_timing_files/ev2.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-2/event_friend_punish.txt custom_timing_files/ev3.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-2/event_friend_reward.txt custom_timing_files/ev4.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-2/event_stranger_punish.txt custom_timing_files/ev5.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-2/event_stranger_reward.txt custom_timing_files/ev6.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-2/event_computer_neutral.txt custom_timing_files/ev7.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-2/event_stranger_neutral.txt custom_timing_files/ev9.txt
+
+paste -d  ' '  /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/confounds_fmriprep/sub-144/func/sub-144_task-sharedreward_run-02_desc-FSLConfounds.tsv > confoundevs.txt
+
+/usr/local/fsl/bin/feat_model design confoundevs.txt
+Warning: at least one EV is (close to) a linear combination of the others. You probably need to alter your design.
+(Design matrix is rank deficient - ratio of min:max eigenvalues in SVD of matrix is 6.13129e-17)
+ Contrasts involving these combinations will be set to zero.
+
+
+/usr/local/fsl/bin/film_gls --in=filtered_func_data --rn=stats --pd=design.mat --thr=100.0 --sa --ms=5 --con=design.con  
+Log directory is: stats
+202
+29
+202
+91014
+Calculating residuals...
+Completed
+Estimating residual autocorrelation...
+Calculating raw AutoCorrs... Completed
+mode = 10118.7
+sig = 1062
+Spatially smoothing auto corr estimates
+.............
+Completed
+Tukey M = 14
+Tukey estimates... Completed
+Completed
+Prewhitening and Computing PEs...
+Percentage done:
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,Completed
+Saving results... 
+Completed
+
+/usr/local/fsl/bin/smoothest -d 172   -m mask -r stats/res4d > stats/smoothness
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat/logs/feat4_post ---
+echo 91014 > thresh_zstat8.vol
+zstat8: DLH=0.548416 VOLUME=91014 RESELS=8.43644
+
+/usr/local/fsl/bin/fslmaths stats/zstat9 -mas mask thresh_zstat9
+
+echo 91014 > thresh_zstat9.vol
+zstat9: DLH=0.548416 VOLUME=91014 RESELS=8.43644
+
+/usr/local/fsl/bin/fslmaths stats/zstat10 -mas mask thresh_zstat10
+
+echo 91014 > thresh_zstat10.vol
+zstat10: DLH=0.548416 VOLUME=91014 RESELS=8.43644
+
+/usr/local/fsl/bin/fslmaths stats/zstat11 -mas mask thresh_zstat11
+
+echo 91014 > thresh_zstat11.vol
+zstat11: DLH=0.548416 VOLUME=91014 RESELS=8.43644
+
+/usr/local/fsl/bin/fslmaths stats/zstat12 -mas mask thresh_zstat12
+
+echo 91014 > thresh_zstat12.vol
+zstat12: DLH=0.548416 VOLUME=91014 RESELS=8.43644
+
+/usr/local/fsl/bin/fslmaths stats/zstat13 -mas mask thresh_zstat13
+
+echo 91014 > thresh_zstat13.vol
+zstat13: DLH=0.548416 VOLUME=91014 RESELS=8.43644
+
+/usr/local/fsl/bin/fslmaths stats/zstat14 -mas mask thresh_zstat14
+
+echo 91014 > thresh_zstat14.vol
+zstat14: DLH=0.548416 VOLUME=91014 RESELS=8.43644
+
+/usr/local/fsl/bin/fslmaths stats/zstat15 -mas mask thresh_zstat15
+
+echo 91014 > thresh_zstat15.vol
+zstat15: DLH=0.548416 VOLUME=91014 RESELS=8.43644
+
+/usr/local/fsl/bin/fslmaths stats/zstat16 -mas mask thresh_zstat16
+
+echo 91014 > thresh_zstat16.vol
+zstat16: DLH=0.548416 VOLUME=91014 RESELS=8.43644
+
+/usr/local/fsl/bin/fslmaths stats/zstat17 -mas mask thresh_zstat17
+
+echo 91014 > thresh_zstat17.vol
+zstat17: DLH=0.548416 VOLUME=91014 RESELS=8.43644
+
+/usr/local/fsl/bin/fslmaths stats/zstat18 -mas mask thresh_zstat18
+
+echo 91014 > thresh_zstat18.vol
+zstat18: DLH=0.548416 VOLUME=91014 RESELS=8.43644
+
+/usr/local/fsl/bin/fslmaths stats/zstat19 -mas mask thresh_zstat19
+
+echo 91014 > thresh_zstat19.vol
+zstat19: DLH=0.548416 VOLUME=91014 RESELS=8.43644
+
+/usr/local/fsl/bin/fslmaths stats/zstat20 -mas mask thresh_zstat20
+
+echo 91014 > thresh_zstat20.vol
+zstat20: DLH=0.548416 VOLUME=91014 RESELS=8.43644
+
+/usr/local/fsl/bin/fslmaths stats/zstat21 -mas mask thresh_zstat21
+
+echo 91014 > thresh_zstat21.vol
+zstat21: DLH=0.548416 VOLUME=91014 RESELS=8.43644
+
+/usr/local/fsl/bin/fslmaths stats/zstat22 -mas mask thresh_zstat22
+
+echo 91014 > thresh_zstat22.vol
+zstat22: DLH=0.548416 VOLUME=91014 RESELS=8.43644
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat1 -t 3.1000000000000005 --othresh=thresh_zstat1 -o cluster_mask_zstat1 --connectivity=26  --olmax=lmax_zstat1.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope1 > cluster_zstat1.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat1 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat2 -t 3.1000000000000005 --othresh=thresh_zstat2 -o cluster_mask_zstat2 --connectivity=26  --olmax=lmax_zstat2.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope2 > cluster_zstat2.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat2 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat3 -t 3.1000000000000005 --othresh=thresh_zstat3 -o cluster_mask_zstat3 --connectivity=26  --olmax=lmax_zstat3.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope3 > cluster_zstat3.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat3 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat4 -t 3.1000000000000005 --othresh=thresh_zstat4 -o cluster_mask_zstat4 --connectivity=26  --olmax=lmax_zstat4.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope4 > cluster_zstat4.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat4 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat5 -t 3.1000000000000005 --othresh=thresh_zstat5 -o cluster_mask_zstat5 --connectivity=26  --olmax=lmax_zstat5.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope5 > cluster_zstat5.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat5 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat6 -t 3.1000000000000005 --othresh=thresh_zstat6 -o cluster_mask_zstat6 --connectivity=26  --olmax=lmax_zstat6.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope6 > cluster_zstat6.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat6 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat7 -t 3.1000000000000005 --othresh=thresh_zstat7 -o cluster_mask_zstat7 --connectivity=26  --olmax=lmax_zstat7.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope7 > cluster_zstat7.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat7 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat8 -t 3.1000000000000005 --othresh=thresh_zstat8 -o cluster_mask_zstat8 --connectivity=26  --olmax=lmax_zstat8.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope8 > cluster_zstat8.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat8 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat9 -t 3.1000000000000005 --othresh=thresh_zstat9 -o cluster_mask_zstat9 --connectivity=26  --olmax=lmax_zstat9.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope9 > cluster_zstat9.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat9 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat10 -t 3.1000000000000005 --othresh=thresh_zstat10 -o cluster_mask_zstat10 --connectivity=26  --olmax=lmax_zstat10.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope10 > cluster_zstat10.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat10 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat11 -t 3.1000000000000005 --othresh=thresh_zstat11 -o cluster_mask_zstat11 --connectivity=26  --olmax=lmax_zstat11.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope11 > cluster_zstat11.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat11 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat12 -t 3.1000000000000005 --othresh=thresh_zstat12 -o cluster_mask_zstat12 --connectivity=26  --olmax=lmax_zstat12.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope12 > cluster_zstat12.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat12 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat13 -t 3.1000000000000005 --othresh=thresh_zstat13 -o cluster_mask_zstat13 --connectivity=26  --olmax=lmax_zstat13.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope13 > cluster_zstat13.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat13 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat14 -t 3.1000000000000005 --othresh=thresh_zstat14 -o cluster_mask_zstat14 --connectivity=26  --olmax=lmax_zstat14.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope14 > cluster_zstat14.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat14 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat15 -t 3.1000000000000005 --othresh=thresh_zstat15 -o cluster_mask_zstat15 --connectivity=26  --olmax=lmax_zstat15.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope15 > cluster_zstat15.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat15 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat16 -t 3.1000000000000005 --othresh=thresh_zstat16 -o cluster_mask_zstat16 --connectivity=26  --olmax=lmax_zstat16.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope16 > cluster_zstat16.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat16 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat17 -t 3.1000000000000005 --othresh=thresh_zstat17 -o cluster_mask_zstat17 --connectivity=26  --olmax=lmax_zstat17.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope17 > cluster_zstat17.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat17 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat18 -t 3.1000000000000005 --othresh=thresh_zstat18 -o cluster_mask_zstat18 --connectivity=26  --olmax=lmax_zstat18.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope18 > cluster_zstat18.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat18 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat19 -t 3.1000000000000005 --othresh=thresh_zstat19 -o cluster_mask_zstat19 --connectivity=26  --olmax=lmax_zstat19.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope19 > cluster_zstat19.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat19 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat20 -t 3.1000000000000005 --othresh=thresh_zstat20 -o cluster_mask_zstat20 --connectivity=26  --olmax=lmax_zstat20.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope20 > cluster_zstat20.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat20 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat21 -t 3.1000000000000005 --othresh=thresh_zstat21 -o cluster_mask_zstat21 --connectivity=26  --olmax=lmax_zstat21.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope21 > cluster_zstat21.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat21 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat22 -t 3.1000000000000005 --othresh=thresh_zstat22 -o cluster_mask_zstat22 --connectivity=26  --olmax=lmax_zstat22.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope22 > cluster_zstat22.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat22 
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat/logs/feat4_post.e12522 ---
+can't read "fmri(conmask1_1)": no such element in array
+    while executing
+"if { [ catch {
+
+for { set argindex 1 } { $argindex < $argc } { incr argindex 1 } {
+    switch -- [ lindex $argv $argindex ] {
+
+	-I {
+	    incr arginde..."
+    (file "/usr/local/fsl/bin/feat" line 312)
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat/logs/feat4_post.o12522 ---
+Error encountered while running in main feat script, halting.
+can't read "fmri(conmask1_1)": no such element in array
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat/logs/feat9 ---
+</pre><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></BODY></HTML>
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat/report_log.html ---
+/usr/local/fsl/bin/fslmaths stats/zstat11 -mas mask thresh_zstat11
+
+echo 91014 > thresh_zstat11.vol
+zstat11: DLH=0.548416 VOLUME=91014 RESELS=8.43644
+
+/usr/local/fsl/bin/fslmaths stats/zstat12 -mas mask thresh_zstat12
+
+echo 91014 > thresh_zstat12.vol
+zstat12: DLH=0.548416 VOLUME=91014 RESELS=8.43644
+
+/usr/local/fsl/bin/fslmaths stats/zstat13 -mas mask thresh_zstat13
+
+echo 91014 > thresh_zstat13.vol
+zstat13: DLH=0.548416 VOLUME=91014 RESELS=8.43644
+
+/usr/local/fsl/bin/fslmaths stats/zstat14 -mas mask thresh_zstat14
+
+echo 91014 > thresh_zstat14.vol
+zstat14: DLH=0.548416 VOLUME=91014 RESELS=8.43644
+
+/usr/local/fsl/bin/fslmaths stats/zstat15 -mas mask thresh_zstat15
+
+echo 91014 > thresh_zstat15.vol
+zstat15: DLH=0.548416 VOLUME=91014 RESELS=8.43644
+
+/usr/local/fsl/bin/fslmaths stats/zstat16 -mas mask thresh_zstat16
+
+echo 91014 > thresh_zstat16.vol
+zstat16: DLH=0.548416 VOLUME=91014 RESELS=8.43644
+
+/usr/local/fsl/bin/fslmaths stats/zstat17 -mas mask thresh_zstat17
+
+echo 91014 > thresh_zstat17.vol
+zstat17: DLH=0.548416 VOLUME=91014 RESELS=8.43644
+
+/usr/local/fsl/bin/fslmaths stats/zstat18 -mas mask thresh_zstat18
+
+echo 91014 > thresh_zstat18.vol
+zstat18: DLH=0.548416 VOLUME=91014 RESELS=8.43644
+
+/usr/local/fsl/bin/fslmaths stats/zstat19 -mas mask thresh_zstat19
+
+echo 91014 > thresh_zstat19.vol
+zstat19: DLH=0.548416 VOLUME=91014 RESELS=8.43644
+
+/usr/local/fsl/bin/fslmaths stats/zstat20 -mas mask thresh_zstat20
+
+echo 91014 > thresh_zstat20.vol
+zstat20: DLH=0.548416 VOLUME=91014 RESELS=8.43644
+
+/usr/local/fsl/bin/fslmaths stats/zstat21 -mas mask thresh_zstat21
+
+echo 91014 > thresh_zstat21.vol
+zstat21: DLH=0.548416 VOLUME=91014 RESELS=8.43644
+
+/usr/local/fsl/bin/fslmaths stats/zstat22 -mas mask thresh_zstat22
+
+echo 91014 > thresh_zstat22.vol
+zstat22: DLH=0.548416 VOLUME=91014 RESELS=8.43644
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat1 -t 3.1000000000000005 --othresh=thresh_zstat1 -o cluster_mask_zstat1 --connectivity=26  --olmax=lmax_zstat1.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope1 > cluster_zstat1.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat1 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat2 -t 3.1000000000000005 --othresh=thresh_zstat2 -o cluster_mask_zstat2 --connectivity=26  --olmax=lmax_zstat2.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope2 > cluster_zstat2.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat2 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat3 -t 3.1000000000000005 --othresh=thresh_zstat3 -o cluster_mask_zstat3 --connectivity=26  --olmax=lmax_zstat3.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope3 > cluster_zstat3.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat3 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat4 -t 3.1000000000000005 --othresh=thresh_zstat4 -o cluster_mask_zstat4 --connectivity=26  --olmax=lmax_zstat4.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope4 > cluster_zstat4.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat4 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat5 -t 3.1000000000000005 --othresh=thresh_zstat5 -o cluster_mask_zstat5 --connectivity=26  --olmax=lmax_zstat5.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope5 > cluster_zstat5.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat5 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat6 -t 3.1000000000000005 --othresh=thresh_zstat6 -o cluster_mask_zstat6 --connectivity=26  --olmax=lmax_zstat6.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope6 > cluster_zstat6.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat6 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat7 -t 3.1000000000000005 --othresh=thresh_zstat7 -o cluster_mask_zstat7 --connectivity=26  --olmax=lmax_zstat7.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope7 > cluster_zstat7.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat7 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat8 -t 3.1000000000000005 --othresh=thresh_zstat8 -o cluster_mask_zstat8 --connectivity=26  --olmax=lmax_zstat8.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope8 > cluster_zstat8.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat8 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat9 -t 3.1000000000000005 --othresh=thresh_zstat9 -o cluster_mask_zstat9 --connectivity=26  --olmax=lmax_zstat9.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope9 > cluster_zstat9.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat9 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat10 -t 3.1000000000000005 --othresh=thresh_zstat10 -o cluster_mask_zstat10 --connectivity=26  --olmax=lmax_zstat10.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope10 > cluster_zstat10.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat10 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat11 -t 3.1000000000000005 --othresh=thresh_zstat11 -o cluster_mask_zstat11 --connectivity=26  --olmax=lmax_zstat11.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope11 > cluster_zstat11.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat11 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat12 -t 3.1000000000000005 --othresh=thresh_zstat12 -o cluster_mask_zstat12 --connectivity=26  --olmax=lmax_zstat12.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope12 > cluster_zstat12.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat12 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat13 -t 3.1000000000000005 --othresh=thresh_zstat13 -o cluster_mask_zstat13 --connectivity=26  --olmax=lmax_zstat13.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope13 > cluster_zstat13.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat13 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat14 -t 3.1000000000000005 --othresh=thresh_zstat14 -o cluster_mask_zstat14 --connectivity=26  --olmax=lmax_zstat14.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope14 > cluster_zstat14.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat14 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat15 -t 3.1000000000000005 --othresh=thresh_zstat15 -o cluster_mask_zstat15 --connectivity=26  --olmax=lmax_zstat15.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope15 > cluster_zstat15.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat15 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat16 -t 3.1000000000000005 --othresh=thresh_zstat16 -o cluster_mask_zstat16 --connectivity=26  --olmax=lmax_zstat16.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope16 > cluster_zstat16.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat16 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat17 -t 3.1000000000000005 --othresh=thresh_zstat17 -o cluster_mask_zstat17 --connectivity=26  --olmax=lmax_zstat17.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope17 > cluster_zstat17.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat17 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat18 -t 3.1000000000000005 --othresh=thresh_zstat18 -o cluster_mask_zstat18 --connectivity=26  --olmax=lmax_zstat18.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope18 > cluster_zstat18.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat18 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat19 -t 3.1000000000000005 --othresh=thresh_zstat19 -o cluster_mask_zstat19 --connectivity=26  --olmax=lmax_zstat19.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope19 > cluster_zstat19.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat19 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat20 -t 3.1000000000000005 --othresh=thresh_zstat20 -o cluster_mask_zstat20 --connectivity=26  --olmax=lmax_zstat20.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope20 > cluster_zstat20.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat20 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat21 -t 3.1000000000000005 --othresh=thresh_zstat21 -o cluster_mask_zstat21 --connectivity=26  --olmax=lmax_zstat21.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope21 > cluster_zstat21.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat21 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat22 -t 3.1000000000000005 --othresh=thresh_zstat22 -o cluster_mask_zstat22 --connectivity=26  --olmax=lmax_zstat22.txt --scalarname=Z -p 0.05 -d 0.548416 --volume=91014 -c stats/cope22 > cluster_zstat22.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat22 
+can't read "fmri(conmask1_1)": no such element in array
+    while executing
+"if { [ catch {
+
+for { set argindex 1 } { $argindex < $argc } { incr argindex 1 } {
+    switch -- [ lindex $argv $argindex ] {
+
+	-I {
+	    incr arginde..."
+    (file "/usr/local/fsl/bin/feat" line 312)
+Error encountered while running in main feat script, halting.
+can't read "fmri(conmask1_1)": no such element in array
+</pre><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></BODY></HTML>
+
+===== derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat =====
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat/logs/feat0 ---
+<HTML><HEAD>
+<!--refreshstart-->
+
+<!--refreshstop-->
+<link REL=stylesheet TYPE=text/css href=.files/fsl.css>
+<TITLE>FSL</TITLE></HEAD><BODY><OBJECT data=report.html></OBJECT>
+<h2>Progress Report / Log</h2>
+Started at Tue Sep 15 12:33:41 AM EDT 2026<p>
+Feat main script<br><pre>
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat/logs/feat0_init.e4191062 ---
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat/logs/feat0_init.o4191062 ---
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat/logs/feat1 ---
+
+/bin/cp /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_ds003745_sub-144_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2.fsf design.fsf
+
+/usr/local/fsl/bin/feat_model design
+Warning: at least one EV is (close to) a linear combination of the others. You probably need to alter your design.
+(Design matrix is rank deficient - ratio of min:max eigenvalues in SVD of matrix is 0)
+ Contrasts involving these combinations will be set to zero.
+
+
+mkdir .files;cp /usr/local/fsl/doc/fsl.css .files;cp -r /usr/local/fsl/doc/images .files/images
+
+/usr/local/fsl/bin/fsl_sub -T 10 -l logs -N feat0_init   /usr/local/fsl/bin/feat /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat/design.fsf -D /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat -I 1 -init
+4191062
+
+/usr/local/fsl/bin/fsl_sub -T 105 -l logs -N feat2_pre -j 4191062  /usr/local/fsl/bin/feat /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat/design.fsf -D /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat -I 1 -prestats
+4193959
+
+/usr/local/fsl/bin/fsl_sub -T 10 -l logs -N feat3_film -j 4193959  /usr/local/fsl/bin/feat /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat/design.fsf -D /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat -I 1 -stats
+9679
+
+/usr/local/fsl/bin/fsl_sub -T 119 -l logs -N feat4_post -j 9679  /usr/local/fsl/bin/feat /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat/design.fsf -D /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat -poststats 0 
+Error submitting job - can't read "fmri(conmask1_1)": no such element in array
+    while executing
+"if { [ catch {
+
+for { set argindex 1 } { $argindex < $argc } { incr argindex 1 } {
+    switch -- [ lindex $argv $argindex ] {
+
+	-I {
+	    incr arginde..."
+    (file "/usr/local/fsl/bin/feat" line 312)
+
+
+FATAL ERROR ENCOUNTERED:
+COMMAND:
+/usr/local/fsl/bin/fsl_sub -T 119 -l logs -N feat4_post -j 9679  /usr/local/fsl/bin/feat /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat/design.fsf -D /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat -poststats 0 
+ERROR MESSAGE:
+child process exited abnormally
+END OF ERROR MESSAGE
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat/logs/feat1a_init ---
+</pre><hr>Initialisation<br><pre>
+
+/usr/local/fsl/bin/fslmaths /ZPOOL/data/projects/sharedreward-aging/derivatives/harmonized/sub-144/func/sub-144_task-sharedreward_run-02_space-MNI152NLin6Asym_desc-smoothToFWHM6_bold prefiltered_func_data -odt float
+Total original volumes = 202
+
+/usr/local/fsl/bin/fslroi prefiltered_func_data example_func 101 1
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat/logs/feat2_pre ---
+</pre><hr>Preprocessing:Stage 1<br><pre>
+</pre><hr>Preprocessing:Stage 2<br><pre>
+
+/usr/local/fsl/bin/fslmaths prefiltered_func_data -Tmean mean_func
+
+/usr/local/fsl/bin/bet2 mean_func mask -f 0.3 -n -m; /usr/local/fsl/bin/immv mask_mask mask
+
+/usr/local/fsl/bin/fslmaths prefiltered_func_data -mas mask prefiltered_func_data_bet
+
+/usr/local/fsl/bin/fslstats prefiltered_func_data_bet -p 2 -p 98
+0.000000 642.617065 
+
+/usr/local/fsl/bin/fslmaths prefiltered_func_data_bet -thr 6.42617065 -Tmin -bin mask -odt char
+
+/usr/local/fsl/bin/fslstats prefiltered_func_data -k mask -p 50
+508.512726 
+
+/usr/local/fsl/bin/fslmaths mask -dilF mask
+
+/usr/local/fsl/bin/fslmaths prefiltered_func_data -mas mask prefiltered_func_data_thresh
+
+/usr/local/fsl/bin/fslmaths prefiltered_func_data_thresh -mul 19.665191230632054 prefiltered_func_data_intnorm
+
+/usr/local/fsl/bin/fslmaths prefiltered_func_data_intnorm filtered_func_data
+
+/usr/local/fsl/bin/fslmaths filtered_func_data -Tmean mean_func
+
+/bin/rm -rf prefiltered_func_data*
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat/logs/feat2_pre.e4193959 ---
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat/logs/feat2_pre.o4193959 ---
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat/logs/feat3_film.e9679 ---
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat/logs/feat3_film.o9679 ---
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat/logs/feat3_stats ---
+</pre><hr>Stats<br><pre>
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-2/event_computer_punish.txt custom_timing_files/ev1.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-2/event_computer_reward.txt custom_timing_files/ev2.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-2/event_friend_punish.txt custom_timing_files/ev3.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-2/event_friend_reward.txt custom_timing_files/ev4.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-2/event_stranger_punish.txt custom_timing_files/ev5.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-2/event_stranger_reward.txt custom_timing_files/ev6.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-2/event_computer_neutral.txt custom_timing_files/ev7.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/EVfiles/ds003745/sub-144/sharedreward/run-2/event_stranger_neutral.txt custom_timing_files/ev9.txt
+
+mkdir -p custom_timing_files ; /usr/local/fsl/bin/fslFixText /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/ts_task-sharedreward_mask-vs_run-2.txt custom_timing_files/ev11.txt
+
+paste -d  ' '  /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/confounds_fmriprep/sub-144/func/sub-144_task-sharedreward_run-02_desc-FSLConfounds.tsv > confoundevs.txt
+
+/usr/local/fsl/bin/feat_model design confoundevs.txt
+Warning: at least one EV is (close to) a linear combination of the others. You probably need to alter your design.
+(Design matrix is rank deficient - ratio of min:max eigenvalues in SVD of matrix is 8.9903e-17)
+ Contrasts involving these combinations will be set to zero.
+
+
+/usr/local/fsl/bin/film_gls --in=filtered_func_data --rn=stats --pd=design.mat --thr=100.0 --sa --ms=5 --con=design.con  
+Log directory is: stats
+202
+40
+202
+91014
+Calculating residuals...
+Completed
+Estimating residual autocorrelation...
+Calculating raw AutoCorrs... Completed
+mode = 10118.7
+sig = 1062
+Spatially smoothing auto corr estimates
+.............
+Completed
+Tukey M = 14
+Tukey estimates... Completed
+Completed
+Prewhitening and Computing PEs...
+Percentage done:
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,Completed
+Saving results... 
+Completed
+
+/usr/local/fsl/bin/smoothest -d 161   -m mask -r stats/res4d > stats/smoothness
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat/logs/feat4_post ---
+
+echo 91014 > thresh_zstat10.vol
+zstat10: DLH=0.556328 VOLUME=91014 RESELS=8.31806
+
+/usr/local/fsl/bin/fslmaths stats/zstat11 -mas mask thresh_zstat11
+
+echo 91014 > thresh_zstat11.vol
+zstat11: DLH=0.556328 VOLUME=91014 RESELS=8.31806
+
+/usr/local/fsl/bin/fslmaths stats/zstat12 -mas mask thresh_zstat12
+
+echo 91014 > thresh_zstat12.vol
+zstat12: DLH=0.556328 VOLUME=91014 RESELS=8.31806
+
+/usr/local/fsl/bin/fslmaths stats/zstat13 -mas mask thresh_zstat13
+
+echo 91014 > thresh_zstat13.vol
+zstat13: DLH=0.556328 VOLUME=91014 RESELS=8.31806
+
+/usr/local/fsl/bin/fslmaths stats/zstat14 -mas mask thresh_zstat14
+
+echo 91014 > thresh_zstat14.vol
+zstat14: DLH=0.556328 VOLUME=91014 RESELS=8.31806
+
+/usr/local/fsl/bin/fslmaths stats/zstat15 -mas mask thresh_zstat15
+
+echo 91014 > thresh_zstat15.vol
+zstat15: DLH=0.556328 VOLUME=91014 RESELS=8.31806
+
+/usr/local/fsl/bin/fslmaths stats/zstat16 -mas mask thresh_zstat16
+
+echo 91014 > thresh_zstat16.vol
+zstat16: DLH=0.556328 VOLUME=91014 RESELS=8.31806
+
+/usr/local/fsl/bin/fslmaths stats/zstat17 -mas mask thresh_zstat17
+
+echo 91014 > thresh_zstat17.vol
+zstat17: DLH=0.556328 VOLUME=91014 RESELS=8.31806
+
+/usr/local/fsl/bin/fslmaths stats/zstat18 -mas mask thresh_zstat18
+
+echo 91014 > thresh_zstat18.vol
+zstat18: DLH=0.556328 VOLUME=91014 RESELS=8.31806
+
+/usr/local/fsl/bin/fslmaths stats/zstat19 -mas mask thresh_zstat19
+
+echo 91014 > thresh_zstat19.vol
+zstat19: DLH=0.556328 VOLUME=91014 RESELS=8.31806
+
+/usr/local/fsl/bin/fslmaths stats/zstat20 -mas mask thresh_zstat20
+
+echo 91014 > thresh_zstat20.vol
+zstat20: DLH=0.556328 VOLUME=91014 RESELS=8.31806
+
+/usr/local/fsl/bin/fslmaths stats/zstat21 -mas mask thresh_zstat21
+
+echo 91014 > thresh_zstat21.vol
+zstat21: DLH=0.556328 VOLUME=91014 RESELS=8.31806
+
+/usr/local/fsl/bin/fslmaths stats/zstat22 -mas mask thresh_zstat22
+
+echo 91014 > thresh_zstat22.vol
+zstat22: DLH=0.556328 VOLUME=91014 RESELS=8.31806
+
+/usr/local/fsl/bin/fslmaths stats/zstat23 -mas mask thresh_zstat23
+
+echo 91014 > thresh_zstat23.vol
+zstat23: DLH=0.556328 VOLUME=91014 RESELS=8.31806
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat1 -t 3.1000000000000005 --othresh=thresh_zstat1 -o cluster_mask_zstat1 --connectivity=26  --olmax=lmax_zstat1.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope1 > cluster_zstat1.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat1 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat2 -t 3.1000000000000005 --othresh=thresh_zstat2 -o cluster_mask_zstat2 --connectivity=26  --olmax=lmax_zstat2.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope2 > cluster_zstat2.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat2 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat3 -t 3.1000000000000005 --othresh=thresh_zstat3 -o cluster_mask_zstat3 --connectivity=26  --olmax=lmax_zstat3.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope3 > cluster_zstat3.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat3 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat4 -t 3.1000000000000005 --othresh=thresh_zstat4 -o cluster_mask_zstat4 --connectivity=26  --olmax=lmax_zstat4.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope4 > cluster_zstat4.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat4 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat5 -t 3.1000000000000005 --othresh=thresh_zstat5 -o cluster_mask_zstat5 --connectivity=26  --olmax=lmax_zstat5.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope5 > cluster_zstat5.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat5 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat6 -t 3.1000000000000005 --othresh=thresh_zstat6 -o cluster_mask_zstat6 --connectivity=26  --olmax=lmax_zstat6.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope6 > cluster_zstat6.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat6 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat7 -t 3.1000000000000005 --othresh=thresh_zstat7 -o cluster_mask_zstat7 --connectivity=26  --olmax=lmax_zstat7.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope7 > cluster_zstat7.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat7 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat8 -t 3.1000000000000005 --othresh=thresh_zstat8 -o cluster_mask_zstat8 --connectivity=26  --olmax=lmax_zstat8.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope8 > cluster_zstat8.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat8 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat9 -t 3.1000000000000005 --othresh=thresh_zstat9 -o cluster_mask_zstat9 --connectivity=26  --olmax=lmax_zstat9.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope9 > cluster_zstat9.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat9 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat10 -t 3.1000000000000005 --othresh=thresh_zstat10 -o cluster_mask_zstat10 --connectivity=26  --olmax=lmax_zstat10.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope10 > cluster_zstat10.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat10 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat11 -t 3.1000000000000005 --othresh=thresh_zstat11 -o cluster_mask_zstat11 --connectivity=26  --olmax=lmax_zstat11.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope11 > cluster_zstat11.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat11 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat12 -t 3.1000000000000005 --othresh=thresh_zstat12 -o cluster_mask_zstat12 --connectivity=26  --olmax=lmax_zstat12.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope12 > cluster_zstat12.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat12 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat13 -t 3.1000000000000005 --othresh=thresh_zstat13 -o cluster_mask_zstat13 --connectivity=26  --olmax=lmax_zstat13.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope13 > cluster_zstat13.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat13 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat14 -t 3.1000000000000005 --othresh=thresh_zstat14 -o cluster_mask_zstat14 --connectivity=26  --olmax=lmax_zstat14.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope14 > cluster_zstat14.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat14 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat15 -t 3.1000000000000005 --othresh=thresh_zstat15 -o cluster_mask_zstat15 --connectivity=26  --olmax=lmax_zstat15.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope15 > cluster_zstat15.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat15 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat16 -t 3.1000000000000005 --othresh=thresh_zstat16 -o cluster_mask_zstat16 --connectivity=26  --olmax=lmax_zstat16.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope16 > cluster_zstat16.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat16 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat17 -t 3.1000000000000005 --othresh=thresh_zstat17 -o cluster_mask_zstat17 --connectivity=26  --olmax=lmax_zstat17.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope17 > cluster_zstat17.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat17 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat18 -t 3.1000000000000005 --othresh=thresh_zstat18 -o cluster_mask_zstat18 --connectivity=26  --olmax=lmax_zstat18.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope18 > cluster_zstat18.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat18 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat19 -t 3.1000000000000005 --othresh=thresh_zstat19 -o cluster_mask_zstat19 --connectivity=26  --olmax=lmax_zstat19.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope19 > cluster_zstat19.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat19 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat20 -t 3.1000000000000005 --othresh=thresh_zstat20 -o cluster_mask_zstat20 --connectivity=26  --olmax=lmax_zstat20.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope20 > cluster_zstat20.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat20 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat21 -t 3.1000000000000005 --othresh=thresh_zstat21 -o cluster_mask_zstat21 --connectivity=26  --olmax=lmax_zstat21.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope21 > cluster_zstat21.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat21 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat22 -t 3.1000000000000005 --othresh=thresh_zstat22 -o cluster_mask_zstat22 --connectivity=26  --olmax=lmax_zstat22.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope22 > cluster_zstat22.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat22 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat23 -t 3.1000000000000005 --othresh=thresh_zstat23 -o cluster_mask_zstat23 --connectivity=26  --olmax=lmax_zstat23.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope23 > cluster_zstat23.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat23 
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat/logs/feat4_post.e43406 ---
+can't read "fmri(conmask1_1)": no such element in array
+    while executing
+"if { [ catch {
+
+for { set argindex 1 } { $argindex < $argc } { incr argindex 1 } {
+    switch -- [ lindex $argv $argindex ] {
+
+	-I {
+	    incr arginde..."
+    (file "/usr/local/fsl/bin/feat" line 312)
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat/logs/feat4_post.o43406 ---
+Error encountered while running in main feat script, halting.
+can't read "fmri(conmask1_1)": no such element in array
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat/logs/feat9 ---
+</pre><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></BODY></HTML>
+
+--- derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat/report_log.html ---
+
+/usr/local/fsl/bin/fslmaths stats/zstat13 -mas mask thresh_zstat13
+
+echo 91014 > thresh_zstat13.vol
+zstat13: DLH=0.556328 VOLUME=91014 RESELS=8.31806
+
+/usr/local/fsl/bin/fslmaths stats/zstat14 -mas mask thresh_zstat14
+
+echo 91014 > thresh_zstat14.vol
+zstat14: DLH=0.556328 VOLUME=91014 RESELS=8.31806
+
+/usr/local/fsl/bin/fslmaths stats/zstat15 -mas mask thresh_zstat15
+
+echo 91014 > thresh_zstat15.vol
+zstat15: DLH=0.556328 VOLUME=91014 RESELS=8.31806
+
+/usr/local/fsl/bin/fslmaths stats/zstat16 -mas mask thresh_zstat16
+
+echo 91014 > thresh_zstat16.vol
+zstat16: DLH=0.556328 VOLUME=91014 RESELS=8.31806
+
+/usr/local/fsl/bin/fslmaths stats/zstat17 -mas mask thresh_zstat17
+
+echo 91014 > thresh_zstat17.vol
+zstat17: DLH=0.556328 VOLUME=91014 RESELS=8.31806
+
+/usr/local/fsl/bin/fslmaths stats/zstat18 -mas mask thresh_zstat18
+
+echo 91014 > thresh_zstat18.vol
+zstat18: DLH=0.556328 VOLUME=91014 RESELS=8.31806
+
+/usr/local/fsl/bin/fslmaths stats/zstat19 -mas mask thresh_zstat19
+
+echo 91014 > thresh_zstat19.vol
+zstat19: DLH=0.556328 VOLUME=91014 RESELS=8.31806
+
+/usr/local/fsl/bin/fslmaths stats/zstat20 -mas mask thresh_zstat20
+
+echo 91014 > thresh_zstat20.vol
+zstat20: DLH=0.556328 VOLUME=91014 RESELS=8.31806
+
+/usr/local/fsl/bin/fslmaths stats/zstat21 -mas mask thresh_zstat21
+
+echo 91014 > thresh_zstat21.vol
+zstat21: DLH=0.556328 VOLUME=91014 RESELS=8.31806
+
+/usr/local/fsl/bin/fslmaths stats/zstat22 -mas mask thresh_zstat22
+
+echo 91014 > thresh_zstat22.vol
+zstat22: DLH=0.556328 VOLUME=91014 RESELS=8.31806
+
+/usr/local/fsl/bin/fslmaths stats/zstat23 -mas mask thresh_zstat23
+
+echo 91014 > thresh_zstat23.vol
+zstat23: DLH=0.556328 VOLUME=91014 RESELS=8.31806
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat1 -t 3.1000000000000005 --othresh=thresh_zstat1 -o cluster_mask_zstat1 --connectivity=26  --olmax=lmax_zstat1.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope1 > cluster_zstat1.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat1 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat2 -t 3.1000000000000005 --othresh=thresh_zstat2 -o cluster_mask_zstat2 --connectivity=26  --olmax=lmax_zstat2.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope2 > cluster_zstat2.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat2 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat3 -t 3.1000000000000005 --othresh=thresh_zstat3 -o cluster_mask_zstat3 --connectivity=26  --olmax=lmax_zstat3.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope3 > cluster_zstat3.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat3 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat4 -t 3.1000000000000005 --othresh=thresh_zstat4 -o cluster_mask_zstat4 --connectivity=26  --olmax=lmax_zstat4.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope4 > cluster_zstat4.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat4 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat5 -t 3.1000000000000005 --othresh=thresh_zstat5 -o cluster_mask_zstat5 --connectivity=26  --olmax=lmax_zstat5.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope5 > cluster_zstat5.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat5 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat6 -t 3.1000000000000005 --othresh=thresh_zstat6 -o cluster_mask_zstat6 --connectivity=26  --olmax=lmax_zstat6.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope6 > cluster_zstat6.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat6 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat7 -t 3.1000000000000005 --othresh=thresh_zstat7 -o cluster_mask_zstat7 --connectivity=26  --olmax=lmax_zstat7.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope7 > cluster_zstat7.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat7 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat8 -t 3.1000000000000005 --othresh=thresh_zstat8 -o cluster_mask_zstat8 --connectivity=26  --olmax=lmax_zstat8.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope8 > cluster_zstat8.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat8 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat9 -t 3.1000000000000005 --othresh=thresh_zstat9 -o cluster_mask_zstat9 --connectivity=26  --olmax=lmax_zstat9.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope9 > cluster_zstat9.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat9 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat10 -t 3.1000000000000005 --othresh=thresh_zstat10 -o cluster_mask_zstat10 --connectivity=26  --olmax=lmax_zstat10.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope10 > cluster_zstat10.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat10 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat11 -t 3.1000000000000005 --othresh=thresh_zstat11 -o cluster_mask_zstat11 --connectivity=26  --olmax=lmax_zstat11.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope11 > cluster_zstat11.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat11 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat12 -t 3.1000000000000005 --othresh=thresh_zstat12 -o cluster_mask_zstat12 --connectivity=26  --olmax=lmax_zstat12.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope12 > cluster_zstat12.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat12 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat13 -t 3.1000000000000005 --othresh=thresh_zstat13 -o cluster_mask_zstat13 --connectivity=26  --olmax=lmax_zstat13.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope13 > cluster_zstat13.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat13 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat14 -t 3.1000000000000005 --othresh=thresh_zstat14 -o cluster_mask_zstat14 --connectivity=26  --olmax=lmax_zstat14.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope14 > cluster_zstat14.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat14 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat15 -t 3.1000000000000005 --othresh=thresh_zstat15 -o cluster_mask_zstat15 --connectivity=26  --olmax=lmax_zstat15.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope15 > cluster_zstat15.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat15 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat16 -t 3.1000000000000005 --othresh=thresh_zstat16 -o cluster_mask_zstat16 --connectivity=26  --olmax=lmax_zstat16.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope16 > cluster_zstat16.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat16 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat17 -t 3.1000000000000005 --othresh=thresh_zstat17 -o cluster_mask_zstat17 --connectivity=26  --olmax=lmax_zstat17.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope17 > cluster_zstat17.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat17 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat18 -t 3.1000000000000005 --othresh=thresh_zstat18 -o cluster_mask_zstat18 --connectivity=26  --olmax=lmax_zstat18.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope18 > cluster_zstat18.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat18 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat19 -t 3.1000000000000005 --othresh=thresh_zstat19 -o cluster_mask_zstat19 --connectivity=26  --olmax=lmax_zstat19.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope19 > cluster_zstat19.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat19 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat20 -t 3.1000000000000005 --othresh=thresh_zstat20 -o cluster_mask_zstat20 --connectivity=26  --olmax=lmax_zstat20.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope20 > cluster_zstat20.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat20 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat21 -t 3.1000000000000005 --othresh=thresh_zstat21 -o cluster_mask_zstat21 --connectivity=26  --olmax=lmax_zstat21.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope21 > cluster_zstat21.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat21 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat22 -t 3.1000000000000005 --othresh=thresh_zstat22 -o cluster_mask_zstat22 --connectivity=26  --olmax=lmax_zstat22.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope22 > cluster_zstat22.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat22 
+
+/usr/local/fsl/bin/fsl-cluster -i thresh_zstat23 -t 3.1000000000000005 --othresh=thresh_zstat23 -o cluster_mask_zstat23 --connectivity=26  --olmax=lmax_zstat23.txt --scalarname=Z -p 0.05 -d 0.556328 --volume=91014 -c stats/cope23 > cluster_zstat23.txt
+
+/usr/local/fsl/bin/cluster2html . cluster_zstat23 
+can't read "fmri(conmask1_1)": no such element in array
+    while executing
+"if { [ catch {
+
+for { set argindex 1 } { $argindex < $argc } { incr argindex 1 } {
+    switch -- [ lindex $argv $argindex ] {
+
+	-I {
+	    incr arginde..."
+    (file "/usr/local/fsl/bin/feat" line 312)
+Error encountered while running in main feat script, halting.
+can't read "fmri(conmask1_1)": no such element in array
+</pre><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></BODY></HTML>
