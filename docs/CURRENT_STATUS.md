@@ -6,6 +6,17 @@ and `srndna-datapaper` main `be25871`. This is the current status index;
 dated run records remain the evidence. The current processing discussed here
 was performed on **Linux2**, not the historical HPC installation.
 
+**Source-validity update, later 2026-09-15:** the PI agrees with excluding
+10657 Shared Reward r1 and retaining r2 conditional on confirmation that the
+friend name was corrected. Trust is unchanged. For 10668, establish raw BOLD
+acquisition count/order and map the two recorded attempts; the current BIDS
+inventory contains one Shared Reward run. Audit 11913/11923 using raw dates and
+series identities (BIDS scans.tsv dates are shifted). See the upstream
+[source-validity follow-up](https://github.com/DVS-Lab/rf1-sra-linux2/blob/main/docs/sharedreward-source-validity.md).
+No generated dispositions/counts below have been changed by this update.
+Imaging-QC exclusions remain Cooper's responsibility, not a prerequisite for
+collecting these source-validity facts.
+
 ## Architecture: two intentional scientific models
 
 | Owner | Responsibility | Model outputs |
@@ -126,8 +137,8 @@ the task-ready table; no new exclusions or manifest changes are made here.
 
 | RF1 subject / retained runs | Specific question for PI/team | Record needed before final cohort freeze |
 |---|---|---|
-| 10657, ses-01 r1/r2 | Did the friend-identifier problem affect the displayed friend stimulus, and does it invalidate both runs, only specified contrasts, or neither? | Confirm run/contrast scope with source evidence, reviewer and date. Its separate r1 smoothing exception does not settle stimulus validity. |
-| 10668, ses-01 r1 | Does the documented narrower Trust-r2-only disposition supersede the old broad cross-computer/cross-task exclusion, specifically validating Shared Reward r1? | Cite the later source/session evidence supporting the retained run. |
+| 10657, ses-01 r1/r2 | Ryan identifies the incorrect Shared Reward collection as r1 only; historical code confirms the name is displayed. PI agrees with r1 exclusion/r2 retention conditional on the r2 name correction. | Confirm that r2 was corrected before final sign-off. Do not change Trust or infer a wrong photo. Generated policy is not changed yet. |
+| 10668, ses-01 r1 | Two recorded attempts both use the run-1 design, but the current BIDS inventory contains one Shared Reward run. | Compare raw acquisition episodes, including adjacent Trust series, to establish count/order and attempt mapping. Do not equate echoes/phase/SBRefs with separate runs. |
 | 11923, ses-01 r1/r2; cross-check 11913 | Do DICOM study/series IDs and acquisition timestamps map these Shared Reward series to the correct participant despite the reported 11913 scanner registration? | Verify both visit timelines; document any mapping or confirm no correction is needed. Keep identifying source details private. |
 
 11539 is already excluded and is not a new decision. Imaging IQR review,

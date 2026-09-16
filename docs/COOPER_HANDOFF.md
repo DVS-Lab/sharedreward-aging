@@ -35,12 +35,16 @@ verified those four L1s and two subject outputs; the other 1,484 expected L1s
 are absent. Full pooled execution and verification remain outstanding. Do not
 build a final L3 sample from the partial verified-candidate table.
 
-Please resolve or escalate these questions with the PI/source-data team:
+The PI/source-data team is resolving these source-validity questions before
+final input handoff; these are **not additional QC exclusions for Cooper**:
 
-1. **10657 r1/r2:** what was the friend-identifier error, and what exact run or
-   contrast scope is invalid? Its 5.280-mm smoothing exception is unrelated.
-2. **10668 r1:** which evidence confirms Shared Reward is valid despite the
-   historical broad exclusion and later narrower Trust-r2 disposition?
+1. **10657:** exclude r1 / retain r2 is PI-endorsed conditional on confirming
+   that the displayed friend name was corrected for r2. The generated exclusion
+   table/manifests are not changed yet. Trust is outside this decision. Its
+   5.280-mm smoothing exception is unrelated.
+2. **10668:** two complete behavioral attempts use the run-1 design, but only
+   one Shared Reward BOLD run is in the current BIDS inventory. Raw DICOM
+   episode count/order and mapping must be established before clearing the run.
 3. **11923 r1/r2 versus 11913:** do source DICOM identifiers and visit timelines
    establish correct participant identity for the Shared Reward images?
 
@@ -49,6 +53,10 @@ run/contrast scope; absence of a technical error is not source-validity proof.
 Do not publish identifying DICOM/session details. Review the existing tSNR,
 motion and coverage flags, and define the hypothesis-specific ratings and
 covariate requirements without silently changing the preprocessing cohort.
+Use the upstream
+[source-validity follow-up](https://github.com/DVS-Lab/rf1-sra-linux2/blob/main/docs/sharedreward-source-validity.md)
+for the scoped read-only audit. This pass does not make motion/tSNR/coverage
+exclusions; those remain Cooper's review.
 
 ## Working inputs
 
