@@ -25,7 +25,7 @@ python_scripts=(
     convert_harmonized_events.py create_common_analysis_mask.py
     create_coverage_eligible_mask.py generate_fsl_confounds.py
     generate_l1_evs.py harmonization_report.py plot_analysis_qc.py recover_sub144_analysis.py
-    plot_coverage_mosaics.py plot_smoothness_comparison.py
+    plot_coverage_mosaics.py plot_smoothness_comparison.py run_full_analysis.py
     read_l1_manifest.py read_l2_manifest.py render_pooled_fsf.py
     render_pooled_l2_fsf.py run_analysis_qc_batch.py
     run_event_qc_batch.py run_fsl_confounds_batch.py

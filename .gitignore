@@ -18,6 +18,7 @@ sourcedata/
 ds003745/
 logs/runs/
 logs/runlists/
+logs/.full-analysis.lock
 derivatives/*
 !derivatives/README.md
 3dFWHMx.1D*

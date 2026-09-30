@@ -1,5 +1,50 @@
 # Shared Reward: current state and handoff gate
 
+## Launch update — 2026-09-30
+
+Upstream `rf1-sra-linux2` `21d468ce` closes the 10668 repair after the
+headerless-confounds checker fix. The final Linux2 record
+`logs/records/20260930-153531_10668-final-validation-20260930-153531.md`
+passes both command and check: two corrected Shared Reward runs, each 255
+volumes with matching confound rows. Upstream preprocessing need not repeat.
+11913/11923 identity provenance is resolved upstream without a data reassignment.
+10657 Shared Reward run 1 is excluded; run 2 is retained. No Trust disposition
+is inferred here.
+
+The new `code/run_full_analysis.py` coordinates the **pooled full-trial**
+activation and provisional VS-PPI analysis, not the separate RF1-only model.
+It refreshes upstream QC inventories, re-smooths only the two corrected 10668
+inputs, refreshes downstream QC/events/ratings and freezes task-ready manifests.
+It checks the reviewed run dispositions and stops for unexpected model holds.
+Imaging-QC flags and ratings eligibility remain separate from task validity;
+this does not apply Cooper's final QC exclusions.
+
+The launcher preserves superseded 10668 L1/L2 models and 10657 run-1/L2 models
+under ignored `derivatives/analysis_refresh_archive/`, plus copies of replaced
+10668 smoothed files. Other complete, provenance-verified pooled models are
+reused. Unexpected stale/incomplete models stop the workflow for review rather
+than triggering blanket overwrites. VS seed caches are prepared serially with
+the existing nearest-neighbor/usesqform recipe to prevent competing run writes.
+No L1/L2 worker or model template is changed by this launcher.
+
+Run via `run_logged.sh` under nohup/setsid after confirming no concurrent
+analysis or input writers. Defaults: `--jobs 25` means up to **50 L1 FEAT jobs**
+(activation and PPI together); `--l2-jobs 5` means up to **10 L2 FEAT jobs**.
+L2 follows a successful full L1 audit; final primary-output verification follows
+L2. All contrast slots are retained; neutral-containing contrasts remain outside
+the primary audit/inference gate. No L3 runs automatically.
+
+`--stage all --confirm-idle` performs preparation and models. After a model-stage
+failure, use `--stage models --prepared <printed prepared.json> --confirm-idle`
+with the same job settings; **do not repeat preparation after starting models**.
+The receipt detects changed prepared inputs. Stage records, frozen manifests,
+and audit summaries live in `logs/records/full-analysis-<UTC timestamp>/` and
+should be committed after completion, along with the updated upstream QC/run
+records. These are launch instructions, not a claim that the full models have
+already run. The dated inventory below is historical until this run finishes.
+
+## Prior inventory and provenance
+
 Reconciled 2026-09-15 against `sharedreward-aging` main `a9b1919`,
 `rf1-sra-sharedreward` main `a398cb7`, `rf1-sra-linux2` main `67ba6dcd`,
 and `srndna-datapaper` main `be25871`. This is the current status index;
