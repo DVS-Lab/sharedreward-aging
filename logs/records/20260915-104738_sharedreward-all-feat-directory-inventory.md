@@ -1,0 +1,46 @@
+# Run Record: sharedreward-all-feat-directory-inventory
+
+- Timestamp: 20260915-104738
+- Branch: main
+- Commit: a9b1919
+- Host: CLA19787.tu.temple.edu
+- User: tug87422
+- Working directory: `/ZPOOL/data/projects/sharedreward-aging`
+- Raw log: `/ZPOOL/data/projects/sharedreward-aging/logs/runs/20260915-104738_sharedreward-all-feat-directory-inventory.log`
+- Command exit: 0
+- Check exit: none
+- Summary: COMMAND exit 0; CHECK none.
+
+## Command
+
+```bash
+find -L /ZPOOL/data/projects/sharedreward-aging/derivatives /ZPOOL/data/projects/rf1-sra-sharedreward/derivatives -type d \( -name \*.feat -o -name \*.gfeat \) -print -prune 
+```
+
+## Log
+
+```text
+RUN START: 20260915-104738
+PROJECT_ROOT: /ZPOOL/data/projects/sharedreward-aging
+GIT: main a9b1919
+HOST: CLA19787.tu.temple.edu
+USER: tug87422
+PWD: /ZPOOL/data/projects/sharedreward-aging
+COMMAND: find -L /ZPOOL/data/projects/sharedreward-aging/derivatives /ZPOOL/data/projects/rf1-sra-sharedreward/derivatives -type d \( -name \*.feat -o -name \*.gfeat \) -print -prune 
+
+/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl-smoothing-test.feat
+/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L2_task-sharedreward_model-fulltrial_type-act_sm-6.gfeat
+/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat
+/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L2_task-sharedreward_model-fulltrial_type-ppi_seed-vs_sm-6.gfeat
+/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat
+/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat
+/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat
+/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/replaced-models/sub144-20260915-131949-404913/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat
+/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/replaced-models/sub144-20260915-131949-404913/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat
+/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/replaced-models/sub144-20260915-131949-404913/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat
+/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/replaced-models/sub144-20260915-131949-404913/ds003745/sub-144/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat
+/ZPOOL/data/projects/rf1-sra-sharedreward/derivatives/fsl/L3_task-sharedreward_model-1_type-act_n93/L3_task-sharedreward_type-act_cnum-11_cname-F-S_onegroup.gfeat
+/ZPOOL/data/projects/rf1-sra-sharedreward/derivatives/fsl/L3_task-sharedreward_model-1_type-act_n93/L3_task-sharedreward_type-act_cnum-10_cname-rew-pun_onegroup.gfeat
+
+COMMAND EXIT: 0
+```
