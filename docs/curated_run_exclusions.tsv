@@ -1,2 +1,3 @@
 dataset	subject	session	run	exclusion_reason	source	note
 rf1	11539	01	*	wrong_friend_photo	Ryan session-note review 2026-08-24	Shared Reward runs 1 and 2 used the wrong friend photo, invalidating the task manipulation.
+rf1	10657	01	1	wrong_friend_name	Ryan session-form review and PI approval 2026-09-29	Incorrect friend name displayed in run 1; retain run 2 based on its recorded absence of task deviations. No Trust exclusion inferred.
