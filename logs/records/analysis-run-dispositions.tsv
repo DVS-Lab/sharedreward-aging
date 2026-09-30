@@ -156,13 +156,14 @@ rf1	10652	01	1	task_ready					true
 rf1	10652	01	2	task_ready					true	
 rf1	10656	01	1	task_ready					true	
 rf1	10656	01	2	task_ready					true	
-rf1	10657	01	1	task_ready					true	
+rf1	10657	01	1	task_excluded	wrong_friend_name				true	
 rf1	10657	01	2	task_ready					true	
 rf1	10661	01	1	task_ready					true	
 rf1	10661	01	2	task_ready					true	
 rf1	10663	01	1	task_ready					true	
 rf1	10663	01	2	task_ready					true	
 rf1	10668	01	1	task_ready					true	
+rf1	10668	01	2	task_ready					true	
 rf1	10673	01	1	task_ready					true	
 rf1	10673	01	2	task_ready					true	
 rf1	10674	01	1	task_ready					true	
@@ -213,7 +214,7 @@ rf1	10801	01	1	task_ready					true
 rf1	10801	01	2	task_ready					true	
 rf1	10802	01	1	task_ready					true	
 rf1	10802	01	2	task_ready					true	
-rf1	10803	01	1	task_ready					false	missing_ratings_file
+rf1	10803	01	1	task_ready					true	
 rf1	10804	01	1	task_ready					true	
 rf1	10804	01	2	task_ready					true	
 rf1	10806	01	1	task_ready					true	
@@ -541,7 +542,7 @@ rf1	11563	01	1	task_ready					true
 rf1	11563	01	2	task_ready					true	
 rf1	11570	01	1	task_ready					true	
 rf1	11570	01	2	task_ready					true	
-rf1	11572	01	1	task_ready					true	
+rf1	11572	01	1	task_ready				low_coverage_iqr_outlier	true	
 rf1	11572	01	2	task_ready				low_coverage_iqr_outlier	true	
 rf1	11579	01	1	task_ready					true	
 rf1	11579	01	2	task_ready					true	

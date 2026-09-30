@@ -80,10 +80,10 @@ rf1	10647	01	2	2	1,2	0		0		true	true		true
 rf1	10649	01	2	2	1,2	0		0		true	true		true
 rf1	10652	01	2	2	1,2	0		0		true	true		true
 rf1	10656	01	2	2	1,2	0		0		true	true		true
-rf1	10657	01	2	2	1,2	0		0		true	true		true
+rf1	10657	01	2	1	2	1	1	0		true	true		true
 rf1	10661	01	2	2	1,2	0		0		true	true		true
 rf1	10663	01	2	2	1,2	0		0		true	true		true
-rf1	10668	01	1	1	1	0		0		true	true		true
+rf1	10668	01	2	2	1,2	0		0		true	true		true
 rf1	10673	01	2	2	1,2	0		0		true	true		true
 rf1	10674	01	2	2	1,2	0		0		true	true		true
 rf1	10677	01	2	2	1,2	0		0		true	true		true
@@ -109,7 +109,7 @@ rf1	10794	01	2	2	1,2	0		0		true	true		true
 rf1	10800	01	2	2	1,2	0		0		true	true		true
 rf1	10801	01	2	2	1,2	0		0		true	true		true
 rf1	10802	01	2	2	1,2	0		0		true	true		true
-rf1	10803	01	1	1	1	0		0		true	false	missing_ratings_file	false
+rf1	10803	01	1	1	1	0		0		true	true		true
 rf1	10804	01	2	2	1,2	0		0		true	true		true
 rf1	10806	01	2	2	1,2	0		0		true	true		true
 rf1	10807	01	2	2	1,2	0		0		true	true		true
