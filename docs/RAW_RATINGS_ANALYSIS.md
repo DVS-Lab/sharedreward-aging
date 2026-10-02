@@ -64,15 +64,59 @@ never imputed; participant-level joined inputs/missingness remain under ignored
 `derivatives/behavioral/`, not added to Git. Aggregate outputs and source hashes
 are recorded under `qc/ratings-raw/`.
 
-## Demographic coverage and rerun
+## Full-demographics results, 2026-10-01
+
+The canonical RF1 BIDS participant table was copied from Linux2 and its SHA256
+matched the verified September 27 export:
+`10004009f83ae3ffd9977941e6c222ac8f1aabfd70f41968470cfaa70ef35ca4`.
+All **347** ratings-qualified participants now have age and recorded sex:
+313 RF1 and 34 ds003745, with zero missing demographics. Current aggregate
+results live directly in `qc/ratings-raw/`; `preliminary-local-age/` preserves
+the earlier, superseded incomplete-demographics analysis for provenance.
+
+The primary dataset- and sex-adjusted model gives a six-slope age omnibus
+Wald chi-square(6)=15.8429, p=0.014622. The mean across six conditions increases
+by **0.09310 raw points per decade** (pointwise 95% CI 0.03644 to 0.14975;
+four-component Holm-adjusted p=0.004920). Age interactions do not survive that
+correction: outcome p=0.290361, partner p=0.772361, and partner x outcome
+p=0.324190. This is an association with chronological age, not longitudinal
+evidence of a change within people.
+
+The raw-rating bar plot is unchanged: it already included all 347 participants.
+The age result supersedes the earlier estimate of 0.13652 points per decade
+from only 237 people using historical RF1 demographics. Both the expanded sample
+and the authoritative demographic source changed; do not attribute the numerical
+change solely to adding participants.
+
+Within-dataset sensitivity matters: the RF1-only mean slope is 0.06056 points
+per decade (Holm p=0.134692), versus 0.27628 in ds003745 (Holm p=0.015597,
+n=34). A difference in significance is not a test of slope heterogeneity.
+Do not describe the pooled association as independently established in both
+datasets. Dataset-by-age interactions, nonlinear age, and ceiling effects
+remain useful sensitivity questions before publication; they are not tested
+by changing the primary result after seeing its p-value.
+
+The execution record is
+`logs/records/20261001-224447_raw-ratings-full-demographics.md`.
+Participant demographics remain ignored and are not committed to Git.
+
+Full-cohort verification: all six slopes/HC3 standard errors and three
+within-person contrasts matched independent statsmodels calculations
+(relative tolerance 1e-11, absolute tolerance 1e-12). An initial relative-only
+check flagged a 3.3e-15 numerical difference for a near-zero slope; no estimates
+or analysis code were changed. All four behavioral unit tests passed. The
+raw-rating summary table and rendered PNG are identical to the earlier plot.
+
+## Demographic coverage history and rerun
 
 The local historical `participants-rf1.tsv` has only 245 rows and lacks 110
 of the 313 current RF1 ratings-qualified participants. It is not an adequate
 full-cohort demographic source. Explicitly labeled local preliminary results
 may use 237 participants (203 RF1 + 34 ds003745); the raw descriptive plot still
 uses all 347. Do not present those age results as the full cohort's findings.
-Use the canonical RF1 baseline participants file generated and verified on
-Linux2. The current pipeline refuses partial demographic coverage unless
+The canonical RF1 baseline participants file generated and verified on
+Linux2 is now available locally and was used for the full-cohort rerun above.
+The current pipeline refuses partial demographic coverage unless
 `--allow-partial-age` is explicitly supplied.
 
 Linux2 (activate `sharedreward-phase0` first):
