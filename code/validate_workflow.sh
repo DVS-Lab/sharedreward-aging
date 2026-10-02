@@ -13,6 +13,7 @@ for script in "${bash_scripts[@]}"; do bash -n "$ROOT/code/$script"; done
 echo 'PASS: bash syntax'
 
 python_scripts=(
+    analyze_raw_ratings.py
     audit_analysis_qc.py audit_event_qc.py audit_fmriprep_ds003745.py
     audit_fsl_confounds.py audit_outputs.py audit_l1_contrasts.py audit_group_readiness.py audit_ratings_qc.py model_provenance.py
     audit_resampling.py audit_smoothness.py audit_target_smoothing.py

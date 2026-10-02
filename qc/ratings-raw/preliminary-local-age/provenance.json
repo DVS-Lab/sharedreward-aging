@@ -1,0 +1,49 @@
+{
+  "status": "preliminary_partial_demographics",
+  "ratings_n": 347,
+  "age_model_n": 237,
+  "missing_demographics": 110,
+  "age_source_label": "Historical repository RF1 table; incomplete, pending canonical Linux2 demographics",
+  "sample_by_dataset": {
+    "ds003745": {
+      "n": 34,
+      "min_age": 18.0,
+      "max_age": 80.0
+    },
+    "rf1": {
+      "n": 203,
+      "min_age": 20.0,
+      "max_age": 84.0
+    }
+  },
+  "method": "Six-outcome subject-level OLS; continuous age per decade; dataset and recorded-sex offsets separately per cell; cross-outcome HC3 covariance; joint Wald chi-square tests; cell slope t intervals; Holm within stated families.",
+  "limitations": [
+    "Cross-sectional age association is not causal aging.",
+    "No final imaging QC exclusions.",
+    "Ratings eligibility retains the existing identical/loss>win rules; response-based selection may affect associations.",
+    "Bounded ratings/ceiling effects and linear age specification require sensitivity review before publication.",
+    "Main plot includes all ratings-qualified participants, not only those with local ages."
+  ],
+  "sources": [
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/logs/records/ratings-qc-subject-level.tsv",
+      "sha256": "dc13ec845d927cb66f41139d54b2bce37ee3efbbb3b62466034ee3bd7f6488ed"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/logs/records/analysis-subject-dispositions.tsv",
+      "sha256": "e30a4c33fc4adf18fc62bdeaada0360851086b66c9fd24d03f73e67c83ae7616"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/participants-rf1.tsv",
+      "sha256": "afd9f63039fcedc3fa6200eab1ab0c05fbdd8afa2a814b3ec0c9d4a4db44a18a"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/participants-srndna.tsv",
+      "sha256": "760730ad4d57f3d5d05ca489620ddead9442380405885b7c84792e413a3dac5e"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/analyze_raw_ratings.py",
+      "sha256": "b9ddbd5984e0b8bb7e10ed41f67cd9081268056fa0cbadc3cbff74c2965d74fb"
+    }
+  ]
+}
