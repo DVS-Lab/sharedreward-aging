@@ -16,6 +16,20 @@ from pathlib import Path
 PARTNERS = (1, 2, 3)
 TRAITS = (0, 1)
 CELLS = tuple((partner, trait) for partner in PARTNERS for trait in TRAITS)
+RATINGS_POLICY = "within_partner_loss_gt_win_primary_2026-10-01"
+
+
+def rating_exclusion_reasons(means):
+    """Primary behavioral rule pending Cooper; any violation excludes the person."""
+    if set(means) != set(CELLS) or any(
+        not math.isfinite(value) or abs(value) > 5 for value in means.values()
+    ):
+        raise ValueError("Expected six finite raw rating means in [-5, 5]")
+    reasons = ["identical_ratings"] if len(set(means.values())) == 1 else []
+    # Equality is allowed; wins for another partner cannot offset a reversal.
+    reasons.extend(f"partner_{partner}_loss_greater_than_win" for partner in PARTNERS
+                   if means[(partner, 1)] > means[(partner, 0)])
+    return reasons
 
 
 def parse_args():
@@ -109,12 +123,7 @@ def evaluate(path):
     win_sum = sum(means[(partner, 0)] for partner in PARTNERS)
     loss_sum = sum(means[(partner, 1)] for partner in PARTNERS)
     identical = len(set(means.values())) == 1
-    reasons = []
-    if identical:
-        reasons.append("identical_ratings")
-    # Equality is intentionally allowed: genuine indifference is not an exclusion.
-    if loss_sum > win_sum:
-        reasons.append("loss_sum_greater_than_win_sum")
+    reasons = rating_exclusion_reasons(means)
     repeated = [cell for cell in CELLS if len(values[cell]) > 1]
     return {
         "ratings_file_sha256": sha256(path),
@@ -304,7 +313,10 @@ def main():
         "exclude_subject",
         "exclusion_reason",
         "review_flags",
+        "ratings_policy",
     )
+    for row in complete:
+        row["ratings_policy"] = RATINGS_POLICY
     complete.sort(key=lambda row: (row["dataset"], row["subject"]))
     missing.sort(key=lambda row: (row["dataset"], row["subject"]))
     write_tsv(args.output, output_fields, complete)

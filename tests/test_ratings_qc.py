@@ -160,11 +160,11 @@ class RatingsQc(unittest.TestCase):
                 equal,
                 [
                     (1, 0, 1),
-                    (1, 1, 2),
+                    (1, 1, 1),
                     (2, 0, 2),
                     (2, 1, 2),
                     (3, 0, 3),
-                    (3, 1, 2),
+                    (3, 1, 3),
                 ],
             )
             write_ratings(
@@ -213,7 +213,8 @@ class RatingsQc(unittest.TestCase):
             self.assertEqual(rows[0]["exclude_subject"], "false")
             self.assertEqual(rows[1]["exclude_subject"], "true")
             self.assertEqual(
-                rows[1]["exclusion_reason"], "loss_sum_greater_than_win_sum"
+                rows[1]["exclusion_reason"], ";".join(
+                    f"partner_{p}_loss_greater_than_win" for p in (1, 2, 3))
             )
             with missing.open(newline="") as handle:
                 failures = list(csv.DictReader(handle, delimiter="\t"))

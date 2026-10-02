@@ -1,4 +1,5 @@
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -8,9 +9,31 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "code"))
 from analyze_raw_ratings import CELLS, age_fit, holm, load_ratings
 from plot_rating_age import age_predictions
+from audit_ratings_qc import rating_exclusion_reasons
 
 
 class RawRatings(unittest.TestCase):
+    def test_within_partner_rule_allows_ties_not_compensating_wins(self):
+        equal = {(p,t): float(p) for p in (1,2,3) for t in (0,1)}
+        self.assertEqual(rating_exclusion_reasons(equal), [])
+        self.assertEqual(rating_exclusion_reasons({k: 0. for k in equal}), ["identical_ratings"])
+        for partner in (1,2,3):
+            means = {(p,t): (5. if t == 0 else -5.) for p,t in equal}
+            means[(partner,0)], means[(partner,1)] = 1., 2.
+            self.assertLess(sum(means[(p,1)] for p in (1,2,3)), sum(means[(p,0)] for p in (1,2,3)))
+            self.assertEqual(rating_exclusion_reasons(means), [f"partner_{partner}_loss_greater_than_win"])
+
+    def test_old_cohort_flag_cannot_restore_a_within_partner_violation(self):
+        with tempfile.TemporaryDirectory() as temp:
+            temp = Path(temp)
+            ratings = pd.DataFrame([dict(dataset='rf1',subject=str(i),exclude_subject='false',exclusion_reason='') for i in (1,2)])
+            ratings[CELLS] = [[5,-5,5,-5,1,2], [5,-5,5,-5,2,2]]
+            ratings.to_csv(temp/'ratings.tsv',sep='\t',index=False)
+            pd.DataFrame([dict(dataset='rf1',subject=str(i),task_l2_ready='true',ratings_l2_ready='true') for i in (1,2)]).to_csv(temp/'cohort.tsv',sep='\t',index=False)
+            data = load_ratings(temp/'ratings.tsv',temp/'cohort.tsv')
+            self.assertEqual(data.subject.tolist(), ['2'])
+            self.assertEqual(data.attrs['behavioral_eligibility'][0]['exclusion_reason'],'partner_3_loss_greater_than_win')
+
     def test_holm_preserves_input_order(self):
         np.testing.assert_allclose(holm([.04, .001, .02]), [.04, .003, .04])
 

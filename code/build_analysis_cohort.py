@@ -8,6 +8,7 @@ import csv
 import os
 from collections import defaultdict
 from pathlib import Path
+from audit_ratings_qc import rating_exclusion_reasons
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -259,6 +260,21 @@ def build(args):
         args.ratings_qc,
         {"dataset", "subject", "exclude_subject", "exclusion_reason"},
     )
+    # Re-evaluate validated cell means so a historical aggregate-rule audit
+    # cannot silently restore people excluded by the current behavioral policy.
+    # This changes only ratings eligibility, never task-valid model eligibility.
+    for row in ratings:
+        if row["exclude_subject"] not in ("true", "false"):
+            raise ValueError("Invalid ratings exclusion flag")
+        if row["exclude_subject"] == "false":
+            try:
+                means = {(p, t): float(row[f"partner_{p}_trait_{t}_mean"])
+                         for p in (1, 2, 3) for t in (0, 1)}
+            except (KeyError, ValueError) as error:
+                raise ValueError("Ratings-qualified subjects require all six validated raw cell means") from error
+            reasons = rating_exclusion_reasons(means)
+            row["exclude_subject"] = str(bool(reasons)).lower()
+            row["exclusion_reason"] = ";".join(reasons)
     curated = read_tsv(
         args.curated_exclusions,
         set(IDENTIFIERS) | {"exclusion_reason", "source", "note"},

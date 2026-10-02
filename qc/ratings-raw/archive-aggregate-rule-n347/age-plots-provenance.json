@@ -1,8 +1,7 @@
 {
-  "n": 318,
+  "n": 347,
   "status": "preliminary_before_imaging_QC",
   "pooled": true,
-  "ratings_policy": "within_partner_loss_gt_win_primary_2026-10-01",
   "age_range": [
     18.0,
     89.0
@@ -29,15 +28,11 @@
     },
     {
       "path": "/Users/tug87422/github/sharedreward-aging/code/plot_rating_age.py",
-      "sha256": "71580f76a2f4a5cc13c8e1613444933d8a2d82ba047f9a66f79a25ccde2c46ef"
+      "sha256": "bd2e8a4d0712f6c5acd059a0fa4a97060b7c621aa1207ca785c7828ede9b55fb"
     },
     {
       "path": "/Users/tug87422/github/sharedreward-aging/code/analyze_raw_ratings.py",
-      "sha256": "20d9e5b53e1da195114b71f5c5cd3b418b89ce4519da93449823dda2614879f7"
-    },
-    {
-      "path": "/Users/tug87422/github/sharedreward-aging/code/audit_ratings_qc.py",
-      "sha256": "49270e365449e66bf4e4375497a4fc574f4946e5481917be3219a235ad3461ef"
+      "sha256": "788ef904bd2beab4078f096479e144257a2c13b2f1a256d25058d24fd4a819f3"
     }
   ]
 }

@@ -1,5 +1,15 @@
 # Cooper handoff: Shared Reward aging
 
+Behavioral update, 2026-10-01: the user selected **exclude the participant if
+Loss > Win for any partner**, equality allowed, as the primary rule until
+Cooper changes it. Raw (not z-scored) ratings, plots, and pooled age statistics
+have been regenerated for **318 participants (285 RF1 + 33 ds003745)** before
+imaging QC. Use `qc/ratings-raw/behavioral-eligibility.tsv`, not the older
+ratings-qualified counts below. See `RAW_RATINGS_ANALYSIS.md` for results and
+the archived 347-person aggregate-rule analysis. Imaging model membership and
+completed outputs were not changed. The September handoff text below is
+historical; consult `CURRENT_STATUS.md` for subsequent execution records.
+
 Prepared 2026-09-15. **Ready for exclusion review and L3 preparation; not yet
 cleared for full-cohort L3 execution.** The [current status](CURRENT_STATUS.md)
 is the evidence index and numerical snapshot. Do not interpret this document

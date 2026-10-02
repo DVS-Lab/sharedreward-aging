@@ -1,21 +1,17 @@
 {
   "status": "exploratory_full_demographics",
-  "ratings_policy": "within_partner_loss_gt_win_primary_2026-10-01",
-  "policy_authority": "User decision; primary until Cooper revises",
-  "task_valid_subjects": 393,
-  "additional_exclusions": 29,
-  "ratings_n": 318,
-  "age_model_n": 318,
+  "ratings_n": 347,
+  "age_model_n": 347,
   "missing_demographics": 0,
   "age_source_label": "canonical upstream RF1 baseline demographics",
   "sample_by_dataset": {
     "ds003745": {
-      "n": 33,
+      "n": 34,
       "min_age": 18.0,
       "max_age": 80.0
     },
     "rf1": {
-      "n": 285,
+      "n": 313,
       "min_age": 20.0,
       "max_age": 89.0
     }
@@ -24,7 +20,7 @@
   "limitations": [
     "Cross-sectional age association is not causal aging.",
     "No final imaging QC exclusions.",
-    "Primary ratings eligibility excludes the person if any partner loss > win; equality allowed; missing/incomplete and all-identical exclusions retained. Response-based selection may affect associations.",
+    "Ratings eligibility retains the existing identical/loss>win rules; response-based selection may affect associations.",
     "Bounded ratings/ceiling effects and linear age specification require sensitivity review before publication.",
     "Main plot includes all ratings-qualified participants, not only those with local ages."
   ],
@@ -47,11 +43,7 @@
     },
     {
       "path": "/Users/tug87422/github/sharedreward-aging/code/analyze_raw_ratings.py",
-      "sha256": "20d9e5b53e1da195114b71f5c5cd3b418b89ce4519da93449823dda2614879f7"
-    },
-    {
-      "path": "/Users/tug87422/github/sharedreward-aging/code/audit_ratings_qc.py",
-      "sha256": "49270e365449e66bf4e4375497a4fc574f4946e5481917be3219a235ad3461ef"
+      "sha256": "b9ddbd5984e0b8bb7e10ed41f67cd9081268056fa0cbadc3cbff74c2965d74fb"
     }
   ]
 }

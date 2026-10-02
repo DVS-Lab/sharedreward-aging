@@ -1,0 +1,394 @@
+dataset	subject	prior_ratings_l2_ready	primary_included	newly_excluded	exclusion_reason	ratings_policy
+ds003745	104	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+ds003745	105	false	false	false	missing_ratings_file	within_partner_loss_gt_win_primary_2026-10-01
+ds003745	106	false	false	false	missing_ratings_file	within_partner_loss_gt_win_primary_2026-10-01
+ds003745	107	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+ds003745	108	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+ds003745	109	false	false	false	missing_ratings_file	within_partner_loss_gt_win_primary_2026-10-01
+ds003745	110	false	false	false	missing_ratings_file	within_partner_loss_gt_win_primary_2026-10-01
+ds003745	111	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+ds003745	112	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+ds003745	113	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+ds003745	115	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+ds003745	116	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+ds003745	117	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+ds003745	120	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+ds003745	121	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+ds003745	122	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+ds003745	124	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+ds003745	125	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+ds003745	126	false	false	false	identical_ratings	within_partner_loss_gt_win_primary_2026-10-01
+ds003745	127	false	false	false	loss_sum_greater_than_win_sum	within_partner_loss_gt_win_primary_2026-10-01
+ds003745	128	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+ds003745	129	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+ds003745	130	false	false	false	missing_ratings_file	within_partner_loss_gt_win_primary_2026-10-01
+ds003745	131	false	false	false	missing_ratings_file	within_partner_loss_gt_win_primary_2026-10-01
+ds003745	132	false	false	false	missing_ratings_file	within_partner_loss_gt_win_primary_2026-10-01
+ds003745	133	false	false	false	missing_ratings_file	within_partner_loss_gt_win_primary_2026-10-01
+ds003745	134	false	false	false	missing_ratings_file	within_partner_loss_gt_win_primary_2026-10-01
+ds003745	136	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+ds003745	137	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+ds003745	140	false	false	false	identical_ratings	within_partner_loss_gt_win_primary_2026-10-01
+ds003745	141	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+ds003745	142	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+ds003745	143	false	false	false	missing_ratings_file	within_partner_loss_gt_win_primary_2026-10-01
+ds003745	144	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+ds003745	145	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+ds003745	147	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+ds003745	149	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+ds003745	150	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+ds003745	151	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+ds003745	152	true	false	true	partner_2_loss_greater_than_win	within_partner_loss_gt_win_primary_2026-10-01
+ds003745	153	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+ds003745	154	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+ds003745	155	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+ds003745	156	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+ds003745	157	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+ds003745	158	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+ds003745	159	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10317	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10369	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10402	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10418	false	false	false	missing_ratings_file	within_partner_loss_gt_win_primary_2026-10-01
+rf1	10462	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10478	false	false	false	missing_ratings_file	within_partner_loss_gt_win_primary_2026-10-01
+rf1	10486	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10529	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10541	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10559	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10572	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10581	false	false	false	missing_ratings_file	within_partner_loss_gt_win_primary_2026-10-01
+rf1	10584	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10585	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10589	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10590	true	false	true	partner_1_loss_greater_than_win	within_partner_loss_gt_win_primary_2026-10-01
+rf1	10596	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10603	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10606	false	false	false	missing_ratings_file	within_partner_loss_gt_win_primary_2026-10-01
+rf1	10608	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10617	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10636	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10638	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10640	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10641	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10642	true	false	true	partner_1_loss_greater_than_win	within_partner_loss_gt_win_primary_2026-10-01
+rf1	10644	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10647	true	false	true	partner_1_loss_greater_than_win	within_partner_loss_gt_win_primary_2026-10-01
+rf1	10649	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10652	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10656	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10657	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10661	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10663	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10668	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10673	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10674	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10677	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10685	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10690	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10691	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10700	false	false	false	missing_ratings_file	within_partner_loss_gt_win_primary_2026-10-01
+rf1	10701	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10713	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10716	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10718	true	false	true	partner_2_loss_greater_than_win	within_partner_loss_gt_win_primary_2026-10-01
+rf1	10720	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10723	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10741	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10748	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10767	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10770	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10777	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10781	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10783	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10785	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10794	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10800	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10801	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10802	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10803	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10804	true	false	true	partner_3_loss_greater_than_win	within_partner_loss_gt_win_primary_2026-10-01
+rf1	10806	true	false	true	partner_1_loss_greater_than_win	within_partner_loss_gt_win_primary_2026-10-01
+rf1	10807	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10809	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10810	false	false	false	missing_ratings_file	within_partner_loss_gt_win_primary_2026-10-01
+rf1	10812	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10817	false	false	false	missing_ratings_file	within_partner_loss_gt_win_primary_2026-10-01
+rf1	10827	false	false	false	missing_ratings_file	within_partner_loss_gt_win_primary_2026-10-01
+rf1	10831	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10834	false	false	false	missing_ratings_file	within_partner_loss_gt_win_primary_2026-10-01
+rf1	10838	false	false	false	missing_ratings_file	within_partner_loss_gt_win_primary_2026-10-01
+rf1	10843	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10850	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10854	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10857	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10858	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10860	false	false	false	identical_ratings	within_partner_loss_gt_win_primary_2026-10-01
+rf1	10862	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10863	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10866	false	false	false	missing_ratings_file	within_partner_loss_gt_win_primary_2026-10-01
+rf1	10875	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10881	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10886	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10887	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10896	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10897	true	false	true	partner_1_loss_greater_than_win	within_partner_loss_gt_win_primary_2026-10-01
+rf1	10898	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10908	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10913	false	false	false	identical_ratings	within_partner_loss_gt_win_primary_2026-10-01
+rf1	10918	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10919	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10924	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10926	true	false	true	partner_2_loss_greater_than_win	within_partner_loss_gt_win_primary_2026-10-01
+rf1	10928	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10929	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10930	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10938	false	false	false	identical_ratings	within_partner_loss_gt_win_primary_2026-10-01
+rf1	10940	false	false	false	loss_sum_greater_than_win_sum	within_partner_loss_gt_win_primary_2026-10-01
+rf1	10950	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10951	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10952	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10953	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10954	true	false	true	partner_3_loss_greater_than_win	within_partner_loss_gt_win_primary_2026-10-01
+rf1	10956	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10958	true	false	true	partner_1_loss_greater_than_win	within_partner_loss_gt_win_primary_2026-10-01
+rf1	10961	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10964	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10966	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10969	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10974	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10977	false	false	false	missing_ratings_file	within_partner_loss_gt_win_primary_2026-10-01
+rf1	10979	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10983	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	10984	true	false	true	partner_3_loss_greater_than_win	within_partner_loss_gt_win_primary_2026-10-01
+rf1	10998	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11005	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11007	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11012	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11016	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11021	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11030	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11031	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11036	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11039	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11042	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11053	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11058	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11060	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11063	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11064	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11065	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11066	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11068	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11071	false	false	false	identical_ratings	within_partner_loss_gt_win_primary_2026-10-01
+rf1	11072	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11074	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11075	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11076	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11078	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11083	true	false	true	partner_2_loss_greater_than_win	within_partner_loss_gt_win_primary_2026-10-01
+rf1	11084	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11085	false	false	false	identical_ratings	within_partner_loss_gt_win_primary_2026-10-01
+rf1	11090	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11110	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11113	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11116	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11120	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11125	false	false	false	loss_sum_greater_than_win_sum	within_partner_loss_gt_win_primary_2026-10-01
+rf1	11126	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11128	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11134	false	false	false	loss_sum_greater_than_win_sum	within_partner_loss_gt_win_primary_2026-10-01
+rf1	11139	true	false	true	partner_1_loss_greater_than_win	within_partner_loss_gt_win_primary_2026-10-01
+rf1	11145	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11164	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11167	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11168	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11171	true	false	true	partner_2_loss_greater_than_win	within_partner_loss_gt_win_primary_2026-10-01
+rf1	11177	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11192	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11193	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11201	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11203	false	false	false	loss_sum_greater_than_win_sum	within_partner_loss_gt_win_primary_2026-10-01
+rf1	11209	false	false	false	loss_sum_greater_than_win_sum	within_partner_loss_gt_win_primary_2026-10-01
+rf1	11227	true	false	true	partner_1_loss_greater_than_win	within_partner_loss_gt_win_primary_2026-10-01
+rf1	11238	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11241	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11246	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11276	true	false	true	partner_2_loss_greater_than_win	within_partner_loss_gt_win_primary_2026-10-01
+rf1	11286	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11301	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11311	true	false	true	partner_1_loss_greater_than_win	within_partner_loss_gt_win_primary_2026-10-01
+rf1	11312	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11316	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11318	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11321	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11325	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11326	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11329	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11330	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11337	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11338	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11340	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11343	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11345	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11348	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11358	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11364	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11367	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11374	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11376	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11377	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11387	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11410	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11416	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11426	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11430	true	false	true	partner_1_loss_greater_than_win;partner_2_loss_greater_than_win	within_partner_loss_gt_win_primary_2026-10-01
+rf1	11432	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11433	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11435	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11439	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11440	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11443	true	false	true	partner_2_loss_greater_than_win	within_partner_loss_gt_win_primary_2026-10-01
+rf1	11450	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11451	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11461	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11462	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11472	false	false	false	missing_ratings_file	within_partner_loss_gt_win_primary_2026-10-01
+rf1	11492	false	false	false	identical_ratings	within_partner_loss_gt_win_primary_2026-10-01
+rf1	11493	false	false	false	loss_sum_greater_than_win_sum	within_partner_loss_gt_win_primary_2026-10-01
+rf1	11498	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11517	true	false	true	partner_1_loss_greater_than_win	within_partner_loss_gt_win_primary_2026-10-01
+rf1	11518	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11523	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11526	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11527	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11529	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11530	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11532	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11533	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11534	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11535	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11536	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11540	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11542	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11545	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11551	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11559	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11560	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11563	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11570	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11572	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11579	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11586	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11587	false	false	false	missing_ratings_file	within_partner_loss_gt_win_primary_2026-10-01
+rf1	11588	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11591	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11597	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11598	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11599	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11600	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11606	false	false	false	loss_sum_greater_than_win_sum	within_partner_loss_gt_win_primary_2026-10-01
+rf1	11614	false	false	false	loss_sum_greater_than_win_sum	within_partner_loss_gt_win_primary_2026-10-01
+rf1	11622	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11623	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11625	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11626	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11628	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11631	true	false	true	partner_1_loss_greater_than_win	within_partner_loss_gt_win_primary_2026-10-01
+rf1	11651	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11660	true	false	true	partner_1_loss_greater_than_win;partner_2_loss_greater_than_win	within_partner_loss_gt_win_primary_2026-10-01
+rf1	11670	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11674	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11679	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11681	false	false	false	missing_ratings_file	within_partner_loss_gt_win_primary_2026-10-01
+rf1	11692	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11694	false	false	false	missing_ratings_file	within_partner_loss_gt_win_primary_2026-10-01
+rf1	11701	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11703	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11705	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11709	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11710	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11714	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11719	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11720	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11722	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11723	true	false	true	partner_2_loss_greater_than_win	within_partner_loss_gt_win_primary_2026-10-01
+rf1	11736	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11744	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11746	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11748	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11756	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11764	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11772	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11773	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11774	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11784	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11787	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11788	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11789	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11790	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11793	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11795	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11815	true	false	true	partner_1_loss_greater_than_win	within_partner_loss_gt_win_primary_2026-10-01
+rf1	11822	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11823	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11824	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11828	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11829	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11840	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11847	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11853	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11854	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11861	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11866	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11867	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11870	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11872	true	false	true	partner_1_loss_greater_than_win	within_partner_loss_gt_win_primary_2026-10-01
+rf1	11876	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11877	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11881	true	false	true	partner_1_loss_greater_than_win	within_partner_loss_gt_win_primary_2026-10-01
+rf1	11885	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11891	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11897	true	false	true	partner_1_loss_greater_than_win	within_partner_loss_gt_win_primary_2026-10-01
+rf1	11900	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11902	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11909	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11913	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11914	false	false	false	identical_ratings	within_partner_loss_gt_win_primary_2026-10-01
+rf1	11920	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11922	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11923	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11924	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11926	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11928	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11929	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11931	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11935	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11939	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11943	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11949	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11960	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11969	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11974	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11976	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11982	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	11984	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	12008	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	12011	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	12013	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	12018	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	12020	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	12021	true	false	true	partner_2_loss_greater_than_win	within_partner_loss_gt_win_primary_2026-10-01
+rf1	12031	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	12032	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	12033	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	12036	false	false	false	identical_ratings	within_partner_loss_gt_win_primary_2026-10-01
+rf1	12037	false	false	false	missing_ratings_file	within_partner_loss_gt_win_primary_2026-10-01
+rf1	12038	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	12039	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	12047	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	12049	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	12051	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	12054	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	12055	true	true	false		within_partner_loss_gt_win_primary_2026-10-01
+rf1	12057	true	true	false		within_partner_loss_gt_win_primary_2026-10-01

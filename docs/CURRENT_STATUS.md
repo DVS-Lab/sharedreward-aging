@@ -1,5 +1,16 @@
 # Shared Reward: current state and handoff gate
 
+## Behavioral policy update — 2026-10-01
+
+Raw-rating plots and statistics now use the user's primary **within-partner
+Loss > Win** exclusion rule, pending Cooper. Equality is allowed. There are
+318 eligible participants (285 RF1 + 33 ds003745), 29 fewer than the superseded
+aggregate-rule analysis. All have demographics. Membership and exclusion
+reasons are in `qc/ratings-raw/behavioral-eligibility.tsv`; methods/results are
+in `RAW_RATINGS_ANALYSIS.md`. No imaging-QC exclusions or FEAT changes were
+made. Earlier frozen ratings-qualified manifests require a policy refresh
+before use; they must not override this new behavioral membership table.
+
 ## Launch update — 2026-09-30
 
 Upstream `rf1-sra-linux2` `21d468ce` closes the 10668 repair after the

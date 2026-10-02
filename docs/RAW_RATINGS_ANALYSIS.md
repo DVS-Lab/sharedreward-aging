@@ -25,13 +25,29 @@ in rating level and range on their common original scale.
 
 ## Current analysis
 
+Primary eligibility decision, 2026-10-01: exclude the **whole participant**
+if Loss > Win for **any** partner (Computer, Stranger, or Friend). Equality
+is allowed; all-six-identical and missing/invalid ratings remain ineligible.
+This rule is primary until Cooper says otherwise, not a sensitivity analysis.
+The user chose it before the revised statistics were calculated. It supersedes
+the aggregate-sum implementation; this is not a claim that historical code
+already applied the within-partner rule.
+
 `code/analyze_raw_ratings.py` reads the current source-validated raw cell means
 from `logs/records/ratings-qc-subject-level.tsv`. It uses one row per participant
-in the current task-valid, ratings-qualified cohort: 347 people (313 RF1,
-34 ds003745), before Cooper's imaging-QC exclusions. A participant with two
-usable fMRI runs does not contribute their ratings twice. Existing ratings
-exclusions are unchanged (including strict loss > win, not equality). This
+in the current task-valid, ratings-qualified cohort: **318 people (285 RF1,
+33 ds003745)**, before Cooper's imaging-QC exclusions. The new rule removes
+29 additional people (28 RF1, one ds003745) from the previous 347. A participant
+with two usable fMRI runs does not contribute their ratings twice. This
 is an imaging-aligned behavioral sample, not every person with any ratings.
+
+`qc/ratings-raw/behavioral-eligibility.tsv` records decisions for all 393
+task-valid participants; `additional-ratings-exclusions.tsv` identifies the
+29 additional exclusions. The original Linux2 source audit and frozen imaging
+manifests were not overwritten. Both the behavioral loader and future cohort
+construction enforce the new rule from validated cell means, so stale ratings
+eligibility flags cannot restore participants. No FEAT models or shared
+task-valid imaging membership changed.
 
 The six-bar displays show means +/- between-person SEM for the combined
 sample and each dataset separately. The full -5 to +5 scale and zero baseline
@@ -64,7 +80,40 @@ never imputed; participant-level joined inputs/missingness remain under ignored
 `derivatives/behavioral/`, not added to Git. Aggregate outputs and source hashes
 are recorded under `qc/ratings-raw/`.
 
-## Full-demographics results, 2026-10-01
+## Primary within-partner-rule results, 2026-10-01
+
+All 318 retained participants have age and recorded sex. The pooled dataset-
+and sex-adjusted omnibus age test gives chi-square(6)=14.2843, p=0.026617.
+The overall mean slope is +0.07228 raw points/decade (pointwise 95% CI
+0.01363 to 0.13092), but does not survive the established four-term Holm
+correction (p=0.061275). Corrected interaction p-values are outcome 0.080187,
+partner 0.945756, and partner x outcome 0.403587. Thus the global six-response
+age association is detectable; none of the four decomposition tests crosses
+0.05 after correction. The pooled model remains primary regardless of the
+significance of separate-dataset sensitivity fits.
+
+Previously requested direct comparisons are exploratory, stored in
+`age-exploratory-contrasts.tsv`. The Friend Loss-minus-Win age slope is
++0.21679 points/decade (95% CI 0.05153 to 0.38205; raw p=0.010303;
+Holm across three partners p=0.030908): Friend loss ratings become less
+negative with age relative to Friend win ratings. The direct Friend-minus-
+Stranger age slopes are -0.06438 for wins and +0.08679 for losses; their
+Holm p-values are 0.531114 and 0.520168. Neither their mean nor their
+Win-minus-Loss differential is significant (four-comparison Holm p=0.783343
+and 0.378090). These follow-ups do not establish a general partner-by-age
+interaction, and were not promoted to primary tests based on their results.
+
+Selection uses the same ratings being analyzed and can influence their age
+associations. This user-selected primary cohort is not yet Cooper's final
+imaging-QC cohort. Raw cell means, the linear model, confidence intervals,
+and previously used correction families are otherwise unchanged.
+
+## Superseded aggregate-rule results (n=347), 2026-10-01
+
+The following is retained as historical provenance, not the current primary
+analysis. Its twelve result/figure files were moved intact to
+`qc/ratings-raw/archive-aggregate-rule-n347/`; historical run records still
+describe their original paths. Current top-level results use 318 participants.
 
 The canonical RF1 BIDS participant table was copied from Linux2 and its SHA256
 matched the verified September 27 export:
@@ -116,7 +165,9 @@ companion plot of each participant's mean across six ratings. Both explicitly
 precede Cooper's imaging-QC exclusions. Points are unadjusted raw ratings with
 horizontal-only display jitter (+/-0.35 years, fixed seed); actual ages are
 used for fitting. No IDs are embedded in the figures. No new exclusions,
-separate-dataset trend lines, or new hypothesis tests are introduced.
+separate-dataset trend lines, or new hypothesis tests are introduced by the
+plotting script. It uses the same primary within-partner eligibility as the
+statistics script.
 
 The fitted lines use the same pooled additive age/dataset/recorded-sex design
 as the primary analysis, averaged over the observed dataset/sex proportions

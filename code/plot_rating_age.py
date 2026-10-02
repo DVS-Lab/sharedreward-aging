@@ -13,6 +13,7 @@ import pandas as pd
 from scipy import stats
 
 from analyze_raw_ratings import ROOT, KEYS, CELLS, LABELS, age_design, age_fit, demographics, load_ratings
+from audit_ratings_qc import RATINGS_POLICY
 
 
 def age_predictions(data, ages):
@@ -76,7 +77,7 @@ def plot(data, output):
              ha="center", fontsize=11, color="#525B63")
     caption = ("Points: individual raw ratings (horizontal jitter ±0.35 years for visibility).\n"
                "Lines: pooled linear trends adjusted for dataset and recorded sex; bands: pointwise 95% confidence intervals.\n"
-               "Predictions average over the sample's dataset/sex mix at every age. No within-person standardization.")
+               "Primary within-partner ratings rule; predictions average over the sample's dataset/sex mix. No z-scoring.")
     fig.text(.5, .045, caption, ha="center", va="center", fontsize=10, linespacing=1.6)
     for extension in ("png", "svg"):
         fig.savefig(output / f"raw-ratings-by-age-six-panels.{extension}", dpi=170)
@@ -130,15 +131,16 @@ def main():
     args.output_dir.mkdir(parents=True, exist_ok=True)
     plot(data, args.output_dir)
     sources = [args.ratings,args.cohort,args.rf1_participants,args.ds_participants,
-               Path(__file__),ROOT/"code/analyze_raw_ratings.py"]
+               Path(__file__),ROOT/"code/analyze_raw_ratings.py",ROOT/"code/audit_ratings_qc.py"]
     metadata = dict(n=len(data), status="preliminary_before_imaging_QC", pooled=True,
+        ratings_policy=RATINGS_POLICY,
         age_range=[float(data.age.min()),float(data.age.max())],
         prediction="Age varied across observed range; dataset/sex covariates fixed at sample means, equivalent to empirical marginal standardization for this additive linear model.",
         uncertainty="HC3 pointwise 95% t confidence intervals for adjusted mean, not prediction intervals or simultaneous bands.",
         points="Unadjusted raw ratings, no participant IDs; horizontal display jitter only, seed 20261001, +/-0.35 years.",
         sources=[dict(path=str(f.resolve()),sha256=hashlib.sha256(f.read_bytes()).hexdigest()) for f in sources])
     (args.output_dir/"age-plots-provenance.json").write_text(json.dumps(metadata,indent=2)+"\n")
-    print(f"Created two pooled age figures (PNG/SVG): n={len(data)}, complete demographics, no new exclusions.")
+    print(f"Created two pooled age figures (PNG/SVG): n={len(data)}, complete demographics; {RATINGS_POLICY}.")
     print(f"Output directory: {args.output_dir.resolve()}")
 
 

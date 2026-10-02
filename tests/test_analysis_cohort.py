@@ -1,5 +1,6 @@
 import csv
 import importlib.util
+import sys
 import tempfile
 import unittest
 from argparse import Namespace
@@ -7,6 +8,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "code"))
 SPEC = importlib.util.spec_from_file_location(
     "build_analysis_cohort", ROOT / "code/build_analysis_cohort.py"
 )
@@ -119,13 +121,18 @@ class CohortTest(unittest.TestCase):
             )
             write_tsv(
                 ratings,
-                ("dataset", "subject", "exclude_subject", "exclusion_reason"),
+                ("dataset", "subject", "exclude_subject", "exclusion_reason") + tuple(
+                    f"partner_{p}_trait_{t}_mean" for p in (1,2,3) for t in (0,1)),
                 [
                     {
                         "dataset": "rf1",
                         "subject": subject,
                         "exclude_subject": "true" if subject == "10606" else "false",
                         "exclusion_reason": "missing_ratings_file" if subject == "10606" else "",
+                        **{f"partner_{p}_trait_{t}_mean": (
+                            (1 if t == 0 else 2) if subject == "11201" and p == 3
+                            else (3 if t == 0 else -3))
+                           for p in (1,2,3) for t in (0,1)},
                     }
                     for subject in sorted({row[1] for row in ids})
                 ],
@@ -166,6 +173,9 @@ class CohortTest(unittest.TestCase):
                 {"11202"},
             )
             self.assertNotIn("10606", {row["subject"] for row in read_tsv(paths["l1_ratings"])})
+            # Previously aggregate-eligible: only Friend loss exceeds win.
+            # Still task-valid, but not ratings-qualified under the new rule.
+            self.assertNotIn("11201", {row["subject"] for row in read_tsv(paths["l1_ratings"])})
             l2 = {row["subject"]: row for row in read_tsv(paths["l2_task"])}
             self.assertNotIn("11969", l2)
             self.assertEqual(l2["12020"]["runs"], "2")

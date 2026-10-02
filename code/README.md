@@ -315,7 +315,7 @@ The resulting run-level imaging and event tables remain separate evidence. A lat
 
 ## Ratings QC
 
-Ratings exclusions are subject-level and apply to both runs. The modern audit preserves the historical rules while removing the unsafe row-position heuristic: exclude for missing/empty ratings, identical ratings across all conditions, or aggregate loss ratings strictly greater than aggregate win ratings. Equality is allowed. Every selected source must contain all six partner (`1`, `2`, `3`) × trait/outcome (`0` win, `1` loss) cells. Raw cell means/counts and the source SHA-256 are retained.
+Ratings exclusions are subject-level and apply to both runs. The primary rule selected by the user on 2026-10-01, pending Cooper, excludes missing/empty ratings, identical ratings across all six cells, or **Loss > Win for any partner**. Equality is allowed. This supersedes the aggregate-sum implementation. Every selected source must contain all six partner (`1`, `2`, `3`) × trait/outcome (`0` win, `1` loss) cells. Incomplete/invalid sources fail validation. Raw cell means/counts and the source SHA-256 are retained. `analyze_raw_ratings.py`, `plot_rating_age.py`, and future cohort building enforce this same rule; historical audits and frozen manifests are not automatically overwritten. Current behavioral eligibility and results are in `qc/ratings-raw/` (318 participants before Cooper's imaging QC).
 
 First retrieve the ds003745 ratings files through DataLad. Then build the discovery manifest. Exactly one source is required per subject; multiple candidates are written to the missing/ambiguous report and must be resolved with an explicit `--ratings-map` rather than by dropping rows or choosing a filename implicitly.
 
@@ -348,7 +348,7 @@ nohup bash code/run_logged.sh \
 The outputs are:
 
 - `logs/runlists/L1-task-ready.tsv` and `L2-task-ready.tsv`: task-valid activation/PPI inputs;
-- `logs/runlists/L1-ratings-ready.tsv` and `L2-ratings-ready.tsv`: the task-valid subset passing the historical ratings gate;
+- `logs/runlists/L1-ratings-ready.tsv` and `L2-ratings-ready.tsv`: on regeneration, the task-valid subset passing the current primary within-partner ratings gate; older frozen versions retain their historical policy;
 - `logs/runlists/L1-model-review-hold.tsv`: otherwise usable runs with one or more zero-count reward/punish conditions;
 - `logs/records/analysis-run-dispositions.tsv` and `analysis-subject-dispositions.tsv`: the complete, mutually exclusive disposition audit.
 

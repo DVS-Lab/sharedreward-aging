@@ -17,6 +17,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from scipy import stats
+from audit_ratings_qc import RATINGS_POLICY, rating_exclusion_reasons
 
 ROOT = Path(__file__).resolve().parents[1]
 KEYS = ["dataset", "subject"]
@@ -33,14 +34,31 @@ def load_ratings(ratings_path, cohort_path):
     for frame in (ratings, cohort):
         if frame.duplicated(KEYS).any():
             raise ValueError("Expected one baseline row per dataset/subject; duplicate keys")
-    cohort = cohort.loc[cohort.ratings_l2_ready.str.lower() == "true", KEYS]
+    cohort = cohort.loc[cohort.task_l2_ready.str.lower() == "true", KEYS + ["ratings_l2_ready"]]
     data = cohort.merge(ratings, on=KEYS, how="left", validate="one_to_one", indicator=True)
-    if not data._merge.eq("both").all() or not data.exclude_subject.eq("false").all():
-        raise ValueError("Ratings eligibility differs from the current cohort")
+    if not data._merge.eq("both").all() or not data.exclude_subject.isin(["true", "false"]).all():
+        raise ValueError("Missing or invalid ratings audit for task-valid participant")
+    eligibility, retained = [], []
+    for index, row in data.iterrows():
+        reasons = row.exclusion_reason.split(";") if row.exclude_subject == "true" else []
+        if not reasons:
+            means = {(p, t): float(row[f"partner_{p}_trait_{t}_mean"])
+                     for p in (1, 2, 3) for t in (0, 1)}
+            reasons = rating_exclusion_reasons(means)
+        included = not reasons
+        if included:
+            retained.append(index)
+        eligibility.append(dict(dataset=row.dataset, subject=row.subject,
+            prior_ratings_l2_ready=row.ratings_l2_ready,
+            primary_included=str(included).lower(),
+            newly_excluded=str(row.ratings_l2_ready == "true" and not included).lower(),
+            exclusion_reason=";".join(reasons), ratings_policy=RATINGS_POLICY))
+    data = data.loc[retained].copy()
     data[CELLS] = data[CELLS].apply(pd.to_numeric, errors="raise")
     values = data[CELLS].to_numpy(float)
     if not len(data) or not np.isfinite(values).all() or (np.abs(values) > 5).any():
         raise ValueError("Missing/nonfinite/out-of-range raw ratings (expected -5 to +5)")
+    data.attrs["behavioral_eligibility"] = eligibility
     return data
 
 
@@ -144,12 +162,40 @@ def plot_ratings(data, output):
                bbox_to_anchor=(.5, .935))
     fig.suptitle("Shared Reward post-scan ratings", fontsize=17, y=.995)
     fig.text(.5, .025, "Mean ± between-participant SEM; one six-cell rating profile per participant.\n"
-             "Current task-valid, ratings-qualified cohort; before Cooper's imaging-QC exclusions.", ha="center", fontsize=10)
+             "Primary within-partner ratings rule; before Cooper's imaging-QC exclusions.", ha="center", fontsize=10)
     fig.tight_layout(rect=(0, .10, 1, .86))
     for extension in ("png", "svg"):
         fig.savefig(output / f"raw-ratings-six-conditions.{extension}", dpi=180)
     plt.close(fig)
     pd.DataFrame(summaries).to_csv(output / "raw-ratings-means-sem.tsv", sep="\t", index=False)
+
+
+def exploratory_contrasts(data):
+    """Previously requested paired comparisons, not new primary hypotheses."""
+    slopes, covariance, df = age_fit(data)
+    families = {
+        "within_partner_loss_minus_win": {
+            "Computer loss-minus-win": [-1, 1, 0, 0, 0, 0],
+            "Stranger loss-minus-win": [0, 0, -1, 1, 0, 0],
+            "Friend loss-minus-win": [0, 0, 0, 0, -1, 1]},
+        "friend_minus_stranger": {
+            "Friend-minus-Stranger win": [0, 0, -1, 0, 1, 0],
+            "Friend-minus-Stranger loss": [0, 0, 0, -1, 0, 1],
+            "Friend-minus-Stranger mean": [0, 0, -.5, -.5, .5, .5],
+            "Friend-minus-Stranger win-minus-loss": [0, 0, -1, 1, 1, -1]}}
+    rows = []
+    for family, contrasts in families.items():
+        group = []
+        for name, weights in contrasts.items():
+            c = np.array(weights); b = float(c @ slopes)
+            se = float(np.sqrt(c @ covariance @ c)); width = stats.t.ppf(.975, df)*se
+            group.append(dict(family=family, contrast=name, status="exploratory_followup",
+                n=len(data), points_per_decade=b, se_hc3=se, df_t=df,
+                ci95_low=b-width, ci95_high=b+width, p=float(2*stats.t.sf(abs(b/se), df))))
+        for row, adjusted in zip(group, holm([r["p"] for r in group])):
+            row.update(p_holm_family=float(adjusted), family_size=len(group))
+        rows.extend(group)
+    return pd.DataFrame(rows)
 
 
 def main():
@@ -165,6 +211,10 @@ def main():
     args = p.parse_args()
     args.output_dir.mkdir(parents=True, exist_ok=True); args.private_dir.mkdir(parents=True, exist_ok=True)
     data = load_ratings(args.ratings, args.cohort)
+    eligibility = pd.DataFrame(data.attrs["behavioral_eligibility"])
+    eligibility.to_csv(args.output_dir / "behavioral-eligibility.tsv", sep="\t", index=False)
+    eligibility.loc[eligibility.newly_excluded.eq("true")].to_csv(
+        args.output_dir / "additional-ratings-exclusions.tsv", sep="\t", index=False)
     plot_ratings(data, args.output_dir)
     print(f"Raw six-cell plot: {len(data)} participants, no rating standardization.", flush=True)
     age = pd.concat([demographics(args.rf1_participants, "rf1"), demographics(args.ds_participants, "ds003745")])
@@ -184,20 +234,25 @@ def main():
         all_tests.extend(test); all_cells.append(cell)
     pd.DataFrame(all_tests).to_csv(args.output_dir / "age-tests.tsv", sep="\t", index=False)
     pd.concat(all_cells).to_csv(args.output_dir / "age-slopes.tsv", sep="\t", index=False)
+    followups = exploratory_contrasts(model)
+    followups.to_csv(args.output_dir / "age-exploratory-contrasts.tsv", sep="\t", index=False)
     evidence = dict(status="preliminary_partial_demographics" if not keep.all() else "exploratory_full_demographics",
+        ratings_policy=RATINGS_POLICY, policy_authority="User decision; primary until Cooper revises",
+        task_valid_subjects=len(eligibility), additional_exclusions=int(eligibility.newly_excluded.eq("true").sum()),
         ratings_n=len(data), age_model_n=len(model), missing_demographics=int((~keep).sum()),
         age_source_label=args.age_source_label,
         sample_by_dataset={d: dict(n=len(g), min_age=float(g.age.min()), max_age=float(g.age.max())) for d,g in model.groupby("dataset")},
         method="Six-outcome subject-level OLS; continuous age per decade; dataset and recorded-sex offsets separately per cell; cross-outcome HC3 covariance; joint Wald chi-square tests; cell slope t intervals; Holm within stated families.",
         limitations=["Cross-sectional age association is not causal aging.", "No final imaging QC exclusions.",
-                      "Ratings eligibility retains the existing identical/loss>win rules; response-based selection may affect associations.",
+                      "Primary ratings eligibility excludes the person if any partner loss > win; equality allowed; missing/incomplete and all-identical exclusions retained. Response-based selection may affect associations.",
                       "Bounded ratings/ceiling effects and linear age specification require sensitivity review before publication.",
                       "Main plot includes all ratings-qualified participants, not only those with local ages."],
         sources=[dict(path=str(f.resolve()),sha256=hashlib.sha256(f.read_bytes()).hexdigest()) for f in
-                 (args.ratings,args.cohort,args.rf1_participants,args.ds_participants,Path(__file__))])
+                 (args.ratings,args.cohort,args.rf1_participants,args.ds_participants,Path(__file__),ROOT/"code/audit_ratings_qc.py")])
     (args.output_dir / "provenance.json").write_text(json.dumps(evidence, indent=2)+"\n")
     print(json.dumps(evidence, indent=2))
     print(pd.DataFrame(all_tests).to_string(index=False))
+    print(followups.to_string(index=False))
 
 
 if __name__ == "__main__":
