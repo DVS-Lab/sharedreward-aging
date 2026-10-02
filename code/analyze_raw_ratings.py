@@ -61,9 +61,8 @@ def holm(p):
     return adjusted
 
 
-def age_fit(data, adjust_sex=True):
-    # All six outcomes have the same subject-level X, allowing an exact wide
-    # multivariate fit rather than treating the six responses as independent.
+def age_design(data, adjust_sex=True):
+    """Shared subject-level design for inference and marginal age plots."""
     columns = [np.ones(len(data)), (data.age.to_numpy(float) - data.age.mean()) / 10]
     if data.dataset.nunique() > 1:
         columns.append(data.dataset.eq("rf1").to_numpy(float))
@@ -71,9 +70,16 @@ def age_fit(data, adjust_sex=True):
         # Preserve recorded O (other); do not silently exclude or recode it.
         for level in sorted(data.sex.unique())[1:]:
             columns.append(data.sex.eq(level).to_numpy(float))
-    x = np.column_stack(columns); y = data[CELLS].to_numpy(float)
+    x = np.column_stack(columns)
     if len(data) <= x.shape[1] + 6 or np.linalg.matrix_rank(x) != x.shape[1]:
         raise ValueError("Insufficient participants or rank-deficient age design")
+    return x
+
+
+def age_fit(data, adjust_sex=True):
+    # All six outcomes have the same subject-level X, allowing an exact wide
+    # multivariate fit rather than treating the six responses as independent.
+    x = age_design(data, adjust_sex); y = data[CELLS].to_numpy(float)
     bread = np.linalg.inv(x.T @ x); beta = bread @ x.T @ y
     residual = y - x @ beta
     leverage = np.sum((x @ bread) * x, axis=1)

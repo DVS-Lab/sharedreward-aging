@@ -1,0 +1,38 @@
+{
+  "n": 347,
+  "status": "preliminary_before_imaging_QC",
+  "pooled": true,
+  "age_range": [
+    18.0,
+    89.0
+  ],
+  "prediction": "Age varied across observed range; dataset/sex covariates fixed at sample means, equivalent to empirical marginal standardization for this additive linear model.",
+  "uncertainty": "HC3 pointwise 95% t confidence intervals for adjusted mean, not prediction intervals or simultaneous bands.",
+  "points": "Unadjusted raw ratings, no participant IDs; horizontal display jitter only, seed 20261001, +/-0.35 years.",
+  "sources": [
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/logs/records/ratings-qc-subject-level.tsv",
+      "sha256": "dc13ec845d927cb66f41139d54b2bce37ee3efbbb3b62466034ee3bd7f6488ed"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/logs/records/analysis-subject-dispositions.tsv",
+      "sha256": "e30a4c33fc4adf18fc62bdeaada0360851086b66c9fd24d03f73e67c83ae7616"
+    },
+    {
+      "path": "/Users/tug87422/github/rf1-sra-linux2/bids/participants.tsv",
+      "sha256": "10004009f83ae3ffd9977941e6c222ac8f1aabfd70f41968470cfaa70ef35ca4"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/participants-srndna.tsv",
+      "sha256": "760730ad4d57f3d5d05ca489620ddead9442380405885b7c84792e413a3dac5e"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/plot_rating_age.py",
+      "sha256": "bd2e8a4d0712f6c5acd059a0fa4a97060b7c621aa1207ca785c7828ede9b55fb"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/analyze_raw_ratings.py",
+      "sha256": "788ef904bd2beab4078f096479e144257a2c13b2f1a256d25058d24fd4a819f3"
+    }
+  ]
+}

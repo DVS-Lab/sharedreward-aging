@@ -109,6 +109,33 @@ raw-rating summary table and rendered PNG are identical to the earlier plot.
 
 ## Demographic coverage history and rerun
 
+### Preliminary age figures
+
+`code/plot_rating_age.py` produces pooled six-condition age panels and a
+companion plot of each participant's mean across six ratings. Both explicitly
+precede Cooper's imaging-QC exclusions. Points are unadjusted raw ratings with
+horizontal-only display jitter (+/-0.35 years, fixed seed); actual ages are
+used for fitting. No IDs are embedded in the figures. No new exclusions,
+separate-dataset trend lines, or new hypothesis tests are introduced.
+
+The fitted lines use the same pooled additive age/dataset/recorded-sex design
+as the primary analysis, averaged over the observed dataset/sex proportions
+at each age. Shading is a pointwise 95% HC3 t confidence interval for the
+adjusted mean, not an interval covering individual observations. The mean
+panel is fit to participant-level means, retaining within-person covariance.
+All six condition panels share the original -5 to +5 rating scale; the overall
+mean panel has a separately labeled scale covering every observed mean.
+The linear trends span the observed age range and do not imply uniform age
+coverage or establish longitudinal change. Aggregate prediction curves and
+source hashes accompany the PNG/SVG files in `qc/ratings-raw/`.
+
+```bash
+bash code/run_logged.sh --label raw-ratings-age-plots --include-full-log -- \
+  "$IMAGING_PYTHON" code/plot_rating_age.py
+```
+
+### Historical demographic subset
+
 The local historical `participants-rf1.tsv` has only 245 rows and lacks 110
 of the 313 current RF1 ratings-qualified participants. It is not an adequate
 full-cohort demographic source. Explicitly labeled local preliminary results

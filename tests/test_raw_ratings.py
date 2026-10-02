@@ -7,6 +7,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "code"))
 from analyze_raw_ratings import CELLS, age_fit, holm, load_ratings
+from plot_rating_age import age_predictions
 
 
 class RawRatings(unittest.TestCase):
@@ -49,6 +50,27 @@ class RawRatings(unittest.TestCase):
         frame[CELLS] = rng.normal(size=(n,6))
         _, _, df = age_fit(frame)
         self.assertEqual(df, n-4)  # intercept, age, M and O; all 60 retained
+
+    def test_plot_predictions_match_marginal_fit_and_mean_covariance(self):
+        from scipy import stats
+        rng = np.random.default_rng(53); n = 120
+        frame = pd.DataFrame(dict(age=rng.uniform(20,80,n), sex=['F','M','O']*40,
+                                  dataset=['rf1','ds003745']*60))
+        frame[CELLS] = rng.normal(size=(n,6)) + (frame.age.to_numpy()/100)[:,None]
+        ages = np.array([30.,50.,70.])
+        pred,lo,hi,slopes = age_predictions(frame, ages)
+        x = np.column_stack([np.ones(n),(frame.age-frame.age.mean())/10,
+                             frame.dataset.eq('rf1'),frame.sex.eq('M'),frame.sex.eq('O')]).astype(float)
+        a = np.linalg.inv(x.T@x)@x.T
+        y = frame[CELLS].to_numpy().mean(axis=1)
+        b = a@y; residual = y-x@b; leverage = np.diag(x@a)
+        covariance = (a*(residual/(1-leverage)))@(a*(residual/(1-leverage))).T
+        g = x.mean(axis=0); g[1]=(50-frame.age.mean())/10
+        self.assertAlmostEqual(pred[1,6],float(g@b))
+        self.assertAlmostEqual(hi[1,6]-pred[1,6],float(stats.t.ppf(.975,n-5)*np.sqrt(g@covariance@g)))
+        np.testing.assert_allclose(pred[:,6],pred[:,:6].mean(axis=1))
+        np.testing.assert_allclose((pred[2]-pred[0])/4,slopes)
+        np.testing.assert_allclose(lo+hi,2*pred)
 
 
 if __name__ == '__main__':
