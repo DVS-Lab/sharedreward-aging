@@ -1,116 +1,114 @@
 # Cooper handoff: Shared Reward aging
 
-Behavioral update, 2026-10-01: the user selected **exclude the participant if
-Loss > Win for any partner**, equality allowed, as the primary rule until
-Cooper changes it. Raw (not z-scored) ratings, plots, and pooled age statistics
-have been regenerated for **318 participants (285 RF1 + 33 ds003745)** before
-imaging QC. Use `qc/ratings-raw/behavioral-eligibility.tsv`, not the older
-ratings-qualified counts below. See `RAW_RATINGS_ANALYSIS.md` for results and
-the archived 347-person aggregate-rule analysis. Imaging model membership and
-completed outputs were not changed. The September handoff text below is
-historical; consult `CURRENT_STATUS.md` for subsequent execution records.
-
-Prepared 2026-09-15. **Ready for exclusion review and L3 preparation; not yet
-cleared for full-cohort L3 execution.** The [current status](CURRENT_STATUS.md)
-is the evidence index and numerical snapshot. Do not interpret this document
-as a final cohort approval or an instruction to rerun preprocessing.
+Updated 2026-10-02. **Ready for Cooper's exclusion review and pooled L3 design.**
+Full pooled activation and provisional VS-PPI processing is complete and
+computationally verified. Final QC and hypothesis-specific cohort approval
+remain separate. No blanket preprocessing or L1 rerun is needed.
 
 ## Message to Cooper
 
-Please take ownership of the Shared Reward aging exclusion review and pooled
-L3 design specification. All current processing was done on Linux2. The
-authoritative pooled analysis is `/ZPOOL/data/projects/sharedreward-aging`:
-RF1 and ds003745 must both use its common full-trial L1/L2 contract. The separate
-RF1-only repository's 14-EV/34-contrast phase-resolved COPEs are not interchangeable
-group inputs.
+Please take ownership of imaging-QC exclusions, hypothesis-specific cohorts,
+and pooled L3 designs. All current imaging processing was performed on Linux2.
+The authoritative pooled analysis is `/ZPOOL/data/projects/sharedreward-aging`;
+both datasets use its common full-trial model. Do not substitute the separate
+RF1-only phase-resolved COPEs.
 
-The model and smoothing decisions are settled: 6-mm total classic-FWHM AFNI
-inputs, no additional FEAT smoothing, 28 activation contrasts and 28 PPI
-interaction contrasts plus physiology COPE29. Preserve numbering and use only
-non-neutral task COPEs **1–6, 10–19, 23–28**. Do not exclude a run simply because
-neutral trials are absent. VS PPI is provisional pending seed-provenance and
-hypothesis approval.
+The completed inventory is **744 runs / 393 subject-sessions**, with **1,488
+verified L1 models and 786 verified subject-level outputs** (activation and
+VS PPI). The [final audit](../logs/records/full-analysis-20260930-203949-441196/final/summary.json)
+passes its computational gate. This is the starting inventory, not a final
+approved post-QC group sample.
 
-The current technical/task inventory has **744 runs / 393 subject-sessions**,
-before final imaging or hypothesis-specific exclusions. Strictly >25% misses
-exclude a run; two known missing-event runs and RF1 11539's wrong-friend-photo
-runs are already excluded. Valid opposite runs remain eligible. Imaging IQR
-flags are review information, not automatic exclusions. Ratings are a separate
-hypothesis-level gate: the tracked 655/346 ratings-qualified count needs a refresh
-for recovered RF1 10803 and must not be treated as final.
+Settled decisions:
 
-The current v3 real-data pilot is complete for ds003745 sub-144 (both runs,
-activation and VS PPI, plus both fixed-effects outputs). The full-cohort audit
-verified those four L1s and two subject outputs; the other 1,484 expected L1s
-are absent. Full pooled execution and verification remain outstanding. Do not
-build a final L3 sample from the partial verified-candidate table.
+- AFNI target **6-mm total classic FWHM**, no additional FEAT smoothing.
+- Keep contrast numbering; current task inference uses non-neutral COPEs
+  **1–6, 10–19, 23–28**. Ignore neutral-containing COPEs 7–9 and 20–22 and
+  physiology COPE29. Absent neutral trials alone do not exclude a run.
+- Use **raw ratings**, not within-person z-scores. Exclude the participant if
+  **Loss > Win for any partner** (Computer, Stranger, or Friend); equality
+  is allowed. Missing/invalid and all-six-identical ratings remain ineligible.
+  This behavioral rule is primary until Cooper revises it.
+- The behavioral cohort is **318 participants (285 RF1 + 33 ds003745)** before
+  imaging QC. Ratings eligibility does not remove otherwise valid imaging
+  models from the shared technical inventory.
+- Motion, tSNR, and coverage flags require review; they were not automatically
+  applied as imaging exclusions. Strictly >25% missed trials and documented
+  task-invalid/source-missing runs are already removed from the task manifests.
+- VS PPI is computationally verified but provisional pending seed provenance
+  and hypothesis approval.
 
-The PI/source-data team is resolving these source-validity questions before
-final input handoff; these are **not additional QC exclusions for Cooper**:
+If a contributing run is excluded, rebuild the affected L2 using retained
+runs, or use explicit L1 passthrough for a one-run subject. Do not simply
+retain an old two-run fixed-effects COPE at L3.
 
-1. **10657:** exclude r1 / retain r2 is PI-endorsed conditional on confirming
-   that the displayed friend name was corrected for r2. The generated exclusion
-   table/manifests are not changed yet. Trust is outside this decision. Its
-   5.280-mm smoothing exception is unrelated.
-2. **10668:** two complete behavioral attempts use the run-1 design, but only
-   one Shared Reward BOLD run is in the current BIDS inventory. Raw DICOM
-   episode count/order and mapping must be established before clearing the run.
-3. **11923 r1/r2 versus 11913:** do source DICOM identifiers and visit timelines
-   establish correct participant identity for the Shared Reward images?
+## Working inputs and evidence
 
-Record reviewer/date, evidence, include/exclude/review decision and exact
-run/contrast scope; absence of a technical error is not source-validity proof.
-Do not publish identifying DICOM/session details. Review the existing tSNR,
-motion and coverage flags, and define the hypothesis-specific ratings and
-covariate requirements without silently changing the preprocessing cohort.
-Use the upstream
-[source-validity follow-up](https://github.com/DVS-Lab/rf1-sra-linux2/blob/main/docs/sharedreward-source-validity.md)
-for the scoped read-only audit. This pass does not make motion/tSNR/coverage
-exclusions; those remain Cooper's review.
+Paths are relative to this repository. Audit tables reference large model
+files on Linux2; GitHub does not contain those images.
 
-## Working inputs
+1. [Current status](CURRENT_STATUS.md): inventory and resolved source issues.
+2. [Completed run record](../logs/records/20260930-163946_sharedreward-full-20260930-163946.md):
+   preparation, paired activation/PPI execution, final audit, command exit 0.
+3. [Frozen L1 manifest](../logs/records/full-analysis-20260930-203949-441196/L1-task-ready.tsv)
+   and [subject manifest](../logs/records/full-analysis-20260930-203949-441196/L2-task-ready.tsv):
+   exact task-valid units used in that run.
+4. [Verified pre-QC candidates](../logs/records/full-analysis-20260930-203949-441196/final/verified-pre-QC-candidates.tsv):
+   dataset/subject/session, model type, contributing runs, contrast, and
+   COPE/VARCOPE/mask paths. **Its ratings flag predates the new behavioral rule.**
+   For ratings-qualified analyses, join the current
+   [behavioral eligibility table](../qc/ratings-raw/behavioral-eligibility.tsv)
+   by dataset + subject, keeping `primary_included=true`. Do not use the
+   older `ratings_eligible` flag or join by row order. Ratings are baseline;
+   adding another session requires explicit handling.
+5. [Run dispositions](../logs/records/analysis-run-dispositions.tsv),
+   [subject dispositions](../logs/records/analysis-subject-dispositions.tsv),
+   [input QC](../logs/records/analysis-qc-run-level.tsv), and
+   [event QC](../logs/records/fulltrial-event-qc-run-level.tsv):
+   task decisions, contributing runs, final-input tSNR, motion, coverage, and
+   misses. Their historical ratings flags also predate the new rule.
+6. [Exclusion policy](EXCLUSION_POLICY.md),
+   [behavioral methods/results](RAW_RATINGS_ANALYSIS.md),
+   [neutral decision](NEUTRAL_CONDITION_DECISION.md), and
+   [contrast coefficients](../templates/FULLTRIAL_CONTRAST_CANDIDATE.tsv).
 
-Paths below are relative to `sharedreward-aging` on Linux2; compact records are
-tracked in Git, imaging and runlists are not.
+Coverage excludes the historical inferior cerebellum/posterior brainstem
+exemption from its fixed denominator. Whole-brain tSNR uses the full
+TemplateFlow reference and final smoothed FEAT input. Neither is automatically
+an approved L3 statistical mask. Source-validated raw rating means/provenance
+remain in `logs/records/ratings-qc-subject-level.tsv`; its aggregate-rule flag
+is superseded by the behavioral eligibility table, not a request to recover
+ratings sources again.
 
-- `logs/records/analysis-run-dispositions.tsv` and
-  `analysis-subject-dispositions.tsv`: current task-valid versus excluded runs,
-  one/two-run status, ratings eligibility, and imaging review flags. These do
-  not yet encode the three upstream historical-review questions.
-- `logs/records/analysis-qc-run-level.tsv`: final-input tSNR, FD, coverage and
-  flags; `qc/` contains figures/mosaics. Use the correct coverage denominator,
-  not an assumed whole-brain or future statistical mask.
-- `logs/records/fulltrial-event-qc-run-level.tsv`: condition support and misses;
-  `ratings-qc-subject-level.tsv`: source-provenanced ratings (refresh required).
-- `templates/FULLTRIAL_CONTRAST_CANDIDATE.tsv` and
-  `docs/NEUTRAL_CONDITION_DECISION.md`: pooled contrast identities and coefficients.
-- `logs/records/group-readiness-20260915-103331/`: current incomplete computational
-  audit, including exact missing paths; not the eventual group input list.
-- Upstream `rf1-sra-linux2/docs/historical-tracker-reconciliation.md`: scientific
-  review evidence. `srndna-datapaper/code/README.md` and the sub-144 recovery
-  record establish the older-dataset event repair.
+## Resolved source issues
 
-## Owners and completion criteria
+RF1 10657 run 1 is excluded and run 2 retained; 10668's reviewed reconstruction
+is repaired and both corrected runs are included; the 11913/11923 source-series
+review found no indicated reassignment or exclusion. The
+[upstream decision record](https://github.com/DVS-Lab/rf1-sra-linux2/blob/main/docs/sharedreward-source-validity.md)
+preserves the evidence and limitations. Do not reopen these as pending lab
+questions or infer a Trust disposition. Older-dataset sub-144's corrected events
+are already used; see [recovery provenance](SUB144_EVENT_RECOVERY.md).
+RF1 10803's ratings recovery is incorporated, not a pending recovery task.
 
-Cooper owns proposed exclusions and L3 specifications; the PI/source-data team
-signs off scientific/identity decisions. Workflow execution remains a separate
-logged step, not an assumption that Cooper must regenerate preprocessing.
+## Cooper's remaining deliverables
 
-Before L3 execution, require:
+- A versioned run/subject decision ledger: reviewer/date, evidence, disposition,
+  and exact scope; retain reasons rather than silently dropping rows.
+- Hypothesis-specific cohorts and ordered inputs aligned to covariates by
+  dataset + subject + session, with explicit missing-data handling. Do not
+  automatically impose the behavioral cohort on every imaging hypothesis.
+- Rebuilt affected subject outputs after run exclusions, followed by validation
+  against final retained-run manifests and selected non-neutral contrasts.
+- L3 designs/contrasts, covariates, rank/estimability checks, approved analysis
+  mask, inference/multiplicity plan, and final PPI seed decision.
 
-- an approved, versioned run/subject decision ledger and hypothesis-specific
-  cohort, with unresolved decisions explicitly visible;
-- refreshed ratings provenance; complete primary L1 and subject-level audit
-  against that cohort, with no missing/unverified inputs silently omitted;
-- two-run fixed effects using only the retained runs, or explicit L1 passthrough
-  for one-run subjects; rebuild affected L2 if a formerly included run is removed;
-- exact ordered COPE/VARCOPE paths, dataset + subject + session keys, contributing
-  runs, model/seed/contrast identity and audit/code revisions;
-- aligned participant/covariate rows, explicit missing-data handling, design
-  rank/contrast estimability checks, approved statistical mask and inference/
-  multiplicity plan. Residual smoothness should be addressed if needed by the
-  chosen inference method; existing workers clean residual files, so their
-  availability must not be assumed.
+Do not assume residual images remain: existing workers clean residual files.
+Check availability before choosing an inference procedure requiring them.
+Computational provenance records image size/mtime, not full 4D hashes; the
+group audit compares EVs with harmonized events, not raw source behavior.
+Keep identifying DICOM/session details private.
 
-The earlier source gaps, wrong-friend-photo exclusion for 11539, sub-144 event
-recovery, neutral policy, and spatial preprocessing do not need reopening.
+The previous September handoff is preserved in
+[Git history](https://github.com/DVS-Lab/sharedreward-aging/blob/6e6fe40/docs/COOPER_HANDOFF.md).
+Its pilot-only and pending-source-review statements are superseded.
