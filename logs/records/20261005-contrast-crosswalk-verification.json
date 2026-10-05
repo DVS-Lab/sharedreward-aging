@@ -1,0 +1,665 @@
+{
+  "checked": "2026-10-05",
+  "passed": true,
+  "scope": "Documentation verification from tracked contracts, rendered pooled FSFs, and completed RF1 run provenance; no live Linux2 image audit",
+  "pooled_source_commit": "323902ca9dd11871d04219a2f89c40ddb3bfa5d3",
+  "rf1_model_commit": "562f0d15e0ac370a69ea36d40fdcb23f5e20f597",
+  "rf1_record_commit": "d5331d38c298023eeaf094e6e83ee0df65434ac2",
+  "outcome_ev_order": [
+    "C_pun",
+    "C_rew",
+    "F_pun",
+    "F_rew",
+    "S_pun",
+    "S_rew",
+    "C_neu",
+    "F_neu",
+    "S_neu"
+  ],
+  "common_contrasts": [
+    {
+      "contrast": "C_pun",
+      "fulltrial_activation_cope": 1,
+      "fulltrial_ppi_cope": 1,
+      "rf1_phase_activation_cope": 1,
+      "outcome_weights": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ignore_neutral": false
+    },
+    {
+      "contrast": "C_rew",
+      "fulltrial_activation_cope": 2,
+      "fulltrial_ppi_cope": 2,
+      "rf1_phase_activation_cope": 2,
+      "outcome_weights": [
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ignore_neutral": false
+    },
+    {
+      "contrast": "F_pun",
+      "fulltrial_activation_cope": 3,
+      "fulltrial_ppi_cope": 3,
+      "rf1_phase_activation_cope": 3,
+      "outcome_weights": [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ignore_neutral": false
+    },
+    {
+      "contrast": "F_rew",
+      "fulltrial_activation_cope": 4,
+      "fulltrial_ppi_cope": 4,
+      "rf1_phase_activation_cope": 4,
+      "outcome_weights": [
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ignore_neutral": false
+    },
+    {
+      "contrast": "S_pun",
+      "fulltrial_activation_cope": 5,
+      "fulltrial_ppi_cope": 5,
+      "rf1_phase_activation_cope": 5,
+      "outcome_weights": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ignore_neutral": false
+    },
+    {
+      "contrast": "S_rew",
+      "fulltrial_activation_cope": 6,
+      "fulltrial_ppi_cope": 6,
+      "rf1_phase_activation_cope": 6,
+      "outcome_weights": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ignore_neutral": false
+    },
+    {
+      "contrast": "C_neu",
+      "fulltrial_activation_cope": 7,
+      "fulltrial_ppi_cope": 7,
+      "rf1_phase_activation_cope": 7,
+      "outcome_weights": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "ignore_neutral": true
+    },
+    {
+      "contrast": "F_neu",
+      "fulltrial_activation_cope": 8,
+      "fulltrial_ppi_cope": 8,
+      "rf1_phase_activation_cope": 8,
+      "outcome_weights": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "ignore_neutral": true
+    },
+    {
+      "contrast": "S_neu",
+      "fulltrial_activation_cope": 9,
+      "fulltrial_ppi_cope": 9,
+      "rf1_phase_activation_cope": 9,
+      "outcome_weights": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "ignore_neutral": true
+    },
+    {
+      "contrast": "rew-pun",
+      "fulltrial_activation_cope": 10,
+      "fulltrial_ppi_cope": 10,
+      "rf1_phase_activation_cope": 10,
+      "outcome_weights": [
+        -1.0,
+        1.0,
+        -1.0,
+        1.0,
+        -1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ignore_neutral": false
+    },
+    {
+      "contrast": "F-S",
+      "fulltrial_activation_cope": 11,
+      "fulltrial_ppi_cope": 11,
+      "rf1_phase_activation_cope": 11,
+      "outcome_weights": [
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        -1.0,
+        -1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ignore_neutral": false
+    },
+    {
+      "contrast": "F-C",
+      "fulltrial_activation_cope": 12,
+      "fulltrial_ppi_cope": 12,
+      "rf1_phase_activation_cope": 12,
+      "outcome_weights": [
+        -1.0,
+        -1.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ignore_neutral": false
+    },
+    {
+      "contrast": "(F+S)-C",
+      "fulltrial_activation_cope": 13,
+      "fulltrial_ppi_cope": 13,
+      "rf1_phase_activation_cope": 13,
+      "outcome_weights": [
+        -2.0,
+        -2.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ignore_neutral": false
+    },
+    {
+      "contrast": "F-S (rew-pun)",
+      "fulltrial_activation_cope": 14,
+      "fulltrial_ppi_cope": 14,
+      "rf1_phase_activation_cope": 14,
+      "outcome_weights": [
+        0.0,
+        0.0,
+        -1.0,
+        1.0,
+        1.0,
+        -1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ignore_neutral": false
+    },
+    {
+      "contrast": "S-C (rew-pun)",
+      "fulltrial_activation_cope": 15,
+      "fulltrial_ppi_cope": 15,
+      "rf1_phase_activation_cope": 15,
+      "outcome_weights": [
+        1.0,
+        -1.0,
+        0.0,
+        0.0,
+        -1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ignore_neutral": false
+    },
+    {
+      "contrast": "F-C (rew-pun)",
+      "fulltrial_activation_cope": 16,
+      "fulltrial_ppi_cope": 16,
+      "rf1_phase_activation_cope": 16,
+      "outcome_weights": [
+        1.0,
+        -1.0,
+        -1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ignore_neutral": false
+    },
+    {
+      "contrast": "F-S (rew)",
+      "fulltrial_activation_cope": 17,
+      "fulltrial_ppi_cope": 17,
+      "rf1_phase_activation_cope": 17,
+      "outcome_weights": [
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        -1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ignore_neutral": false
+    },
+    {
+      "contrast": "S-C (rew)",
+      "fulltrial_activation_cope": 18,
+      "fulltrial_ppi_cope": 18,
+      "rf1_phase_activation_cope": 18,
+      "outcome_weights": [
+        0.0,
+        -1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ignore_neutral": false
+    },
+    {
+      "contrast": "F-C (rew)",
+      "fulltrial_activation_cope": 19,
+      "fulltrial_ppi_cope": 19,
+      "rf1_phase_activation_cope": 19,
+      "outcome_weights": [
+        0.0,
+        -1.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ignore_neutral": false
+    },
+    {
+      "contrast": "F-S (rew-neu)",
+      "fulltrial_activation_cope": 20,
+      "fulltrial_ppi_cope": 20,
+      "rf1_phase_activation_cope": 20,
+      "outcome_weights": [
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        -1.0,
+        0.0,
+        -1.0,
+        1.0
+      ],
+      "ignore_neutral": true
+    },
+    {
+      "contrast": "S-C (rew-neu)",
+      "fulltrial_activation_cope": 21,
+      "fulltrial_ppi_cope": 21,
+      "rf1_phase_activation_cope": 21,
+      "outcome_weights": [
+        0.0,
+        -1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        -1.0
+      ],
+      "ignore_neutral": true
+    },
+    {
+      "contrast": "F-C (rew-neu)",
+      "fulltrial_activation_cope": 22,
+      "fulltrial_ppi_cope": 22,
+      "rf1_phase_activation_cope": 22,
+      "outcome_weights": [
+        0.0,
+        -1.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        1.0,
+        -1.0,
+        0.0
+      ],
+      "ignore_neutral": true
+    },
+    {
+      "contrast": "F-(S+C) all",
+      "fulltrial_activation_cope": 23,
+      "fulltrial_ppi_cope": 23,
+      "rf1_phase_activation_cope": 23,
+      "outcome_weights": [
+        -1.0,
+        -1.0,
+        2.0,
+        2.0,
+        -1.0,
+        -1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ignore_neutral": false
+    },
+    {
+      "contrast": "F-(S+C) rew",
+      "fulltrial_activation_cope": 24,
+      "fulltrial_ppi_cope": 24,
+      "rf1_phase_activation_cope": 24,
+      "outcome_weights": [
+        0.0,
+        -1.0,
+        0.0,
+        2.0,
+        0.0,
+        -1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ignore_neutral": false
+    },
+    {
+      "contrast": "F-(S+C) pun",
+      "fulltrial_activation_cope": 25,
+      "fulltrial_ppi_cope": 25,
+      "rf1_phase_activation_cope": 25,
+      "outcome_weights": [
+        -1.0,
+        0.0,
+        2.0,
+        0.0,
+        -1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ignore_neutral": false
+    },
+    {
+      "contrast": "F-(S+C) rew-pun",
+      "fulltrial_activation_cope": 26,
+      "fulltrial_ppi_cope": 26,
+      "rf1_phase_activation_cope": 26,
+      "outcome_weights": [
+        1.0,
+        -1.0,
+        -2.0,
+        2.0,
+        1.0,
+        -1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ignore_neutral": false
+    },
+    {
+      "contrast": "F-S (pun)",
+      "fulltrial_activation_cope": 27,
+      "fulltrial_ppi_cope": 27,
+      "rf1_phase_activation_cope": 31,
+      "outcome_weights": [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        -1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ignore_neutral": false
+    },
+    {
+      "contrast": "F-C (pun)",
+      "fulltrial_activation_cope": 28,
+      "fulltrial_ppi_cope": 28,
+      "rf1_phase_activation_cope": 32,
+      "outcome_weights": [
+        -1.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ignore_neutral": false
+    }
+  ],
+  "rf1_only_decision_contrasts": [
+    {
+      "cope": 27,
+      "name": "F_dec",
+      "vector": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nonneutral": true
+    },
+    {
+      "cope": 28,
+      "name": "S_dec",
+      "vector": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "nonneutral": true
+    },
+    {
+      "cope": 29,
+      "name": "C_dec",
+      "vector": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "nonneutral": true
+    },
+    {
+      "cope": 30,
+      "name": "Face v Non-Face",
+      "vector": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        -2.0
+      ],
+      "nonneutral": true
+    },
+    {
+      "cope": 33,
+      "name": "F-S (dec)",
+      "vector": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        -1.0,
+        0.0
+      ],
+      "nonneutral": true
+    },
+    {
+      "cope": 34,
+      "name": "F-C (dec)",
+      "vector": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        -1.0
+      ],
+      "nonneutral": true
+    }
+  ],
+  "ppi_only": {
+    "cope": 29,
+    "name": "phys",
+    "ignore_for_task_inference": true
+  },
+  "warning": "Matching outcome coefficient patterns are not equivalent temporal estimands; PPI interactions are not activation effects.",
+  "source_sha256": {
+    "templates/FULLTRIAL_CONTRAST_CANDIDATE.tsv": "a02eb07bbba468cd9e2d8bb89574bf033c5de2f454f01db91182fd7f6111ed03",
+    "code/render_pooled_fsf.py": "3a035069ae60be13b1fc55cfa8322dfa5e7bf1a5f93cc93da06a99d714d9110a",
+    "rf1-sra-sharedreward/templates/L1_task-sharedreward_model-1_type-act.fsf": "cf23311dc4d7b33693f2f08bb0d7880f9ae747c2afdfd3cd08adad76999c1025",
+    "rf1-sra-sharedreward/logs/records/phase-resolved-20261005-144746/provenance.json": "a01cea25ad86c23fd20ae1860258a9f9e7c3234028946b9795781a8420944467"
+  }
+}

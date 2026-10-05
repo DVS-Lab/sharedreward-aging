@@ -1,9 +1,24 @@
 # Shared Reward: current state and handoff gate
 
-Updated 2026-10-02. **Pooled activation and provisional VS-PPI processing is
+Updated 2026-10-05. **Pooled full-trial activation and provisional VS-PPI processing is
 complete and computationally verified. Ready for Cooper's QC and L3 design,
 not automatic final cohort approval.** The [Cooper handoff](COOPER_HANDOFF.md)
 is the working checklist.
+
+## Additional completed family: RF1 phase-resolved activation
+
+The 2026-10-05 RF1 run completed and passed its final audit: **655 L1 runs,
+309 two-run fixed-effects L2 outputs, and 37 L1 passthroughs**, representing
+346 subject-sessions. These are the same reviewed RF1 run selection, not an
+additional 346 people. Outputs live in `rf1-sra-sharedreward/derivatives/fsl/`.
+No further RF1 activation L2 launch is needed before Cooper's QC review.
+
+The [current contrast crosswalk](CONTRAST_CROSSWALK.md) links the verified
+manifest and evidence, and documents **full-trial F-S (pun) 27 → RF1 31** and
+**F-C (pun) 28 → RF1 32**. Use separate model families at L3. The new pooled
+phase-resolved outcome family still needs validated SRNDNA phase-resolved
+outputs; canonical RF1 activation completion does not establish that or
+phase-resolved PPI. Existing full-trial activation/PPI remains intact.
 
 ## Completed Linux2 execution
 
@@ -114,7 +129,8 @@ redesign is required for this handoff.
 
 Pooled models live under Linux2
 `/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/{dataset}/sub-{subject}`.
-Do not substitute RF1-only 14-EV/34-contrast outputs. RF1's canonical phase
+Do not substitute RF1-only 14-EV/34-contrast outputs into this full-trial family.
+Use them only for a separately labeled phase-resolved analysis. RF1's canonical phase
 timing stays intact upstream; pooled RF1 epochs span decision onset through
 outcome offset. ds003745 uses its recoverable published full trial.
 

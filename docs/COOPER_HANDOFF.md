@@ -1,9 +1,14 @@
 # Cooper handoff: Shared Reward aging
 
-Updated 2026-10-02. **Ready for Cooper's exclusion review and pooled L3 design.**
+Updated 2026-10-05. **Ready for Cooper's exclusion review and pooled full-trial L3 design.**
 Full pooled activation and provisional VS-PPI processing is complete and
 computationally verified. Final QC and hypothesis-specific cohort approval
 remain separate. No blanket preprocessing or L1 rerun is needed.
+
+RF1-only phase-resolved activation has also completed L1/L2 and its technical
+audit. It is a separate analysis family, not a replacement for pooled full-trial
+inputs. Start with the [current contrast-number crosswalk](CONTRAST_CROSSWALK.md)
+before selecting phase-resolved inputs; it includes exact manifests and paths.
 
 ## Message to Cooper
 
@@ -12,6 +17,15 @@ and pooled L3 designs. All current imaging processing was performed on Linux2.
 The authoritative pooled analysis is `/ZPOOL/data/projects/sharedreward-aging`;
 both datasets use its common full-trial model. Do not substitute the separate
 RF1-only phase-resolved COPEs.
+
+For the separate RF1-only phase-resolved activation analysis, **655 runs / 346
+subject-sessions** are verified: **309 fixed-effects L2 + 37 L1 passthroughs**.
+L2 is already complete. Use the [crosswalk and RF1 input manifest](CONTRAST_CROSSWALK.md#canonical-rf1-phase-resolved-family--activation-only).
+In particular, **F-S (pun): full-trial 27 → RF1 phase-resolved 31** and
+**F-C (pun): 28 → 32**. RF1 phase-resolved 27/28 are decision effects.
+`F-C (rew-pun)` remains 16. Same names/numbers do not make the temporal
+estimands interchangeable. SRNDNA phase-resolved validation and the new pooled
+phase-resolved family remain outstanding; do not mix it with full-trial inputs.
 
 The completed inventory is **744 runs / 393 subject-sessions**, with **1,488
 verified L1 models and 786 verified subject-level outputs** (activation and
@@ -22,9 +36,11 @@ approved post-QC group sample.
 Settled decisions:
 
 - AFNI target **6-mm total classic FWHM**, no additional FEAT smoothing.
-- Keep contrast numbering; current task inference uses non-neutral COPEs
+- Keep contrast numbering; current **full-trial** task inference uses non-neutral COPEs
   **1–6, 10–19, 23–28**. Ignore neutral-containing COPEs 7–9 and 20–22 and
   physiology COPE29. Absent neutral trials alone do not exclude a run.
+- RF1 phase-resolved **outcome** inputs instead use **1–6, 10–19, 23–26, 31–32**.
+  Ignore neutral-containing contrasts there too; decision effects are separate.
 - Use **raw ratings**, not within-person z-scores. Exclude the participant if
   **Loss > Win for any partner** (Computer, Stranger, or Friend); equality
   is allowed. Missing/invalid and all-six-identical ratings remain ineligible.
@@ -71,6 +87,9 @@ files on Linux2; GitHub does not contain those images.
    [behavioral methods/results](RAW_RATINGS_ANALYSIS.md),
    [neutral decision](NEUTRAL_CONDITION_DECISION.md), and
    [contrast coefficients](../templates/FULLTRIAL_CONTRAST_CANDIDATE.tsv).
+7. [Current full-trial/phase-resolved crosswalk](CONTRAST_CROSSWALK.md):
+   all contrast mappings, number collisions, model-family boundaries,
+   exact RF1 L2/passthrough paths, and source/model commits.
 
 Coverage excludes the historical inferior cerebellum/posterior brainstem
 exemption from its fixed denominator. Whole-brain tSNR uses the full

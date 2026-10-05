@@ -2,15 +2,22 @@
 
 This repository owns the project-specific harmonization of RF1 Shared Reward with OpenNeuro `ds003745` version 2.1.1 plus the documented sub-144 event repair. It does not replace either source dataset and does not copy RF1 FEAT trees.
 
-## Current status — 2026-09-15
+## Current status — 2026-10-05
 
 Start with [CURRENT_STATUS.md](docs/CURRENT_STATUS.md) and the
 [Cooper handoff](docs/COOPER_HANDOFF.md). The task-ready inventory is 744 runs /
-393 subject-sessions, not a final QC-approved or completed-model cohort. Current
-pooled v3 activation/PPI L1 and fixed-effects verification is complete for
-ds003745 sub-144; the full-cohort audit records the remaining model execution as
-outstanding. All current processing discussed here is on Linux2. Ratings refresh
-and three RF1 source/stimulus review questions remain explicit pre-freeze work.
+393 subject-sessions before final imaging QC. Pooled full-trial activation and
+provisional VS-PPI L1/L2 processing and computational verification are complete.
+The separate canonical RF1 phase-resolved activation run is also complete:
+655 runs / 346 subject-sessions (309 fixed-effects L2, 37 L1 passthroughs).
+All processing was performed on Linux2. Source-review resolutions and the
+current behavioral policy are documented in the status/handoff, not pending
+blanket recovery work.
+
+Use the [current contrast crosswalk](docs/CONTRAST_CROSSWALK.md) for Cooper's
+input selection: full-trial punishment contrasts 27/28 map to RF1 phase-resolved
+31/32. Do not mix these model families. The proposed pooled phase-resolved
+analysis still requires validated SRNDNA phase-resolved outputs.
 
 There are two intentional models: `rf1-sra-sharedreward` fits RF1-only
 phase-resolved activation (14 EVs/34 contrasts); this repository fits **both
