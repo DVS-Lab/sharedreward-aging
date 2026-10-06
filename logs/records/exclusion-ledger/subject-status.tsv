@@ -6,13 +6,13 @@ ds003745	107		01,02	fixed_effects	01,02	fixed_effects	unchanged			true
 ds003745	108		01,02	fixed_effects	01,02	fixed_effects	unchanged			true	
 ds003745	109		01	l1_passthrough	01	l1_passthrough	unchanged			false	
 ds003745	110		01,02	fixed_effects	01,02	fixed_effects	unchanged			false	
-ds003745	111		02	l1_passthrough	02	l1_passthrough	unchanged		ds003745_sub-111_run-2_low_coverage_iqr_outlier	true	
+ds003745	111		02	l1_passthrough			subject_removed	ds003745_sub-111_run-2_low_coverage_iqr_outlier		true	
 ds003745	112		01,02	fixed_effects	01,02	fixed_effects	unchanged			true	
 ds003745	113		01,02	fixed_effects	01,02	fixed_effects	unchanged			true	
 ds003745	115		01,02	fixed_effects	01,02	fixed_effects	unchanged			true	
 ds003745	116		01,02	fixed_effects	01,02	fixed_effects	unchanged			true	
 ds003745	117		01,02	fixed_effects	01,02	fixed_effects	unchanged			true	
-ds003745	120		01,02	fixed_effects	01	l1_passthrough	runs_removed	ds003745_sub-120_run-2_high_mean_fd_iqr_outlier	ds003745_sub-120_run-1_low_coverage_iqr_outlier	true	fulltrial_act;fulltrial_ppi_seed-vs
+ds003745	120		01,02	fixed_effects			subject_removed	ds003745_sub-120_run-1_low_coverage_iqr_outlier;ds003745_sub-120_run-2_high_mean_fd_iqr_outlier		true	
 ds003745	121		01,02	fixed_effects	01,02	fixed_effects	unchanged			true	
 ds003745	122		01,02	fixed_effects	01,02	fixed_effects	unchanged			true	
 ds003745	124		01,02	fixed_effects	01,02	fixed_effects	unchanged			true	
@@ -164,7 +164,7 @@ rf1	10984	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			false
 rf1	10998	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11005	01	1,2	fixed_effects			subject_removed	rf1_sub-11005_ses-01_run-1_high_mean_fd_iqr_outlier;rf1_sub-11005_ses-01_run-2_high_mean_fd_iqr_outlier		true	
 rf1	11007	01	1,2	fixed_effects	1	l1_passthrough	runs_removed	rf1_sub-11007_ses-01_run-2_high_mean_fd_iqr_outlier		true	fulltrial_act;fulltrial_ppi_seed-vs;rf1_phase_resolved_act
-rf1	11012	01	1,2	fixed_effects	1,2	fixed_effects	unchanged		rf1_sub-11012_ses-01_run-1_prior_pipeline_removal_unrecorded	true	
+rf1	11012	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11016	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11021	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11030	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
@@ -239,7 +239,7 @@ rf1	11374	01	1,2	fixed_effects			subject_removed	rf1_sub-11374_ses-01_run-1_high
 rf1	11376	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11377	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11387	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
-rf1	11410	01	1,2	fixed_effects	1,2	fixed_effects	unchanged		rf1_sub-11410_ses-01_run-2_low_coverage_iqr_outlier	true	
+rf1	11410	01	1,2	fixed_effects	1	l1_passthrough	runs_removed	rf1_sub-11410_ses-01_run-2_low_coverage_iqr_outlier		true	fulltrial_act;fulltrial_ppi_seed-vs;rf1_phase_resolved_act
 rf1	11416	01	1	l1_passthrough			subject_removed	rf1_sub-11416_ses-01_run-1_high_mean_fd_iqr_outlier		true	
 rf1	11426	01	1	l1_passthrough	1	l1_passthrough	unchanged			true	
 rf1	11430	01	1	l1_passthrough	1	l1_passthrough	unchanged			false	
@@ -253,7 +253,7 @@ rf1	11450	01	1	l1_passthrough	1	l1_passthrough	unchanged			true
 rf1	11451	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11461	01	1,2	fixed_effects	2	l1_passthrough	runs_removed	rf1_sub-11461_ses-01_run-1_high_mean_fd_iqr_outlier		true	fulltrial_act;fulltrial_ppi_seed-vs;rf1_phase_resolved_act
 rf1	11462	01	1	l1_passthrough	1	l1_passthrough	unchanged			true	
-rf1	11472	01	1,2	fixed_effects	1,2	fixed_effects	unchanged		rf1_sub-11472_ses-01_run-1_low_coverage_iqr_outlier	false	
+rf1	11472	01	1,2	fixed_effects	2	l1_passthrough	runs_removed	rf1_sub-11472_ses-01_run-1_low_coverage_iqr_outlier		false	fulltrial_act;fulltrial_ppi_seed-vs;rf1_phase_resolved_act
 rf1	11492	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			false	
 rf1	11493	01	1,2	fixed_effects	2	l1_passthrough	runs_removed	rf1_sub-11493_ses-01_run-1_high_mean_fd_iqr_outlier		false	fulltrial_act;fulltrial_ppi_seed-vs;rf1_phase_resolved_act
 rf1	11498	01	1	l1_passthrough	1	l1_passthrough	unchanged			true	
@@ -262,7 +262,7 @@ rf1	11518	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true
 rf1	11523	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11526	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11527	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
-rf1	11529	01	1,2	fixed_effects	1,2	fixed_effects	unchanged		rf1_sub-11529_ses-01_run-2_low_coverage_iqr_outlier	true	
+rf1	11529	01	1,2	fixed_effects	1	l1_passthrough	runs_removed	rf1_sub-11529_ses-01_run-2_low_coverage_iqr_outlier		true	fulltrial_act;fulltrial_ppi_seed-vs;rf1_phase_resolved_act
 rf1	11530	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11532	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11533	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
@@ -277,7 +277,7 @@ rf1	11559	01	1,2	fixed_effects	1	l1_passthrough	runs_removed	rf1_sub-11559_ses-0
 rf1	11560	01	1,2	fixed_effects			subject_removed	rf1_sub-11560_ses-01_run-1_high_mean_fd_iqr_outlier;rf1_sub-11560_ses-01_run-2_high_mean_fd_iqr_outlier		true	
 rf1	11563	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11570	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
-rf1	11572	01	1,2	fixed_effects	1,2	fixed_effects	unchanged		rf1_sub-11572_ses-01_run-1_low_coverage_iqr_outlier;rf1_sub-11572_ses-01_run-2_low_coverage_iqr_outlier	true	
+rf1	11572	01	1,2	fixed_effects			subject_removed	rf1_sub-11572_ses-01_run-1_low_coverage_iqr_outlier;rf1_sub-11572_ses-01_run-2_low_coverage_iqr_outlier		true	
 rf1	11579	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11586	01	1	l1_passthrough	1	l1_passthrough	unchanged			true	
 rf1	11587	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			false	
@@ -309,7 +309,7 @@ rf1	11705	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true
 rf1	11709	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11710	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11714	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
-rf1	11719	01	1	l1_passthrough	1	l1_passthrough	unchanged		rf1_sub-11719_ses-01_run-1_low_coverage_iqr_outlier	true	
+rf1	11719	01	1	l1_passthrough			subject_removed	rf1_sub-11719_ses-01_run-1_low_coverage_iqr_outlier		true	
 rf1	11720	01	1,2	fixed_effects			subject_removed	rf1_sub-11720_ses-01_run-1_high_mean_fd_iqr_outlier;rf1_sub-11720_ses-01_run-2_high_mean_fd_iqr_outlier		true	
 rf1	11722	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11723	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			false	
@@ -318,48 +318,48 @@ rf1	11744	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true
 rf1	11746	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11748	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11756	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
-rf1	11764	01	1,2	fixed_effects	1,2	fixed_effects	unchanged		rf1_sub-11764_ses-01_run-2_low_coverage_iqr_outlier	true	
+rf1	11764	01	1,2	fixed_effects	1	l1_passthrough	runs_removed	rf1_sub-11764_ses-01_run-2_low_coverage_iqr_outlier		true	fulltrial_act;fulltrial_ppi_seed-vs;rf1_phase_resolved_act
 rf1	11772	01	1	l1_passthrough	1	l1_passthrough	unchanged			true	
 rf1	11773	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11774	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11784	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11787	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11788	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
-rf1	11789	01	1,2	fixed_effects	1,2	fixed_effects	unchanged		rf1_sub-11789_ses-01_run-1_low_coverage_iqr_outlier;rf1_sub-11789_ses-01_run-2_low_coverage_iqr_outlier	true	
+rf1	11789	01	1,2	fixed_effects			subject_removed	rf1_sub-11789_ses-01_run-1_low_coverage_iqr_outlier;rf1_sub-11789_ses-01_run-2_low_coverage_iqr_outlier		true	
 rf1	11790	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11793	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11795	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11815	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			false	
-rf1	11822	01	1,2	fixed_effects	1,2	fixed_effects	unchanged		rf1_sub-11822_ses-01_run-2_low_coverage_iqr_outlier	true	
+rf1	11822	01	1,2	fixed_effects	1	l1_passthrough	runs_removed	rf1_sub-11822_ses-01_run-2_low_coverage_iqr_outlier		true	fulltrial_act;fulltrial_ppi_seed-vs;rf1_phase_resolved_act
 rf1	11823	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
-rf1	11824	01	1,2	fixed_effects	1,2	fixed_effects	unchanged		rf1_sub-11824_ses-01_run-1_low_coverage_iqr_outlier	true	
-rf1	11828	01	1,2	fixed_effects	1,2	fixed_effects	unchanged		rf1_sub-11828_ses-01_run-2_low_coverage_iqr_outlier	true	
-rf1	11829	01	2	l1_passthrough	2	l1_passthrough	unchanged		rf1_sub-11829_ses-01_run-2_low_coverage_iqr_outlier	true	
+rf1	11824	01	1,2	fixed_effects	2	l1_passthrough	runs_removed	rf1_sub-11824_ses-01_run-1_low_coverage_iqr_outlier		true	fulltrial_act;fulltrial_ppi_seed-vs;rf1_phase_resolved_act
+rf1	11828	01	1,2	fixed_effects	1	l1_passthrough	runs_removed	rf1_sub-11828_ses-01_run-2_low_coverage_iqr_outlier		true	fulltrial_act;fulltrial_ppi_seed-vs;rf1_phase_resolved_act
+rf1	11829	01	2	l1_passthrough			subject_removed	rf1_sub-11829_ses-01_run-2_low_coverage_iqr_outlier		true	
 rf1	11840	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11847	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
-rf1	11853	01	1,2	fixed_effects	1,2	fixed_effects	unchanged		rf1_sub-11853_ses-01_run-1_low_coverage_iqr_outlier;rf1_sub-11853_ses-01_run-2_low_coverage_iqr_outlier	true	
+rf1	11853	01	1,2	fixed_effects			subject_removed	rf1_sub-11853_ses-01_run-1_low_coverage_iqr_outlier;rf1_sub-11853_ses-01_run-2_low_coverage_iqr_outlier		true	
 rf1	11854	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
-rf1	11861	01	1,2	fixed_effects	1,2	fixed_effects	unchanged		rf1_sub-11861_ses-01_run-1_low_coverage_iqr_outlier	true	
-rf1	11866	01	1,2	fixed_effects	1,2	fixed_effects	unchanged		rf1_sub-11866_ses-01_run-1_low_coverage_iqr_outlier;rf1_sub-11866_ses-01_run-2_low_coverage_iqr_outlier	true	
-rf1	11867	01	1,2	fixed_effects	1,2	fixed_effects	unchanged		rf1_sub-11867_ses-01_run-2_low_coverage_iqr_outlier	true	
-rf1	11870	01	1,2	fixed_effects	1,2	fixed_effects	unchanged		rf1_sub-11870_ses-01_run-1_low_coverage_iqr_outlier;rf1_sub-11870_ses-01_run-2_low_coverage_iqr_outlier	true	
+rf1	11861	01	1,2	fixed_effects	2	l1_passthrough	runs_removed	rf1_sub-11861_ses-01_run-1_low_coverage_iqr_outlier		true	fulltrial_act;fulltrial_ppi_seed-vs;rf1_phase_resolved_act
+rf1	11866	01	1,2	fixed_effects			subject_removed	rf1_sub-11866_ses-01_run-1_low_coverage_iqr_outlier;rf1_sub-11866_ses-01_run-2_low_coverage_iqr_outlier		true	
+rf1	11867	01	1,2	fixed_effects	1	l1_passthrough	runs_removed	rf1_sub-11867_ses-01_run-2_low_coverage_iqr_outlier		true	fulltrial_act;fulltrial_ppi_seed-vs;rf1_phase_resolved_act
+rf1	11870	01	1,2	fixed_effects			subject_removed	rf1_sub-11870_ses-01_run-1_low_coverage_iqr_outlier;rf1_sub-11870_ses-01_run-2_low_coverage_iqr_outlier		true	
 rf1	11872	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			false	
 rf1	11876	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
-rf1	11877	01	1,2	fixed_effects	1,2	fixed_effects	unchanged		rf1_sub-11877_ses-01_run-2_low_coverage_iqr_outlier	true	
-rf1	11881	01	1,2	fixed_effects	1,2	fixed_effects	unchanged		rf1_sub-11881_ses-01_run-1_low_coverage_iqr_outlier;rf1_sub-11881_ses-01_run-2_low_coverage_iqr_outlier	false	
+rf1	11877	01	1,2	fixed_effects	1	l1_passthrough	runs_removed	rf1_sub-11877_ses-01_run-2_low_coverage_iqr_outlier		true	fulltrial_act;fulltrial_ppi_seed-vs;rf1_phase_resolved_act
+rf1	11881	01	1,2	fixed_effects			subject_removed	rf1_sub-11881_ses-01_run-1_low_coverage_iqr_outlier;rf1_sub-11881_ses-01_run-2_low_coverage_iqr_outlier		false	
 rf1	11885	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11891	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11897	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			false	
 rf1	11900	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
-rf1	11902	01	1	l1_passthrough	1	l1_passthrough	unchanged		rf1_sub-11902_ses-01_run-1_low_coverage_iqr_outlier	true	
+rf1	11902	01	1	l1_passthrough			subject_removed	rf1_sub-11902_ses-01_run-1_low_coverage_iqr_outlier		true	
 rf1	11909	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11913	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11914	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			false	
 rf1	11920	01	1	l1_passthrough	1	l1_passthrough	unchanged			true	
 rf1	11922	01	1,2	fixed_effects			subject_removed	rf1_sub-11922_ses-01_run-1_high_mean_fd_iqr_outlier;rf1_sub-11922_ses-01_run-2_high_mean_fd_iqr_outlier		true	
-rf1	11923	01	1,2	fixed_effects	1,2	fixed_effects	unchanged		rf1_sub-11923_ses-01_run-1_low_coverage_iqr_outlier	true	
+rf1	11923	01	1,2	fixed_effects	2	l1_passthrough	runs_removed	rf1_sub-11923_ses-01_run-1_low_coverage_iqr_outlier		true	fulltrial_act;fulltrial_ppi_seed-vs;rf1_phase_resolved_act
 rf1	11924	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
-rf1	11926	01	1,2	fixed_effects	1,2	fixed_effects	unchanged		rf1_sub-11926_ses-01_run-1_low_coverage_iqr_outlier	true	
+rf1	11926	01	1,2	fixed_effects	2	l1_passthrough	runs_removed	rf1_sub-11926_ses-01_run-1_low_coverage_iqr_outlier		true	fulltrial_act;fulltrial_ppi_seed-vs;rf1_phase_resolved_act
 rf1	11928	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11929	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11931	01	1,2	fixed_effects			subject_removed	rf1_sub-11931_ses-01_run-1_high_mean_fd_iqr_outlier;rf1_sub-11931_ses-01_run-2_high_mean_fd_iqr_outlier		true	
@@ -367,7 +367,7 @@ rf1	11935	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true
 rf1	11939	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11943	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11949	01	1,2	fixed_effects			subject_removed	rf1_sub-11949_ses-01_run-1_high_mean_fd_iqr_outlier;rf1_sub-11949_ses-01_run-2_high_mean_fd_iqr_outlier		true	
-rf1	11960	01	1,2	fixed_effects	1,2	fixed_effects	unchanged		rf1_sub-11960_ses-01_run-1_low_coverage_iqr_outlier;rf1_sub-11960_ses-01_run-2_low_coverage_iqr_outlier	true	
+rf1	11960	01	1,2	fixed_effects			subject_removed	rf1_sub-11960_ses-01_run-1_low_coverage_iqr_outlier;rf1_sub-11960_ses-01_run-2_low_coverage_iqr_outlier		true	
 rf1	11969	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11974	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	11976	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
@@ -377,7 +377,7 @@ rf1	12008	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true
 rf1	12011	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	12013	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	12018	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
-rf1	12020	01	1,2	fixed_effects	1,2	fixed_effects	unchanged		rf1_sub-12020_ses-01_run-2_low_coverage_iqr_outlier	true	
+rf1	12020	01	1,2	fixed_effects	1	l1_passthrough	runs_removed	rf1_sub-12020_ses-01_run-2_low_coverage_iqr_outlier		true	fulltrial_act;fulltrial_ppi_seed-vs;rf1_phase_resolved_act
 rf1	12021	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			false	
 rf1	12031	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	12032	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
@@ -389,6 +389,6 @@ rf1	12039	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true
 rf1	12047	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	12049	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	12051	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
-rf1	12054	01	1,2	fixed_effects	1,2	fixed_effects	unchanged		rf1_sub-12054_ses-01_run-1_low_coverage_iqr_outlier;rf1_sub-12054_ses-01_run-2_low_coverage_iqr_outlier	true	
+rf1	12054	01	1,2	fixed_effects			subject_removed	rf1_sub-12054_ses-01_run-1_low_coverage_iqr_outlier;rf1_sub-12054_ses-01_run-2_low_coverage_iqr_outlier		true	
 rf1	12055	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	
 rf1	12057	01	1,2	fixed_effects	1,2	fixed_effects	unchanged			true	

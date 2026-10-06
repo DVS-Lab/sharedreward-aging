@@ -49,9 +49,10 @@ Settled decisions:
   imaging QC. Ratings eligibility does not remove otherwise valid imaging
   models from the shared technical inventory.
 - Imaging QC decisions are recorded in the [exclusion ledger](EXCLUSION_LEDGER.md).
-  On 2026-10-05 the registered FD rule was applied as registered (47 runs;
-  [decision file](exclusion_decisions/2026-10-05_high-motion.tsv)). No tSNR
-  flags occur. Coverage flags and rf1 11012 run 1 remain pending review. Strictly >25% missed trials and documented
+  On 2026-10-05 the registered FD and coverage rules were applied as registered
+  (47 and 34 runs; decision files in `docs/exclusion_decisions/`); no tSNR flags
+  occur and rf1 11012 run 1 is retained. Final imaging sample: 663 runs / 358
+  subjects. Use `logs/records/exclusion-ledger/candidates.tsv` for L3 inputs. Strictly >25% missed trials and documented
   task-invalid/source-missing runs are already removed from the task manifests.
 - VS PPI is computationally verified but provisional pending seed provenance
   and hypothesis approval.

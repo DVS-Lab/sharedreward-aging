@@ -6,13 +6,11 @@ ds003745	107		2	01,02	fixed_effects	true
 ds003745	108		2	01,02	fixed_effects	true	
 ds003745	109		1	01	l1_passthrough	false	see docs/exclusion_ledger.tsv
 ds003745	110		2	01,02	fixed_effects	false	see docs/exclusion_ledger.tsv
-ds003745	111		1	02	l1_passthrough	true	
 ds003745	112		2	01,02	fixed_effects	true	
 ds003745	113		2	01,02	fixed_effects	true	
 ds003745	115		2	01,02	fixed_effects	true	
 ds003745	116		2	01,02	fixed_effects	true	
 ds003745	117		2	01,02	fixed_effects	true	
-ds003745	120		1	01	l1_passthrough	true	
 ds003745	121		2	01,02	fixed_effects	true	
 ds003745	122		2	01,02	fixed_effects	true	
 ds003745	124		2	01,02	fixed_effects	true	
@@ -225,7 +223,7 @@ rf1	11367	01	2	1,2	fixed_effects	true
 rf1	11376	01	2	1,2	fixed_effects	true	
 rf1	11377	01	2	1,2	fixed_effects	true	
 rf1	11387	01	2	1,2	fixed_effects	true	
-rf1	11410	01	2	1,2	fixed_effects	true	
+rf1	11410	01	1	1	l1_passthrough	true	
 rf1	11426	01	1	1	l1_passthrough	true	
 rf1	11430	01	1	1	l1_passthrough	false	see docs/exclusion_ledger.tsv
 rf1	11432	01	2	1,2	fixed_effects	true	
@@ -237,7 +235,7 @@ rf1	11450	01	1	1	l1_passthrough	true
 rf1	11451	01	2	1,2	fixed_effects	true	
 rf1	11461	01	1	2	l1_passthrough	true	
 rf1	11462	01	1	1	l1_passthrough	true	
-rf1	11472	01	2	1,2	fixed_effects	false	see docs/exclusion_ledger.tsv
+rf1	11472	01	1	2	l1_passthrough	false	see docs/exclusion_ledger.tsv
 rf1	11492	01	2	1,2	fixed_effects	false	see docs/exclusion_ledger.tsv
 rf1	11493	01	1	2	l1_passthrough	false	see docs/exclusion_ledger.tsv
 rf1	11498	01	1	1	l1_passthrough	true	
@@ -246,7 +244,7 @@ rf1	11518	01	2	1,2	fixed_effects	true
 rf1	11523	01	2	1,2	fixed_effects	true	
 rf1	11526	01	2	1,2	fixed_effects	true	
 rf1	11527	01	2	1,2	fixed_effects	true	
-rf1	11529	01	2	1,2	fixed_effects	true	
+rf1	11529	01	1	1	l1_passthrough	true	
 rf1	11530	01	2	1,2	fixed_effects	true	
 rf1	11532	01	2	1,2	fixed_effects	true	
 rf1	11533	01	2	1,2	fixed_effects	true	
@@ -260,7 +258,6 @@ rf1	11551	01	2	1,2	fixed_effects	true
 rf1	11559	01	1	1	l1_passthrough	true	
 rf1	11563	01	2	1,2	fixed_effects	true	
 rf1	11570	01	2	1,2	fixed_effects	true	
-rf1	11572	01	2	1,2	fixed_effects	true	
 rf1	11579	01	2	1,2	fixed_effects	true	
 rf1	11586	01	1	1	l1_passthrough	true	
 rf1	11587	01	2	1,2	fixed_effects	false	see docs/exclusion_ledger.tsv
@@ -291,7 +288,6 @@ rf1	11705	01	2	1,2	fixed_effects	true
 rf1	11709	01	2	1,2	fixed_effects	true	
 rf1	11710	01	2	1,2	fixed_effects	true	
 rf1	11714	01	2	1,2	fixed_effects	true	
-rf1	11719	01	1	1	l1_passthrough	true	
 rf1	11722	01	2	1,2	fixed_effects	true	
 rf1	11723	01	2	1,2	fixed_effects	false	see docs/exclusion_ledger.tsv
 rf1	11736	01	2	1,2	fixed_effects	true	
@@ -299,53 +295,45 @@ rf1	11744	01	2	1,2	fixed_effects	true
 rf1	11746	01	2	1,2	fixed_effects	true	
 rf1	11748	01	2	1,2	fixed_effects	true	
 rf1	11756	01	2	1,2	fixed_effects	true	
-rf1	11764	01	2	1,2	fixed_effects	true	
+rf1	11764	01	1	1	l1_passthrough	true	
 rf1	11772	01	1	1	l1_passthrough	true	
 rf1	11773	01	2	1,2	fixed_effects	true	
 rf1	11774	01	2	1,2	fixed_effects	true	
 rf1	11784	01	2	1,2	fixed_effects	true	
 rf1	11787	01	2	1,2	fixed_effects	true	
 rf1	11788	01	2	1,2	fixed_effects	true	
-rf1	11789	01	2	1,2	fixed_effects	true	
 rf1	11790	01	2	1,2	fixed_effects	true	
 rf1	11793	01	2	1,2	fixed_effects	true	
 rf1	11795	01	2	1,2	fixed_effects	true	
 rf1	11815	01	2	1,2	fixed_effects	false	see docs/exclusion_ledger.tsv
-rf1	11822	01	2	1,2	fixed_effects	true	
+rf1	11822	01	1	1	l1_passthrough	true	
 rf1	11823	01	2	1,2	fixed_effects	true	
-rf1	11824	01	2	1,2	fixed_effects	true	
-rf1	11828	01	2	1,2	fixed_effects	true	
-rf1	11829	01	1	2	l1_passthrough	true	
+rf1	11824	01	1	2	l1_passthrough	true	
+rf1	11828	01	1	1	l1_passthrough	true	
 rf1	11840	01	2	1,2	fixed_effects	true	
 rf1	11847	01	2	1,2	fixed_effects	true	
-rf1	11853	01	2	1,2	fixed_effects	true	
 rf1	11854	01	2	1,2	fixed_effects	true	
-rf1	11861	01	2	1,2	fixed_effects	true	
-rf1	11866	01	2	1,2	fixed_effects	true	
-rf1	11867	01	2	1,2	fixed_effects	true	
-rf1	11870	01	2	1,2	fixed_effects	true	
+rf1	11861	01	1	2	l1_passthrough	true	
+rf1	11867	01	1	1	l1_passthrough	true	
 rf1	11872	01	2	1,2	fixed_effects	false	see docs/exclusion_ledger.tsv
 rf1	11876	01	2	1,2	fixed_effects	true	
-rf1	11877	01	2	1,2	fixed_effects	true	
-rf1	11881	01	2	1,2	fixed_effects	false	see docs/exclusion_ledger.tsv
+rf1	11877	01	1	1	l1_passthrough	true	
 rf1	11885	01	2	1,2	fixed_effects	true	
 rf1	11891	01	2	1,2	fixed_effects	true	
 rf1	11897	01	2	1,2	fixed_effects	false	see docs/exclusion_ledger.tsv
 rf1	11900	01	2	1,2	fixed_effects	true	
-rf1	11902	01	1	1	l1_passthrough	true	
 rf1	11909	01	2	1,2	fixed_effects	true	
 rf1	11913	01	2	1,2	fixed_effects	true	
 rf1	11914	01	2	1,2	fixed_effects	false	see docs/exclusion_ledger.tsv
 rf1	11920	01	1	1	l1_passthrough	true	
-rf1	11923	01	2	1,2	fixed_effects	true	
+rf1	11923	01	1	2	l1_passthrough	true	
 rf1	11924	01	2	1,2	fixed_effects	true	
-rf1	11926	01	2	1,2	fixed_effects	true	
+rf1	11926	01	1	2	l1_passthrough	true	
 rf1	11928	01	2	1,2	fixed_effects	true	
 rf1	11929	01	2	1,2	fixed_effects	true	
 rf1	11935	01	2	1,2	fixed_effects	true	
 rf1	11939	01	2	1,2	fixed_effects	true	
 rf1	11943	01	2	1,2	fixed_effects	true	
-rf1	11960	01	2	1,2	fixed_effects	true	
 rf1	11969	01	2	1,2	fixed_effects	true	
 rf1	11974	01	2	1,2	fixed_effects	true	
 rf1	11976	01	2	1,2	fixed_effects	true	
@@ -355,7 +343,7 @@ rf1	12008	01	2	1,2	fixed_effects	true
 rf1	12011	01	2	1,2	fixed_effects	true	
 rf1	12013	01	2	1,2	fixed_effects	true	
 rf1	12018	01	2	1,2	fixed_effects	true	
-rf1	12020	01	2	1,2	fixed_effects	true	
+rf1	12020	01	1	1	l1_passthrough	true	
 rf1	12021	01	2	1,2	fixed_effects	false	see docs/exclusion_ledger.tsv
 rf1	12031	01	2	1,2	fixed_effects	true	
 rf1	12032	01	2	1,2	fixed_effects	true	
@@ -367,6 +355,5 @@ rf1	12039	01	2	1,2	fixed_effects	true
 rf1	12047	01	2	1,2	fixed_effects	true	
 rf1	12049	01	2	1,2	fixed_effects	true	
 rf1	12051	01	2	1,2	fixed_effects	true	
-rf1	12054	01	2	1,2	fixed_effects	true	
 rf1	12055	01	2	1,2	fixed_effects	true	
 rf1	12057	01	2	1,2	fixed_effects	true	

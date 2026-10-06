@@ -51,8 +51,9 @@ curated invalid runs = 744**. Source gaps are RF1 11450 r2 and 12037 r2;
 curated invalid runs are 11539 r1/r2 and 10657 r1. There are zero reward/punish
 model-review holds. Imaging QC decisions now live in the
 [exclusion ledger](EXCLUSION_LEDGER.md): on 2026-10-05 the registered FD rule
-was applied as registered (47 runs; 697 runs / 371 subjects remain). Coverage
-flags and rf1 11012 run 1 remain pending review.
+and the registered coverage rule were applied as registered (47 FD runs, 34
+coverage runs; rf1 11012 run 1 retained). The final imaging sample is 663 runs /
+358 subjects; no imaging rows remain pending.
 
 Do not repeat the full launcher merely to begin QC/L3: it can regenerate
 inputs and retire superseded models. Use scoped, logged reruns only when a

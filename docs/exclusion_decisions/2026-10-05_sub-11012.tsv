@@ -1,0 +1,2 @@
+ledger_id	disposition	reviewer	review_date	rationale
+rf1_sub-11012_ses-01_run-1_prior_pipeline_removal_unrecorded	retain	Cooper Sharp	2026-10-05	Feb 2026 removal attributed by reviewer to a preprocessing issue in an earlier pipeline version, likely resolved by reprocessing; current run passes all QC (coverage 99.80%, mean FD 0.150 mm, 1.9% missed trials) and its coverage mosaic (qc/coverage-mosaics/review-2026-10) is clean

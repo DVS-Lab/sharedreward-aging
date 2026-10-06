@@ -1,7 +1,10 @@
 pending_as	dataset	frozen_subjects	retained_runs	retained_subjects	fixed_effects	l1_passthrough	subjects_runs_removed	subjects_removed	retained_ratings_eligible
-retain	ds003745	47	84	45	39	6	2	2	32
-retain	rf1	346	613	326	287	39	9	20	270
-retain	all	393	697	371	326	45	11	22	302
+fail	ds003745	47	82	43	39	4	1	4	30
+fail	rf1	346	581	315	266	49	22	31	260
+fail	all	393	663	358	305	53	23	35	290
+retain	ds003745	47	82	43	39	4	1	4	30
+retain	rf1	346	581	315	266	49	22	31	260
+retain	all	393	663	358	305	53	23	35	290
 exclude	ds003745	47	82	43	39	4	1	4	30
-exclude	rf1	346	580	315	265	50	23	31	260
-exclude	all	393	662	358	304	54	24	35	290
+exclude	rf1	346	581	315	266	49	22	31	260
+exclude	all	393	663	358	305	53	23	35	290

@@ -9,7 +9,7 @@ This document operationalizes the recurring exclusion scheme in the lab's Shared
 - Low anatomical coverage: fixed-mask overlap below `Q1 - 1.5 × IQR`, calculated separately by dataset.
 - Poor task compliance: missed trials strictly greater than 25% of all trials in the run.
 
-The imaging metrics are review flags until the complete cohort distributions have been inspected. Fixed rules such as coverage below 90% or more than 20% of volumes with FD above 0.5 mm are not registered exclusion criteria and are disabled by default. FD-above-0.5-mm counts remain useful descriptive diagnostics. Review decisions are recorded in `docs/exclusion_ledger.tsv` (see `EXCLUSION_LEDGER.md`). As of 2026-10-05 the high-motion rule has been applied as registered; coverage decisions are pending.
+The imaging metrics are review flags until the complete cohort distributions have been inspected. Fixed rules such as coverage below 90% or more than 20% of volumes with FD above 0.5 mm are not registered exclusion criteria and are disabled by default. FD-above-0.5-mm counts remain useful descriptive diagnostics. Review decisions are recorded in `docs/exclusion_ledger.tsv` (see `EXCLUSION_LEDGER.md`). As of 2026-10-05 the high-motion and low-coverage rules have both been applied as registered to every flagged run.
 
 ## Metric implementation
 
