@@ -1,0 +1,32 @@
+dataset	subject	session	family	runs	strategy	action
+ds003745	120		fulltrial_act	01	l1_passthrough	repoint_to_verified_l1
+ds003745	120		fulltrial_ppi_seed-vs	01	l1_passthrough	repoint_to_verified_l1
+ds003745	131		fulltrial_act	01	l1_passthrough	repoint_to_verified_l1
+ds003745	131		fulltrial_ppi_seed-vs	01	l1_passthrough	repoint_to_verified_l1
+rf1	10806	01	fulltrial_act	1	l1_passthrough	repoint_to_verified_l1
+rf1	10806	01	fulltrial_ppi_seed-vs	1	l1_passthrough	repoint_to_verified_l1
+rf1	10806	01	rf1_phase_resolved_act	1	l1_passthrough	repoint_to_verified_l1
+rf1	10950	01	fulltrial_act	2	l1_passthrough	repoint_to_verified_l1
+rf1	10950	01	fulltrial_ppi_seed-vs	2	l1_passthrough	repoint_to_verified_l1
+rf1	10950	01	rf1_phase_resolved_act	2	l1_passthrough	repoint_to_verified_l1
+rf1	10953	01	fulltrial_act	1	l1_passthrough	repoint_to_verified_l1
+rf1	10953	01	fulltrial_ppi_seed-vs	1	l1_passthrough	repoint_to_verified_l1
+rf1	10953	01	rf1_phase_resolved_act	1	l1_passthrough	repoint_to_verified_l1
+rf1	10974	01	fulltrial_act	2	l1_passthrough	repoint_to_verified_l1
+rf1	10974	01	fulltrial_ppi_seed-vs	2	l1_passthrough	repoint_to_verified_l1
+rf1	10974	01	rf1_phase_resolved_act	2	l1_passthrough	repoint_to_verified_l1
+rf1	11007	01	fulltrial_act	1	l1_passthrough	repoint_to_verified_l1
+rf1	11007	01	fulltrial_ppi_seed-vs	1	l1_passthrough	repoint_to_verified_l1
+rf1	11007	01	rf1_phase_resolved_act	1	l1_passthrough	repoint_to_verified_l1
+rf1	11461	01	fulltrial_act	2	l1_passthrough	repoint_to_verified_l1
+rf1	11461	01	fulltrial_ppi_seed-vs	2	l1_passthrough	repoint_to_verified_l1
+rf1	11461	01	rf1_phase_resolved_act	2	l1_passthrough	repoint_to_verified_l1
+rf1	11493	01	fulltrial_act	2	l1_passthrough	repoint_to_verified_l1
+rf1	11493	01	fulltrial_ppi_seed-vs	2	l1_passthrough	repoint_to_verified_l1
+rf1	11493	01	rf1_phase_resolved_act	2	l1_passthrough	repoint_to_verified_l1
+rf1	11559	01	fulltrial_act	1	l1_passthrough	repoint_to_verified_l1
+rf1	11559	01	fulltrial_ppi_seed-vs	1	l1_passthrough	repoint_to_verified_l1
+rf1	11559	01	rf1_phase_resolved_act	1	l1_passthrough	repoint_to_verified_l1
+rf1	11597	01	fulltrial_act	2	l1_passthrough	repoint_to_verified_l1
+rf1	11597	01	fulltrial_ppi_seed-vs	2	l1_passthrough	repoint_to_verified_l1
+rf1	11597	01	rf1_phase_resolved_act	2	l1_passthrough	repoint_to_verified_l1

@@ -6,7 +6,7 @@ Stranger, Friend x Win, Loss. Ratings range from -5 (negative) to +5 (positive).
 Mapping is verified in the original `SR_postRatings.py`: partner 1/2/3 =
 computer/stranger/friend; trait 0/1 = win/loss.
 
-The old `code/exclusions/08_zscore_ratings.py` standardized each participant's
+The old `code/archive/exclusions-2026-02/08_zscore_ratings.py` standardized each participant's
 six cells jointly. This removes between-person mean differences and divides
 each person's condition differences by their own rating SD. That answers a
 relative-profile question rather than the present raw-rating age question.

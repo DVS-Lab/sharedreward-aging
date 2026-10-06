@@ -48,8 +48,10 @@ Settled decisions:
 - The behavioral cohort is **318 participants (285 RF1 + 33 ds003745)** before
   imaging QC. Ratings eligibility does not remove otherwise valid imaging
   models from the shared technical inventory.
-- Motion, tSNR, and coverage flags require review; they were not automatically
-  applied as imaging exclusions. Strictly >25% missed trials and documented
+- Imaging QC decisions are recorded in the [exclusion ledger](EXCLUSION_LEDGER.md).
+  On 2026-10-05 the registered FD rule was applied as registered (47 runs;
+  [decision file](exclusion_decisions/2026-10-05_high-motion.tsv)). No tSNR
+  flags occur. Coverage flags and rf1 11012 run 1 remain pending review. Strictly >25% missed trials and documented
   task-invalid/source-missing runs are already removed from the task manifests.
 - VS PPI is computationally verified but provisional pending seed provenance
   and hypothesis approval.

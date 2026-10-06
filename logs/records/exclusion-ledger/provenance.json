@@ -1,0 +1,13 @@
+{
+  "ledger": "docs/exclusion_ledger.tsv",
+  "ledger_sha256": "4d98de73c22ceb71b4e1b99ef7b607af0a34d4e93b492ea8ae5d97e17bc09d17",
+  "ledger_last_commit": "",
+  "ledger_uncommitted_changes": true,
+  "l1_manifest": "logs/records/full-analysis-20260930-203949-441196/L1-task-ready.tsv",
+  "l2_manifest": "logs/records/full-analysis-20260930-203949-441196/L2-task-ready.tsv",
+  "candidates": "logs/records/full-analysis-20260930-203949-441196/final/verified-pre-QC-candidates.tsv",
+  "l1_audit": "logs/records/full-analysis-20260930-203949-441196/final/l1-audit.tsv",
+  "analysis_qc": "logs/records/analysis-qc-run-level.tsv",
+  "pending_as": "retain",
+  "n_pending_imaging_rows": 35
+}

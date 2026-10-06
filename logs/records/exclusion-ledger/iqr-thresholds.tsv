@@ -1,0 +1,7 @@
+dataset	criterion	metric	population	n_runs	q1	q3	iqr_multiplier	direction	threshold	n_flagged
+ds003745	low_tsnr_iqr_outlier	median_tsnr	all_runs	100	102.852	155.201	1.5	below	24.3286	0
+ds003745	high_mean_fd_iqr_outlier	mean_fd_mm	all_runs	100	0.123531	0.271574	1.5	above	0.49364	9
+ds003745	low_coverage_iqr_outlier	coverage_pct	all_runs	100	96.6352	98.2496	1.5	below	94.2137	5
+rf1	low_tsnr_iqr_outlier	median_tsnr	all_runs	668	89.7978	127.781	1.5	below	32.8231	0
+rf1	high_mean_fd_iqr_outlier	mean_fd_mm	all_runs	668	0.109782	0.21223	1.5	above	0.3659	44
+rf1	low_coverage_iqr_outlier	coverage_pct	all_runs	668	99.5998	99.9004	1.5	below	99.1488	33
