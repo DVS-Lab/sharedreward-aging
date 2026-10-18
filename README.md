@@ -2,7 +2,15 @@
 
 This repository owns the project-specific harmonization of RF1 Shared Reward with OpenNeuro `ds003745` version 2.1.1 plus the documented sub-144 event repair. It does not replace either source dataset and does not copy RF1 FEAT trees.
 
-## Current status — 2026-10-05
+## Current status — 2026-10-18
+
+Cooper's recorded imaging exclusions retain **663 runs / 358 people**, including
+290 with eligible ratings. The ratings-only primary analysis remains N=318;
+see the [behavioral results inventory](docs/BEHAVIORAL_RESULTS_INVENTORY.md).
+A separate [preliminary pooled age analysis](docs/PRELIMINARY_AGE_ANALYSIS.md)
+is prepared for activation and VS-PPI, with whole-brain and ROI summaries.
+It must pass a fresh Linux2 audit first: the latest post-QC audit encountered
+permission errors, so preparation is not a claim that new age maps are complete.
 
 Start with [CURRENT_STATUS.md](docs/CURRENT_STATUS.md) and the
 [Cooper handoff](docs/COOPER_HANDOFF.md). The task-ready inventory is 744 runs /

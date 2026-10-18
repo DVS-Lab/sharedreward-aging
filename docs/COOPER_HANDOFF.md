@@ -10,6 +10,18 @@ audit. It is a separate analysis family, not a replacement for pooled full-trial
 inputs. Start with the [current contrast-number crosswalk](CONTRAST_CROSSWALK.md)
 before selecting phase-resolved inputs; it includes exact manifests and paths.
 
+### October 18 exploratory age analysis
+
+The user requested a basic pooled age-effects pass with both whole-brain and
+ROI summaries. See the [analysis specification and launcher](PRELIMINARY_AGE_ANALYSIS.md)
+and [current behavioral inventory](BEHAVIORAL_RESULTS_INVENTORY.md). It uses
+your 663-run/358-person imaging decisions, not the original 393-person cohort;
+behavior-only results remain N=318. This is an exploratory parallel analysis,
+not a replacement for your final L3 hypotheses. The latest post-QC audit is
+blocked by Linux2 file permissions, and the new launcher requires a fresh
+successful audit before fitting models. Do not infer completion from a plan
+record or the older pre-QC verification.
+
 ## Message to Cooper
 
 Please take ownership of imaging-QC exclusions, hypothesis-specific cohorts,

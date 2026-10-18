@@ -1,0 +1,120 @@
+{
+  "status": "plan_only",
+  "n": 358,
+  "retained_runs": 663,
+  "n_by_dataset": {
+    "ds003745": 43,
+    "rf1": 315
+  },
+  "age_by_dataset": {
+    "ds003745": {
+      "n": 43,
+      "min": 20.0,
+      "max": 76.0,
+      "mean": 43.51162790697674
+    },
+    "rf1": {
+      "n": 315,
+      "min": 20.0,
+      "max": 89.0,
+      "mean": 46.7015873015873
+    }
+  },
+  "design_columns": [
+    "intercept",
+    "age_decades_centered",
+    "dataset_rf1",
+    "sex_M",
+    "sex_O",
+    "retained_mean_fd_centered"
+  ],
+  "age_center": 46.31843575418994,
+  "fd_center": 0.16470950834987833,
+  "design_condition_number": 29.684150631198726,
+  "contrasts": {
+    "10": "rew-pun",
+    "11": "F-S",
+    "12": "F-C",
+    "14": "F-S (rew-pun)",
+    "16": "F-C (rew-pun)"
+  },
+  "kinds": [
+    "act",
+    "ppi_seed-vs"
+  ],
+  "permutations": 5000,
+  "seed": 20261018,
+  "jobs": 4,
+  "method": "Pooled common age slope; dataset, recorded sex, retained-volume-weighted mean FD; subject equal-weight OLS",
+  "roi_policy": "VS activation; vmPFC activation and PPI. Existing provisional masks; common coverage; HC3; Holm 15 tests.",
+  "wholebrain_policy": "Dataset-blocked randomise TFCE; positive and negative age; Bonferroni across 20 FWE-corrected maps",
+  "limitations": [
+    "Exploratory cross-sectional associations, not causal aging or a final preregistered L3 model.",
+    "Provisional seed/ROI provenance is not an independent confirmation claim.",
+    "Permutation inference assumes within-dataset exchangeability of nuisance-adjusted errors; dataset offsets/blocks do not guarantee homoscedasticity.",
+    "Equal subject weighting does not use varcope precision; differing retained-run reliability warrants sensitivity analysis.",
+    "Common-coverage masks restrict anatomical interpretation; ROI coverage fractions must be reviewed.",
+    "PPI is task-dependent coupling, not resting connectivity or directionality; full-trial is not phase-resolved."
+  ],
+  "git_commit": "228a0fbc7220aa11f0b2f174486d2f701f9f8038",
+  "versions": {
+    "python": "3.12.12 | packaged by conda-forge | (main, Oct 22 2025, 23:34:53) [Clang 19.1.7 ]",
+    "numpy": "2.1.3",
+    "scipy": "1.16.3",
+    "nibabel": "5.3.2"
+  },
+  "sources": [
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/logs/records/exclusion-ledger/provenance.json",
+      "sha256": "8dd97755958251f93c354b47fcb485b411667e3d787ee37b7178985d7cfd3c3c"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/logs/records/exclusion-ledger/retained-L1.tsv",
+      "sha256": "5be81a99863bcc0e276e2ea1db38729ed1b0e42d25d1618a635c2df291e03b35"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/logs/records/exclusion-ledger/retained-L2.tsv",
+      "sha256": "78ea3eea75f8ef5bcbada721e63555023fcdb40a911ab526a0be2b0c4bb42ca6"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/docs/exclusion_ledger.tsv",
+      "sha256": "f8ee78cdac3b14ff0c2ebef28bdb969145b76de081d1b0c4b7937238f77ba887"
+    },
+    {
+      "path": "/Users/tug87422/github/rf1-sra-linux2/bids/participants.tsv",
+      "sha256": "10004009f83ae3ffd9977941e6c222ac8f1aabfd70f41968470cfaa70ef35ca4"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/participants-srndna.tsv",
+      "sha256": "760730ad4d57f3d5d05ca489620ddead9442380405885b7c84792e413a3dac5e"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/logs/records/analysis-qc-run-level.tsv",
+      "sha256": "f536c6162f8c859fa9b0535cd0b096ec8aeb04dcaf7dbedd1777d7233fd8ad75"
+    },
+    {
+      "path": "/Users/tug87422/github/rf1-sra-sharedreward/resources/rf1_MNI152NLin6Asym_reference_grid.nii.gz",
+      "sha256": "52fd69e09e50ffe857b25a62afb9b8c4fc31f8b3cad9942a6a6874ff5b067bcf"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/run_preliminary_age.py",
+      "sha256": "33966b6635792ef0a879c3467196309e849135bda194fce4104697303a534c33"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/audit_group_readiness.py",
+      "sha256": "c29c77889229b3539ffd07b85dbb90c8574e3d67e454f826060403e7c12dc0ea"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/templates/FULLTRIAL_CONTRAST_CANDIDATE.tsv",
+      "sha256": "a02eb07bbba468cd9e2d8bb89574bf033c5de2f454f01db91182fd7f6111ed03"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/masks/seed-vs.nii.gz",
+      "sha256": "e601c05fe95d6e43968892d4a3b23f7b08963c9b2ca596e594f8efd31f14e091"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/masks/VMPFC-mask-neurovault-resliced-bin.nii.gz",
+      "sha256": "e802973856ec1c3e830bb8e8650ead0542c509eaaa4f8c4857acff477a7e760a"
+    }
+  ]
+}
