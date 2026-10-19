@@ -1,0 +1,47 @@
+Writing raw log: /ZPOOL/data/projects/sharedreward-aging/logs/runs/20261018-205220_age-effects-20261018-205220-roi.log
+Writing run record: /ZPOOL/data/projects/sharedreward-aging/logs/records/20261018-205220_age-effects-20261018-205220-roi.md
+RUN START: 20261018-205220
+PROJECT_ROOT: /ZPOOL/data/projects/sharedreward-aging
+GIT: main 0919098
+HOST: CLA19787.tu.temple.edu
+USER: tug87422
+PWD: /ZPOOL/data/projects/sharedreward-aging
+COMMAND: /ZPOOL/data/tools/anaconda/tug87422/envs/sharedreward-phase0/bin/python code/run_preliminary_age.py --stage roi --label age-effects-20261018-205220-roi --jobs 4 --permutations 5000 --mask-allowance resources/age-mask-allowance-20261018.json 
+
+Age analysis plan (roi): 358 people; 663 runs; 0 whole-brain models; 15 ROI tests
+Design: ['intercept', 'age_decades_centered', 'dataset_rf1', 'sex_M', 'sex_O', 'retained_mean_fd_centered']; private outputs: /ZPOOL/data/projects/sharedreward-aging/derivatives/preliminary-age/age-effects-20261018-205220-roi; reports: /ZPOOL/data/projects/sharedreward-aging/logs/records/preliminary-age/age-effects-20261018-205220-roi
+COMMAND: /ZPOOL/data/tools/anaconda/tug87422/envs/sharedreward-phase0/bin/python /ZPOOL/data/projects/sharedreward-aging/code/audit_group_readiness.py --l1-manifest /ZPOOL/data/projects/sharedreward-aging/logs/records/exclusion-ledger/retained-L1.tsv --subject-manifest /ZPOOL/data/projects/sharedreward-aging/logs/records/exclusion-ledger/retained-L2.tsv --fsl-root /ZPOOL/data/projects/sharedreward-aging/derivatives/fsl --reference /ZPOOL/data/projects/rf1-sra-sharedreward/resources/rf1_MNI152NLin6Asym_reference_grid.nii.gz --report-dir /ZPOOL/data/projects/sharedreward-aging/logs/records/preliminary-age/age-effects-20261018-205220-roi/readiness --mask-allowance resources/age-mask-allowance-20261018.json
+Read-only audit: 663 retained runs; 358 subject-sessions; both activation/PPI
+Primary COPE IDs: [1, 2, 3, 4, 5, 6, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 23, 24, 25, 26, 27, 28]; neutral-weighted contrasts and PPI phys excluded.
+L1 models checked: 100
+L1 models checked: 200
+L1 models checked: 300
+L1 models checked: 400
+L1 models checked: 500
+L1 models checked: 600
+L1 models checked: 700
+L1 models checked: 800
+L1 models checked: 900
+L1 models checked: 1000
+L1 models checked: 1100
+L1 models checked: 1200
+L1 models checked: 1300
+l1: {'verified': 1326}
+subject: {'verified': 716}
+Reports: /ZPOOL/data/projects/sharedreward-aging/logs/records/preliminary-age/age-effects-20261018-205220-roi/readiness
+PROVISIONAL: 20 model mask fingerprint exceptions; original stamps unchanged.
+CHECK PASSED: primary computational inputs verified under the recorded policy; final QC still separate.
+Prepared act_cope-10: common mask 81600 voxels
+Prepared act_cope-11: common mask 81600 voxels
+Prepared act_cope-12: common mask 81600 voxels
+Prepared act_cope-14: common mask 81600 voxels
+Prepared act_cope-16: common mask 81600 voxels
+Prepared ppi_seed-vs_cope-10: common mask 81600 voxels
+Prepared ppi_seed-vs_cope-11: common mask 81600 voxels
+Prepared ppi_seed-vs_cope-12: common mask 81600 voxels
+Prepared ppi_seed-vs_cope-14: common mask 81600 voxels
+Prepared ppi_seed-vs_cope-16: common mask 81600 voxels
+CHECK PASSED: ROI age analysis complete (15 tests); no whole-brain permutations requested.
+
+COMMAND EXIT: 0
+Run record saved: /ZPOOL/data/projects/sharedreward-aging/logs/records/20261018-205220_age-effects-20261018-205220-roi.md

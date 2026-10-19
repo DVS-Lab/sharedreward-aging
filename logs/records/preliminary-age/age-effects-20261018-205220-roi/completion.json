@@ -1,0 +1,8 @@
+{
+  "complete": true,
+  "stage": "roi",
+  "roi_tests": 15,
+  "finished_maps": 0,
+  "provisional": true,
+  "plan_sha256": "991e51bed1e2a485c85c5c0eef8dea9b50f4aac783071ef42845adb5491a2792"
+}

@@ -1,0 +1,6 @@
+{
+  "randomise": "/usr/local/fsl/share/fsl/bin/randomise",
+  "fsl_version": "6.0.7.18",
+  "threads_per_process": 1,
+  "FSLOUTPUTTYPE": "NIFTI_GZ"
+}
