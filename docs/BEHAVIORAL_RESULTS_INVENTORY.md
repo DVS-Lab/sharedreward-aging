@@ -161,6 +161,41 @@ Source: [loss age comparisons](../qc/ratings-raw/loss-age-comparisons/loss-age-t
 and [provenance](../qc/ratings-raw/loss-age-comparisons/provenance.json).
 Reproduce with `python code/analyze_loss_rating_age.py`.
 
+The [shared-axis loss plot](../qc/ratings-raw/loss-age-comparisons/loss-ratings-by-age-sex-adjusted.png)
+shows only the dataset/sex-adjusted model. Its pointwise HC3 95% confidence bands
+describe adjusted means at the sample's dataset/sex mix, not individual prediction
+intervals. [Predictions](../qc/ratings-raw/loss-age-comparisons/loss-age-predictions.tsv)
+retain raw rating units. The displayed y axis is zoomed to −4 through 0.
+
+### Rating normalization interpretation
+
+Raw ratings remain primary. Within-person centering would remove each person's
+overall rating level, changing the question from absolute evaluations to relative
+evaluations. Within-person z-scoring additionally divides by that person's SD
+across conditions. For example, the normalized friend-minus-stranger loss
+contrast equals the raw contrast divided by that person's SD. This changes the
+contrast and can alter its age association if the SD varies with age. The six
+ratings mix valence and partner preferences, so their SD cannot be assumed to
+measure response style alone. Scale boundaries can also affect that SD.
+
+The existing raw paired contrasts already cancel any additive response offset
+shared across conditions; they do not remove multiplicative scale-use differences.
+A common linear rescaling applied identically to everyone merely changes units
+and does not solve participant-specific response style. With these six ratings
+alone, genuine preference differences cannot be cleanly separated from scale-use
+differences without additional assumptions or calibration data. Normalized
+profiles could be a separately labeled relative-preference sensitivity, not a
+replacement for the current primary question or an automatic correction.
+
+[Lebreton, Bavard, Daunizeau and Palminteri (2019)](https://doi.org/10.1038/s41562-019-0681-8)
+specifically examine how within-person explanatory-variable scaling and neural
+coding assumptions affect between-person fMRI activation comparisons (Fig. 2,
+pp. 901–902). They do not establish a blanket prohibition on z-scoring or prove
+that raw behavioral ratings eliminate response-style differences. The relevant
+lesson here is to specify the quantity being compared and not treat normalization
+as neutral preprocessing. The current behavioral outcome regression is not the
+same analysis as their first-level fMRI regressor-scaling example.
+
 ## Other available behavioral material
 
 | Material | Current status | Location |

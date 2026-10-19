@@ -15,6 +15,7 @@
   "multiplicity": "Holm across all three pairwise partner loss-slope comparisons within each specification. Separately Holm across three individual loss slopes. Exploratory follow-up, not experiment-wide control.",
   "interpretation": "Positive loss slope means less negative ratings at older ages. Positive Friend-minus-X slope means a larger age slope for Friend than X.",
   "exclusions": "Unchanged primary behavior-only sample; no imaging QC or extra ceiling/floor exclusions.",
+  "figure": "Sex-adjusted model only. Dataset/sex held at empirical sample mix; age varied over observed range. Pointwise HC3 t confidence bands for means, not simultaneous or prediction intervals. Raw units, zoomed y axis; no raw scatter.",
   "limitations": [
     "Cross-sectional, not causal age effects.",
     "Loss floors and response-based eligibility remain interpretive limitations.",
@@ -39,7 +40,7 @@
     },
     {
       "path": "/Users/tug87422/github/sharedreward-aging/code/analyze_loss_rating_age.py",
-      "sha256": "bf947bc91997eab8d62b138fe09965df19d6f856f47b895338e850850ee715cc"
+      "sha256": "d98c205e860580b3a0a52905a14069cf09c316a709aa29cb78635590d15e05ef"
     },
     {
       "path": "/Users/tug87422/github/sharedreward-aging/code/analyze_raw_ratings.py",
@@ -48,6 +49,10 @@
     {
       "path": "/Users/tug87422/github/sharedreward-aging/code/audit_ratings_qc.py",
       "sha256": "49270e365449e66bf4e4375497a4fc574f4946e5481917be3219a235ad3461ef"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/plot_rating_age.py",
+      "sha256": "71580f76a2f4a5cc13c8e1613444933d8a2d82ba047f9a66f79a25ccde2c46ef"
     }
   ]
 }

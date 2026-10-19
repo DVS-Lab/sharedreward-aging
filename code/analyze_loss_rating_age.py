@@ -8,9 +8,13 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 from scipy import stats
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 
 from analyze_raw_ratings import ROOT, KEYS, CELLS, age_fit, demographics, load_ratings, holm
 from audit_ratings_qc import RATINGS_POLICY
+from plot_rating_age import age_predictions
 
 PARTNERS = ['Friend', 'Stranger', 'Computer']
 LOSS_WEIGHTS = np.eye(6)[[5, 3, 1]]
@@ -18,6 +22,40 @@ PAIR_NAMES = ['Friend minus Stranger', 'Friend minus Computer', 'Stranger minus 
 PAIR_WEIGHTS = np.array([LOSS_WEIGHTS[0]-LOSS_WEIGHTS[1],
                          LOSS_WEIGHTS[0]-LOSS_WEIGHTS[2],
                          LOSS_WEIGHTS[1]-LOSS_WEIGHTS[2]])
+
+
+def plot_loss_age(data, output):
+    """Sex/dataset-adjusted means using the same HC3 model as the slope tests."""
+    ages = np.linspace(data.age.min(), data.age.max(), 180)
+    means, low, high, slopes = age_predictions(data, ages)
+    fig, ax = plt.subplots(figsize=(9.4, 6.5))
+    fig.subplots_adjust(left=.12, right=.97, top=.79, bottom=.24)
+    colors = ['#326B9F', '#C07A32', '#338574']
+    rows = []
+    for name, col, color, style in zip(PARTNERS, [5,3,1], colors, ['-', '--', '-.']):
+        ax.fill_between(ages, low[:,col], high[:,col], color=color, alpha=.16, linewidth=0)
+        ax.plot(ages, means[:,col], color=color, lw=2.8, linestyle=style, label=name)
+        for i, age in enumerate(ages):
+            rows.append(dict(partner=name, age=float(age), n=len(data), adjusted_mean=means[i,col],
+                ci95_low=low[i,col], ci95_high=high[i,col], points_per_decade=slopes[col]))
+    ax.set(xlabel='Age (years)', ylabel='Adjusted loss rating',
+           xlim=(data.age.min(), data.age.max()), ylim=(-4,0))
+    ax.set_xticks([20,40,60,80]); ax.set_yticks([-4,-3,-2,-1,0])
+    ax.spines[['top','right']].set_visible(False)
+    ax.grid(axis='y', color='#E6EAED', lw=.8); ax.set_axisbelow(True)
+    ax.legend(frameon=False, loc='lower right', fontsize=11)
+    fig.suptitle('Loss ratings across age', fontsize=21, y=.96)
+    fig.text(.5,.875,f'Friend, stranger and computer | N = {len(data)} | Primary behavioral exclusions',
+             ha='center',fontsize=11,color='#505A63')
+    fig.text(.12,.13,'Lines adjust for dataset and recorded sex; shading shows pointwise HC3 95% confidence intervals.',fontsize=9.5)
+    fig.text(.12,.085,'Raw rating scale: −5 to +5; the axis is zoomed to the adjusted means. Higher means less negative.',fontsize=9.5)
+    fig.text(.12,.04,'No within-person normalization. Bands describe uncertainty in the mean, not individual variability.',fontsize=9.5)
+    for extension in ('png','svg'):
+        fig.savefig(output/f'loss-ratings-by-age-sex-adjusted.{extension}', dpi=180)
+    plt.close(fig)
+    predictions = pd.DataFrame(rows)
+    predictions.to_csv(output/'loss-age-predictions.tsv', sep='\t', index=False)
+    return predictions
 
 
 def loss_tests(data):
@@ -65,7 +103,9 @@ def main():
     results = loss_tests(data)
     args.output_dir.mkdir(parents=True, exist_ok=True)
     results.to_csv(args.output_dir/'loss-age-tests.tsv', sep='\t', index=False)
-    sources += [Path(__file__), ROOT/'code/analyze_raw_ratings.py', ROOT/'code/audit_ratings_qc.py']
+    plot_loss_age(data, args.output_dir)
+    sources += [Path(__file__), ROOT/'code/analyze_raw_ratings.py', ROOT/'code/audit_ratings_qc.py',
+                ROOT/'code/plot_rating_age.py']
     meta = dict(n=len(data), sample_by_dataset=data.groupby('dataset').size().to_dict(),
         recorded_sex_counts=data.sex.value_counts().to_dict(), ratings_policy=RATINGS_POLICY,
         design='Intercept + continuous centered age per decade + dataset dummy, with/without recorded-sex M/O offsets (F reference).',
@@ -73,6 +113,7 @@ def main():
         multiplicity='Holm across all three pairwise partner loss-slope comparisons within each specification. Separately Holm across three individual loss slopes. Exploratory follow-up, not experiment-wide control.',
         interpretation='Positive loss slope means less negative ratings at older ages. Positive Friend-minus-X slope means a larger age slope for Friend than X.',
         exclusions='Unchanged primary behavior-only sample; no imaging QC or extra ceiling/floor exclusions.',
+        figure='Sex-adjusted model only. Dataset/sex held at empirical sample mix; age varied over observed range. Pointwise HC3 t confidence bands for means, not simultaneous or prediction intervals. Raw units, zoomed y axis; no raw scatter.',
         limitations=['Cross-sectional, not causal age effects.', 'Loss floors and response-based eligibility remain interpretive limitations.',
                      'Failure to reject slope differences is not evidence of equivalence.'],
         sources=[dict(path=str(p.resolve()), sha256=hashlib.sha256(p.read_bytes()).hexdigest()) for p in sources])
