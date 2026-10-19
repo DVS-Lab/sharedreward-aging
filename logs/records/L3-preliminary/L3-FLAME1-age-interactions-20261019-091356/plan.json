@@ -1,0 +1,761 @@
+{
+  "stage": "all",
+  "engine": "FEAT FLAME1",
+  "specifications": [
+    {
+      "family": "age",
+      "kind": "act",
+      "cope": 10,
+      "n": 358,
+      "columns": [
+        "intercept",
+        "age_decades",
+        "tsnr",
+        "fdmean_mm",
+        "dataset_rf1"
+      ],
+      "names": [
+        "age_decades_positive",
+        "age_decades_negative"
+      ]
+    },
+    {
+      "family": "age",
+      "kind": "act",
+      "cope": 11,
+      "n": 358,
+      "columns": [
+        "intercept",
+        "age_decades",
+        "tsnr",
+        "fdmean_mm",
+        "dataset_rf1"
+      ],
+      "names": [
+        "age_decades_positive",
+        "age_decades_negative"
+      ]
+    },
+    {
+      "family": "age",
+      "kind": "act",
+      "cope": 12,
+      "n": 358,
+      "columns": [
+        "intercept",
+        "age_decades",
+        "tsnr",
+        "fdmean_mm",
+        "dataset_rf1"
+      ],
+      "names": [
+        "age_decades_positive",
+        "age_decades_negative"
+      ]
+    },
+    {
+      "family": "age",
+      "kind": "act",
+      "cope": 14,
+      "n": 358,
+      "columns": [
+        "intercept",
+        "age_decades",
+        "tsnr",
+        "fdmean_mm",
+        "dataset_rf1"
+      ],
+      "names": [
+        "age_decades_positive",
+        "age_decades_negative"
+      ]
+    },
+    {
+      "family": "age",
+      "kind": "act",
+      "cope": 16,
+      "n": 358,
+      "columns": [
+        "intercept",
+        "age_decades",
+        "tsnr",
+        "fdmean_mm",
+        "dataset_rf1"
+      ],
+      "names": [
+        "age_decades_positive",
+        "age_decades_negative"
+      ]
+    },
+    {
+      "family": "age",
+      "kind": "act",
+      "cope": 17,
+      "n": 358,
+      "columns": [
+        "intercept",
+        "age_decades",
+        "tsnr",
+        "fdmean_mm",
+        "dataset_rf1"
+      ],
+      "names": [
+        "age_decades_positive",
+        "age_decades_negative"
+      ]
+    },
+    {
+      "family": "age",
+      "kind": "ppi_seed-vs",
+      "cope": 10,
+      "n": 358,
+      "columns": [
+        "intercept",
+        "age_decades",
+        "tsnr",
+        "fdmean_mm",
+        "dataset_rf1"
+      ],
+      "names": [
+        "age_decades_positive",
+        "age_decades_negative"
+      ]
+    },
+    {
+      "family": "age",
+      "kind": "ppi_seed-vs",
+      "cope": 11,
+      "n": 358,
+      "columns": [
+        "intercept",
+        "age_decades",
+        "tsnr",
+        "fdmean_mm",
+        "dataset_rf1"
+      ],
+      "names": [
+        "age_decades_positive",
+        "age_decades_negative"
+      ]
+    },
+    {
+      "family": "age",
+      "kind": "ppi_seed-vs",
+      "cope": 12,
+      "n": 358,
+      "columns": [
+        "intercept",
+        "age_decades",
+        "tsnr",
+        "fdmean_mm",
+        "dataset_rf1"
+      ],
+      "names": [
+        "age_decades_positive",
+        "age_decades_negative"
+      ]
+    },
+    {
+      "family": "age",
+      "kind": "ppi_seed-vs",
+      "cope": 14,
+      "n": 358,
+      "columns": [
+        "intercept",
+        "age_decades",
+        "tsnr",
+        "fdmean_mm",
+        "dataset_rf1"
+      ],
+      "names": [
+        "age_decades_positive",
+        "age_decades_negative"
+      ]
+    },
+    {
+      "family": "age",
+      "kind": "ppi_seed-vs",
+      "cope": 16,
+      "n": 358,
+      "columns": [
+        "intercept",
+        "age_decades",
+        "tsnr",
+        "fdmean_mm",
+        "dataset_rf1"
+      ],
+      "names": [
+        "age_decades_positive",
+        "age_decades_negative"
+      ]
+    },
+    {
+      "family": "age",
+      "kind": "ppi_seed-vs",
+      "cope": 17,
+      "n": 358,
+      "columns": [
+        "intercept",
+        "age_decades",
+        "tsnr",
+        "fdmean_mm",
+        "dataset_rf1"
+      ],
+      "names": [
+        "age_decades_positive",
+        "age_decades_negative"
+      ]
+    },
+    {
+      "family": "age-ratings",
+      "kind": "act",
+      "cope": 17,
+      "n": 290,
+      "columns": [
+        "intercept",
+        "friend_win_minus_stranger_win_rating",
+        "age_decades",
+        "tsnr",
+        "fdmean_mm",
+        "dataset_rf1"
+      ],
+      "names": [
+        "friend_win_minus_stranger_win_rating_positive",
+        "friend_win_minus_stranger_win_rating_negative",
+        "age_decades_positive",
+        "age_decades_negative"
+      ]
+    },
+    {
+      "family": "age-ratings",
+      "kind": "ppi_seed-vs",
+      "cope": 17,
+      "n": 290,
+      "columns": [
+        "intercept",
+        "friend_win_minus_stranger_win_rating",
+        "age_decades",
+        "tsnr",
+        "fdmean_mm",
+        "dataset_rf1"
+      ],
+      "names": [
+        "friend_win_minus_stranger_win_rating_positive",
+        "friend_win_minus_stranger_win_rating_negative",
+        "age_decades_positive",
+        "age_decades_negative"
+      ]
+    },
+    {
+      "family": "age-ratings-interaction",
+      "kind": "act",
+      "cope": 17,
+      "n": 290,
+      "columns": [
+        "intercept",
+        "age_decades_x_rating",
+        "friend_win_minus_stranger_win_rating",
+        "age_decades",
+        "tsnr",
+        "fdmean_mm",
+        "dataset_rf1"
+      ],
+      "names": [
+        "age_decades_x_rating_positive",
+        "age_decades_x_rating_negative",
+        "friend_win_minus_stranger_win_rating_positive",
+        "friend_win_minus_stranger_win_rating_negative",
+        "age_decades_positive",
+        "age_decades_negative"
+      ]
+    },
+    {
+      "family": "age-ratings-interaction",
+      "kind": "ppi_seed-vs",
+      "cope": 17,
+      "n": 290,
+      "columns": [
+        "intercept",
+        "age_decades_x_rating",
+        "friend_win_minus_stranger_win_rating",
+        "age_decades",
+        "tsnr",
+        "fdmean_mm",
+        "dataset_rf1"
+      ],
+      "names": [
+        "age_decades_x_rating_positive",
+        "age_decades_x_rating_negative",
+        "friend_win_minus_stranger_win_rating_positive",
+        "friend_win_minus_stranger_win_rating_negative",
+        "age_decades_positive",
+        "age_decades_negative"
+      ]
+    }
+  ],
+  "qc_exclusion_verification": [
+    {
+      "dataset": "ds003745",
+      "metric": "median_tsnr",
+      "threshold": 24.3286,
+      "direction": "below",
+      "flagged_runs": 0,
+      "retained_flagged_runs": 0
+    },
+    {
+      "dataset": "ds003745",
+      "metric": "mean_fd_mm",
+      "threshold": 0.49364,
+      "direction": "above",
+      "flagged_runs": 9,
+      "retained_flagged_runs": 0
+    },
+    {
+      "dataset": "ds003745",
+      "metric": "coverage_pct",
+      "threshold": 94.2137,
+      "direction": "below",
+      "flagged_runs": 5,
+      "retained_flagged_runs": 0
+    },
+    {
+      "dataset": "rf1",
+      "metric": "median_tsnr",
+      "threshold": 32.8231,
+      "direction": "below",
+      "flagged_runs": 0,
+      "retained_flagged_runs": 0
+    },
+    {
+      "dataset": "rf1",
+      "metric": "mean_fd_mm",
+      "threshold": 0.3659,
+      "direction": "above",
+      "flagged_runs": 44,
+      "retained_flagged_runs": 0
+    },
+    {
+      "dataset": "rf1",
+      "metric": "coverage_pct",
+      "threshold": 99.1488,
+      "direction": "below",
+      "flagged_runs": 33,
+      "retained_flagged_runs": 0
+    }
+  ],
+  "tsnr": "mean of retained-run whole-brain median tSNR from smoothed FEAT-input QC",
+  "fd": "valid-FD-volume-weighted mean over retained runs",
+  "robust_outliers": false,
+  "support": "directory-mask intersection AND every subject VARCOPE > 0; same support for ROI and FEAT",
+  "interaction": "centered age/10 times centered raw friend-win minus stranger-win rating; both main effects retained",
+  "inference": "Z>3.1, cluster p<0.05 per signed map; no across-model multiplicity correction",
+  "sources": [
+    {
+      "path": "/ZPOOL/data/projects/sharedreward-aging/code/run_L3stats.py",
+      "sha256": "84ab96bc63ced20755bd25a39efdb5c91123051f13c7745d868671c5e40131da"
+    },
+    {
+      "path": "/ZPOOL/data/projects/sharedreward-aging/code/L3stats.sh",
+      "sha256": "1fb70f2129589ad6067dc83305d95ec0536cb6f59840488f2b94e01155050574"
+    },
+    {
+      "path": "/ZPOOL/data/projects/sharedreward-aging/templates/L3_template_pooled_age_flame1.fsf",
+      "sha256": "b06b1cc85fd21289941910788593526caefc9cf993554eff385d7c286f8a8284"
+    },
+    {
+      "path": "/ZPOOL/data/projects/sharedreward-aging/templates/L3_template_pooled_age-ratings_flame1.fsf",
+      "sha256": "6da4f4bcb92934d1f54bf362df126b8c8412411f0ce3c50512041481cd3e6ae9"
+    },
+    {
+      "path": "/ZPOOL/data/projects/sharedreward-aging/templates/L3_template_pooled_age-ratings-interaction_flame1.fsf",
+      "sha256": "079004fb85c69782ba434ae9416a1736035fb1bdcb39015c4de9af8e16f3879b"
+    },
+    {
+      "path": "/ZPOOL/data/projects/sharedreward-aging/logs/records/analysis-qc-run-level.tsv",
+      "sha256": "f536c6162f8c859fa9b0535cd0b096ec8aeb04dcaf7dbedd1777d7233fd8ad75"
+    },
+    {
+      "path": "/ZPOOL/data/projects/rf1-sra-linux2/bids/participants.tsv",
+      "sha256": "10004009f83ae3ffd9977941e6c222ac8f1aabfd70f41968470cfaa70ef35ca4"
+    },
+    {
+      "path": "/ZPOOL/data/projects/sharedreward-aging/participants-srndna.tsv",
+      "sha256": "760730ad4d57f3d5d05ca489620ddead9442380405885b7c84792e413a3dac5e"
+    },
+    {
+      "path": "/ZPOOL/data/projects/sharedreward-aging/logs/records/exclusion-ledger/retained-L1.tsv",
+      "sha256": "5be81a99863bcc0e276e2ea1db38729ed1b0e42d25d1618a635c2df291e03b35"
+    },
+    {
+      "path": "/ZPOOL/data/projects/sharedreward-aging/logs/records/exclusion-ledger/retained-L2.tsv",
+      "sha256": "78ea3eea75f8ef5bcbada721e63555023fcdb40a911ab526a0be2b0c4bb42ca6"
+    },
+    {
+      "path": "/ZPOOL/data/projects/sharedreward-aging/logs/records/exclusion-ledger/provenance.json",
+      "sha256": "8dd97755958251f93c354b47fcb485b411667e3d787ee37b7178985d7cfd3c3c"
+    },
+    {
+      "path": "/ZPOOL/data/projects/sharedreward-aging/logs/records/exclusion-ledger/iqr-thresholds.tsv",
+      "sha256": "e93562edc3b63abcf9a8bffc904add3a9e9222673f6f0281a46e2058a30ae106"
+    },
+    {
+      "path": "/ZPOOL/data/projects/sharedreward-aging/code/run_preliminary_age.py",
+      "sha256": "f46d9cb6fc0ef9d30114074b9ce2d7f011719934df266b98d4f4afb30e427cf0"
+    },
+    {
+      "path": "/ZPOOL/data/projects/sharedreward-aging/code/audit_ratings_qc.py",
+      "sha256": "49270e365449e66bf4e4375497a4fc574f4946e5481917be3219a235ad3461ef"
+    },
+    {
+      "path": "/ZPOOL/data/projects/sharedreward-aging/code/analyze_raw_ratings.py",
+      "sha256": "20d9e5b53e1da195114b71f5c5cd3b418b89ce4519da93449823dda2614879f7"
+    },
+    {
+      "path": "/ZPOOL/data/projects/sharedreward-aging/docs/exclusion_ledger.tsv",
+      "sha256": "f8ee78cdac3b14ff0c2ebef28bdb969145b76de081d1b0c4b7937238f77ba887"
+    },
+    {
+      "path": "/ZPOOL/data/projects/sharedreward-aging/code/audit_group_readiness.py",
+      "sha256": "a8f690db671cc070ed99b3b1ac83c04b498e14e3e5328818bee9aaf4b625f6f2"
+    },
+    {
+      "path": "/ZPOOL/data/projects/sharedreward-aging/masks/seed-vs.nii.gz",
+      "sha256": "e601c05fe95d6e43968892d4a3b23f7b08963c9b2ca596e594f8efd31f14e091"
+    },
+    {
+      "path": "/ZPOOL/data/projects/sharedreward-aging/masks/VMPFC-mask-neurovault-resliced-bin.nii.gz",
+      "sha256": "e802973856ec1c3e830bb8e8650ead0542c509eaaa4f8c4857acff477a7e760a"
+    },
+    {
+      "path": "/ZPOOL/data/projects/sharedreward-aging/logs/records/ratings-qc-subject-level.tsv",
+      "sha256": "dc13ec845d927cb66f41139d54b2bce37ee3efbbb3b62466034ee3bd7f6488ed"
+    },
+    {
+      "path": "resources/age-mask-allowance-20261018.json",
+      "sha256": "6f417e0c2cefa7dbcf610b2c831b35630fec492558ef59c7ef7c17ea1498a393"
+    }
+  ],
+  "provisional": true,
+  "mask_provenance_warnings": [
+    {
+      "model": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/rf1/sub-11083/ses-01/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat",
+      "type": "act",
+      "recorded": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11083/ses-01/func/sub-11083_ses-01_task-sharedreward_run-1_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3911,
+        "mtime_ns": 1784231393485518501
+      },
+      "current": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11083/ses-01/func/sub-11083_ses-01_task-sharedreward_run-1_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3882,
+        "mtime_ns": 1792209915915993310
+      },
+      "size_changed": true,
+      "current_modified_utc": "2026-10-17T04:05:15.915993+00:00"
+    },
+    {
+      "model": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/rf1/sub-11083/ses-01/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat",
+      "type": "ppi_seed-vs",
+      "recorded": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11083/ses-01/func/sub-11083_ses-01_task-sharedreward_run-1_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3911,
+        "mtime_ns": 1784231393485518501
+      },
+      "current": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11083/ses-01/func/sub-11083_ses-01_task-sharedreward_run-1_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3882,
+        "mtime_ns": 1792209915915993310
+      },
+      "size_changed": true,
+      "current_modified_utc": "2026-10-17T04:05:15.915993+00:00"
+    },
+    {
+      "model": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/rf1/sub-11083/ses-01/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat",
+      "type": "act",
+      "recorded": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11083/ses-01/func/sub-11083_ses-01_task-sharedreward_run-2_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3943,
+        "mtime_ns": 1784231394431533788
+      },
+      "current": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11083/ses-01/func/sub-11083_ses-01_task-sharedreward_run-2_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3870,
+        "mtime_ns": 1792209916925009039
+      },
+      "size_changed": true,
+      "current_modified_utc": "2026-10-17T04:05:16.925009+00:00"
+    },
+    {
+      "model": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/rf1/sub-11083/ses-01/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat",
+      "type": "ppi_seed-vs",
+      "recorded": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11083/ses-01/func/sub-11083_ses-01_task-sharedreward_run-2_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3943,
+        "mtime_ns": 1784231394431533788
+      },
+      "current": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11083/ses-01/func/sub-11083_ses-01_task-sharedreward_run-2_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3870,
+        "mtime_ns": 1792209916925009039
+      },
+      "size_changed": true,
+      "current_modified_utc": "2026-10-17T04:05:16.925009+00:00"
+    },
+    {
+      "model": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/rf1/sub-11084/ses-01/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat",
+      "type": "act",
+      "recorded": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11084/ses-01/func/sub-11084_ses-01_task-sharedreward_run-1_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3897,
+        "mtime_ns": 1784234803188260023
+      },
+      "current": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11084/ses-01/func/sub-11084_ses-01_task-sharedreward_run-1_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3917,
+        "mtime_ns": 1792210114126084917
+      },
+      "size_changed": true,
+      "current_modified_utc": "2026-10-17T04:08:34.126085+00:00"
+    },
+    {
+      "model": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/rf1/sub-11084/ses-01/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat",
+      "type": "ppi_seed-vs",
+      "recorded": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11084/ses-01/func/sub-11084_ses-01_task-sharedreward_run-1_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3897,
+        "mtime_ns": 1784234803188260023
+      },
+      "current": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11084/ses-01/func/sub-11084_ses-01_task-sharedreward_run-1_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3917,
+        "mtime_ns": 1792210114126084917
+      },
+      "size_changed": true,
+      "current_modified_utc": "2026-10-17T04:08:34.126085+00:00"
+    },
+    {
+      "model": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/rf1/sub-11084/ses-01/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat",
+      "type": "act",
+      "recorded": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11084/ses-01/func/sub-11084_ses-01_task-sharedreward_run-2_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3809,
+        "mtime_ns": 1784234804088273116
+      },
+      "current": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11084/ses-01/func/sub-11084_ses-01_task-sharedreward_run-2_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3861,
+        "mtime_ns": 1792210115156100991
+      },
+      "size_changed": true,
+      "current_modified_utc": "2026-10-17T04:08:35.156101+00:00"
+    },
+    {
+      "model": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/rf1/sub-11084/ses-01/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat",
+      "type": "ppi_seed-vs",
+      "recorded": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11084/ses-01/func/sub-11084_ses-01_task-sharedreward_run-2_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3809,
+        "mtime_ns": 1784234804088273116
+      },
+      "current": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11084/ses-01/func/sub-11084_ses-01_task-sharedreward_run-2_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3861,
+        "mtime_ns": 1792210115156100991
+      },
+      "size_changed": true,
+      "current_modified_utc": "2026-10-17T04:08:35.156101+00:00"
+    },
+    {
+      "model": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/rf1/sub-11110/ses-01/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat",
+      "type": "act",
+      "recorded": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11110/ses-01/func/sub-11110_ses-01_task-sharedreward_run-1_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3869,
+        "mtime_ns": 1784237644259262199
+      },
+      "current": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11110/ses-01/func/sub-11110_ses-01_task-sharedreward_run-1_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3818,
+        "mtime_ns": 1792213585578778166
+      },
+      "size_changed": true,
+      "current_modified_utc": "2026-10-17T05:06:25.578778+00:00"
+    },
+    {
+      "model": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/rf1/sub-11110/ses-01/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat",
+      "type": "ppi_seed-vs",
+      "recorded": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11110/ses-01/func/sub-11110_ses-01_task-sharedreward_run-1_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3869,
+        "mtime_ns": 1784237644259262199
+      },
+      "current": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11110/ses-01/func/sub-11110_ses-01_task-sharedreward_run-1_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3818,
+        "mtime_ns": 1792213585578778166
+      },
+      "size_changed": true,
+      "current_modified_utc": "2026-10-17T05:06:25.578778+00:00"
+    },
+    {
+      "model": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/rf1/sub-11110/ses-01/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat",
+      "type": "act",
+      "recorded": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11110/ses-01/func/sub-11110_ses-01_task-sharedreward_run-2_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3817,
+        "mtime_ns": 1784237645684283545
+      },
+      "current": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11110/ses-01/func/sub-11110_ses-01_task-sharedreward_run-2_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3896,
+        "mtime_ns": 1792213587556809930
+      },
+      "size_changed": true,
+      "current_modified_utc": "2026-10-17T05:06:27.556810+00:00"
+    },
+    {
+      "model": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/rf1/sub-11110/ses-01/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat",
+      "type": "ppi_seed-vs",
+      "recorded": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11110/ses-01/func/sub-11110_ses-01_task-sharedreward_run-2_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3817,
+        "mtime_ns": 1784237645684283545
+      },
+      "current": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11110/ses-01/func/sub-11110_ses-01_task-sharedreward_run-2_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3896,
+        "mtime_ns": 1792213587556809930
+      },
+      "size_changed": true,
+      "current_modified_utc": "2026-10-17T05:06:27.556810+00:00"
+    },
+    {
+      "model": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/rf1/sub-11120/ses-01/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat",
+      "type": "act",
+      "recorded": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11120/ses-01/func/sub-11120_ses-01_task-sharedreward_run-1_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3849,
+        "mtime_ns": 1784244554601289512
+      },
+      "current": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11120/ses-01/func/sub-11120_ses-01_task-sharedreward_run-1_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3971,
+        "mtime_ns": 1792214212001845417
+      },
+      "size_changed": true,
+      "current_modified_utc": "2026-10-17T05:16:52.001845+00:00"
+    },
+    {
+      "model": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/rf1/sub-11120/ses-01/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat",
+      "type": "ppi_seed-vs",
+      "recorded": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11120/ses-01/func/sub-11120_ses-01_task-sharedreward_run-1_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3849,
+        "mtime_ns": 1784244554601289512
+      },
+      "current": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11120/ses-01/func/sub-11120_ses-01_task-sharedreward_run-1_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3971,
+        "mtime_ns": 1792214212001845417
+      },
+      "size_changed": true,
+      "current_modified_utc": "2026-10-17T05:16:52.001845+00:00"
+    },
+    {
+      "model": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/rf1/sub-11120/ses-01/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat",
+      "type": "act",
+      "recorded": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11120/ses-01/func/sub-11120_ses-01_task-sharedreward_run-2_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3894,
+        "mtime_ns": 1784244555746307145
+      },
+      "current": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11120/ses-01/func/sub-11120_ses-01_task-sharedreward_run-2_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3930,
+        "mtime_ns": 1792214213081862783
+      },
+      "size_changed": true,
+      "current_modified_utc": "2026-10-17T05:16:53.081863+00:00"
+    },
+    {
+      "model": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/rf1/sub-11120/ses-01/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat",
+      "type": "ppi_seed-vs",
+      "recorded": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11120/ses-01/func/sub-11120_ses-01_task-sharedreward_run-2_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3894,
+        "mtime_ns": 1784244555746307145
+      },
+      "current": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11120/ses-01/func/sub-11120_ses-01_task-sharedreward_run-2_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3930,
+        "mtime_ns": 1792214213081862783
+      },
+      "size_changed": true,
+      "current_modified_utc": "2026-10-17T05:16:53.081863+00:00"
+    },
+    {
+      "model": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/rf1/sub-11193/ses-01/L1_task-sharedreward_model-fulltrial_type-act_run-1_sm-6.feat",
+      "type": "act",
+      "recorded": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11193/ses-01/func/sub-11193_ses-01_task-sharedreward_run-1_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3827,
+        "mtime_ns": 1784267710663508747
+      },
+      "current": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11193/ses-01/func/sub-11193_ses-01_task-sharedreward_run-1_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3813,
+        "mtime_ns": 1792217417985837702
+      },
+      "size_changed": true,
+      "current_modified_utc": "2026-10-17T06:10:17.985838+00:00"
+    },
+    {
+      "model": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/rf1/sub-11193/ses-01/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-1_sm-6.feat",
+      "type": "ppi_seed-vs",
+      "recorded": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11193/ses-01/func/sub-11193_ses-01_task-sharedreward_run-1_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3827,
+        "mtime_ns": 1784267710663508747
+      },
+      "current": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11193/ses-01/func/sub-11193_ses-01_task-sharedreward_run-1_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3813,
+        "mtime_ns": 1792217417985837702
+      },
+      "size_changed": true,
+      "current_modified_utc": "2026-10-17T06:10:17.985838+00:00"
+    },
+    {
+      "model": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/rf1/sub-11193/ses-01/L1_task-sharedreward_model-fulltrial_type-act_run-2_sm-6.feat",
+      "type": "act",
+      "recorded": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11193/ses-01/func/sub-11193_ses-01_task-sharedreward_run-2_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3952,
+        "mtime_ns": 1784267711613523243
+      },
+      "current": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11193/ses-01/func/sub-11193_ses-01_task-sharedreward_run-2_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3874,
+        "mtime_ns": 1792217418979853475
+      },
+      "size_changed": true,
+      "current_modified_utc": "2026-10-17T06:10:18.979853+00:00"
+    },
+    {
+      "model": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/rf1/sub-11193/ses-01/L1_task-sharedreward_model-fulltrial_type-ppi_seed-vs_run-2_sm-6.feat",
+      "type": "ppi_seed-vs",
+      "recorded": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11193/ses-01/func/sub-11193_ses-01_task-sharedreward_run-2_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3952,
+        "mtime_ns": 1784267711613523243
+      },
+      "current": {
+        "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11193/ses-01/func/sub-11193_ses-01_task-sharedreward_run-2_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+        "size": 3874,
+        "mtime_ns": 1792217418979853475
+      },
+      "size_changed": true,
+      "current_modified_utc": "2026-10-17T06:10:18.979853+00:00"
+    }
+  ]
+}

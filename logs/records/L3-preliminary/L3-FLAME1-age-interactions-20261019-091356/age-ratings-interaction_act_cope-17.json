@@ -1,0 +1,56 @@
+{
+  "family": "age-ratings-interaction",
+  "kind": "act",
+  "cope": 17,
+  "n": 290,
+  "columns": [
+    "intercept",
+    "age_decades_x_rating",
+    "friend_win_minus_stranger_win_rating",
+    "age_decades",
+    "tsnr",
+    "fdmean_mm",
+    "dataset_rf1"
+  ],
+  "names": [
+    "age_decades_x_rating_positive",
+    "age_decades_x_rating_negative",
+    "friend_win_minus_stranger_win_rating_positive",
+    "friend_win_minus_stranger_win_rating_negative",
+    "age_decades_positive",
+    "age_decades_negative"
+  ],
+  "output": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-FLAME1-age-interactions-20261019-091356/age-ratings-interaction_act_cope-17/L3.gfeat",
+  "results": [
+    {
+      "contrast": 1,
+      "surviving_voxels": 0,
+      "max_abs_z": 4.08009672164917
+    },
+    {
+      "contrast": 2,
+      "surviving_voxels": 0,
+      "max_abs_z": 4.08009672164917
+    },
+    {
+      "contrast": 3,
+      "surviving_voxels": 0,
+      "max_abs_z": 5.035399913787842
+    },
+    {
+      "contrast": 4,
+      "surviving_voxels": 23,
+      "max_abs_z": 5.035399913787842
+    },
+    {
+      "contrast": 5,
+      "surviving_voxels": 0,
+      "max_abs_z": 4.75600004196167
+    },
+    {
+      "contrast": 6,
+      "surviving_voxels": 0,
+      "max_abs_z": 4.75600004196167
+    }
+  ]
+}

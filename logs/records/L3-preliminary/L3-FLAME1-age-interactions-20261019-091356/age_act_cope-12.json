@@ -1,0 +1,30 @@
+{
+  "family": "age",
+  "kind": "act",
+  "cope": 12,
+  "n": 358,
+  "columns": [
+    "intercept",
+    "age_decades",
+    "tsnr",
+    "fdmean_mm",
+    "dataset_rf1"
+  ],
+  "names": [
+    "age_decades_positive",
+    "age_decades_negative"
+  ],
+  "output": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-FLAME1-age-interactions-20261019-091356/age_act_cope-12/L3.gfeat",
+  "results": [
+    {
+      "contrast": 1,
+      "surviving_voxels": 17,
+      "max_abs_z": 4.914027690887451
+    },
+    {
+      "contrast": 2,
+      "surviving_voxels": 120,
+      "max_abs_z": 4.914027690887451
+    }
+  ]
+}
