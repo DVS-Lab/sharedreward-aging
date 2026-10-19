@@ -10,6 +10,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "code"))
 from analyze_raw_ratings import CELLS, age_fit, holm, load_ratings
 from plot_rating_age import age_predictions
 from audit_ratings_qc import rating_exclusion_reasons
+from plot_rating_gaps import gap_analysis, GAPS
 
 
 class RawRatings(unittest.TestCase):
@@ -94,6 +95,31 @@ class RawRatings(unittest.TestCase):
         np.testing.assert_allclose(pred[:,6],pred[:,:6].mean(axis=1))
         np.testing.assert_allclose((pred[2]-pred[0])/4,slopes)
         np.testing.assert_allclose(lo+hi,2*pred)
+
+    def test_gap_predictions_and_paired_slope_tests_use_subject_covariance(self):
+        from analyze_raw_ratings import age_design
+        from scipy import stats
+        rng=np.random.default_rng(801); n=120
+        frame=pd.DataFrame(dict(age=rng.uniform(20,80,n),sex=['F','M','O']*40,
+                                dataset=['rf1','ds003745']*60))
+        frame[CELLS]=rng.normal(size=(n,6)) + ((frame.age.to_numpy()-50)/10)[:,None]*np.arange(6)/10
+        ages=np.array([30.,50.,70.])
+        predicted,lo,hi,tests=gap_analysis(frame,ages)
+        np.testing.assert_allclose((predicted[2]-predicted[0])/4,tests.points_per_decade.iloc[:3])
+        np.testing.assert_allclose(lo+hi,2*predicted)
+        x=age_design(frame); a=np.linalg.inv(x.T@x)@x.T
+        # Independently fit the paired Friend-minus-Stranger gap response.
+        y=frame[CELLS].to_numpy()@(GAPS[0]-GAPS[1])
+        beta=a@y; residual=y-x@beta; leverage=np.diag(x@a)
+        covariance=(a*(residual/(1-leverage)))@(a*(residual/(1-leverage))).T
+        row=tests[tests.comparison.eq('Friend minus Stranger')].iloc[0]
+        self.assertAlmostEqual(row.points_per_decade,beta[1])
+        self.assertAlmostEqual(row.se_hc3,np.sqrt(covariance[1,1]))
+        self.assertAlmostEqual(row.p,2*stats.t.sf(abs(beta[1])/np.sqrt(covariance[1,1]),n-x.shape[1]))
+        for family in ('partner_age_slopes','paired_slope_differences'):
+            subset=tests[tests.family.eq(family)]
+            np.testing.assert_allclose(subset.p_holm_family,holm(subset.p.to_numpy()))
+        self.assertEqual(tests.iloc[-1]['df'],2)
 
 
 if __name__ == '__main__':
