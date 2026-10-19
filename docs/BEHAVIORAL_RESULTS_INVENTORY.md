@@ -283,10 +283,12 @@ The historical plotting notebooks include DLPFC NPPI, MTG activation, and an
 age×friend-minus-stranger z-rating model with motion, tSNR, study and `flip`
 covariates. They must not be presented as current raw-rating or current
 post-QC brain results. Their cluster-selected extractions are not independent
-ROIs for the new age tests. No current validated inferential output for task
-reaction times, closeness, or financial-exploitation questionnaires was found
-in this repository review; source availability and a model specification
-would need checking before adding those analyses.
+ROIs for the new age tests. The 2026-10-19
+[exploratory trial-behavior analysis](EXPLORATORY_TRIAL_BEHAVIOR.md) now adds
+current-partner RT, next-trial RT after feedback, and next-guess switching,
+with source checks and multiplicity/sensitivity results. These are separate
+from the primary ratings hypothesis. Closeness and financial-exploitation
+questionnaires still need source and model checks before adding analyses.
 
 ## Next imaging analysis
 

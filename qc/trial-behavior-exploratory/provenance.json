@@ -1,0 +1,220 @@
+{
+  "exploratory": true,
+  "ratings_policy": "within_partner_loss_gt_win_primary_2026-10-01",
+  "n_ratings_eligible": 318,
+  "n_people_with_task_ready_runs": 318,
+  "rt_filter": "Primary >=150 ms, sensitivity all positive responded RTs; misses never assigned sentinel RT. Neither filter bridges trials.",
+  "model": "Log RT with run intercepts; lag RT and binary guess-switch linear probability model with RF1 run / ds003745 block intercepts; participant-cluster CR1 SE, t df=clusters-1.",
+  "age": "Age centered at 50, per decade. Main age/sex/dataset offsets absorbed by run or block. Current-partner effects include age/dataset/sex interactions. Lag effects include age and dataset interactions; no sex interaction.",
+  "sequence": "Lagged variables formed before filtering. No crossing run boundaries; ds003745 lag tests additionally exclude block boundaries. Neutral feedback is retained as a nuisance category.",
+  "multiplicity": "Both Holm within each six-test model family and Holm across all 18 exploratory tests; separately for primary and explicitly labeled all-positive-RT sensitivity. Plot-derived estimates are descriptive contrasts, not additional significance claims.",
+  "limitations": [
+    "Exploration following ratings analyses, not confirmatory.",
+    "Eligibility deliberately matches ratings analysis; not all task performers. MRI QC exclusions not added.",
+    "RF1 raw source uses current upstream conversion and count checks; canonical BIDS files are not local, so RF1 per-trial BIDS hash equivalence is not independently established.",
+    "Task code differs: older RT timestamps before response display flip, RF1 after display flip; decision windows 2.5 vs 2.8 seconds.",
+    "Predetermined outcomes and different block/event designs preclude interpreting switching as task accuracy or optimal learning.",
+    "Lag age moderation assumes common age modulation across partners; no higher-order interaction search."
+  ],
+  "specifications": {
+    "0.15": [
+      {
+        "model": "current_partner_RT",
+        "names": [
+          "friend",
+          "age_friend",
+          "dataset_friend",
+          "sexM_friend",
+          "sexO_friend",
+          "stranger",
+          "age_stranger",
+          "dataset_stranger",
+          "sexM_stranger",
+          "sexO_stranger",
+          "progress",
+          "progress2",
+          "older_block_reward"
+        ],
+        "n": 33001,
+        "clusters": 318,
+        "df": 317,
+        "fixed_effect_groups": 603,
+        "parameters": 616
+      },
+      {
+        "model": "post_outcome_RT",
+        "names": [
+          "previous_loss",
+          "previous_neutral",
+          "loss_age",
+          "loss_dataset",
+          "previous_friend",
+          "current_friend",
+          "loss_friend",
+          "previous_stranger",
+          "current_stranger",
+          "loss_stranger",
+          "partner_switch",
+          "previous_logRT",
+          "feedback_gap_s",
+          "progress",
+          "progress2"
+        ],
+        "n": 31493,
+        "clusters": 318,
+        "df": 317,
+        "fixed_effect_groups": 1104,
+        "parameters": 1119
+      },
+      {
+        "model": "post_outcome_guess_switch",
+        "names": [
+          "previous_loss",
+          "previous_neutral",
+          "loss_age",
+          "loss_dataset",
+          "previous_friend",
+          "current_friend",
+          "loss_friend",
+          "previous_stranger",
+          "current_stranger",
+          "loss_stranger",
+          "partner_switch",
+          "previous_logRT",
+          "feedback_gap_s",
+          "progress",
+          "progress2"
+        ],
+        "n": 31493,
+        "clusters": 318,
+        "df": 317,
+        "fixed_effect_groups": 1104,
+        "parameters": 1119
+      }
+    ],
+    "0.0": [
+      {
+        "model": "current_partner_RT",
+        "names": [
+          "friend",
+          "age_friend",
+          "dataset_friend",
+          "sexM_friend",
+          "sexO_friend",
+          "stranger",
+          "age_stranger",
+          "dataset_stranger",
+          "sexM_stranger",
+          "sexO_stranger",
+          "progress",
+          "progress2",
+          "older_block_reward"
+        ],
+        "n": 33064,
+        "clusters": 318,
+        "df": 317,
+        "fixed_effect_groups": 603,
+        "parameters": 616
+      },
+      {
+        "model": "post_outcome_RT",
+        "names": [
+          "previous_loss",
+          "previous_neutral",
+          "loss_age",
+          "loss_dataset",
+          "previous_friend",
+          "current_friend",
+          "loss_friend",
+          "previous_stranger",
+          "current_stranger",
+          "loss_stranger",
+          "partner_switch",
+          "previous_logRT",
+          "feedback_gap_s",
+          "progress",
+          "progress2"
+        ],
+        "n": 31603,
+        "clusters": 318,
+        "df": 317,
+        "fixed_effect_groups": 1104,
+        "parameters": 1119
+      },
+      {
+        "model": "post_outcome_guess_switch",
+        "names": [
+          "previous_loss",
+          "previous_neutral",
+          "loss_age",
+          "loss_dataset",
+          "previous_friend",
+          "current_friend",
+          "loss_friend",
+          "previous_stranger",
+          "current_stranger",
+          "loss_stranger",
+          "partner_switch",
+          "previous_logRT",
+          "feedback_gap_s",
+          "progress",
+          "progress2"
+        ],
+        "n": 31603,
+        "clusters": 318,
+        "df": 317,
+        "fixed_effect_groups": 1104,
+        "parameters": 1119
+      }
+    ]
+  },
+  "local_trial_derivative": "/Users/tug87422/github/sharedreward-aging/derivatives/behavioral-exploratory/trials.tsv",
+  "trial_sha256": "a54374c56061e736f772d98c50d50f0f8e61a668eeb7159bed287153614a4157",
+  "rt_below_150ms": 63,
+  "sources": [
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/explore_trial_behavior.py",
+      "sha256": "a9c97f0e28ebbca6b5bad2ca4e1128401b6278e0b62501d00eb5eabd4b0ba72a"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/logs/records/analysis-run-dispositions.tsv",
+      "sha256": "586a42f81e6c74e0a5441e960b9fa400e52329722a2b8f58fa929c3150e7d480"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/logs/records/fulltrial-event-qc-run-level.tsv",
+      "sha256": "a6a23c82d69883033bfe43c49273adeda8306eea35509b9404d8ad5837649c69"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/logs/records/ratings-qc-subject-level.tsv",
+      "sha256": "dc13ec845d927cb66f41139d54b2bce37ee3efbbb3b62466034ee3bd7f6488ed"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/logs/records/analysis-subject-dispositions.tsv",
+      "sha256": "e30a4c33fc4adf18fc62bdeaada0360851086b66c9fd24d03f73e67c83ae7616"
+    },
+    {
+      "path": "/Users/tug87422/github/rf1-sra-linux2/code/convert_behavior.py",
+      "sha256": "3cd52e980a37e5d42ec6a5c2197345891f371161f7ddfc1cd14f1546a9095121"
+    },
+    {
+      "path": "/Users/tug87422/github/rf1-sra-linux2/bids/participants.tsv",
+      "sha256": "10004009f83ae3ffd9977941e6c222ac8f1aabfd70f41968470cfaa70ef35ca4"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/participants-srndna.tsv",
+      "sha256": "760730ad4d57f3d5d05ca489620ddead9442380405885b7c84792e413a3dac5e"
+    },
+    {
+      "path": "/Users/tug87422/github/srndna-datapaper/code/recover_sub144_sharedreward_events.py",
+      "sha256": "242c851a5564c94cf5f82cdeb1cc2aef1b224901dd309876cc8d7edf07221d50"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/analyze_raw_ratings.py",
+      "sha256": "20d9e5b53e1da195114b71f5c5cd3b418b89ce4519da93449823dda2614879f7"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/audit_ratings_qc.py",
+      "sha256": "49270e365449e66bf4e4375497a4fc574f4946e5481917be3219a235ad3461ef"
+    }
+  ]
+}
