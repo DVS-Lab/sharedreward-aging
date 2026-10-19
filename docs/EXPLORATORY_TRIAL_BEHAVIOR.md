@@ -126,3 +126,34 @@ adjacent `rf1-sra`, `rf1-sra-linux2` and `srndna-datapaper` clones and the local
 older BIDS event snapshots. Paths can be supplied explicitly using `--help`.
 Source and model hashes are in the accompanying
 [provenance file](../qc/trial-behavior-exploratory/provenance.json).
+
+## Absolute RT across age
+
+The complementary participant-level analysis in `code/plot_absolute_rt_age.py`
+estimates overall age-associated slowing, which the preceding run-fixed-effect
+model absorbs. It averages log RT within each participant and partner, then
+fits the three paired responses to continuous age, dataset and recorded sex.
+Every participant has equal weight; within-participant dependence is preserved
+in the HC3 covariance of slope differences. Curves are exponentiated to seconds
+(geometric means, not arithmetic means), with pointwise 95% confidence bands.
+The same 318 participants and RT cutoff are retained, with an all-positive-RT
+sensitivity analysis. This summary model does not additionally control trial
+position or block context and does not replace the earlier trial-level results.
+
+Overall RT increases by 3.94% per decade (95% CI 2.44–5.46%; p=3.17e−7).
+Partner-specific increases are 3.40% for friend, 3.95% for stranger and 4.46%
+for computer. The joint equality-of-slopes test gives p=.0148. Direct paired
+age-slope tests give friend versus computer p=.00409 (Holm across three pairs
+p=.0123), friend versus stranger p=.111, and stranger versus computer p=.104.
+These are exploratory tests in this complementary model, not a fresh
+confirmatory family that supersedes the preceding 18-test exploration.
+The direction and these pairwise conclusions persist when responses below
+150 ms are included.
+
+The result is broad age-associated slowing with modest partner modulation,
+not older participants responding faster overall to friends. These are
+cross-sectional age associations, not measured within-person aging effects.
+See [tests](../qc/trial-behavior-exploratory/absolute-RT-age-tests.tsv) and
+[provenance](../qc/trial-behavior-exploratory/absolute-RT-age-provenance.json).
+
+![Absolute RT across age](../qc/trial-behavior-exploratory/absolute-RT-age.png)

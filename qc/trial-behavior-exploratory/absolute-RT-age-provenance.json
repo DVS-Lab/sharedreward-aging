@@ -1,0 +1,26 @@
+{
+  "n": 318,
+  "ratings_policy": "within_partner_loss_gt_win_primary_2026-10-01",
+  "exploratory": true,
+  "response": "Mean log RT across valid responded trials for each participant/partner; equal participant weighting. Geometric means after exponentiation, not arithmetic mean RT.",
+  "model": "Separate partner outcomes: intercept + centered age/10 + dataset + recorded sex; shared participant-level X; HC3 covariance preserves paired slope dependencies.",
+  "estimand": "Overall age coefficient averages the three partner log-RT age slopes. Paired tests compare slopes directly; joint 2-df Wald chi-square tests equality.",
+  "plotting": "Covariates held at empirical dataset/sex mix; pointwise 95% t intervals back-transformed to seconds. Not individual prediction intervals.",
+  "distinction": "Complement to trial-level run-fixed-effect model: estimates between-person overall age association, but does not control trial position/block context; not a replacement for earlier partner-effect tests.",
+  "multiplicity": "Uncorrected p plus Holm within three partner slopes and within three paired slope differences; overall and joint tests shown separately. Threshold sensitivity explicitly labeled.",
+  "trial_sha256": "a54374c56061e736f772d98c50d50f0f8e61a668eeb7159bed287153614a4157",
+  "sources": [
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/qc/trial-behavior-exploratory/provenance.json",
+      "sha256": "35e87bba73dadc293b0d95d9648cdcd3fed8fbef8dd43744063aa7224a2c16c0"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/plot_absolute_rt_age.py",
+      "sha256": "9f23610c62395e516fbdc39f1e0fa80431e887c4d132f4bdb19b13e9bbd8426a"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/analyze_raw_ratings.py",
+      "sha256": "20d9e5b53e1da195114b71f5c5cd3b418b89ce4519da93449823dda2614879f7"
+    }
+  ]
+}
