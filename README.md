@@ -7,10 +7,11 @@ This repository owns the project-specific harmonization of RF1 Shared Reward wit
 Cooper's recorded imaging exclusions retain **663 runs / 358 people**, including
 290 with eligible ratings. The ratings-only primary analysis remains N=318;
 see the [behavioral results inventory](docs/BEHAVIORAL_RESULTS_INVENTORY.md).
-A separate [preliminary pooled age analysis](docs/PRELIMINARY_AGE_ANALYSIS.md)
+A separate [preliminary pooled FEAT/FLAME1 analysis](docs/L3_FEAT_AGE_RATINGS.md)
 is prepared for activation and VS-PPI, with whole-brain and ROI summaries.
-It must pass a fresh Linux2 audit first: the latest post-QC audit encountered
-permission errors, so preparation is not a claim that new age maps are complete.
+It models age, tSNR, mean FD and dataset, with optional matched raw-ratings
+models. It checks the existing QC exclusions and must pass a fresh Linux2
+readiness audit first; preparation is not a claim that new age maps are complete.
 
 Start with [CURRENT_STATUS.md](docs/CURRENT_STATUS.md) and the
 [Cooper handoff](docs/COOPER_HANDOFF.md). The task-ready inventory is 744 runs /

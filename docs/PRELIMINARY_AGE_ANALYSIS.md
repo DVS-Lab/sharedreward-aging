@@ -1,5 +1,10 @@
 # Preliminary pooled imaging age analysis
 
+**Superseded for new launches:** the requested FEAT/FLAME1 age + tSNR + FD +
+dataset models and optional matched-ratings extension are documented in
+[L3_FEAT_AGE_RATINGS.md](L3_FEAT_AGE_RATINGS.md). The specification below
+describes the earlier permutation workflow, not the new requested model.
+
 Requested 2026-10-18: both whole-brain maps and ROI summaries. This separate
 exploratory analysis uses Cooper's current **663 retained runs / 358 people**
 (315 RF1, 43 ds003745). It does not change exclusions, task templates, L1/L2

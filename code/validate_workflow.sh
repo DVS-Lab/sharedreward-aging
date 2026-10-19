@@ -7,13 +7,13 @@ bash_scripts=(
     run_fmriprep_ds003745_batch.sh resample_to_rf1_grid.sh
     measure_smoothness.sh smooth_to_target.sh smooth_with_feat_susan.sh
     run_logged.sh install_phase0_afni.sh validate_workflow.sh
-    L1stats.sh run_L1stats.sh L2stats.sh run_L2stats.sh
+    L1stats.sh run_L1stats.sh L2stats.sh run_L2stats.sh L3stats.sh
 )
 for script in "${bash_scripts[@]}"; do bash -n "$ROOT/code/$script"; done
 echo 'PASS: bash syntax'
 
 python_scripts=(
-    analyze_raw_ratings.py plot_rating_age.py run_preliminary_age.py
+    analyze_raw_ratings.py plot_rating_age.py run_preliminary_age.py run_L3stats.py
     audit_analysis_qc.py audit_event_qc.py audit_fmriprep_ds003745.py
     audit_fsl_confounds.py audit_outputs.py audit_l1_contrasts.py audit_group_readiness.py audit_ratings_qc.py model_provenance.py
     audit_resampling.py audit_smoothness.py audit_target_smoothing.py
