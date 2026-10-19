@@ -226,6 +226,39 @@ See the [comparison figure](../qc/ratings-normalized/loss-ratings-normalization-
 [provenance](../qc/ratings-normalized/provenance.json).
 Reproduce with `python code/plot_normalized_loss_ratings.py`.
 
+### Normalized win minus loss age comparisons
+
+The 2026-10-19 [updated figure](../qc/ratings-normalized/normalized-win-loss-age.png)
+shows all three partner gaps and the direct friend-minus-stranger gap contrast.
+The same 318 participants are z-scored across their six ratings before computing
+win minus loss, with no second normalization of gaps. Dataset and recorded sex
+are adjusted as above. Right-panel points are participant contrasts with fitted
+dataset/sex contributions removed relative to the sample mean covariate mix.
+Confidence bands are pointwise HC3 95% intervals for adjusted means.
+
+| Age slope or slope difference | Within-person SD per decade | 95% CI | Uncorrected p | Holm p |
+|---|---:|---|---:|---:|
+| Friend gap | −0.0564 | [−0.0993, −0.0134] | .0104 | .0311 |
+| Stranger gap | +0.0001 | [−0.0430, +0.0432] | .9980 | .9980 |
+| Computer gap | −0.0413 | [−0.0899, +0.0073] | .0954 | .1908 |
+| Friend minus stranger | −0.0564 | [−0.1232, +0.0104] | .0976 | .2928 |
+| Friend minus computer | −0.0150 | [−0.0918, +0.0617] | .7002 | .7002 |
+| Stranger minus computer | +0.0414 | [−0.0195, +0.1023] | .1823 | .3647 |
+
+Holm correction is separate for the three individual gap slopes and three paired
+slope differences. The joint age-by-partner test is chi-square(2)=3.5833,
+p=.1667. The friend gap decreases with age, but the direct slope differences
+do not establish a selective friend effect. This is the current adjusted N318
+analysis, not a reproduction of the supplied historical N205 slide's correlation
+or its unspecified normalization. Its historical p=.006 should not be carried
+over as the result of this analysis.
+
+Sources: [tests](../qc/ratings-normalized/normalized-win-loss-age-tests.tsv),
+[predictions](../qc/ratings-normalized/normalized-win-loss-age-predictions.tsv),
+and [provenance](../qc/ratings-normalized/normalized-win-loss-provenance.json).
+An editable vector [SVG](../qc/ratings-normalized/normalized-win-loss-age.svg)
+is available. Reproduce with `python code/plot_normalized_rating_gaps.py`.
+
 ## Other available behavioral material
 
 | Material | Current status | Location |
