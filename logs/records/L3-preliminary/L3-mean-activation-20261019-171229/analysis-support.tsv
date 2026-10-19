@@ -1,0 +1,4 @@
+model	directory_voxels	analysis_voxels	removed_nonpositive_variance_voxels	VS_full_voxels	VS_directory_voxels	VS_analysis_voxels	vmPFC_full_voxels	vmPFC_directory_voxels	vmPFC_analysis_voxels
+mean_act_cope-10	81600	69207	12393	117	117	117	1516	939	630
+mean_act_cope-11	81600	69207	12393	117	117	117	1516	939	630
+mean_act_cope-12	81600	69207	12393	117	117	117	1516	939	630

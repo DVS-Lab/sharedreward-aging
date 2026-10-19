@@ -1,0 +1,30 @@
+{
+  "family": "mean",
+  "kind": "act",
+  "cope": 11,
+  "n": 358,
+  "columns": [
+    "intercept",
+    "age_decades",
+    "tsnr",
+    "fdmean_mm",
+    "dataset_rf1"
+  ],
+  "names": [
+    "pooled_mean_positive",
+    "pooled_mean_negative"
+  ],
+  "output": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-11/L3.gfeat",
+  "results": [
+    {
+      "contrast": 1,
+      "surviving_voxels": 12888,
+      "max_abs_z": 11.138447761535645
+    },
+    {
+      "contrast": 2,
+      "surviving_voxels": 4226,
+      "max_abs_z": 11.138447761535645
+    }
+  ]
+}

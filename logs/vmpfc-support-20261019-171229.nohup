@@ -1,0 +1,46 @@
+Writing raw log: /ZPOOL/data/projects/sharedreward-aging/logs/runs/20261019-171253_vmpfc-support-20261019-171229.log
+Writing run record: /ZPOOL/data/projects/sharedreward-aging/logs/records/20261019-171253_vmpfc-support-20261019-171229.md
+RUN START: 20261019-171253
+PROJECT_ROOT: /ZPOOL/data/projects/sharedreward-aging
+GIT: main b0ce686
+HOST: CLA19787.tu.temple.edu
+USER: tug87422
+PWD: /ZPOOL/data/projects/sharedreward-aging
+COMMAND: /ZPOOL/data/tools/anaconda/tug87422/envs/sharedreward-phase0/bin/python code/audit_vmpfc_support.py --analysis-root derivatives/fsl/L3-preliminary/L3-FLAME1-age-interactions-20261019-091356 --output-dir logs/records/vmpfc-support/vmpfc-support-20261019-171229 --map-dir derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229 
+
+AUDIT: age-ratings-interaction_act_cope-17
+VERIFIED: age-ratings-interaction_act_cope-17: 290 original participant inputs; saved group masks reproduced
+AUDIT: age-ratings-interaction_ppi_seed-vs_cope-17
+VERIFIED: age-ratings-interaction_ppi_seed-vs_cope-17: 290 original participant inputs; saved group masks reproduced
+AUDIT: age-ratings_act_cope-17
+VERIFIED: age-ratings_act_cope-17: 290 original participant inputs; saved group masks reproduced
+AUDIT: age-ratings_ppi_seed-vs_cope-17
+VERIFIED: age-ratings_ppi_seed-vs_cope-17: 290 original participant inputs; saved group masks reproduced
+AUDIT: age_act_cope-10
+VERIFIED: age_act_cope-10: 358 original participant inputs; saved group masks reproduced
+AUDIT: age_act_cope-11
+VERIFIED: age_act_cope-11: 358 original participant inputs; saved group masks reproduced
+AUDIT: age_act_cope-12
+VERIFIED: age_act_cope-12: 358 original participant inputs; saved group masks reproduced
+AUDIT: age_act_cope-14
+VERIFIED: age_act_cope-14: 358 original participant inputs; saved group masks reproduced
+AUDIT: age_act_cope-16
+VERIFIED: age_act_cope-16: 358 original participant inputs; saved group masks reproduced
+AUDIT: age_act_cope-17
+VERIFIED: age_act_cope-17: 358 original participant inputs; saved group masks reproduced
+AUDIT: age_ppi_seed-vs_cope-10
+VERIFIED: age_ppi_seed-vs_cope-10: 358 original participant inputs; saved group masks reproduced
+AUDIT: age_ppi_seed-vs_cope-11
+VERIFIED: age_ppi_seed-vs_cope-11: 358 original participant inputs; saved group masks reproduced
+AUDIT: age_ppi_seed-vs_cope-12
+VERIFIED: age_ppi_seed-vs_cope-12: 358 original participant inputs; saved group masks reproduced
+AUDIT: age_ppi_seed-vs_cope-14
+VERIFIED: age_ppi_seed-vs_cope-14: 358 original participant inputs; saved group masks reproduced
+AUDIT: age_ppi_seed-vs_cope-16
+VERIFIED: age_ppi_seed-vs_cope-16: 358 original participant inputs; saved group masks reproduced
+AUDIT: age_ppi_seed-vs_cope-17
+VERIFIED: age_ppi_seed-vs_cope-17: 358 original participant inputs; saved group masks reproduced
+CHECK PASSED: original masks and variance support reproduce every requested group mask. No exclusions changed.
+
+COMMAND EXIT: 0
+Run record saved: /ZPOOL/data/projects/sharedreward-aging/logs/records/20261019-171253_vmpfc-support-20261019-171229.md

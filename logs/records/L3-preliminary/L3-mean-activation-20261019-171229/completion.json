@@ -1,0 +1,9 @@
+{
+  "complete": true,
+  "stage": "all",
+  "provisional": true,
+  "completed_models": 3,
+  "expected_models": 3,
+  "roi_tests": 6,
+  "failures": []
+}
