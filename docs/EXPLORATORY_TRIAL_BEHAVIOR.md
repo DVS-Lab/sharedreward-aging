@@ -235,3 +235,116 @@ and [provenance](../qc/trial-behavior-exploratory/next-trial-RT-age-provenance.j
 Independent tests verify predictions and HC3 intervals, absorbed-model clustered
 covariance against explicit fixed-effect regressions, interaction contrast
 weights and joint tests, and sequence/missing-cell safeguards.
+
+## Partner switching and ratings models with RT covariates
+
+The subsequent 2026-10-19 exploration tests switching in RF1 only. The older
+block task has no partner switches among eligible within-block trial pairs.
+Including its block boundaries would mix partner switching with block changes
+and violate the preceding sequence restriction. All 285 RF1 participants
+contribute both stay and switch pairs after wins and losses: 24,602 pairs in
+the primary >=150 ms sample. The pooled ratings analysis retains all 318
+participants; there is no new exclusion or change to the primary ratings model.
+
+### Post-loss speeding when the partner stays or switches
+
+The trial-level model extends the preceding RF1 run-fixed-effect model with
+loss × switch, loss × switch × previous partner, and loss × switch × age,
+including their lower-order terms. It retains previous RT, current partner,
+current-partner age terms, previous-partner age terms, trial progress and
+feedback interval. Recorded-sex main effects are absorbed by run intercepts;
+loss-sex terms remain. Dataset terms are unnecessary in RF1 alone. There is
+no four-way age × loss × switch × partner interaction. Tests use participant-
+cluster CR1 covariance. Six planned follow-up tests have raw and Holm-adjusted
+p-values; the all-positive-RT sensitivity is separate.
+
+At age 50, the equal-partner average is **2.95% faster after losses when the
+partner stays** (95% CI 1.21–4.66% faster), and **3.21% faster when the partner
+switches** (95% CI 1.99–4.41% faster). Direct outcome-by-switch p=.789. Its
+variation across previous partners gives p=.483; age moderation of the
+outcome-by-switch effect gives p=.849. Partner-specific switch differences
+give p=.944 for friend, .256 for stranger, and .605 for computer. None of the
+six tests passes even the uncorrected .05 threshold. All-positive-RT results
+are similar (outcome-by-switch p=.847; partner moderation p=.378).
+
+These results do not establish equal effects but do not support a specific
+social-context switching explanation of the speeding.
+
+![Post-loss speeding by partner transition](../qc/trial-behavior-exploratory/switch-ratings/post-loss-partner-switch.png)
+
+### Fixed exploratory RT additions to ratings models
+
+Two existing targets are examined: the friend win-minus-loss gap and the friend
+gap minus the stranger gap. Raw ratings remain primary. Within-person z-scored
+six-rating profiles (sample SD, ddof=1) are a labeled sensitivity analysis.
+Every model retains age per decade, dataset and recorded sex. The fixed
+candidate additions are:
+
+1. Overall speed: equal average of the three current-partner mean log RTs.
+2. Social RT difference: current friend mean log RT minus stranger mean log RT.
+3. Post-loss RT difference: equal average over previous partners of mean next
+   log RT after loss minus after win.
+4. All three measures together.
+
+These are descriptive participant-level summaries, not individual coefficients
+from the adjusted population lag model. They are standardized between people
+for regression, and their measurement uncertainty is not separately modeled.
+No ratings-based feature selection is performed. In RF1 only, a fourth summary
+is added to the three-measure block: the loss-minus-win RT difference on switch
+pairs minus that on stay pairs. It averages the actual previous-partner mix
+within each cell. The older dataset's nonexistent switch score remains missing,
+never zero-imputed or used to remove those participants from pooled models.
+
+HC3 inference compares coefficients and robust Wald tests of the added RT block.
+Prediction uses 20 repeats of 10-fold participant cross-validation, with fixed
+seed 20261019 and dataset/sex-stratified folds shared across models and targets.
+RT scaling uses training participants only. Fold results are not treated as
+independent observations for a significance test. This is internal exploratory
+prediction, not external validation.
+
+For the **friend gap minus stranger gap**, age-effect p-values are:
+
+| Model | Raw ratings, uncorrected p | Normalized ratings, uncorrected p |
+|---|---:|---:|
+| Original age, dataset and sex model | .0945 | .0976 |
+| Add overall RT | .0294 | .0475 |
+| Add friend-minus-stranger RT | .0599 | .0614 |
+| Add post-loss RT | .0993 | .1029 |
+| Add all three RT measures | .0195 | .0312 |
+
+Adding all three makes the raw age slope more negative, from −0.151 to −0.217
+rating points per decade (expanded-model 95% CI −0.399 to −0.035). However,
+Holm correction across the ten age/model/target tests gives p=.0976 for this
+expanded raw age effect and p=.156 for its normalized counterpart. The added
+three-RT block has raw-rating p=.0397, but Holm p=.278 across eight added-block
+tests (two targets × four extensions). The normalized block gives p=.0588.
+The corrections are separate by raw/normalized analysis and pooled/RF1 scope,
+not a guarantee covering every historical exploration. All model results,
+including nulls, are retained.
+
+Predictive gains are small: raw friend-minus-stranger RMSE changes from 2.9618
+to 2.9457 rating points with all three measures (about 0.54% improvement), and
+normalized RMSE from 1.1248 to 1.1219. The friend-gap-only prediction worsens
+with all three RT measures (raw RMSE 2.8799 to 2.9070). Post-loss RT alone adds
+no clear explanatory value for either raw target (block p=.669 for friend gap,
+.524 for friend-minus-stranger). The RF1 switch-specific addition likewise
+does not help: incremental raw p=.735 and .983, respectively, and held-out
+prediction worsens relative to the three-RT model.
+
+A smaller age p-value is not sufficient grounds to replace the original model.
+RT is age-associated task behavior, not an established pre-exposure confounder.
+Adjusting for it changes the estimand and can remove an age-related pathway or
+produce suppression. These exploratory associations do not establish mediation
+or rescue a confirmatory prediction. Preserve the raw primary analysis and
+report these additions as sensitivity analyses if scientifically useful.
+
+![Ratings age coefficients with RT additions](../qc/trial-behavior-exploratory/switch-ratings/ratings-age-with-RT.png)
+
+Reproduce with `python code/analyze_rt_switch_ratings.py`. Results include
+[switch tests](../qc/trial-behavior-exploratory/switch-ratings/switch-tests.tsv),
+[ratings comparisons](../qc/trial-behavior-exploratory/switch-ratings/ratings-model-comparisons.tsv),
+[individual RT coefficients](../qc/trial-behavior-exploratory/switch-ratings/ratings-RT-coefficients.tsv),
+and [provenance](../qc/trial-behavior-exploratory/switch-ratings/provenance.json).
+Tests independently verify interaction contrasts and clustered covariance,
+HC3 regressions, cross-validation predictions, deterministic folds, and the
+distinction between an unavailable older-dataset switch score and zero.

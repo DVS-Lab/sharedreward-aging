@@ -1,0 +1,140 @@
+{
+  "exploratory": true,
+  "ratings_policy": "within_partner_loss_gt_win_primary_2026-10-01",
+  "trial_sha256": "a54374c56061e736f772d98c50d50f0f8e61a668eeb7159bed287153614a4157",
+  "switching": "RF1 only. Extend previous age*outcome*previous-partner model with switch*previous-partner, switch*age, loss*switch, loss*switch*previous-partner, loss*switch*age. All lower-order terms retained. Run FE; participant-cluster CR1 t/F inference. Previous partner contrasts at age50. No age*loss*switch*partner four-way interaction.",
+  "switch_multiplicity": "Six planned follow-up tests, raw p and Holm6. Conditional cell estimates shown with pointwise CIs, not additional significance claims. All-positive RT sensitivity separately corrected.",
+  "feature_definitions": {
+    "overall_logRT": "Equal mean of three current-partner mean log RTs.",
+    "friend_minus_stranger_logRT": "Current friend mean log RT minus current stranger mean log RT.",
+    "loss_minus_win_logRT": "Equal average across three previous partners of mean next-trial log RT after loss minus after win.",
+    "switch_minus_stay_loss_effect": "RF1 only: loss-minus-win mean next log RT when partner switches minus the same when partner stays; averages actual previous-partner composition within each cell."
+  },
+  "features_caveat": "Descriptive individual differences, not participant coefficients from the adjusted population model. No outcome-based feature selection. Measurement error/unequal trial counts not modeled; associations conditional on these noisy summaries, not mediation.",
+  "ratings": "Same318; raw primary, person-zscored six-rating profile sensitivity (ddof1). Two fixed targets: friend win-loss gap and friend-minus-stranger gap difference. Base age/10+dataset+sex. Add overall RT, social RT, post-loss RT separately and jointly. RF1-only sensitivity base, three RT and all four including switch-specific measure; never impute older switches.",
+  "ratings_inference": "HC3 t age/feature tests and robust Wald F for added RT block. Holm block tests across two targets/four extensions within each raw/normalized pooled scope; RF1 scope separately. All age-model-target p also Holm adjusted within scope/normalization. No favorable-model selection; primary ratings model unchanged.",
+  "prediction": "20 repeats of 10-fold participant CV, seed20261019, dataset/sex-stratified folds shared across models/outcomes. RT centering/scaling learned only on training participants. Mean held-out RMSE and change vs same-scope baseline; no significance test treating folds as independent.",
+  "limitations": [
+    "Switch analysis cannot be pooled across incompatible block/event designs.",
+    "No additional imaging exclusions. Previous neutral and invalid adjacent responses omitted without bridging.",
+    "Task RT can be age-related, so adding it changes the estimand and may overadjust; this is not causal mediation.",
+    "Response-based behavioral eligibility, exploratory multiplicity and bounded ratings remain limitations.",
+    "Reused same dataset for exploratory hypothesis generation; held-out prediction within it is not external validation."
+  ],
+  "inventory": [
+    {
+      "minimum_rt_s": 0.15,
+      "names": [
+        "previous_loss",
+        "loss_age",
+        "loss_sex_M",
+        "loss_sex_O",
+        "previous_friend",
+        "previous_age_friend",
+        "loss_friend",
+        "loss_age_friend",
+        "current_friend",
+        "current_age_friend",
+        "previous_stranger",
+        "previous_age_stranger",
+        "loss_stranger",
+        "loss_age_stranger",
+        "current_stranger",
+        "current_age_stranger",
+        "partner_switch",
+        "previous_logRT",
+        "feedback_gap_s",
+        "progress",
+        "progress2",
+        "switch_age",
+        "loss_switch",
+        "loss_switch_age",
+        "switch_friend",
+        "loss_switch_friend",
+        "switch_stranger",
+        "loss_switch_stranger"
+      ],
+      "n": 24602,
+      "clusters": 285,
+      "df": 284,
+      "fixed_effect_groups": 540,
+      "parameters": 568
+    },
+    {
+      "minimum_rt_s": 0.0,
+      "names": [
+        "previous_loss",
+        "loss_age",
+        "loss_sex_M",
+        "loss_sex_O",
+        "previous_friend",
+        "previous_age_friend",
+        "loss_friend",
+        "loss_age_friend",
+        "current_friend",
+        "current_age_friend",
+        "previous_stranger",
+        "previous_age_stranger",
+        "loss_stranger",
+        "loss_age_stranger",
+        "current_stranger",
+        "current_age_stranger",
+        "partner_switch",
+        "previous_logRT",
+        "feedback_gap_s",
+        "progress",
+        "progress2",
+        "switch_age",
+        "loss_switch",
+        "loss_switch_age",
+        "switch_friend",
+        "loss_switch_friend",
+        "switch_stranger",
+        "loss_switch_stranger"
+      ],
+      "n": 24670,
+      "clusters": 285,
+      "df": 284,
+      "fixed_effect_groups": 540,
+      "parameters": 568
+    }
+  ],
+  "sources": [
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/qc/trial-behavior-exploratory/provenance.json",
+      "sha256": "35e87bba73dadc293b0d95d9648cdcd3fed8fbef8dd43744063aa7224a2c16c0"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/logs/records/ratings-qc-subject-level.tsv",
+      "sha256": "dc13ec845d927cb66f41139d54b2bce37ee3efbbb3b62466034ee3bd7f6488ed"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/logs/records/analysis-subject-dispositions.tsv",
+      "sha256": "e30a4c33fc4adf18fc62bdeaada0360851086b66c9fd24d03f73e67c83ae7616"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/analyze_rt_switch_ratings.py",
+      "sha256": "09d208ec3613cb7729b7379538f6413bfe6613b0d56a21dc44323f38c6dbfba7"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/plot_next_trial_rt_age.py",
+      "sha256": "485bde63affe6068b6de6eee70883fd4a0daab6a53f773b18418928710746aac"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/explore_trial_behavior.py",
+      "sha256": "a9c97f0e28ebbca6b5bad2ca4e1128401b6278e0b62501d00eb5eabd4b0ba72a"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/analyze_raw_ratings.py",
+      "sha256": "20d9e5b53e1da195114b71f5c5cd3b418b89ce4519da93449823dda2614879f7"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/plot_normalized_loss_ratings.py",
+      "sha256": "fc2f487fe9bf94503a7266b2f0f4597db4bb9bac821e4a39ba43480c24fcb940"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/plot_rating_gaps.py",
+      "sha256": "0c9ab0f597aa6b3eb2483fcf5861e2c194d7464c051d1df91319546d4786137c"
+    }
+  ]
+}
