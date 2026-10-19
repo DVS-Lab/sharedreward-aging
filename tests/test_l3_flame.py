@@ -89,6 +89,31 @@ class L3Tests(unittest.TestCase):
                 self.assertEqual(settings["fmri(featwatcher_yn)"], "0")
                 self.assertEqual(settings["fmri(smooth)"], "0")
 
+    def test_dof_audit_distinguishes_group_scope_and_reports_all_inputs(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            ref = nib.Nifti1Image(np.ones((4,4,4)), np.eye(4))
+            common = np.ones(ref.shape, dtype=bool); common[0] = False
+            rows = []
+            for i in range(3):
+                folder = root / str(i); (folder / "stats").mkdir(parents=True)
+                dof = np.full(ref.shape, 100.)
+                dof[0] = 0  # Outside group mask, inside this subject's mask.
+                if i == 1: dof[1,1,1] = 0  # Genuine in-group failure.
+                for name, values in (("mask.nii.gz", np.ones(ref.shape)),
+                                     ("stats/varcope1.nii.gz",np.ones(ref.shape)),
+                                     ("stats/tdof_t1.nii.gz",dof)):
+                    nib.save(nib.Nifti1Image(values,ref.affine),folder / name)
+                if i == 2: (folder / "stats/tdof_t1.nii.gz").unlink()
+                rows.append(dict(subject=str(i),strategy="fixed_effects",cope_path=str(folder / "stats/cope1.nii.gz"),
+                    varcope_path=str(folder / "stats/varcope1.nii.gz"),mask_path=str(folder / "mask.nii.gz")))
+            result=l3.audit_dof_inputs(pd.DataFrame(rows),ref,common,root / "audit.tsv")
+            self.assertEqual(result.status.tolist(),["verified","failed","failed"])
+            self.assertEqual(result.nonpositive_dof_outside_common.iloc[0],16)
+            self.assertEqual(result.nonpositive_dof_in_common.iloc[1],1)
+            self.assertIn("Missing fixed-effects DOF",result.problem.iloc[2])
+            l3.save_json(root / "failures.json", result.to_dict("records"))
+
     @unittest.skipUnless(os.environ.get("RUN_FSL_SMOKE") == "1", "Set RUN_FSL_SMOKE=1 for real FEAT fit")
     def test_real_feat_flame1(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -99,21 +124,25 @@ class L3Tests(unittest.TestCase):
             reference = nib.Nifti1Image(np.ones((12, 12, 12)), np.diag([2., 2., 2., 1.]))
             ref = root / "reference.nii.gz"; nib.save(reference, ref)
             inputs = []
+            common = np.ones(reference.shape, dtype=bool); common[0] = False
             for i in range(len(x)):
                 original = root / f"original-{i}.feat"
                 (original / "stats").mkdir(parents=True)
+                dof = np.full(reference.shape, 100.); dof[0] = 0
+                individual = np.ones(reference.shape)
+                if i == 0: individual[0] = 0  # FEAT's intersection removes this slab.
                 for name, values in {
                     "stats/cope1.nii.gz": rng.normal(size=reference.shape) + .2*x[i, 1],
                     "stats/varcope1.nii.gz": np.ones(reference.shape),
-                    "stats/tdof_t1.nii.gz": np.full(reference.shape, 100.),
-                    "mask.nii.gz": np.ones(reference.shape),
+                    "stats/tdof_t1.nii.gz": dof,
+                    "mask.nii.gz": individual,
                     "mean_func.nii.gz": rng.uniform(900, 1100, reference.shape),
                 }.items():
                     nib.save(nib.Nifti1Image(values, reference.affine), original / name)
                 (original / "design.con").write_text("/NumWaves 1\n/NumContrasts 1\n/PPheights 1\n/RequiredEffect 1\n/Matrix\n1\n")
                 row = dict(cope_path=str(original / "stats/cope1.nii.gz"), varcope_path=str(original / "stats/varcope1.nii.gz"),
                            mask_path=str(original / "mask.nii.gz"), strategy="fixed_effects")
-                inputs.append(l3.stage_input(row, root / "inputs" / f"input-{i}.feat", reference))
+                inputs.append(l3.stage_input(row, root / "inputs" / f"input-{i}.feat", reference, common))
             fsf = root / "design.fsf"
             output = root / "out.gfeat"
             fsf.write_text(l3.render("age", output, inputs, x, c, columns, names, ref))
@@ -123,7 +152,7 @@ class L3Tests(unittest.TestCase):
                 for log in output.glob("**/logs/*"):
                     if log.is_file(): print(log, log.read_text(errors="replace")[-4000:])
             self.assertEqual(result.returncode, 0)
-            self.assertEqual(len(l3.audit_fit(output, x, c, reference)), 2)
+            self.assertEqual(len(l3.audit_fit(output, x, c, reference, common)), 2)
 
 
 if __name__ == "__main__":

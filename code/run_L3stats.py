@@ -163,7 +163,49 @@ def ordered(candidates, data, kind, cope):
     return rows
 
 
-def stage_input(row, folder, reference):
+def input_dof(row, reference):
+    cope = Path(row["cope_path"])
+    number = int(re.fullmatch(r"cope(\d+)\.nii\.gz", cope.name)[1])
+    original = cope.parent.parent
+    dof = original / f"stats/tdof_t{number}.nii.gz"
+    if dof.is_file():
+        return image_values(dof, reference), dof
+    scalar = original / "stats/dof"
+    require(row["strategy"] == "l1_passthrough", f"Missing fixed-effects DOF map: {dof}")
+    value = float(scalar.read_text().strip())
+    require(np.isfinite(value) and value > 0, f"Invalid L1 DOF: {scalar}: {value}")
+    return np.full(reference.shape[:3], value, dtype=np.float32), scalar
+
+
+def audit_dof_inputs(rows, reference, common, destination):
+    """Inspect all subjects, preserving the ordinary FEAT mask and input values."""
+    require(common.any(), "Empty group mask")
+    records = []
+    for row in rows.to_dict("records"):
+        item = {k: row.get(k, "") for k in (*KEY, "runs", "cope", "strategy", "cope_path")}
+        item.update(status="verified", problem="", common_mask_voxels=int(common.sum()))
+        try:
+            individual = image_values(row["mask_path"], reference) > 0
+            require(not (common & ~individual).any(), "Group mask extends outside input mask")
+            dof, path = input_dof(row, reference)
+            var = image_values(row["varcope_path"], reference)
+            invalid = dof <= 0
+            item.update(dof_source=str(path), individual_mask_voxels=int(individual.sum()),
+                        min_dof_in_common=float(dof[common].min()), max_dof_in_common=float(dof[common].max()),
+                        nonpositive_dof_in_individual=int((invalid & individual).sum()),
+                        nonpositive_dof_in_common=int((invalid & common).sum()),
+                        nonpositive_dof_outside_common=int((invalid & individual & ~common).sum()),
+                        nonpositive_dof_with_positive_varcope_in_common=int((invalid & common & (var > 0)).sum()))
+            require(not (invalid & common).any(), f"Nonpositive DOF inside group mask: {path}")
+        except (ValueError, OSError) as error:
+            item.update(status="failed", problem=str(error))
+        records.append(item)
+    result = pd.DataFrame(records).fillna("")
+    result.to_csv(destination, sep="\t", index=False)
+    return result
+
+
+def stage_input(row, folder, reference, common=None):
     """Read-only symlink adapters for already-standard-space maps, not new fits.
 
     design.lev tells FEAT not to re-register these verified RF1-grid inputs.
@@ -179,15 +221,15 @@ def stage_input(row, folder, reference):
         image_values(source, reference)
         dest.symlink_to(source.resolve(strict=True))
     dof = original / f"stats/tdof_t{number}.nii.gz"
+    individual = image_values(mask, reference) > 0
+    scope = individual if common is None else common
+    require(scope.any() and not (scope & ~individual).any(), "Invalid group mask")
+    values, dof_source = input_dof(row, reference)
+    require((values[scope] > 0).all(), f"Nonpositive DOF inside analysis mask: {dof_source}")
     if dof.is_file():
-        values = image_values(dof, reference)
-        require((values[image_values(mask, reference)>0] > 0).all(), "Invalid DOF map")
         (folder / "stats" / dof.name).symlink_to(dof.resolve())
     else:
-        require(row["strategy"] == "l1_passthrough", f"Missing fixed-effects DOF map: {dof}")
-        value = float((original / "stats/dof").read_text().strip())
-        require(np.isfinite(value) and value > 0, "Invalid L1 DOF")
-        nib.save(nib.Nifti1Image(np.full(reference.shape[:3], value, dtype=np.float32), reference.affine),
+        nib.save(nib.Nifti1Image(values, reference.affine),
                  folder / "stats" / dof.name)
     for name in ("design.con", "design.lcon"):
         if (original / name).is_file():
@@ -209,7 +251,7 @@ def run_command(cmd, log=None):
     subprocess.run(list(map(str, cmd)), check=True, cwd=ROOT, stdout=log, stderr=subprocess.STDOUT if log else None)
 
 
-def audit_fit(output, x, c, reference):
+def audit_fit(output, x, c, reference, expected_mask=None):
     stats = output / "cope1.feat"
     require(np.allclose(matrix(stats / "design.mat"), x, atol=1e-5, rtol=1e-6), "Fitted design differs")
     require(np.array_equal(matrix(stats / "design.con"), c), "Fitted contrasts differ")
@@ -217,6 +259,8 @@ def audit_fit(output, x, c, reference):
     require(settings["fmri(mixed_yn)"] == "2", "Not FLAME 1")
     mask = image_values(stats / "mask.nii.gz", reference) > 0
     require(mask.any(), "Empty group mask")
+    if expected_mask is not None:
+        require(np.array_equal(mask, expected_mask), "Fitted mask differs from audited group mask")
     summary = []
     for i in range(1, len(c)+1):
         for name in ("cope", "varcope", "zstat"):
@@ -241,7 +285,7 @@ def cluster_table(stats, number):
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("--stage", choices=("plan", "roi", "wholebrain", "all"), default="plan")
+    p.add_argument("--stage", choices=("plan", "roi", "inputs", "wholebrain", "all"), default="plan")
     p.add_argument("--label", required=True)
     p.add_argument("--jobs", type=int, default=4)
     p.add_argument("--with-ratings", action="store_true")
@@ -290,7 +334,7 @@ def main():
     save_json(report / "plan.json", plan)
     print(f"Plan: {len(data)} imaging participants; {len(specs)} FEAT models; stage={args.stage}", flush=True)
     if args.stage == "plan": return
-    for tool in ("feat", "flameo", "feat_model"):
+    for tool in (("feat", "flameo", "feat_model") if args.stage in ("wholebrain", "all") else ()):
         require(shutil.which(tool) is not None, f"Missing FSL tool: {tool}")
     run_command([sys.executable, ROOT / "code/audit_group_readiness.py", "--l1-manifest",
         args.ledger_dir / "retained-L1.tsv", "--subject-manifest", args.ledger_dir / "retained-L2.tsv",
@@ -304,7 +348,7 @@ def main():
     save_json(report / "plan.json", plan)
     candidates = read(report / "readiness/verified-pre-QC-candidates.tsv")
     reference = nib.load(args.reference)
-    jobs, roi_rows = [], []
+    jobs, prepared, roi_rows = [], [], []
     for spec in specs:
         family, kind, cope = spec["family"], spec["kind"], spec["cope"]
         people = cohorts[family]
@@ -313,9 +357,10 @@ def main():
         folder = out / f"{family}_{kind}_cope-{cope}"
         folder.mkdir()
         rows.to_csv(folder / "ordered-inputs.tsv", sep="\t", index=False)
-        if args.stage != "wholebrain":
-            common = np.ones(reference.shape[:3], dtype=bool)
-            for row in rows.to_dict("records"): common &= image_values(row["mask_path"], reference)>0
+        common = np.ones(reference.shape[:3], dtype=bool)
+        for row in rows.to_dict("records"): common &= image_values(row["mask_path"], reference)>0
+        require(common.any(), f"Empty group mask: {folder.name}")
+        if args.stage in ("all", "roi"):
             for name, path in ROI_FILES.items():
                 if kind != "act" and name == "VS": continue
                 mask = resample_from_to(nib.load(path), (reference.shape[:3], reference.affine), order=0).get_fdata()>0
@@ -328,16 +373,7 @@ def main():
                                      predictor=columns[1], roi_voxels=int(mask.sum()), full_roi_voxels=full_n, **result))
                 private = people[KEY].copy(); private["mean_cope"] = y
                 private.to_csv(folder / f"roi-{name}-values.tsv", sep="\t", index=False)
-        if args.stage == "roi": continue
-        inputs = [stage_input(row, folder / "inputs" / f"input-{i:04d}.feat", reference)
-                  for i, row in enumerate(rows.to_dict("records"))]
-        output = folder / "L3.gfeat"
-        fsf = folder / "design.fsf"
-        fsf.write_text(render(family, output, inputs, x, c, columns, names, args.reference))
-        run_command(["feat_model", fsf.with_suffix("")])
-        require(np.allclose(matrix(fsf.with_suffix(".mat")), x, atol=1e-5, rtol=1e-6), "Rendered matrix differs")
-        require(np.array_equal(matrix(fsf.with_suffix(".con")), c), "Rendered contrasts differ")
-        jobs.append((spec, fsf, output, x, c))
+        prepared.append((spec, folder, rows, x, c, columns, names, common))
     if roi_rows:
         roi = pd.DataFrame(roi_rows)
         for family in roi.family.unique():
@@ -358,11 +394,42 @@ def main():
             ax.set_xlabel("COPE change per decade" if family == "age" else "COPE change per raw rating-difference unit")
             ax.set_title(f"Preliminary pooled {family}: adjusted ROI estimates, HC3 95% CI")
             fig.tight_layout(); fig.savefig(plot_dir / f"{family}-roi.png", dpi=170); plt.close(fig)
+        save_json(report / "roi-completion.json", dict(complete=True, roi_tests=len(roi_rows),
+                  provisional=readiness["provisional"], wholebrain_complete=False))
+        print(f"ROI COMPLETE: {len(roi_rows)} tests saved before whole-brain preparation.", flush=True)
+    if args.stage != "roi":
+        input_failures = []
+        for spec, folder, rows, x, c, columns, names, common in prepared:
+            diagnostic = audit_dof_inputs(rows, reference, common, report / f"{folder.name}_dof-inputs.tsv")
+            failed = diagnostic[diagnostic.status.eq("failed")]
+            for item in failed.to_dict("records"):
+                input_failures.append(dict(model=folder.name, **item))
+                print(f"INPUT ERROR: {folder.name}: {item['problem']} (COPE: {item['cope_path']})", flush=True)
+            print(f"DOF AUDIT: {folder.name}: {len(diagnostic)} inputs; {len(failed)} failures", flush=True)
+        save_json(report / "input-completion.json", dict(complete=not input_failures,
+                  models_checked=len(prepared), failures=input_failures))
+        if input_failures:
+            save_json(report / "completion.json", dict(complete=False, stage=args.stage,
+                provisional=readiness["provisional"], completed_models=0, expected_models=len(prepared),
+                roi_tests=len(roi_rows), failure_stage="input_dof", failures=input_failures))
+            raise ValueError(f"{len(input_failures)} input DOF failures; see {report}/input-completion.json; no FEAT models launched")
+        if args.stage == "inputs":
+            print("CHECK PASSED: all requested group-mask DOF input audits; no FEAT models launched.", flush=True)
+            return
+        for spec, folder, rows, x, c, columns, names, common in prepared:
+            inputs = [stage_input(row, folder / "inputs" / f"input-{i:04d}.feat", reference, common)
+                      for i, row in enumerate(rows.to_dict("records"))]
+            output, fsf = folder / "L3.gfeat", folder / "design.fsf"
+            fsf.write_text(render(spec["family"], output, inputs, x, c, columns, names, args.reference))
+            run_command(["feat_model", fsf.with_suffix("")])
+            require(np.allclose(matrix(fsf.with_suffix(".mat")), x, atol=1e-5, rtol=1e-6), "Rendered matrix differs")
+            require(np.array_equal(matrix(fsf.with_suffix(".con")), c), "Rendered contrasts differ")
+            jobs.append((spec, fsf, output, x, c, common))
     def execute(job):
-        spec, fsf, output, x, c = job
+        spec, fsf, output, x, c, common = job
         with (fsf.parent / "feat.log").open("w") as log:
             run_command(["bash", ROOT / "code/L3stats.sh", fsf], log)
-        results = audit_fit(output, x, c, reference)
+        results = audit_fit(output, x, c, reference, common)
         save_json(report / f"{fsf.parent.name}.json", dict(spec, output=str(output), results=results))
         for i in range(1, len(c)+1):
             shutil.copy2(cluster_table(output / "cope1.feat", i), report / f"{fsf.parent.name}_zstat{i}_clusters.txt")

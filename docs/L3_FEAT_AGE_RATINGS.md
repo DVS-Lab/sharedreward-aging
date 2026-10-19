@@ -71,6 +71,19 @@ already-standard-space inputs, not a newly estimated fixed-effects model.
 Only a single-run L1 input may obtain a constant DOF map from its recorded
 `stats/dof`; missing fixed-effects DOF maps fail.
 
+DOF positivity is checked within the model's common FEAT mask (intersection
+of its retained subjects' existing masks), not every voxel in every individual
+mask. The original DOF maps and masks remain unchanged. FEAT's fitted mask is
+checked against this audited intersection. Nonfinite images, missing required
+DOF sources, and nonpositive DOF inside the group mask still fail. Nothing is
+imputed and no subjects or voxels are silently removed to pass this check.
+
+`--stage inputs` runs the full read-only input diagnostic without fitting.
+Every model writes a `*_dof-inputs.tsv`, including source paths, DOF range and
+counts of nonpositive values inside and outside the common mask. All affected
+inputs are reported, rather than stopping at the first failure. Summary:
+`input-completion.json`.
+
 Whole-brain inference: Z>3.1, cluster p<0.05 **per signed map**. There is no
 additional correction across models or signs; these analyses are exploratory.
 Each result audit verifies fitted matrices, FLAME1 setting, common mask,
@@ -82,6 +95,9 @@ VS activation and vmPFC activation/PPI, with HC3 95% CIs and Holm-adjusted
 p-values separately for the 18 age and three ratings ROI tests. Ratings ROI
 plots show the ratings coefficient; whole-brain ratings models also test age.
 Plots are under `qc/L3-preliminary/LABEL/`. No individual VS masks are created.
+For `--stage all`, ROI tables and plots are saved first, with a separate
+`roi-completion.json`, before any DOF diagnostic or FEAT input staging.
+Thus a whole-brain input problem no longer discards the updated ROI results.
 
 The scoped `resources/age-mask-allowance-20261018.json` can permit the ten
 previously reviewed upstream whole-brain-mask fingerprint changes for this
@@ -118,3 +134,17 @@ tail -f "logs/${l3_label}.nohup"
 Ctrl-C ends `tail`, not the detached job. `--stage roi` and `--stage wholebrain`
 also work independently with distinct labels. Push the completed run record
 and aggregate reports for review; do not add derivatives.
+
+## October 18 DOF retry
+
+The run `L3-FLAME1-age-ratings-20261018-224232` passed readiness (1,326 L1
+and 716 subject-level activation/PPI models) but stopped at the first input
+staging step with `Invalid DOF map`. No new FLAME1 fit ran and no complete
+updated ROI/rating summary was saved. Its error did not identify the file or
+voxel counts, so the cause within the production images remains unconfirmed.
+
+The former check required DOF>0 throughout each subject mask, which is stricter
+than needed outside FEAT's group-mask intersection. The corrected check and
+all-input diagnostic distinguish this case from a real in-group failure.
+Retry the launch above with a new label; do not delete or overwrite the old
+directory and do not rerun L1/L2 solely on the basis of this wrapper error.
