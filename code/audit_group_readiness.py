@@ -81,7 +81,30 @@ def fsf_settings(path):
         r"^set\s+(\S+)\s+([^\n]+)", path.read_text(), re.M)}
 
 
-def check_stamp(directory, level, kind, primary, parents=(), required_inputs=(), required_images=()):
+def load_mask_allowance(path):
+    """An explicit, exact old/new fingerprint exception; never a blanket bypass."""
+    if path is None:
+        return {}
+    policy = json.loads(Path(path).read_text())
+    require(policy["policy"] == "existing-feat-upstream-mask-review-v1", "unknown mask allowance policy")
+    require(bool(policy["reason"]), "mask allowance requires a reason")
+    entries = {}
+    for entry in policy["changes"]:
+        old, new = entry["recorded"], entry["current"]
+        require(set(old) == set(new) == {"path", "size", "mtime_ns"}, "invalid mask fingerprint fields")
+        require(old["path"] == new["path"] and old != new, "invalid mask fingerprint transition")
+        require(re.fullmatch(
+            r"/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-(11083|11084|11110|11120|11193)"
+            r"/ses-01/func/sub-\1_ses-01_task-sharedreward_run-[12]_part-mag_space-MNI152NLin6Asym_desc-brain_mask\.nii\.gz",
+            old["path"]) is not None, "mask allowance outside reviewed scope")
+        require(old["path"] not in entries, "duplicate mask allowance")
+        entries[old["path"]] = entry
+    require(len(entries) == 10, "expected exactly ten reviewed masks")
+    return entries
+
+
+def check_stamp(directory, level, kind, primary, parents=(), required_inputs=(), required_images=(),
+                mask_allowance=None, allowed_mask=None, warnings=None):
     data = json.loads((directory / STAMP).read_text())
     require((data["contract"], data["level"], data["type"]) == (CONTRACT, level, kind),
             "unverified model contract/type; investigate provenance, not an automatic rerun")
@@ -100,7 +123,15 @@ def check_stamp(directory, level, kind, primary, parents=(), required_inputs=(),
             require(match is not None, f"unexpected L2 image provenance: {item['path']}")
             if int(match[1]) not in primary:
                 continue  # Neutral/phys output absence does not block task inference.
-        require(fingerprint(item["path"], True) == item, f"changed image input: {item['path']}")
+        current = fingerprint(item["path"], True)
+        if current != item:
+            entry = (mask_allowance or {}).get(item["path"])
+            permitted = (level == "l1" and allowed_mask is not None
+                         and item["path"] == str(Path(allowed_mask).resolve())
+                         and entry is not None and entry["recorded"] == item and entry["current"] == current)
+            require(permitted, f"changed image input: {item['path']}")
+            require(warnings is not None, "mask allowance requires a warning report")
+            warnings.append(dict(model=str(directory), type=kind, **entry))
 
 
 def check_events(settings, row):
@@ -172,7 +203,7 @@ def check_maps(directory, numbers, reference):
                 require((values >= 0).all() and (values > 0).any(), f"invalid in-mask variance: {path}")
 
 
-def check_l1(directory, row, kind, reference, primary):
+def check_l1(directory, row, kind, reference, primary, mask_allowance=None, warnings=None):
     settings, nvol = check_l1_design(directory, kind)
     require(Path(settings["feat_files(1)"]).resolve() == Path(row["input"]).resolve(),
             "model BOLD differs from manifest")
@@ -180,7 +211,8 @@ def check_l1(directory, row, kind, reference, primary):
     require(confounds.resolve() == Path(row["confounds"]).resolve(), "model confounds differ from manifest")
     evs = check_events(settings, row)
     check_stamp(directory, "l1", kind, primary, required_inputs=[confounds, *evs],
-                required_images=[row["input"], row["mask"]])
+                required_images=[row["input"], row["mask"]], mask_allowance=mask_allowance,
+                allowed_mask=row["mask"], warnings=warnings)
     bold = nib.load(row["input"])
     require(len(bold.shape) == 4 and bold.shape[3] == nvol, "BOLD/design volume mismatch")
     nuisance = np.loadtxt(confounds, ndmin=2)
@@ -231,7 +263,11 @@ def main():
     parser.add_argument("--reference", type=Path, required=True)
     parser.add_argument("--report-dir", type=Path, required=True, help="New directory; existing reports are never overwritten")
     parser.add_argument("--ppi-seed", default="vs")
+    parser.add_argument("--mask-allowance", type=Path,
+                        help="Opt-in exact mask fingerprint transitions for preliminary existing-FEAT analyses")
     args = parser.parse_args()
+    allowance = load_mask_allowance(args.mask_allowance)
+    mask_warnings = []
     require(bool(re.fullmatch(r"[a-z0-9_-]+", args.ppi_seed)), "invalid seed label")
     l1, subjects = read_table(args.l1_manifest), read_table(args.subject_manifest)
     validate_manifests(l1, subjects)
@@ -245,7 +281,8 @@ def main():
     for row in l1:
         for kind in kinds:
             path = l1_path(args.fsl_root, row, kind)
-            status, problem = checked(path, lambda: check_l1(path, row, kind, reference, primary))
+            status, problem = checked(path, lambda: check_l1(path, row, kind, reference, primary,
+                                                           allowance, mask_warnings))
             cache[(*subject_key(row), int(row["run"]), kind)] = status
             results.append(dict(row, type=kind, path=str(path), status=status, problem=problem))
         if len(results) % 100 == 0:
@@ -274,6 +311,9 @@ def main():
     write_table(args.report_dir / "verified-pre-QC-candidates.tsv", candidates,
                 keys + ["runs", "strategy", "cope", "contrast", "cope_path", "varcope_path", "mask_path", "ratings_eligible"])
     summary = {"contract": CONTRACT, "primary_cope_ids": primary,
+        "provisional_mask_allowance": fingerprint(args.mask_allowance) if args.mask_allowance else None,
+        "mask_provenance_warnings": mask_warnings,
+        "provisional": bool(mask_warnings),
         "ignored_neutral_cope_ids": [i for i in range(1, 29) if i not in primary],
         "ppi_phys_cope29_in_scope": False,
         "inputs": [fingerprint(p) for p in (args.l1_manifest, args.subject_manifest, CONTRASTS, Path(__file__))],
@@ -294,7 +334,9 @@ def main():
     summary["computational_gate_passed"] = passed
     (args.report_dir / "summary.json").write_text(json.dumps(summary, indent=2) + "\n")
     print(f"Reports: {args.report_dir.resolve()}")
-    print("CHECK PASSED: primary computational inputs verified; final QC still separate." if passed else
+    if mask_warnings:
+        print(f"PROVISIONAL: {len(mask_warnings)} model mask fingerprint exceptions; original stamps unchanged.")
+    print("CHECK PASSED: primary computational inputs verified under the recorded policy; final QC still separate." if passed else
           "CHECK INCOMPLETE: review reports before handoff; no model files were changed.")
     return 0 if passed else 1
 

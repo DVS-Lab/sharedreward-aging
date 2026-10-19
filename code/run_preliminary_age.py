@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Exploratory pooled age associations after Cooper's recorded imaging exclusions.
 
-Plan is read-only except for a new output/report directory. All first runs the
-existing model audit, then ROI OLS/HC3 and whole-brain randomise. Never refits FEAT.
+Plan is read-only except for a new output/report directory. Independent ROI and
+wholebrain stages each audit first; all runs both. Never refits FEAT.
 """
 import argparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -149,7 +149,7 @@ def ordered_candidates(candidates, data, kind, cope):
     return rows
 
 
-def prepare_model(rows, data, x, reference, folder, roi_masks, kind, cope):
+def prepare_model(rows, data, x, reference, folder, roi_masks, kind, cope, build_stack=True):
     folder.mkdir()
     common = np.ones(reference.shape[:3], dtype=bool)
     for row in rows.to_dict("records"):
@@ -157,21 +157,23 @@ def prepare_model(rows, data, x, reference, folder, roi_masks, kind, cope):
     require(common.any(), f"Empty common model mask: {kind} COPE{cope}")
     nib.save(nib.Nifti1Image(common.astype(np.uint8), reference.affine), folder / "mask.nii.gz")
     # Memory-mapped array limits RAM while retaining exact subject/design order.
-    matrix = np.lib.format.open_memmap(folder / "merged.npy", mode="w+", dtype="float32",
-                                      shape=(*common.shape, len(rows)))
+    matrix = (np.lib.format.open_memmap(folder / "merged.npy", mode="w+", dtype="float32",
+                                      shape=(*common.shape, len(rows))) if build_stack else None)
     rois = {name: mask & common for name, mask in roi_masks.items() if kind == "act" or name != "VS"}
     for name, mask in rois.items():
         require(mask.any(), f"No common coverage in ROI {name}")
     values = {name: [] for name in rois}
     for i, row in enumerate(rows.to_dict("records")):
         volume = image_values(row["cope_path"], reference)
-        matrix[..., i] = np.where(common, volume, 0)
+        if matrix is not None:
+            matrix[..., i] = np.where(common, volume, 0)
         for name, mask in rois.items():
             values[name].append(float(volume[mask].mean()))
-    matrix.flush()
-    nib.save(nib.Nifti1Image(matrix, reference.affine), folder / "copes.nii.gz")
-    del matrix
-    (folder / "merged.npy").unlink()  # Only this newly generated scratch array.
+    if matrix is not None:
+        matrix.flush()
+        nib.save(nib.Nifti1Image(matrix, reference.affine), folder / "copes.nii.gz")
+        del matrix
+        (folder / "merged.npy").unlink()  # Only this newly generated scratch array.
     roi_rows = []
     for name, y in values.items():
         roi_rows.append(dict(type=kind, cope=cope, contrast=COPES[cope], roi=name, n=len(y),
@@ -180,7 +182,8 @@ def prepare_model(rows, data, x, reference, folder, roi_masks, kind, cope):
     private = data.copy()
     for name, y in values.items():
         private[f"mean_cope_{name}"] = y
-    private.to_csv(folder / "roi-subject-values.tsv", sep="\t", index=False)
+    if values:
+        private.to_csv(folder / "roi-subject-values.tsv", sep="\t", index=False)
     rows.to_csv(folder / "ordered-inputs.tsv", sep="\t", index=False)
     return roi_rows, dict(type=kind, cope=cope, contrast=COPES[cope], mask_voxels=int(common.sum()))
 
@@ -208,7 +211,8 @@ def randomise_model(folder, output, executable, permutations, seed):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--stage", choices=("plan", "all"), default="plan")
+    parser.add_argument("--stage", choices=("plan", "roi", "wholebrain", "all"), default="plan")
+    parser.add_argument("--mask-allowance", type=Path, help="Explicit provisional upstream-mask policy JSON")
     parser.add_argument("--label", required=True)
     parser.add_argument("--ledger-dir", type=Path, default=ROOT / "logs/records/exclusion-ledger")
     parser.add_argument("--rf1-participants", type=Path, default=ROOT.parent / "rf1-sra-linux2/bids/participants.tsv")
@@ -237,13 +241,16 @@ def main():
     sources += [ROOT / "docs/exclusion_ledger.tsv", args.rf1_participants, args.ds_participants, args.qc,
                 args.reference, Path(__file__), ROOT / "code/audit_group_readiness.py",
                 ROOT / "templates/FULLTRIAL_CONTRAST_CANDIDATE.tsv", *ROI_FILES.values()]
+    if args.mask_allowance:
+        sources.append(args.mask_allowance)
     plan = dict(status="plan_only", n=len(data), retained_runs=int(data.n_runs.astype(int).sum()),
         n_by_dataset=data.groupby("dataset").size().to_dict(),
         age_by_dataset={k: dict(n=len(v), min=float(v.age.min()), max=float(v.age.max()), mean=float(v.age.mean()))
                         for k, v in data.groupby("dataset")},
         design_columns=names, age_center=float(data.age.mean()), fd_center=float(data.retained_mean_fd_mm.mean()),
         design_condition_number=float(np.linalg.cond(x)), contrasts=COPES, kinds=KINDS,
-        permutations=args.permutations, seed=args.seed, jobs=args.jobs,
+        permutations=args.permutations, seed=args.seed, jobs=args.jobs, stage=args.stage,
+        mask_allowance=str(args.mask_allowance) if args.mask_allowance else None,
         method="Pooled common age slope; dataset, recorded sex, retained-volume-weighted mean FD; subject equal-weight OLS",
         roi_policy="VS activation; vmPFC activation and PPI. Existing provisional masks; common coverage; HC3; Holm 15 tests.",
         wholebrain_policy="Dataset-blocked randomise TFCE; positive and negative age; Bonferroni across 20 FWE-corrected maps",
@@ -257,7 +264,10 @@ def main():
         versions=dict(python=sys.version, numpy=np.__version__, scipy=scipy.__version__, nibabel=nib.__version__),
         sources=[dict(path=str(p), sha256=sha(p)) for p in sources])
     save_json(report / "plan.json", plan)
-    print(f"Age analysis plan: {len(data)} people; {plan['retained_runs']} runs; 10 whole-brain models; 15 ROI tests", flush=True)
+    n_maps = 0 if args.stage == "roi" else 10
+    n_rois = 0 if args.stage == "wholebrain" else 15
+    print(f"Age analysis plan ({args.stage}): {len(data)} people; {plan['retained_runs']} runs; "
+          f"{n_maps} whole-brain models; {n_rois} ROI tests", flush=True)
     print(f"Design: {names}; private outputs: {output}; reports: {report}", flush=True)
     if args.stage == "plan":
         print("PLAN ONLY: no imaging models run or validated.")
@@ -265,7 +275,7 @@ def main():
     for var in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS"):
         os.environ[var] = "1"
     executable = shutil.which("randomise")
-    require(executable, "FSL randomise not on PATH")
+    require(executable or args.stage == "roi", "FSL randomise not on PATH")
     os.environ["FSLOUTPUTTYPE"] = "NIFTI_GZ"
     fsl_version_file = Path(os.environ.get("FSLDIR", "/usr/local/fsl")) / "etc/fslversion"
     require(fsl_version_file.is_file(), "FSLDIR/etc/fslversion unavailable; initialize FSL first")
@@ -275,15 +285,20 @@ def main():
              "--l1-manifest", args.ledger_dir / "retained-L1.tsv",
              "--subject-manifest", args.ledger_dir / "retained-L2.tsv",
              "--fsl-root", ROOT / "derivatives/fsl", "--reference", args.reference,
-             "--report-dir", report / "readiness"])
+             "--report-dir", report / "readiness"] +
+            (["--mask-allowance", args.mask_allowance] if args.mask_allowance else []))
     readiness = json.loads((report / "readiness/summary.json").read_text())
     require(readiness["computational_gate_passed"], "Readiness failed; no analysis launched")
+    plan["status"] = "provisional_existing_feat" if readiness["provisional"] else "verified_inputs"
+    plan["provisional"] = readiness["provisional"]
+    plan["mask_provenance_warnings"] = readiness["mask_provenance_warnings"]
+    save_json(report / "plan.json", plan)
     require(all(sha(p["path"]) == p["sha256"] for p in plan["sources"]),
             "Input specification changed during audit; use a fresh run label")
     candidates = read(report / "readiness/verified-pre-QC-candidates.tsv")
     reference = nib.load(str(args.reference))
     roi_masks = {}
-    for name, path in ROI_FILES.items():
+    for name, path in (ROI_FILES.items() if args.stage != "wholebrain" else []):
         image = nib.load(str(path))
         require(len(image.shape) == 3 and np.isfinite(image.get_fdata()).all(), "Invalid ROI")
         roi_masks[name] = resample_from_to(image, (reference.shape[:3], reference.affine), order=0).get_fdata() > 0
@@ -294,23 +309,18 @@ def main():
         for cope in COPES:
             folder = output / f"{kind}_cope-{cope}"
             rows = ordered_candidates(candidates, data, kind, cope)
-            roi, info = prepare_model(rows, data, x, reference, folder, roi_masks, kind, cope)
+            roi, info = prepare_model(rows, data, x, reference, folder, roi_masks, kind, cope,
+                                      build_stack=args.stage != "roi")
             roi_results.extend(roi)
             model_info.append((folder, info))
             print(f"Prepared {folder.name}: common mask {info['mask_voxels']} voxels", flush=True)
-    roi = pd.DataFrame(roi_results)
-    require(len(roi) == 15, "Unexpected ROI family size")
-    roi["p_holm_15"] = holm(roi.p_two_sided)
-    roi.to_csv(report / "roi-age-results.tsv", sep="\t", index=False)
-    fig, ax = plt.subplots(figsize=(9, 8))
-    positions = np.arange(len(roi))
-    ax.errorbar(roi.beta_per_decade, positions,
-                xerr=np.vstack([roi.beta_per_decade-roi.ci95_low, roi.ci95_high-roi.beta_per_decade]), fmt="o", capsize=3)
-    ax.set_yticks(positions, [f"{r.type} | {r.roi} | {r.contrast}" for r in roi.itertuples()])
-    ax.axvline(0, color="gray", linestyle="--"); ax.invert_yaxis()
-    ax.set_xlabel("COPE change per decade (HC3 pointwise 95% CI; not percent signal change)")
-    ax.set_title("Exploratory pooled age associations | provisional ROIs")
-    fig.tight_layout(); fig.savefig(report / "roi-age-effects.png", dpi=180); plt.close(fig)
+    if args.stage != "wholebrain":
+        write_roi_results(roi_results, report, readiness["provisional"])
+    if args.stage == "roi":
+        save_json(report / "completion.json", dict(complete=True, stage="roi", roi_tests=len(roi_results),
+            finished_maps=0, provisional=readiness["provisional"], plan_sha256=sha(report / "plan.json")))
+        print("CHECK PASSED: ROI age analysis complete (15 tests); no whole-brain permutations requested.", flush=True)
+        return
     results, failures = [], []
     with ThreadPoolExecutor(max_workers=args.jobs) as pool:
         futures = {pool.submit(randomise_model, folder, output, executable, args.permutations, args.seed): (folder, info)
@@ -324,10 +334,29 @@ def main():
                 failures.append(dict(model=folder.name, error=str(error)))
                 print(f"ERROR: {folder.name}: {error}", flush=True)
     pd.DataFrame(results).to_csv(report / "wholebrain-age-summary.tsv", sep="\t", index=False)
-    save_json(report / "completion.json", dict(complete=not failures, finished_maps=len(results), failures=failures,
+    save_json(report / "completion.json", dict(complete=not failures and len(results) == 20,
+        stage=args.stage, provisional=readiness["provisional"], roi_tests=len(roi_results),
+        finished_maps=len(results), failures=failures,
         randomise_executable=executable, readiness=readiness["counts"], plan_sha256=sha(report / "plan.json")))
     require(not failures and len(results) == 20, "Incomplete randomise models; inspect per-model logs, do not rerun FEAT")
-    print("CHECK PASSED: exploratory age analysis complete (10 models, 20 signed maps, 15 ROI tests).", flush=True)
+    print(f"CHECK PASSED: age analysis complete (20 signed maps, {len(roi_results)} ROI tests).", flush=True)
+
+
+def write_roi_results(roi_results, report, provisional=False):
+    roi = pd.DataFrame(roi_results)
+    require(len(roi) == 15, "Unexpected ROI family size")
+    roi["p_holm_15"] = holm(roi.p_two_sided)
+    roi.to_csv(report / "roi-age-results.tsv", sep="\t", index=False)
+    fig, ax = plt.subplots(figsize=(9, 8))
+    positions = np.arange(len(roi))
+    ax.errorbar(roi.beta_per_decade, positions,
+                xerr=np.vstack([roi.beta_per_decade-roi.ci95_low, roi.ci95_high-roi.beta_per_decade]), fmt="o", capsize=3)
+    ax.set_yticks(positions, [f"{r.type} | {r.roi} | {r.contrast}" for r in roi.itertuples()])
+    ax.axvline(0, color="gray", linestyle="--"); ax.invert_yaxis()
+    ax.set_xlabel("COPE change per decade (HC3 pointwise 95% CI; not percent signal change)")
+    ax.set_title("Exploratory pooled age associations | provisional ROIs" +
+                 ("\nUpstream mask provenance review pending" if provisional else ""))
+    fig.tight_layout(); fig.savefig(report / "roi-age-effects.png", dpi=180); plt.close(fig)
 
 
 if __name__ == "__main__":

@@ -1,5 +1,7 @@
 """Synthetic checks; no participant data or FSL installation required."""
 from pathlib import Path
+import json
+import os
 import sys
 import tempfile
 import unittest
@@ -11,6 +13,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "code"))
 from run_preliminary_age import design, hc3_age, ordered_candidates, prepare_model, randomise_model, vest
+import run_preliminary_age as age
 
 
 class AgeTests(unittest.TestCase):
@@ -71,6 +74,17 @@ class AgeTests(unittest.TestCase):
             merged = nib.load(root / "model/copes.nii.gz").get_fdata()
             np.testing.assert_allclose(merged[1, 1, 1], y, atol=1e-6)
             np.testing.assert_equal(merged[0, 0, 0], 0)
+            roi_only, _ = prepare_model(pd.DataFrame(rows), data, x, reference, root / "roi-only",
+                                      {"VS": full, "vmPFC": full}, "ppi_seed-vs", 10, build_stack=False)
+            self.assertEqual(roi, roi_only)
+            self.assertFalse((root / "roi-only/copes.nii.gz").exists())
+            self.assertFalse((root / "roi-only/merged.npy").exists())
+            self.assertTrue((root / "roi-only/roi-subject-values.tsv").exists())
+            wb_only, _ = prepare_model(pd.DataFrame(rows), data, x, reference, root / "wb-only",
+                                      {}, "ppi_seed-vs", 10)
+            self.assertEqual(wb_only, [])
+            self.assertTrue((root / "wb-only/copes.nii.gz").exists())
+            self.assertFalse((root / "wb-only/roi-subject-values.tsv").exists())
 
     def test_fsl_probability_direction_and_family_correction(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -86,6 +100,61 @@ class AgeTests(unittest.TestCase):
             self.assertEqual(rows[1]["voxels_p05_across_20_maps"], 0)
             vest(root / "design.con", np.array([[0, 1, 0], [0, -1, 0]]), contrast=True)
             self.assertIn("/NumContrasts\t2", (root / "design.con").read_text())
+
+    def test_independent_stage_orchestration_and_provisional_reports(self):
+        """Real extraction/statistics/plotting, stubbed external audit/permutations."""
+        data = self.sample()
+        data["n_runs"] = "1"
+        x, _ = design(data)
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            ledger = root / "ledger"
+            ledger.mkdir()
+            for name in ("provenance.json", "retained-L1.tsv", "retained-L2.tsv"):
+                (ledger / name).write_text("test source")
+            for name in ("docs/exclusion_ledger.tsv", "code/audit_group_readiness.py",
+                         "templates/FULLTRIAL_CONTRAST_CANDIDATE.tsv", "rf1.tsv", "ds.tsv", "qc.tsv",
+                         "etc/fslversion"):
+                path = root / name
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text("test source")
+            image = root / "reference.nii.gz"
+            nib.save(nib.Nifti1Image(np.ones((2, 2, 2)), np.eye(4)), image)
+            candidates = []
+            for index, person in data.iterrows():
+                cope = root / f"cope-{index}.nii.gz"
+                nib.save(nib.Nifti1Image(np.full((2, 2, 2), .6*x[index, 1] + np.sin(index)*.05), np.eye(4)), cope)
+                for kind in age.KINDS:
+                    for number, contrast in age.COPES.items():
+                        candidates.append(dict(person, type=kind, cope=str(number), contrast=contrast,
+                                               cope_path=str(cope), mask_path=str(image)))
+            def fake_audit(command):
+                report = Path(command[command.index("--report-dir") + 1])
+                report.mkdir(parents=True)
+                age.save_json(report / "summary.json", dict(computational_gate_passed=True,
+                    provisional=True, mask_provenance_warnings=[{"test": "review pending"}], counts={}))
+                pd.DataFrame(candidates).to_csv(report / "verified-pre-QC-candidates.tsv", sep="\t", index=False)
+            for stage in ("roi", "wholebrain", "all"):
+                args = ["age", "--stage", stage, "--label", stage, "--ledger-dir", str(ledger),
+                        "--rf1-participants", str(root / "rf1.tsv"), "--ds-participants", str(root / "ds.tsv"),
+                        "--qc", str(root / "qc.tsv"), "--reference", str(image)]
+                with patch.object(age, "ROOT", root), patch.object(age, "cohort", return_value=data), \
+                     patch.object(age, "ROI_FILES", {"VS": image, "vmPFC": image}), \
+                     patch.object(age, "command", side_effect=fake_audit), \
+                     patch.object(age, "randomise_model", return_value=[{"direction": 1}, {"direction": 2}]) as permutations, \
+                     patch.object(age.subprocess, "check_output", return_value="synthetic"), \
+                     patch.object(age.shutil, "which", return_value=None if stage == "roi" else "randomise"), \
+                     patch.dict(os.environ, {"FSLDIR": str(root)}), patch.object(sys, "argv", args):
+                    age.main()
+                report = root / "logs/records/preliminary-age" / stage
+                completed = json.loads((report / "completion.json").read_text())
+                self.assertTrue(completed["complete"])
+                self.assertTrue(completed["provisional"])
+                self.assertEqual(completed["stage"], stage)
+                self.assertEqual(completed["finished_maps"], 0 if stage == "roi" else 20)
+                self.assertEqual(completed["roi_tests"], 0 if stage == "wholebrain" else 15)
+                self.assertEqual(permutations.call_count, 0 if stage == "roi" else 10)
+                self.assertEqual((report / "roi-age-effects.png").exists(), stage != "wholebrain")
 
 
 if __name__ == "__main__":
