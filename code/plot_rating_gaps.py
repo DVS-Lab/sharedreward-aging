@@ -20,8 +20,8 @@ GAPS = np.array([[0,0,0,0,1,-1], [0,0,1,-1,0,0], [1,-1,0,0,0,0]], dtype=float)
 COLORS = ['#326B9F', '#C07A32', '#338574']
 
 
-def gap_analysis(data, ages):
-    x = age_design(data)
+def gap_analysis(data, ages, adjust_sex=True):
+    x = age_design(data, adjust_sex=adjust_sex)
     y = data[CELLS].to_numpy(float) @ GAPS.T
     bread = np.linalg.inv(x.T @ x)
     beta = bread @ x.T @ y
@@ -34,7 +34,7 @@ def gap_analysis(data, ages):
     cov = influence.T @ influence
     df = len(data)-x.shape[1]
     critical = stats.t.ppf(.975, df)
-    six_slopes, six_cov, _ = age_fit(data)
+    six_slopes, six_cov, _ = age_fit(data, adjust_sex=adjust_sex)
     np.testing.assert_allclose(beta[1], GAPS @ six_slopes, atol=1e-12)
     np.testing.assert_allclose(cov, GAPS @ six_cov @ GAPS.T, atol=1e-12)
     g = np.tile(x.mean(axis=0), (len(ages),1))

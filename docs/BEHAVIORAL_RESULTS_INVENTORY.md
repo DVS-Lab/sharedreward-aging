@@ -259,6 +259,16 @@ and [provenance](../qc/ratings-normalized/normalized-win-loss-provenance.json).
 An editable vector [SVG](../qc/ratings-normalized/normalized-win-loss-age.svg)
 is available. Reproduce with `python code/plot_normalized_rating_gaps.py`.
 
+The normalized friend-minus-stranger gap sensitivity with recorded sex omitted
+retains all 318 participants and dataset adjustment. With sex, the slope is
+−0.0564 SD/decade (95% CI −0.1232 to +0.0104; uncorrected p=.0976, Holm p=.2928).
+Without sex it is −0.0582 (95% CI −0.1249 to +0.0085; uncorrected p=.0868,
+Holm p=.2605). The point estimate changes little, and neither direct comparison
+crosses .05 even before correction. The correction covers three paired partner
+comparisons per specification. Source: [sex sensitivity](../qc/ratings-normalized/normalized-gap-sex-sensitivity.tsv)
+and [provenance](../qc/ratings-normalized/normalized-gap-sex-provenance.json).
+Reproduce with `python code/check_normalized_gap_sex.py`.
+
 ## Other available behavioral material
 
 | Material | Current status | Location |
