@@ -47,6 +47,29 @@ class L3Tests(unittest.TestCase):
         with self.assertRaises(ValueError):
             l3.add_tsnr(data, runs, qc.iloc[:1])
 
+    def test_pooled_mean_unequal_datasets_and_hc3_intercept(self):
+        people = self.people(60)
+        people["dataset"] = ["ds003745"]*10 + ["rf1"]*50
+        x, c, columns, names = l3.design(people, "mean")
+        np.testing.assert_allclose(x[:, 1:].mean(axis=0), 0, atol=1e-12)
+        np.testing.assert_array_equal(c, [[1,0,0,0,0], [-1,0,0,0,0]])
+        self.assertEqual(names, ["pooled_mean_positive", "pooled_mean_negative"])
+        y = 3 + 6*people.dataset.eq("rf1").astype(float).to_numpy()
+        y += np.random.default_rng(29).normal(size=60)
+        beta = np.linalg.lstsq(x, y, rcond=None)[0]
+        self.assertAlmostEqual(beta[0], y.mean())
+        bread = np.linalg.inv(x.T @ x)
+        residual = y - x @ beta
+        hat = np.diag(x @ bread @ x.T)
+        cov = bread @ x.T @ np.diag((residual/(1-hat))**2) @ x @ bread
+        result = l3.hc3_age(x, y, column=0)
+        self.assertAlmostEqual(result["beta_per_decade"], y.mean())
+        self.assertAlmostEqual(result["se_hc3"], np.sqrt(cov[0,0]))
+        # Old age-family dataset indicator must remain 0/1, not centered.
+        old_x, old_c, _, _ = l3.design(people, "age")
+        np.testing.assert_array_equal(old_x[:, -1], people.dataset.eq("rf1").astype(float))
+        self.assertEqual(old_c[0, 1], 1)
+
     def test_interaction_keeps_centered_main_effects_and_exact_contrasts(self):
         people = self.people(60)
         x, c, columns, names = l3.design(people, "age-ratings-interaction")
@@ -182,11 +205,18 @@ class L3Tests(unittest.TestCase):
 
     @unittest.skipUnless(os.environ.get("RUN_FSL_SMOKE") == "1", "Set RUN_FSL_SMOKE=1 for real FEAT fit")
     def test_real_feat_flame1(self):
+        self.real_feat_fit("age-ratings-interaction")
+
+    @unittest.skipUnless(os.environ.get("RUN_FSL_SMOKE") == "1", "Set RUN_FSL_SMOKE=1 for real FEAT fit")
+    def test_real_feat_flame1_mean(self):
+        self.real_feat_fit("mean")
+
+    def real_feat_fit(self, family):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
             rng = np.random.default_rng(8)
             data = self.people(24)
-            x, c, columns, names = l3.design(data, "age-ratings-interaction")
+            x, c, columns, names = l3.design(data, family)
             reference = nib.Nifti1Image(np.ones((12, 12, 12)), np.diag([2., 2., 2., 1.]))
             ref = root / "reference.nii.gz"; nib.save(reference, ref)
             rows = []
@@ -221,14 +251,14 @@ class L3Tests(unittest.TestCase):
                       for i,row in enumerate(rows.to_dict('records'))]
             fsf = root / "design.fsf"
             output = root / "out.gfeat"
-            fsf.write_text(l3.render("age-ratings-interaction", output, inputs, x, c, columns, names, ref))
+            fsf.write_text(l3.render(family, output, inputs, x, c, columns, names, ref))
             result = subprocess.run(["bash", str(l3.ROOT / "code/L3stats.sh"), str(fsf)], capture_output=True, text=True)
             if result.returncode:
                 print(result.stdout, result.stderr)
                 for log in output.glob("**/logs/*"):
                     if log.is_file(): print(log, log.read_text(errors="replace")[-4000:])
             self.assertEqual(result.returncode, 0)
-            self.assertEqual(len(l3.audit_fit(output, x, c, reference, common)), 6)
+            self.assertEqual(len(l3.audit_fit(output, x, c, reference, common)), len(c))
             self.assertEqual(source_hashes, {p:l3.sha(p) for p in source_hashes})
 
     def test_roi_cli_all_families_support_and_completion(self):
@@ -281,6 +311,24 @@ class L3Tests(unittest.TestCase):
             support=pd.read_csv(report/'analysis-support.tsv',sep='\t')
             self.assertEqual(len(support),16)
             self.assertTrue((support.analysis_voxels==48).all())
+            with patch.object(l3,'ROOT',root), patch.object(l3,'cohort',return_value=people), \
+                 patch.object(l3,'add_tsnr',return_value=people), \
+                 patch.object(l3,'verify_qc_exclusions',return_value=[]), \
+                 patch.object(l3,'read',return_value=pd.DataFrame(candidates)), \
+                 patch.object(l3,'sha',return_value='fixture'), \
+                 patch.object(l3,'run_command',side_effect=audit_command), \
+                 patch.object(l3,'ROI_FILES',{'VS':refpath,'vmPFC':refpath}), \
+                 patch.object(sys,'argv',['run_L3stats.py','--stage','roi','--label','mean-test',
+                                         '--mean-activation','--reference',str(refpath)]):
+                l3.main()
+            report=root/'logs/records/L3-preliminary/mean-test'
+            completion=json.loads((report/'completion.json').read_text())
+            self.assertTrue(completion['complete']); self.assertEqual(completion['roi_tests'],6)
+            roi=pd.read_csv(report/'roi-results.tsv',sep='\t')
+            self.assertEqual(set(roi.cope),{10,11,12})
+            self.assertTrue(roi.predictor.eq('intercept').all())
+            self.assertTrue(roi.kind.eq('act').all())
+            self.assertEqual(len(pd.read_csv(report/'analysis-support.tsv',sep='\t')),3)
 
 
 if __name__ == "__main__":

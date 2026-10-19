@@ -100,20 +100,21 @@ def design(data):
     return x, list(columns)
 
 
-def hc3_age(x, y):
+def hc3_age(x, y, column=1):
+    """HC3 inference for a selected coefficient; legacy result key retained."""
     bread = np.linalg.inv(x.T @ x)
     beta = bread @ x.T @ y
     residual = y - x @ beta
     leverage = np.sum((x @ bread) * x, axis=1)
     require(np.max(leverage) < 1 - 1e-8, "Unit leverage prevents HC3 inference")
-    influence = (x @ bread[:, 1]) * residual / (1 - leverage)
+    influence = (x @ bread[:, column]) * residual / (1 - leverage)
     se = float(np.sqrt(influence @ influence))
     require(se > 0 and np.isfinite(se), "Degenerate ROI standard error")
     df = x.shape[0] - x.shape[1]
     critical = stats.t.ppf(.975, df)
-    return dict(beta_per_decade=float(beta[1]), se_hc3=se,
-                ci95_low=float(beta[1] - critical * se), ci95_high=float(beta[1] + critical * se),
-                p_two_sided=float(2 * stats.t.sf(abs(beta[1] / se), df)), df=df)
+    return dict(beta_per_decade=float(beta[column]), se_hc3=se,
+                ci95_low=float(beta[column] - critical * se), ci95_high=float(beta[column] + critical * se),
+                p_two_sided=float(2 * stats.t.sf(abs(beta[column] / se), df)), df=df)
 
 
 def vest(path, array, contrast=False):

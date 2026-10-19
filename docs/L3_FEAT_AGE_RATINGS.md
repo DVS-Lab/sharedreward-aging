@@ -6,6 +6,9 @@ permutation launcher; it does not overwrite its results or rerun L1/L2.
 
 ## Models and tracked templates
 
+- `templates/L3_template_pooled_mean_flame1.fsf`: **new group-mean activation
+  family** (2026-10-19). Intercept, centered age/10, centered tSNR, centered FD,
+  and **centered dataset dummy**. See the basic-response diagnostic below.
 - `templates/L3_template_pooled_age_flame1.fsf`: intercept, centered age/10,
   centered tSNR, centered mean FD, dataset dummy (RF1=1, ds003745=0).
 - `templates/L3_template_pooled_age-ratings_flame1.fsf`: intercept, centered raw
@@ -41,6 +44,92 @@ Current local covariate plan: 358 imaging participants (315 RF1, 43 ds003745),
 663 retained runs; 290 participants qualify for the ratings extension.
 Ratings use the primary within-partner loss>win exclusion, equality allowed,
 plus the existing validated ratings eligibility. Raw ratings are not z-scored.
+
+## Basic activation responses and participant-level vmPFC support (2026-10-19)
+
+`--mean-activation` selects three new, separate FLAME1 activation models:
+COPE10 win > loss, COPE11 friend > stranger, and COPE12 friend > computer.
+These are Shared Reward contrasts, **not Trust reciprocate > defect**.
+For each model, group zstat1 tests the positive pooled mean and zstat2 its
+negative. Existing age/ratings designs and output files are unchanged. The
+new flag cannot be combined with ratings/interaction flags. There is no PPI
+group-mean model in this addition.
+
+All non-intercept covariates, including the dataset indicator, are centered
+on the retained sample. Thus the intercept evaluates the fitted response at
+sample-mean age, tSNR and FD, and the participant-count-weighted dataset
+mixture (currently 315/358 RF1), rather than at the reference dataset alone.
+This defines the estimand; FLAME1 still uses its usual precision weighting.
+With ordinary least squares the intercept equals the sample mean of COPEs.
+No sex term, new smoothing, robust outlier deweighting, or new exclusions.
+`--stage all` also reports VS and vmPFC mean COPEs with HC3 uncertainty and
+Holm correction across the six ROI tests. The usual per-signed-map Z>3.1,
+cluster p<.05 threshold does not correct across these six whole-brain maps.
+
+`code/audit_vmpfc_support.py` reads an existing L3 analysis directory's
+`ordered-inputs.tsv` files and loads the **original participant-level**
+L1-passthrough or L2 mask/VARCOPE paths. It explicitly rejects adapter paths:
+adapter masks have already been reduced to common support and cannot answer
+who caused coverage loss. The anatomical vmPFC ROI is nearest-neighbor
+resampled to the shared reference grid; originals are never modified.
+
+For every participant/model it records anatomical ROI coverage by the mask,
+coverage by mask AND positive variance, and additional zero-variance loss.
+`unique_mask_loss_voxels` and `unique_support_loss_voxels` count voxels absent
+only in that participant, i.e. the coverage gained if that one input were
+omitted. These are descriptive attribution measures, **not exclusion rules**.
+They are not additive estimates for arbitrary combinations of exclusions.
+The diagnostic must exactly reproduce the saved directory and effective
+group masks; discrepancies, invalid values or grids cause a failed audit.
+
+Outputs:
+
+- Tracked report directory: participant/model TSV, pooled and dataset-specific
+  summary TSV, provenance hashes, completion JSON and coverage overview PNG.
+- Ignored derivatives directory: pooled and dataset-specific mask/support
+  frequency maps, with values 0–1, and the resampled anatomical vmPFC ROI.
+  These maps cover the whole reference grid; use the supplied ROI to inspect
+  vmPFC. Dataset-specific intersections are diagnostic, not new analysis masks.
+
+The two commands can run concurrently. Do not alter exclusion manifests or
+L1/L2 outputs while they are running. Use a fresh timestamp for every attempt:
+
+```bash
+cd /ZPOOL/data/projects/sharedreward-aging
+git pull --ff-only origin main
+conda activate sharedreward-phase0
+export IMAGING_PYTHON=/ZPOOL/data/tools/anaconda/tug87422/envs/sharedreward-phase0/bin/python
+export FSLDIR=/usr/local/fsl
+export PATH="$FSLDIR/share/fsl/bin:$PATH"
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 FSLSUB_PARALLEL=1
+
+stamp=$(date +%Y%m%d-%H%M%S)
+mean_label="L3-mean-activation-${stamp}"
+coverage_label="vmpfc-support-${stamp}"
+
+nohup setsid -f -w bash code/run_logged.sh \
+  --label "$mean_label" --include-full-log -- \
+  "$IMAGING_PYTHON" code/run_L3stats.py \
+    --stage all --mean-activation --jobs 3 --label "$mean_label" \
+    --mask-allowance resources/age-mask-allowance-20261018.json \
+  > "logs/${mean_label}.nohup" 2>&1 < /dev/null &
+
+nohup setsid -f -w bash code/run_logged.sh \
+  --label "$coverage_label" --include-full-log -- \
+  "$IMAGING_PYTHON" code/audit_vmpfc_support.py \
+    --analysis-root derivatives/fsl/L3-preliminary/L3-FLAME1-age-interactions-20261019-091356 \
+    --output-dir "logs/records/vmpfc-support/${coverage_label}" \
+    --map-dir "derivatives/qc/vmpfc-support/${coverage_label}" \
+  > "logs/${coverage_label}.nohup" 2>&1 < /dev/null &
+```
+
+The mean run repeats readiness and frozen-QC checks before launching FEAT.
+Expected completion is three FEAT models and six ROI tests; the coverage
+diagnostic checks all 16 models in the specified existing age/ratings run.
+Both retain the documented mask-fingerprint provenance caveat. No additional
+participants are excluded automatically. Decide whether any coverage-based
+sensitivity analysis is justified only after inspecting this diagnostic;
+do not choose exclusions to improve task or age significance.
 
 ## Exclusions are applied before modeling
 

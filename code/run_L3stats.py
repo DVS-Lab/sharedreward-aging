@@ -27,7 +27,7 @@ from run_preliminary_age import (ROOT, KEY, KINDS, ROI_FILES, cohort, require, s
 CONTRASTS = {10: "rew-pun", 11: "F-S", 12: "F-C", 14: "F-S (rew-pun)",
              16: "F-C (rew-pun)", 17: "F-S (rew)"}
 TEMPLATES = {family: ROOT / f"templates/L3_template_pooled_{family}_flame1.fsf"
-             for family in ("age", "age-ratings", "age-ratings-interaction")}
+             for family in ("mean", "age", "age-ratings", "age-ratings-interaction")}
 
 
 def verify_qc_exclusions(runs, qc, thresholds):
@@ -100,7 +100,7 @@ def design(data, family):
     require(family in TEMPLATES, "Unknown model family")
     columns = {"intercept": np.ones(len(data))}
     age = (data.age - data.age.mean()) / 10
-    if family != "age":
+    if family not in ("mean", "age"):
         rating = data.rating_score - data.rating_score.mean()
         if family == "age-ratings-interaction":
             # Product of centered lower-order terms, not residualized/orthogonalized.
@@ -110,16 +110,20 @@ def design(data, family):
     columns["tsnr"] = data.retained_tsnr - data.retained_tsnr.mean()
     columns["fdmean_mm"] = data.retained_mean_fd_mm - data.retained_mean_fd_mm.mean()
     columns["dataset_rf1"] = data.dataset.eq("rf1").astype(float)
+    if family == "mean":
+        # Intercept at the retained sample's covariate means, including dataset.
+        columns["dataset_rf1"] -= columns["dataset_rf1"].mean()
     require(data.dataset.nunique() == 2, "Both datasets are required")
     x = np.column_stack(list(columns.values())).astype(float)
     require(np.isfinite(x).all() and np.linalg.matrix_rank(x) == x.shape[1], "Nonfinite/rank-deficient L3 design")
     require(len(data) > x.shape[1] + 10, "Insufficient residual degrees of freedom")
-    indices = {"age": [1], "age-ratings": [1, 2], "age-ratings-interaction": [1, 2, 3]}[family]
+    indices = {"mean": [0], "age": [1], "age-ratings": [1, 2], "age-ratings-interaction": [1, 2, 3]}[family]
     c = np.zeros((len(indices)*2, x.shape[1]))
     names = []
     for i, col in enumerate(indices):
         c[2*i, col], c[2*i+1, col] = 1, -1
-        names.extend([list(columns)[col] + "_positive", list(columns)[col] + "_negative"])
+        name = "pooled_mean" if family == "mean" else list(columns)[col]
+        names.extend([name + "_positive", name + "_negative"])
     return x, c, list(columns), names
 
 
@@ -326,6 +330,7 @@ def main():
     p.add_argument("--label", required=True)
     p.add_argument("--jobs", type=int, default=4)
     p.add_argument("--with-ratings", action="store_true")
+    p.add_argument("--mean-activation", action="store_true", help="Only pooled mean activation: COPEs 10, 11, 12; same QC cohort")
     p.add_argument("--with-interactions", action="store_true", help="Also fit age x raw ratings; implies --with-ratings")
     p.add_argument("--mask-allowance", type=Path)
     p.add_argument("--ledger-dir", type=Path, default=ROOT / "logs/records/exclusion-ledger")
@@ -336,6 +341,7 @@ def main():
     p.add_argument("--reference", type=Path, default=ROOT.parent / "rf1-sra-sharedreward/resources/rf1_MNI152NLin6Asym_reference_grid.nii.gz")
     args = p.parse_args()
     args.with_ratings = args.with_ratings or args.with_interactions
+    require(not (args.mean_activation and args.with_ratings), "Mean activation is a separate family; omit ratings/interaction flags")
     require(re.fullmatch(r"[A-Za-z0-9_-]+", args.label) and 1 <= args.jobs <= 8, "Invalid label/jobs")
     out = ROOT / "derivatives/fsl/L3-preliminary" / args.label
     report = ROOT / "logs/records/L3-preliminary" / args.label
@@ -345,7 +351,7 @@ def main():
     qc_exclusions = verify_qc_exclusions(read(args.ledger_dir / "retained-L1.tsv"), read(args.qc),
                                          read(args.ledger_dir / "iqr-thresholds.tsv"))
     out.mkdir(parents=True); report.mkdir(parents=True)
-    cohorts = {"age": data}
+    cohorts = {"mean" if args.mean_activation else "age": data}
     if args.with_ratings:
         cohorts["age-ratings"], eligibility = rating_cohort(data, read(args.ratings))
         eligibility.to_csv(out / "ratings-eligibility.tsv", sep="\t", index=False)
@@ -355,8 +361,8 @@ def main():
     for family, people in cohorts.items():
         x, c, columns, names = design(people, family)
         people.to_csv(out / f"{family}-subject-design.tsv", sep="\t", index=False)
-        for kind in KINDS:
-            for cope in (CONTRASTS if family == "age" else (17,)):
+        for kind in (("act",) if family == "mean" else KINDS):
+            for cope in ((10, 11, 12) if family == "mean" else CONTRASTS if family == "age" else (17,)):
                 specs.append(dict(family=family, kind=kind, cope=cope, n=len(people), columns=columns, names=names))
     sources = [Path(__file__), ROOT / "code/L3stats.sh", *TEMPLATES.values(), args.qc,
                args.rf1_participants, args.ds_participants, args.ledger_dir / "retained-L1.tsv",
@@ -370,6 +376,7 @@ def main():
                 qc_exclusion_verification=qc_exclusions,
                 tsnr="mean of retained-run whole-brain median tSNR from smoothed FEAT-input QC",
                 fd="valid-FD-volume-weighted mean over retained runs", robust_outliers=False,
+                mean_estimand="For mean family only: intercept at sample-mean age, tSNR, FD and dataset fraction; participant-count-weighted dataset mixture, not equal dataset weighting. FLAME1 retains precision weighting.",
                 support="directory-mask intersection AND every subject VARCOPE > 0; same support for ROI and FEAT",
                 interaction="centered age/10 times centered raw friend-win minus stranger-win rating; both main effects retained",
                 inference="Z>3.1, cluster p<0.05 per signed map; no across-model multiplicity correction",
@@ -425,10 +432,11 @@ def main():
                 coverage[f"{name}_analysis_voxels"] = int(mask.sum())
                 require(mask.any(), f"Empty ROI: {name}")
                 y = np.array([image_values(path, reference)[mask].mean() for path in rows.cope_path])
-                result = hc3_age(x, y)
+                target_column = 0 if family == "mean" else 1
+                result = hc3_age(x, y, column=target_column)
                 result["beta"] = result.pop("beta_per_decade")
                 roi_rows.append(dict(family=family, kind=kind, cope=cope, roi=name, n=len(people),
-                                     predictor=columns[1], roi_voxels=int(mask.sum()), full_roi_voxels=full_n,
+                                     predictor=columns[target_column], roi_voxels=int(mask.sum()), full_roi_voxels=full_n,
                                      directory_roi_voxels=directory_n, **result))
                 private = people[KEY].copy(); private["mean_cope"] = y
                 private.to_csv(folder / f"roi-{name}-values.tsv", sep="\t", index=False)
@@ -453,7 +461,7 @@ def main():
             ax.set_yticks(y, [f"{r.kind} | {r.roi} | COPE{r.cope} {CONTRASTS[r.cope]}"
                              for r in subset.itertuples()])
             ax.invert_yaxis(); ax.axvline(0, color="gray", linewidth=1)
-            ax.set_xlabel({"age": "COPE change per decade", "age-ratings": "COPE change per raw rating-difference unit",
+            ax.set_xlabel({"mean": "Adjusted pooled mean COPE", "age": "COPE change per decade", "age-ratings": "COPE change per raw rating-difference unit",
                            "age-ratings-interaction": "Change in ratings slope per decade (COPE / rating unit / decade)"}[family])
             ax.set_title(f"Preliminary pooled {family}: adjusted ROI estimates, HC3 95% CI")
             fig.tight_layout(); fig.savefig(plot_dir / f"{family}-roi.png", dpi=170); plt.close(fig)
