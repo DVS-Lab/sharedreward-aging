@@ -1,0 +1,21 @@
+type	cope	contrast	mask_voxels	direction	min_p_voxelwise_fwe	min_p_across_20_maps	voxels_p05_across_20_maps
+act	12	F-C	81600	positive	0.21560001373291016	1.0	0
+act	12	F-C	81600	negative	0.10559999942779541	1.0	0
+act	11	F-S	81600	positive	0.397599995136261	1.0	0
+act	11	F-S	81600	negative	0.1565999984741211	1.0	0
+act	10	rew-pun	81600	positive	0.6704000234603882	1.0	0
+act	10	rew-pun	81600	negative	0.5005999803543091	1.0	0
+act	14	F-S (rew-pun)	81600	positive	0.14560002088546753	1.0	0
+act	14	F-S (rew-pun)	81600	negative	0.7638000249862671	1.0	0
+act	16	F-C (rew-pun)	81600	positive	0.24819999933242798	1.0	0
+act	16	F-C (rew-pun)	81600	negative	0.6294000148773193	1.0	0
+ppi_seed-vs	12	F-C	81600	positive	0.8353999853134155	1.0	0
+ppi_seed-vs	12	F-C	81600	negative	0.7648000121116638	1.0	0
+ppi_seed-vs	11	F-S	81600	positive	0.7871999740600586	1.0	0
+ppi_seed-vs	11	F-S	81600	negative	0.7386000156402588	1.0	0
+ppi_seed-vs	10	rew-pun	81600	positive	0.4118000268936157	1.0	0
+ppi_seed-vs	10	rew-pun	81600	negative	0.8579999804496765	1.0	0
+ppi_seed-vs	14	F-S (rew-pun)	81600	positive	0.7459999918937683	1.0	0
+ppi_seed-vs	14	F-S (rew-pun)	81600	negative	0.7749999761581421	1.0	0
+ppi_seed-vs	16	F-C (rew-pun)	81600	positive	0.9408000111579895	1.0	0
+ppi_seed-vs	16	F-C (rew-pun)	81600	negative	0.9247999787330627	1.0	0

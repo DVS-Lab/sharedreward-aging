@@ -1,0 +1,30 @@
+{
+  "complete": true,
+  "stage": "wholebrain",
+  "provisional": true,
+  "roi_tests": 0,
+  "finished_maps": 20,
+  "failures": [],
+  "randomise_executable": "/usr/local/fsl/share/fsl/bin/randomise",
+  "readiness": {
+    "l1": {
+      "verified": 1326
+    },
+    "l1_by_dataset_type_status": {
+      "ds003745/act/verified": 82,
+      "ds003745/ppi_seed-vs/verified": 82,
+      "rf1/act/verified": 581,
+      "rf1/ppi_seed-vs/verified": 581
+    },
+    "subject": {
+      "verified": 716
+    },
+    "subject_by_dataset_type_status": {
+      "ds003745/act/verified": 43,
+      "ds003745/ppi_seed-vs/verified": 43,
+      "rf1/act/verified": 315,
+      "rf1/ppi_seed-vs/verified": 315
+    }
+  },
+  "plan_sha256": "6230ca8c49f457e35898e8648eb439c7522653338f52072ad2f745554d77b19f"
+}
