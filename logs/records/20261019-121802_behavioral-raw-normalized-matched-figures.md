@@ -1,0 +1,95 @@
+# Run Record: behavioral-raw-normalized-matched-figures
+
+- Timestamp: 20261019-121802
+- Branch: main
+- Commit: 2a51270
+- Host: CLA19733
+- User: tug87422
+- Working directory: `/Users/tug87422/github/sharedreward-aging`
+- Raw log: `/Users/tug87422/github/sharedreward-aging/logs/runs/20261019-121802_behavioral-raw-normalized-matched-figures.log`
+- Command exit: 0
+- Check exit: none
+- Summary: CHECK PASSED: matched raw and normalized rating figures generated on the same sample.
+
+## Command
+
+```bash
+/Users/tug87422/fsl/bin/python3 code/plot_ratings_comparison.py 
+```
+
+## Log
+
+```text
+RUN START: 20261019-121802
+PROJECT_ROOT: /Users/tug87422/github/sharedreward-aging
+GIT: main 2a51270
+HOST: CLA19733
+USER: tug87422
+PWD: /Users/tug87422/github/sharedreward-aging
+COMMAND: /Users/tug87422/fsl/bin/python3 code/plot_ratings_comparison.py 
+
+{
+  "n": 318,
+  "sample_by_dataset": {
+    "ds003745": 33,
+    "rf1": 285
+  },
+  "ratings_policy": "within_partner_loss_gt_win_primary_2026-10-01",
+  "exclusions": "Applied to raw ratings before normalization; within-partner loss > win excludes, equality allowed.",
+  "normalization": "Within-person six-cell z-score using sample SD (ddof=1), then form contrasts. No second normalization.",
+  "model": "Intercept + centered age/10 + dataset + recorded sex (F reference, M/O offsets). Paired contrast, HC3 t inference.",
+  "bars": "Pooled descriptive means and between-person SEM; not model-adjusted.",
+  "scatter": "Dots and fitted line adjusted to empirical dataset/sex mix; pointwise HC3 95% CI; all observations shown.",
+  "p_values": "Two-sided uncorrected p displayed. age-tests.tsv also retains Holm correction over three paired comparisons per scale.",
+  "interpretation": "User states a directional substantive prediction. These plots do not establish a preregistered normalization choice. Neither pipeline nor primary raw-rating policy changed.",
+  "sources": [
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/logs/records/ratings-qc-subject-level.tsv",
+      "sha256": "dc13ec845d927cb66f41139d54b2bce37ee3efbbb3b62466034ee3bd7f6488ed"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/logs/records/analysis-subject-dispositions.tsv",
+      "sha256": "e30a4c33fc4adf18fc62bdeaada0360851086b66c9fd24d03f73e67c83ae7616"
+    },
+    {
+      "path": "/Users/tug87422/github/rf1-sra-linux2/bids/participants.tsv",
+      "sha256": "10004009f83ae3ffd9977941e6c222ac8f1aabfd70f41968470cfaa70ef35ca4"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/participants-srndna.tsv",
+      "sha256": "760730ad4d57f3d5d05ca489620ddead9442380405885b7c84792e413a3dac5e"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/plot_ratings_comparison.py",
+      "sha256": "252779f4f7c0219a88d1bec1c18ade3025f63a7e84ac4dadfe6df763d7b4a40b"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/analyze_raw_ratings.py",
+      "sha256": "20d9e5b53e1da195114b71f5c5cd3b418b89ce4519da93449823dda2614879f7"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/audit_ratings_qc.py",
+      "sha256": "49270e365449e66bf4e4375497a4fc574f4946e5481917be3219a235ad3461ef"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/plot_normalized_loss_ratings.py",
+      "sha256": "fc2f487fe9bf94503a7266b2f0f4597db4bb9bac821e4a39ba43480c24fcb940"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/plot_normalized_rating_gaps.py",
+      "sha256": "a254d96b3a5a628448f96377a11e2047b743f0a91ae3ecc879afb9d2210a6f22"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/plot_rating_gaps.py",
+      "sha256": "0c9ab0f597aa6b3eb2483fcf5861e2c194d7464c051d1df91319546d4786137c"
+    }
+  ]
+}
+scale                   family            comparison   n  points_per_decade   se_hc3  ci95_low  ci95_high  df        p  p_holm_family  chi2          slope_units
+  raw paired_slope_differences Friend minus Stranger 318          -0.151176 0.090142 -0.328536   0.026184 313 0.094523       0.283568   NaN rating points/decade
+     scale                   family            comparison   n  points_per_decade   se_hc3  ci95_low  ci95_high  df      p  p_holm_family  chi2             slope_units
+normalized paired_slope_differences Friend minus Stranger 318          -0.056404 0.033947 -0.123197   0.010388 313 0.0976       0.292801   NaN within-person SD/decade
+CHECK PASSED: matched raw and normalized rating figures generated on the same sample.
+
+COMMAND EXIT: 0
+```
