@@ -196,6 +196,36 @@ lesson here is to specify the quantity being compared and not treat normalizatio
 as neutral preprocessing. The current behavioral outcome regression is not the
 same analysis as their first-level fMRI regressor-scaling example.
 
+### Within-person normalized loss sensitivity
+
+At the user's request, the 2026-10-19 sensitivity plots compare raw ratings,
+within-person mean-centering, and within-person z-scoring. Each person's six
+partner-by-outcome cell means receive equal weight. Z-scoring subtracts that
+six-cell mean and divides by the sample SD (ddof=1). Normalization is not done
+separately for losses. All 318 participants remain, with the raw-rating
+eligibility policy applied first and the same dataset/recorded-sex model.
+
+The z-scored friend loss slope is +0.0376 within-person SD units/decade
+(95% CI +0.0009 to +0.0743, raw p=.0444, Holm p=.1333 across three loss slopes).
+Stranger is −0.0018 and computer +0.0130. Direct z-scored slope differences are
+friend minus stranger +0.0394 (95% CI −0.0093 to +0.0881, raw p=.1125,
+Holm p=.3375) and friend minus computer +0.0246 (95% CI −0.0324 to +0.0816,
+raw p=.3966, Holm p=.7931). The overall age-by-partner test is p=.2586.
+Thus the positive friend slope remains nominally detectable, but neither the
+three-slope correction nor direct partner comparisons establishes a selective
+friend-loss age effect. Mean-centering alone leaves all pairwise raw slope tests
+unchanged, verified numerically.
+
+The response-style motivation is explicit, but these transformations can remove
+both scale-use differences and substantive differences. They remain sensitivity
+analyses; the raw-rating primary model has not been changed.
+
+See the [comparison figure](../qc/ratings-normalized/loss-ratings-normalization-comparison.png),
+[tests](../qc/ratings-normalized/loss-age-tests.tsv),
+[predictions](../qc/ratings-normalized/loss-age-predictions.tsv), and
+[provenance](../qc/ratings-normalized/provenance.json).
+Reproduce with `python code/plot_normalized_loss_ratings.py`.
+
 ## Other available behavioral material
 
 | Material | Current status | Location |

@@ -1,0 +1,52 @@
+{
+  "n": 318,
+  "sample_by_dataset": {
+    "ds003745": 33,
+    "rf1": 285
+  },
+  "ratings_policy": "within_partner_loss_gt_win_primary_2026-10-01",
+  "normalization": "Within each participant, equally weight all six partner x outcome cell means. Center by six-cell mean; z-score by six-cell sample SD (ddof=1). No pooling of SDs, no loss-only normalization.",
+  "exclusions": "Applied to raw ratings first. Identical sample for all three models; zero SD fails explicitly. No imaging QC exclusions.",
+  "model": "Intercept + centered continuous age per decade + dataset + recorded sex; condition-specific coefficients, paired HC3 covariance.",
+  "inference": "Pointwise t confidence intervals. Holm over three pairwise loss-slope tests within each normalization; separately over three individual loss slopes. Exploratory, not experiment-wide correction.",
+  "interpretation": "Centering targets relative rating level; z-scoring also adjusts scale spread. Normalization may remove response-style differences and substantive between-person differences; no claim to identify pure response bias.",
+  "primary_model_changed": false,
+  "sources": [
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/logs/records/ratings-qc-subject-level.tsv",
+      "sha256": "dc13ec845d927cb66f41139d54b2bce37ee3efbbb3b62466034ee3bd7f6488ed"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/logs/records/analysis-subject-dispositions.tsv",
+      "sha256": "e30a4c33fc4adf18fc62bdeaada0360851086b66c9fd24d03f73e67c83ae7616"
+    },
+    {
+      "path": "/Users/tug87422/github/rf1-sra-linux2/bids/participants.tsv",
+      "sha256": "10004009f83ae3ffd9977941e6c222ac8f1aabfd70f41968470cfaa70ef35ca4"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/participants-srndna.tsv",
+      "sha256": "760730ad4d57f3d5d05ca489620ddead9442380405885b7c84792e413a3dac5e"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/plot_normalized_loss_ratings.py",
+      "sha256": "fc2f487fe9bf94503a7266b2f0f4597db4bb9bac821e4a39ba43480c24fcb940"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/analyze_raw_ratings.py",
+      "sha256": "20d9e5b53e1da195114b71f5c5cd3b418b89ce4519da93449823dda2614879f7"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/audit_ratings_qc.py",
+      "sha256": "49270e365449e66bf4e4375497a4fc574f4946e5481917be3219a235ad3461ef"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/plot_rating_age.py",
+      "sha256": "71580f76a2f4a5cc13c8e1613444933d8a2d82ba047f9a66f79a25ccde2c46ef"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/analyze_loss_rating_age.py",
+      "sha256": "d98c205e860580b3a0a52905a14069cf09c316a709aa29cb78635590d15e05ef"
+    }
+  ]
+}
