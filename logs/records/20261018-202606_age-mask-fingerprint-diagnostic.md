@@ -1,0 +1,174 @@
+# Run Record: age-mask-fingerprint-diagnostic
+
+- Timestamp: 20261018-202606
+- Branch: main
+- Commit: 713590f
+- Host: CLA19787.tu.temple.edu
+- User: tug87422
+- Working directory: `/ZPOOL/data/projects/sharedreward-aging`
+- Raw log: `/ZPOOL/data/projects/sharedreward-aging/logs/runs/20261018-202606_age-mask-fingerprint-diagnostic.log`
+- Command exit: 0
+- Check exit: none
+- Summary: COMMAND exit 0; CHECK none.
+
+## Command
+
+```bash
+python3 - 
+```
+
+## Log
+
+```text
+RUN START: 20261018-202606
+PROJECT_ROOT: /ZPOOL/data/projects/sharedreward-aging
+GIT: main 713590f
+HOST: CLA19787.tu.temple.edu
+USER: tug87422
+PWD: /ZPOOL/data/projects/sharedreward-aging
+COMMAND: python3 - 
+
+{
+  "recorded": {
+    "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11083/ses-01/func/sub-11083_ses-01_task-sharedreward_run-1_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+    "size": 3911,
+    "mtime_ns": 1784231393485518501
+  },
+  "current": {
+    "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11083/ses-01/func/sub-11083_ses-01_task-sharedreward_run-1_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+    "size": 3882,
+    "mtime_ns": 1792209915915993310
+  },
+  "size_changed": true,
+  "current_modified_utc": "2026-10-17T04:05:15.915993+00:00"
+}
+{
+  "recorded": {
+    "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11083/ses-01/func/sub-11083_ses-01_task-sharedreward_run-2_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+    "size": 3943,
+    "mtime_ns": 1784231394431533788
+  },
+  "current": {
+    "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11083/ses-01/func/sub-11083_ses-01_task-sharedreward_run-2_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+    "size": 3870,
+    "mtime_ns": 1792209916925009039
+  },
+  "size_changed": true,
+  "current_modified_utc": "2026-10-17T04:05:16.925009+00:00"
+}
+{
+  "recorded": {
+    "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11084/ses-01/func/sub-11084_ses-01_task-sharedreward_run-1_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+    "size": 3897,
+    "mtime_ns": 1784234803188260023
+  },
+  "current": {
+    "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11084/ses-01/func/sub-11084_ses-01_task-sharedreward_run-1_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+    "size": 3917,
+    "mtime_ns": 1792210114126084917
+  },
+  "size_changed": true,
+  "current_modified_utc": "2026-10-17T04:08:34.126085+00:00"
+}
+{
+  "recorded": {
+    "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11084/ses-01/func/sub-11084_ses-01_task-sharedreward_run-2_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+    "size": 3809,
+    "mtime_ns": 1784234804088273116
+  },
+  "current": {
+    "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11084/ses-01/func/sub-11084_ses-01_task-sharedreward_run-2_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+    "size": 3861,
+    "mtime_ns": 1792210115156100991
+  },
+  "size_changed": true,
+  "current_modified_utc": "2026-10-17T04:08:35.156101+00:00"
+}
+{
+  "recorded": {
+    "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11110/ses-01/func/sub-11110_ses-01_task-sharedreward_run-1_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+    "size": 3869,
+    "mtime_ns": 1784237644259262199
+  },
+  "current": {
+    "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11110/ses-01/func/sub-11110_ses-01_task-sharedreward_run-1_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+    "size": 3818,
+    "mtime_ns": 1792213585578778166
+  },
+  "size_changed": true,
+  "current_modified_utc": "2026-10-17T05:06:25.578778+00:00"
+}
+{
+  "recorded": {
+    "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11110/ses-01/func/sub-11110_ses-01_task-sharedreward_run-2_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+    "size": 3817,
+    "mtime_ns": 1784237645684283545
+  },
+  "current": {
+    "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11110/ses-01/func/sub-11110_ses-01_task-sharedreward_run-2_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+    "size": 3896,
+    "mtime_ns": 1792213587556809930
+  },
+  "size_changed": true,
+  "current_modified_utc": "2026-10-17T05:06:27.556810+00:00"
+}
+{
+  "recorded": {
+    "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11120/ses-01/func/sub-11120_ses-01_task-sharedreward_run-1_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+    "size": 3849,
+    "mtime_ns": 1784244554601289512
+  },
+  "current": {
+    "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11120/ses-01/func/sub-11120_ses-01_task-sharedreward_run-1_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+    "size": 3971,
+    "mtime_ns": 1792214212001845417
+  },
+  "size_changed": true,
+  "current_modified_utc": "2026-10-17T05:16:52.001845+00:00"
+}
+{
+  "recorded": {
+    "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11120/ses-01/func/sub-11120_ses-01_task-sharedreward_run-2_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+    "size": 3894,
+    "mtime_ns": 1784244555746307145
+  },
+  "current": {
+    "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11120/ses-01/func/sub-11120_ses-01_task-sharedreward_run-2_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+    "size": 3930,
+    "mtime_ns": 1792214213081862783
+  },
+  "size_changed": true,
+  "current_modified_utc": "2026-10-17T05:16:53.081863+00:00"
+}
+{
+  "recorded": {
+    "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11193/ses-01/func/sub-11193_ses-01_task-sharedreward_run-1_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+    "size": 3827,
+    "mtime_ns": 1784267710663508747
+  },
+  "current": {
+    "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11193/ses-01/func/sub-11193_ses-01_task-sharedreward_run-1_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+    "size": 3813,
+    "mtime_ns": 1792217417985837702
+  },
+  "size_changed": true,
+  "current_modified_utc": "2026-10-17T06:10:17.985838+00:00"
+}
+{
+  "recorded": {
+    "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11193/ses-01/func/sub-11193_ses-01_task-sharedreward_run-2_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+    "size": 3952,
+    "mtime_ns": 1784267711613523243
+  },
+  "current": {
+    "path": "/ZPOOL/data/projects/rf1-sra-linux2/derivatives/fmriprep/sub-11193/ses-01/func/sub-11193_ses-01_task-sharedreward_run-2_part-mag_space-MNI152NLin6Asym_desc-brain_mask.nii.gz",
+    "size": 3874,
+    "mtime_ns": 1792217418979853475
+  },
+  "size_changed": true,
+  "current_modified_utc": "2026-10-17T06:10:18.979853+00:00"
+}
+Distinct changed image fingerprints: 10
+
+COMMAND EXIT: 0
+```
