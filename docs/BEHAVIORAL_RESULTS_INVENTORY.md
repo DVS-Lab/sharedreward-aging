@@ -86,6 +86,56 @@ separate exploratory corrections, not one experiment-wide error guarantee.
 
 Source: [paired follow-up estimates and intervals](../qc/ratings-raw/age-exploratory-contrasts.tsv).
 
+### Ceiling and recorded sex sensitivity
+
+The 2026-10-19 sensitivity check retains the identical 318 people and primary
+behavioral exclusions. Friend wins have a substantial ceiling: 223/318 (70.1%)
+are +5, compared with 86/318 (27.0%) stranger wins and 65/318 (20.4%) computer
+wins. Friend losses also have a floor: 104/318 (32.7%) are −5. Endpoint responses
+are retained, not treated as invalid or removed in a selected-subset analysis.
+
+The primary design is an intercept, continuous centered age per decade, an RF1
+dataset dummy, and recorded-sex offsets (M and O, reference F). Recorded sex is
+186 F, 129 M and 3 O; it is not verified gender identity. There are no age-by-sex
+interactions, motion or tSNR covariates in this behavioral-only model.
+
+| Adjustment | Friend win age slope | Friend loss age slope | Friend win minus loss slope (95% CI) | Gap Holm p |
+|---|---:|---:|---|---:|
+| Dataset and recorded sex | −0.026 | +0.190 | −0.217 [−0.382, −0.052] | .0309 |
+| Dataset only | −0.036 | +0.209 | −0.246 [−0.411, −0.080] | .0112 |
+
+Slopes are raw rating points per decade. Gap p-values correct over the three
+partner gaps separately within each adjustment model. About 88% of the primary
+friend gap point estimate comes algebraically from the loss slope, not the win
+slope; this decomposition is not a causal attribution. Friend-win ceiling
+membership changes by +1.14 percentage points per decade after dataset/sex
+adjustment (HC3 95% CI −1.72 to +3.99; unadjusted p=.434). This does not establish
+that latent preferences are age invariant.
+
+A bounded-mean sensitivity uses [fractional logit](https://www.nber.org/papers/t0147)
+on (rating+5)/10 with endpoints included. Average age derivatives are returned to
+the original rating scale. Paired participant-level sandwich covariance (HC1)
+and a delta method conditional on the observed covariates give 95% normal CIs.
+The dataset/sex-adjusted friend gap derivative is −0.210 [−0.368, −0.053],
+Holm p=.0260. Without sex it is −0.241 [−0.400, −0.083], Holm p=.0086.
+This models the observed bounded mean, not latent uncensored ratings.
+
+Interpretation: the observed friend gap narrows mainly because losses are rated
+less negatively at older ages, and this result is similar with or without sex
+adjustment and in the bounded-mean sensitivity. The ceiling still prevents a
+strong interpretation of the flat win slope. Differences among partners' gap
+slopes remain uncertain (joint p=.202 in the primary model; .212 in the bounded
+sensitivity). These are exploratory sensitivity checks, not independent
+replications or an experiment-wide multiplicity correction.
+
+Sources: [endpoint counts](../qc/ratings-raw/ceiling-sensitivity/endpoint-prevalence.tsv),
+[endpoint age tests](../qc/ratings-raw/ceiling-sensitivity/endpoint-age-tests.tsv),
+[model comparisons](../qc/ratings-raw/ceiling-sensitivity/age-sensitivity-tests.tsv),
+[figure](../qc/ratings-raw/ceiling-sensitivity/ceiling-sex-sensitivity.png), and
+[methods and source hashes](../qc/ratings-raw/ceiling-sensitivity/provenance.json).
+Reproduce with `python code/check_ratings_ceiling.py`; this does not modify the
+primary eligibility rule, previous figures or imaging inputs.
+
 ## Other available behavioral material
 
 | Material | Current status | Location |

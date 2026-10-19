@@ -1,0 +1,60 @@
+{
+  "n": 318,
+  "sample_by_dataset": {
+    "ds003745": 33,
+    "rf1": 285
+  },
+  "recorded_sex_counts": {
+    "F": 186,
+    "M": 129,
+    "O": 3
+  },
+  "task_valid_n": 393,
+  "ratings_policy": "within_partner_loss_gt_win_primary_2026-10-01",
+  "design": "Intercept + centered continuous age per decade + RF1 dataset dummy; with/without recorded sex M/O dummy offsets (F reference).",
+  "exclusions": "Same primary behavioral exclusions; no MRI QC, no exclusion of ceiling/floor responses.",
+  "bounded_sensitivity": "Fractional logit of (rating+5)/10, endpoints included; average age derivative on original scale. Paired sandwich HC1 and delta method conditional on observed covariates; normal CIs.",
+  "endpoint_tests": "Linear-probability HC3 slopes in percentage points/decade. Six tests (win ceilings and loss floors), Holm within each adjustment specification.",
+  "multiplicity": "Separate exploratory Holm families of 6 condition slopes, 3 gaps, 3 paired gap differences per model; no experiment-wide claim.",
+  "limitations": [
+    "Does not identify latent preferences above/below scale boundaries.",
+    "Bounded mean sensitivity is not an ordinal or censored-latent model.",
+    "Response-based eligibility may affect associations; no causal aging interpretation.",
+    "Recorded sex O category has only 3 participants; this is not a test of sex moderation or verified gender identity."
+  ],
+  "reference": "https://www.nber.org/papers/t0147",
+  "sources": [
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/logs/records/ratings-qc-subject-level.tsv",
+      "sha256": "dc13ec845d927cb66f41139d54b2bce37ee3efbbb3b62466034ee3bd7f6488ed"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/logs/records/analysis-subject-dispositions.tsv",
+      "sha256": "e30a4c33fc4adf18fc62bdeaada0360851086b66c9fd24d03f73e67c83ae7616"
+    },
+    {
+      "path": "/Users/tug87422/github/rf1-sra-linux2/bids/participants.tsv",
+      "sha256": "10004009f83ae3ffd9977941e6c222ac8f1aabfd70f41968470cfaa70ef35ca4"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/participants-srndna.tsv",
+      "sha256": "760730ad4d57f3d5d05ca489620ddead9442380405885b7c84792e413a3dac5e"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/check_ratings_ceiling.py",
+      "sha256": "ea5f6e6eec7f5eadb7108d63b01aebce4070b00dc18544b7d578e8a676d6eb96"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/analyze_raw_ratings.py",
+      "sha256": "20d9e5b53e1da195114b71f5c5cd3b418b89ce4519da93449823dda2614879f7"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/audit_ratings_qc.py",
+      "sha256": "49270e365449e66bf4e4375497a4fc574f4946e5481917be3219a235ad3461ef"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/plot_rating_gaps.py",
+      "sha256": "dca61b26005a280c05e3204fdf4e8468c02d2f73d03ea2245c47d0a057bb480b"
+    }
+  ]
+}
