@@ -136,6 +136,31 @@ Sources: [endpoint counts](../qc/ratings-raw/ceiling-sensitivity/endpoint-preval
 Reproduce with `python code/check_ratings_ceiling.py`; this does not modify the
 primary eligibility rule, previous figures or imaging inputs.
 
+### Direct comparisons of loss age slopes
+
+The 2026-10-19 loss-only follow-up uses the same 318 participants, exclusions,
+continuous-age/dataset model and paired HC3 covariance, with and without recorded
+sex. Positive values below mean the friend loss rating becomes less negative
+with age more quickly than the comparison condition. Units are points per decade.
+
+| Adjustment | Loss slope comparison | Difference (95% CI) | Raw p | Holm p |
+|---|---|---|---:|---:|
+| Dataset and sex | Friend minus stranger | +0.087 [−0.038, +0.212] | .173 | .520 |
+| Dataset and sex | Friend minus computer | +0.044 [−0.115, +0.203] | .584 | .956 |
+| Dataset only | Friend minus stranger | +0.099 [−0.023, +0.221] | .112 | .337 |
+| Dataset only | Friend minus computer | +0.069 [−0.088, +0.225] | .389 | .778 |
+
+Holm correction covers all three pairwise loss-slope differences in each
+specification, including stranger minus computer. The overall age-by-partner
+test on losses is chi-square(2)=2.130, p=.345 with sex, and 2.606, p=.272 without.
+Friend has the largest estimated slope (+0.190 with sex, +0.209 without), but
+these direct tests do not establish a friend-specific age effect or equivalence
+among partners. Loss floors and response-based eligibility remain relevant.
+
+Source: [loss age comparisons](../qc/ratings-raw/loss-age-comparisons/loss-age-tests.tsv)
+and [provenance](../qc/ratings-raw/loss-age-comparisons/provenance.json).
+Reproduce with `python code/analyze_loss_rating_age.py`.
+
 ## Other available behavioral material
 
 | Material | Current status | Location |
