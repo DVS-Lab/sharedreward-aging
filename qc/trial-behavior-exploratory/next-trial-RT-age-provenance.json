@@ -1,0 +1,104 @@
+{
+  "exploratory": true,
+  "ratings_policy": "within_partner_loss_gt_win_primary_2026-10-01",
+  "trial_sha256": "a54374c56061e736f772d98c50d50f0f8e61a668eeb7159bed287153614a4157",
+  "absolute_plot": "Six mean-log-RT outcomes per participant (previous partner by previous win/loss), age/10 + dataset + sex with intercept; equal participant weights; HC3 pointwise t confidence bands; exponentiated to geometric seconds. No previous-RT adjustment in this descriptive plot.",
+  "inferential_model": "log(next RT) ~ previous loss * previous partner * age/10 (age centered 50), current partner * age/10, previous log RT, partner switch, feedback gap, progress + progress squared, loss * dataset, loss * sex; RF1 run / older dataset run-block fixed intercepts absorb age, sex and dataset main effects. Participant-cluster CR1 covariance; t(df=participants-1), omnibus Wald F(2,participants-1).",
+  "contrasts": "Equal previous-partner weights for overall loss and loss-age effects; dataset and sex held at empirical participant mix. Partner effect tests at age 50. Three-way omnibus tests equality of partner-specific loss-age slopes.",
+  "selection": "Existing basic behavioral eligibility; real adjacent positive responses at/above150ms primary; all-positive sensitivity. Previous neutral omitted, never bridged. No run crossing; older dataset restricted within blocks. Current misses and invalid current/previous RT excluded. No additional MRI QC selection.",
+  "differences_from_earlier": "New explicitly requested three-way interaction with lower-order terms. Wins/losses only (earlier model retained neutral nuisance); added current-partner age and loss-sex adjustments. Earlier outputs are preserved, not overwritten.",
+  "multiplicity": "13 exploratory tests; uncorrected p, Holm across all13 and within four global / three partner effects / three partner age effects / three paired age differences. Sensitivity corrected separately. No correction can make this follow-up confirmatory.",
+  "limitations": [
+    "Cross-sectional, not within-person aging.",
+    "Conditional on adjacent valid responses and ratings eligibility; not all task performers.",
+    "Some participant cells are sparse; report counts and retain equal-person descriptive weighting.",
+    "Different block/event tasks and RT implementations; outcomes predetermined, so RT is not uniquely learning or valuation.",
+    "RF1 raw-source count checks do not independently establish per-trial BIDS hash equivalence."
+  ],
+  "inventory": [
+    {
+      "minimum_rt_s": 0.15,
+      "min_cell_count": 1,
+      "names": [
+        "previous_loss",
+        "loss_age",
+        "loss_dataset",
+        "loss_sex_M",
+        "loss_sex_O",
+        "previous_friend",
+        "previous_age_friend",
+        "loss_friend",
+        "loss_age_friend",
+        "current_friend",
+        "current_age_friend",
+        "previous_stranger",
+        "previous_age_stranger",
+        "loss_stranger",
+        "loss_age_stranger",
+        "current_stranger",
+        "current_age_stranger",
+        "partner_switch",
+        "previous_logRT",
+        "feedback_gap_s",
+        "progress",
+        "progress2"
+      ],
+      "n": 27957,
+      "clusters": 318,
+      "df": 317,
+      "fixed_effect_groups": 1104,
+      "parameters": 1126
+    },
+    {
+      "minimum_rt_s": 0.0,
+      "min_cell_count": 1,
+      "names": [
+        "previous_loss",
+        "loss_age",
+        "loss_dataset",
+        "loss_sex_M",
+        "loss_sex_O",
+        "previous_friend",
+        "previous_age_friend",
+        "loss_friend",
+        "loss_age_friend",
+        "current_friend",
+        "current_age_friend",
+        "previous_stranger",
+        "previous_age_stranger",
+        "loss_stranger",
+        "loss_age_stranger",
+        "current_stranger",
+        "current_age_stranger",
+        "partner_switch",
+        "previous_logRT",
+        "feedback_gap_s",
+        "progress",
+        "progress2"
+      ],
+      "n": 28051,
+      "clusters": 318,
+      "df": 317,
+      "fixed_effect_groups": 1104,
+      "parameters": 1126
+    }
+  ],
+  "sources": [
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/qc/trial-behavior-exploratory/provenance.json",
+      "sha256": "35e87bba73dadc293b0d95d9648cdcd3fed8fbef8dd43744063aa7224a2c16c0"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/plot_next_trial_rt_age.py",
+      "sha256": "485bde63affe6068b6de6eee70883fd4a0daab6a53f773b18418928710746aac"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/analyze_raw_ratings.py",
+      "sha256": "20d9e5b53e1da195114b71f5c5cd3b418b89ce4519da93449823dda2614879f7"
+    },
+    {
+      "path": "/Users/tug87422/github/sharedreward-aging/code/explore_trial_behavior.py",
+      "sha256": "a9c97f0e28ebbca6b5bad2ca4e1128401b6278e0b62501d00eb5eabd4b0ba72a"
+    }
+  ]
+}

@@ -157,3 +157,81 @@ See [tests](../qc/trial-behavior-exploratory/absolute-RT-age-tests.tsv) and
 [provenance](../qc/trial-behavior-exploratory/absolute-RT-age-provenance.json).
 
 ![Absolute RT across age](../qc/trial-behavior-exploratory/absolute-RT-age.png)
+
+## Next-trial RT after wins and losses across age
+
+The 2026-10-19 follow-up explicitly tests whether age modulation of post-loss
+speeding depends on the **previous** partner. It retains all 318 behaviorally
+eligible participants and 27,957 valid adjacent win/loss pairs (24,602 RF1;
+3,355 ds003745). Outcome and partner refer to trial t; RT is from trial t+1.
+Both responses must be positive and at least 150 ms. No trial is bridged after
+filtering, no pairs cross runs, and older-dataset pairs stay within blocks.
+Previous neutral trials are omitted from this win/loss-focused analysis, not
+connected to later responses. No additional imaging QC exclusions were applied.
+
+Two complementary figures answer different questions:
+
+- **Absolute RT:** six participant-specific mean-log-RT outcomes (previous
+  partner × previous win/loss), regressed on age, dataset and recorded sex.
+  Participants receive equal weight, and exponentiated predictions show
+  geometric RT in seconds with pointwise HC3 95% confidence intervals. All six
+  cells exist for everyone, although some have only one trial; the cell-count
+  audit is retained. These curves do not control previous RT or trial context.
+- **Adjusted loss effect:** a trial-level log-RT model with the full age ×
+  previous outcome × previous partner interaction and all identifiable
+  lower-order terms. Controls include previous log RT, current partner and its
+  age interaction, partner switching, feedback-to-decision interval, trial
+  progress and progress squared, and loss-by-dataset/recorded-sex terms. RF1
+  run and older-dataset run-block fixed intercepts absorb participant-level
+  age, sex and dataset offsets. Uncertainty is participant-clustered CR1;
+  individual contrasts use t(317), and joint tests use Wald F(2,317).
+
+This extends, rather than silently replaces, the earlier lag model. That model
+included neutral feedback as a nuisance category and assumed a common loss-age
+slope across partners. This follow-up restricts previous feedback to wins/losses,
+adds the requested three-way interaction with lower-order terms, and adds
+current-partner age and loss-sex adjustments. Earlier results remain unchanged.
+
+### Results
+
+At age 50, averaging equally across previous partners and standardizing to the
+sample's dataset/sex composition, responses are **2.98% faster after losses**
+(95% CI 1.91–4.04% faster; uncorrected p=1.28e−7; Holm across all 13 follow-up
+tests p=1.66e−6). Partner-specific estimates are 3.05% faster after friend losses,
+3.18% after stranger losses and 2.70% after computer losses.
+
+| Direct test | Uncorrected p |
+|---|---:|
+| Age × previous outcome, averaged across partners | .198 |
+| Previous outcome × previous partner, at age 50 | .889 |
+| Age × previous outcome × previous partner | .809 |
+| Loss-age slope: friend minus stranger | .537 |
+| Loss-age slope: friend minus computer | .891 |
+| Loss-age slope: stranger minus computer | .613 |
+
+The average loss/win RT ratio changes by −0.39% per decade (95% CI −0.98% to
++0.20%); this is a relative ratio change, not percentage points of RT. The
+estimates do not establish equivalent slopes, but do not provide convincing
+evidence that speeding differs by age or previous partner. The all-positive-RT
+sensitivity retains 28,051 pairs and again shows speeding (3.10%, p=1.68e−7),
+without clear age modulation (p=.164) or three-way interaction (p=.730).
+
+All 13 tests are exploratory. The output includes raw p-values, Holm across
+all 13, and Holm within the four global tests and each three-test partner
+family. Sensitivity corrections are separate. These corrections do not turn
+post-hoc follow-up into confirmatory evidence. The behaviorally selected sample,
+different task implementations and cross-sectional age design remain important
+limitations. Post-loss speeding is not uniquely evidence of valuation or learning.
+
+![Next-trial RT by age and previous feedback](../qc/trial-behavior-exploratory/next-trial-RT-age.png)
+
+![Adjusted post-loss speeding by age](../qc/trial-behavior-exploratory/post-loss-speeding-age.png)
+
+Reproduce with `python code/plot_next_trial_rt_age.py` after generating the
+source-verified trial derivative. The script verifies its SHA-256 fingerprint.
+See [tests and intervals](../qc/trial-behavior-exploratory/next-trial-RT-age-tests.tsv),
+[cell counts](../qc/trial-behavior-exploratory/next-trial-RT-age-cell-counts.tsv),
+and [provenance](../qc/trial-behavior-exploratory/next-trial-RT-age-provenance.json).
+Independent tests verify predictions and HC3 intervals, absorbed-model clustered
+covariance against explicit fixed-effect regressions, interaction contrast
+weights and joint tests, and sequence/missing-cell safeguards.
