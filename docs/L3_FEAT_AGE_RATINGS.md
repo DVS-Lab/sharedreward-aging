@@ -11,6 +11,11 @@ permutation launcher; it does not overwrite its results or rerun L1/L2.
 - `templates/L3_template_pooled_age-ratings_flame1.fsf`: intercept, centered raw
   friend-win minus stranger-win rating, centered age/10, centered tSNR,
   centered mean FD, dataset dummy.
+- `templates/L3_template_pooled_age-ratings-interaction_flame1.fsf`: intercept,
+  centered age/10 × centered raw rating difference, both centered main effects,
+  centered tSNR, centered mean FD, dataset dummy. The product is not separately
+  centered or orthogonalized. Ratings slope is evaluated at mean age; age slope
+  at mean rating difference.
 
 No sex term is included. tSNR is the mean of the retained runs' whole-brain
 median tSNR, measured on the smoothed FEAT inputs (`post_target_blur`). Mean FD
@@ -26,6 +31,11 @@ COPE17, each testing ratings positive/negative and age positive/negative:
 14 FEAT models total. The original task COPE number is distinct from the
 group-level zstat number: age-only zstat1/2 = age positive/negative;
 ratings zstat1/2 = ratings positive/negative, zstat3/4 = adjusted age.
+`--with-interactions` includes the additive ratings models and adds two
+COPE17 activation/PPI interaction models: **16 FEAT models total**. Their
+zstat1/2 test interaction positive/negative, zstat3/4 ratings at mean age,
+and zstat5/6 age at mean ratings. The interaction coefficient is the change
+in the brain–ratings slope per decade, per raw rating-difference unit.
 
 Current local covariate plan: 358 imaging participants (315 RF1, 43 ds003745),
 663 retained runs; 290 participants qualify for the ratings extension.
@@ -63,7 +73,7 @@ and no FEAT watcher/X11. Outer concurrency defaults to four model workers;
 FSLSUB_PARALLEL and BLAS/OpenMP threads are constrained to one per worker.
 Preparation and readiness checks precede those workers.
 
-Verified standard-space COPE/VARCOPE/mask/DOF inputs are exposed through
+Verified standard-space COPE/VARCOPE/DOF inputs are exposed through
 read-only symlink adapter directories under the new L3 output root. These
 prevent FEAT from registering or writing into the original L1/L2 directories.
 Adapters retain original contrast scaling. An adapter's `design.lev=2` signals
@@ -71,16 +81,32 @@ already-standard-space inputs, not a newly estimated fixed-effects model.
 Only a single-run L1 input may obtain a constant DOF map from its recorded
 `stats/dof`; missing fixed-effects DOF maps fail.
 
-DOF positivity is checked within the model's common FEAT mask (intersection
-of its retained subjects' existing masks), not every voxel in every individual
-mask. The original DOF maps and masks remain unchanged. FEAT's fitted mask is
-checked against this audited intersection. Nonfinite images, missing required
-DOF sources, and nonpositive DOF inside the group mask still fail. Nothing is
-imputed and no subjects or voxels are silently removed to pass this check.
+The effective analysis support is the intersection of retained subjects'
+directory masks **AND positive VARCOPE in every selected input**. This is
+FLAMEO's existing variance-support rule (`fsl-flameo/design.cc`, zero-varcope
+check), made explicit before fitting. The original directory mask can include
+zero-filled fixed-effects voxels with zero VARCOPE and DOF. Those voxels are
+not valid statistical inputs, even if the directory mask includes them.
+
+The launcher saves both `directory-mask.nii.gz` and `analysis-mask.nii.gz`
+per model. Adapter masks are copies of that effective common support, ensuring
+FEAT poststats and ROI calculations use the same voxels. Original masks,
+COPE/VARCOPE and DOF maps are never modified; no subjects are dropped. DOF is
+NOT used to select the mask: nonpositive DOF on positive-variance common
+support still fails. Missing DOF, grid mismatch, nonfinite values and empty
+support also fail. There is no DOF imputation for fixed-effects inputs.
+
+`analysis-support.tsv` records directory/effective voxel counts and, for ROI
+stages, full/directory/effective VS and vmPFC counts. Each model uses a shared
+group ROI across its participants, not individual-level ROIs. Support may differ
+by contrast and eligible sample. Check the recorded coverage before interpreting
+results. Older ROI results based on directory masks alone are superseded by
+these support-aware estimates.
 
 `--stage inputs` runs the full read-only input diagnostic without fitting.
 Every model writes a `*_dof-inputs.tsv`, including source paths, DOF range and
-counts of nonpositive values inside and outside the common mask. All affected
+counts of nonpositive values inside and outside the effective mask, zero/negative
+VARCOPE counts in the directory mask, and removed-voxel counts. All affected
 inputs are reported, rather than stopping at the first failure. Summary:
 `input-completion.json`.
 
@@ -90,14 +116,16 @@ Each result audit verifies fitted matrices, FLAME1 setting, common mask,
 finite COPE/VARCOPE/zstat maps, variance, cluster masks and cluster tables.
 
 The independent ROI stage uses the same participant model and shared group
-VS/vmPFC masks, intersected with the common available FEAT mask. It estimates
+VS/vmPFC masks, intersected with common positive-variance support. It estimates
 VS activation and vmPFC activation/PPI, with HC3 95% CIs and Holm-adjusted
-p-values separately for the 18 age and three ratings ROI tests. Ratings ROI
-plots show the ratings coefficient; whole-brain ratings models also test age.
+p-values separately for the 18 age, three additive ratings, and three interaction
+ROI tests (24 total with interactions). Ratings ROI plots show the ratings
+coefficient; interaction plots show the age × ratings coefficient. Whole-brain
+ratings models also test age and interaction models retain both main effects.
 Plots are under `qc/L3-preliminary/LABEL/`. No individual VS masks are created.
 For `--stage all`, ROI tables and plots are saved first, with a separate
-`roi-completion.json`, before any DOF diagnostic or FEAT input staging.
-Thus a whole-brain input problem no longer discards the updated ROI results.
+`roi-completion.json`, after support/DOF validation but before FEAT staging.
+A failed input gate prevents a successful ROI completion declaration as well.
 
 The scoped `resources/age-mask-allowance-20261018.json` can permit the ten
 previously reviewed upstream whole-brain-mask fingerprint changes for this
@@ -121,11 +149,11 @@ export FSLDIR=/usr/local/fsl
 source "$FSLDIR/etc/fslconf/fsl.sh"
 export PATH="$FSLDIR/share/fsl/bin:$PATH"
 
-l3_label="L3-FLAME1-age-ratings-$(date +%Y%m%d-%H%M%S)"
+l3_label="L3-FLAME1-age-interactions-$(date +%Y%m%d-%H%M%S)"
 nohup setsid -f -w bash code/run_logged.sh \
   --label "$l3_label" --include-full-log -- \
   "$IMAGING_PYTHON" code/run_L3stats.py \
-    --stage all --label "$l3_label" --with-ratings --jobs 4 \
+    --stage all --label "$l3_label" --with-interactions --jobs 4 \
     --mask-allowance resources/age-mask-allowance-20261018.json \
   > "logs/${l3_label}.nohup" 2>&1 < /dev/null &
 tail -f "logs/${l3_label}.nohup"
@@ -135,16 +163,17 @@ Ctrl-C ends `tail`, not the detached job. `--stage roi` and `--stage wholebrain`
 also work independently with distinct labels. Push the completed run record
 and aggregate reports for review; do not add derivatives.
 
-## October 18 DOF retry
+## October 19 variance support correction
 
 The run `L3-FLAME1-age-ratings-20261018-224232` passed readiness (1,326 L1
-and 716 subject-level activation/PPI models) but stopped at the first input
-staging step with `Invalid DOF map`. No new FLAME1 fit ran and no complete
-updated ROI/rating summary was saved. Its error did not identify the file or
-voxel counts, so the cause within the production images remains unconfirmed.
+and 716 subject-level activation/PPI models) but stopped before FLAME1. The
+subsequent `L3-FLAME1-DOF-retry-20261018-233101` audit found zero voxels with
+both nonpositive DOF and positive VARCOPE among its flagged common-mask voxels.
+The directory-mask-only gate therefore rejected unsupported zero-variance
+voxels that native FLAMEO would exclude. The positive-variance support rule
+above corrects this validation mistake; it is not a repair to source images.
 
-The former check required DOF>0 throughout each subject mask, which is stricter
-than needed outside FEAT's group-mask intersection. The corrected check and
-all-input diagnostic distinguish this case from a real in-group failure.
-Retry the launch above with a new label; do not delete or overwrite the old
-directory and do not rerun L1/L2 solely on the basis of this wrapper error.
+Keep `robust_yn=0` by the user's October 19 decision. The historical L3 age
+template used `robust_yn=1`; the current parameterized templates intentionally
+do not use outlier deweighting. FLAME1 and Z=3.1/cluster p=.05 are retained.
+Use a new label; no deletion or L1/L2 rerun is needed for this correction.

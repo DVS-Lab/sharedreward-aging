@@ -10,7 +10,9 @@ see the [behavioral results inventory](docs/BEHAVIORAL_RESULTS_INVENTORY.md).
 A separate [preliminary pooled FEAT/FLAME1 analysis](docs/L3_FEAT_AGE_RATINGS.md)
 is prepared for activation and VS-PPI, with whole-brain and ROI summaries.
 It models age, tSNR, mean FD and dataset, with optional matched raw-ratings
-models. It checks the existing QC exclusions and must pass a fresh Linux2
+models and age × ratings interactions (`--with-interactions`). ROI and FEAT
+share explicitly audited positive-variance support; outlier deweighting stays off.
+It checks the existing QC exclusions and must pass a fresh Linux2
 readiness audit first; preparation is not a claim that new age maps are complete.
 
 Start with [CURRENT_STATUS.md](docs/CURRENT_STATUS.md) and the

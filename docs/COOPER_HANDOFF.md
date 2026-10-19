@@ -19,7 +19,12 @@ your 663-run/358-person imaging decisions, not the original 393-person cohort;
 behavior-only results remain N=318. This is an exploratory parallel analysis,
 not a replacement for your final L3 hypotheses. The model includes age, tSNR,
 mean FD and dataset; optional COPE17 models include friend-win minus
-stranger-win raw ratings. The new launcher verifies the frozen QC rules and
+stranger-win raw ratings. The October 19 extension also tests age × ratings
+with both main effects retained (`--with-interactions`); robust outlier
+deweighting stays off. ROI and FEAT use the same positive-variance common
+support, with full/effective ROI coverage recorded. Earlier directory-mask-only
+ROI estimates should be superseded by the support-aware rerun.
+The new launcher verifies the frozen QC rules and
 requires a fresh successful computational audit before fitting models. The
 documented scoped upstream-mask allowance keeps this pass provisional.
 Do not infer completion from a plan

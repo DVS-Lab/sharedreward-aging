@@ -7,6 +7,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 import nibabel as nib
 import numpy as np
@@ -46,6 +47,31 @@ class L3Tests(unittest.TestCase):
         with self.assertRaises(ValueError):
             l3.add_tsnr(data, runs, qc.iloc[:1])
 
+    def test_interaction_keeps_centered_main_effects_and_exact_contrasts(self):
+        people = self.people(60)
+        x, c, columns, names = l3.design(people, "age-ratings-interaction")
+        age = (people.age - people.age.mean()) / 10
+        rating = people.rating_score - people.rating_score.mean()
+        self.assertEqual(x.shape, (60, 7))
+        np.testing.assert_allclose(x[:, 1], age * rating)
+        np.testing.assert_allclose(x[:, 2], rating)
+        np.testing.assert_allclose(x[:, 3], age)
+        self.assertEqual(columns[1], "age_decades_x_rating")
+        for i, j in enumerate((1, 2, 3)):
+            expected = np.zeros(7); expected[j] = 1
+            np.testing.assert_array_equal(c[2*i], expected)
+            np.testing.assert_array_equal(c[2*i+1], -expected)
+        # Independent OLS/HC3 check of the interaction coefficient and SE.
+        y = x @ np.array([2., .7, -.2, .4, .01, .5, .1]) + np.random.default_rng(7).normal(size=60)
+        beta = np.linalg.lstsq(x, y, rcond=None)[0]
+        bread = np.linalg.inv(x.T @ x)
+        residual = y - x @ beta
+        hat = np.diag(x @ bread @ x.T)
+        cov = bread @ x.T @ np.diag((residual / (1-hat))**2) @ x @ bread
+        result = l3.hc3_age(x, y)
+        self.assertAlmostEqual(result['beta_per_decade'], beta[1])
+        self.assertAlmostEqual(result['se_hc3'], np.sqrt(cov[1,1]))
+
     def test_qc_outlier_cannot_enter_retained_manifest(self):
         runs = pd.DataFrame([dict(dataset="rf1", subject="1", session="01", run="1")])
         qc = runs.copy().assign(stage="post_target_blur", mean_fd_mm=.2, median_tsnr=100., coverage_pct=99.9)
@@ -75,7 +101,7 @@ class L3Tests(unittest.TestCase):
     def test_real_feat_model_matrix(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
-            for family in ("age", "age-ratings"):
+            for family in l3.TEMPLATES:
                 x, c, columns, names = l3.design(self.people(), family)
                 fsf = root / f"{family}.fsf"
                 fsf.write_text(l3.render(family, root / "out.gfeat", [root / f"i{i}.feat/stats/cope1.nii.gz" for i in range(len(x))],
@@ -88,6 +114,46 @@ class L3Tests(unittest.TestCase):
                 self.assertEqual(settings["fmri(mixed_yn)"], "2")
                 self.assertEqual(settings["fmri(featwatcher_yn)"], "0")
                 self.assertEqual(settings["fmri(smooth)"], "0")
+                self.assertEqual(settings["fmri(robust_yn)"], "0")
+
+    def test_variance_support_excludes_zeros_not_bad_dof_or_subjects(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            ref = nib.Nifti1Image(np.ones((4,4,4)), np.eye(4))
+            rows = []
+            for i in range(2):
+                folder = root / str(i); (folder / 'stats').mkdir(parents=True)
+                variance = np.ones(ref.shape); dof = np.full(ref.shape, 100.)
+                if i == 0:
+                    variance[0] = 0; dof[0] = 0
+                for name, values in (('mask.nii.gz', np.ones(ref.shape)),
+                                     ('stats/varcope1.nii.gz', variance), ('stats/tdof_t1.nii.gz', dof)):
+                    nib.save(nib.Nifti1Image(values, ref.affine), folder / name)
+                rows.append(dict(cope_path=str(folder / 'stats/cope1.nii.gz'),
+                                 varcope_path=str(folder / 'stats/varcope1.nii.gz'),
+                                 mask_path=str(folder / 'mask.nii.gz'), strategy='fixed_effects'))
+            rows = pd.DataFrame(rows)
+            original_hashes = {p:l3.sha(p) for p in root.glob('*/**/*.nii.gz')}
+            directory, effective = l3.analysis_support(rows, ref)
+            self.assertEqual(directory.sum(), 64); self.assertEqual(effective.sum(), 48)
+            audit = l3.audit_dof_inputs(rows, ref, effective, root / 'audit.tsv', directory)
+            self.assertEqual(audit.status.tolist(), ['verified','verified'])
+            self.assertEqual(audit.nonpositive_dof_in_directory.iloc[0], 16)
+            self.assertTrue((audit.nonpositive_dof_in_common == 0).all())
+            self.assertEqual(original_hashes, {p:l3.sha(p) for p in original_hashes})
+            # An ROI cannot average in unsupported zero-filled COPE values.
+            example_cope = np.full(ref.shape, 2.); example_cope[0] = 0
+            self.assertEqual(example_cope[effective].mean(), 2.)
+            self.assertEqual(example_cope[directory].mean(), 1.5)
+            dof = np.full(ref.shape, 100.); dof[1,1,1] = 0
+            nib.save(nib.Nifti1Image(dof,ref.affine), root/'1/stats/tdof_t1.nii.gz')
+            audit = l3.audit_dof_inputs(rows, ref, effective, root/'bad.tsv', directory)
+            self.assertEqual(audit.status.tolist(), ['verified','failed'])
+            # Nonfinite variance must fail, not silently shrink the support.
+            variance = np.ones(ref.shape); variance[2,2,2] = np.nan
+            nib.save(nib.Nifti1Image(variance,ref.affine), root/'1/stats/varcope1.nii.gz')
+            with self.assertRaisesRegex(ValueError, 'Nonfinite'):
+                l3.analysis_support(rows,ref)
 
     def test_dof_audit_distinguishes_group_scope_and_reports_all_inputs(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -120,20 +186,20 @@ class L3Tests(unittest.TestCase):
             root = Path(temp)
             rng = np.random.default_rng(8)
             data = self.people(24)
-            x, c, columns, names = l3.design(data, "age")
+            x, c, columns, names = l3.design(data, "age-ratings-interaction")
             reference = nib.Nifti1Image(np.ones((12, 12, 12)), np.diag([2., 2., 2., 1.]))
             ref = root / "reference.nii.gz"; nib.save(reference, ref)
-            inputs = []
-            common = np.ones(reference.shape, dtype=bool); common[0] = False
+            rows = []
             for i in range(len(x)):
                 original = root / f"original-{i}.feat"
                 (original / "stats").mkdir(parents=True)
                 dof = np.full(reference.shape, 100.); dof[0] = 0
                 individual = np.ones(reference.shape)
-                if i == 0: individual[0] = 0  # FEAT's intersection removes this slab.
+                variance = np.ones(reference.shape)
+                if i == 0: variance[0] = 0  # Within EVERY directory mask: production failure.
                 for name, values in {
                     "stats/cope1.nii.gz": rng.normal(size=reference.shape) + .2*x[i, 1],
-                    "stats/varcope1.nii.gz": np.ones(reference.shape),
+                    "stats/varcope1.nii.gz": variance,
                     "stats/tdof_t1.nii.gz": dof,
                     "mask.nii.gz": individual,
                     "mean_func.nii.gz": rng.uniform(900, 1100, reference.shape),
@@ -142,17 +208,79 @@ class L3Tests(unittest.TestCase):
                 (original / "design.con").write_text("/NumWaves 1\n/NumContrasts 1\n/PPheights 1\n/RequiredEffect 1\n/Matrix\n1\n")
                 row = dict(cope_path=str(original / "stats/cope1.nii.gz"), varcope_path=str(original / "stats/varcope1.nii.gz"),
                            mask_path=str(original / "mask.nii.gz"), strategy="fixed_effects")
-                inputs.append(l3.stage_input(row, root / "inputs" / f"input-{i}.feat", reference, common))
+                rows.append(row)
+            rows = pd.DataFrame(rows)
+            source_hashes = {p:l3.sha(p) for p in root.glob('original-*/*/*.nii.gz')}
+            source_hashes.update({p:l3.sha(p) for p in root.glob('original-*/*.nii.gz')})
+            directory, common = l3.analysis_support(rows, reference)
+            self.assertEqual(directory.sum(), 12**3)
+            self.assertEqual(common.sum(), 11*12*12)
+            audit = l3.audit_dof_inputs(rows, reference, common, root / 'audit.tsv', directory)
+            self.assertTrue(audit.status.eq('verified').all())
+            inputs = [l3.stage_input(row, root/'inputs'/f'input-{i}.feat',reference,common)
+                      for i,row in enumerate(rows.to_dict('records'))]
             fsf = root / "design.fsf"
             output = root / "out.gfeat"
-            fsf.write_text(l3.render("age", output, inputs, x, c, columns, names, ref))
+            fsf.write_text(l3.render("age-ratings-interaction", output, inputs, x, c, columns, names, ref))
             result = subprocess.run(["bash", str(l3.ROOT / "code/L3stats.sh"), str(fsf)], capture_output=True, text=True)
             if result.returncode:
                 print(result.stdout, result.stderr)
                 for log in output.glob("**/logs/*"):
                     if log.is_file(): print(log, log.read_text(errors="replace")[-4000:])
             self.assertEqual(result.returncode, 0)
-            self.assertEqual(len(l3.audit_fit(output, x, c, reference, common)), 2)
+            self.assertEqual(len(l3.audit_fit(output, x, c, reference, common)), 6)
+            self.assertEqual(source_hashes, {p:l3.sha(p) for p in source_hashes})
+
+    def test_roi_cli_all_families_support_and_completion(self):
+        """Exercise the ROI orchestration, not only individual statistical helpers."""
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp); people = self.people(24).assign(runs='1,2')
+            ref = nib.Nifti1Image(np.ones((4,4,4)), np.eye(4))
+            refpath = root/'ref.nii.gz'; nib.save(ref,refpath)
+            candidates = []
+            rng = np.random.default_rng(24)
+            for person in people.to_dict('records'):
+                folder=root/person['subject']; (folder/'stats').mkdir(parents=True)
+                values = np.full(ref.shape,float(person['age'])*.01 + rng.normal())
+                variance=np.ones(ref.shape); variance[0]=0
+                dof=np.full(ref.shape,100.); dof[0]=0
+                for name,arr in (('stats/cope1.nii.gz',values),('stats/varcope1.nii.gz',variance),
+                                 ('stats/tdof_t1.nii.gz',dof),('mask.nii.gz',np.ones(ref.shape))):
+                    nib.save(nib.Nifti1Image(arr,ref.affine),folder/name)
+                for kind in l3.KINDS:
+                    for cope,contrast in l3.CONTRASTS.items():
+                        candidates.append(dict(**{key:person[key] for key in l3.KEY},runs='1,2',type=kind,
+                            cope=str(cope),contrast=contrast,strategy='fixed_effects',
+                            cope_path=str(folder/'stats/cope1.nii.gz'),varcope_path=str(folder/'stats/varcope1.nii.gz'),
+                            mask_path=str(folder/'mask.nii.gz')))
+            def audit_command(cmd):
+                self.assertIn('audit_group_readiness.py',str(cmd[1]))
+                destination=Path(cmd[cmd.index('--report-dir')+1]); destination.mkdir(parents=True)
+                l3.save_json(destination/'summary.json',dict(computational_gate_passed=True,
+                            provisional=False,mask_provenance_warnings=[]))
+            with patch.object(l3,'ROOT',root), patch.object(l3,'cohort',return_value=people), \
+                 patch.object(l3,'add_tsnr',return_value=people), \
+                 patch.object(l3,'verify_qc_exclusions',return_value=[]), \
+                 patch.object(l3,'rating_cohort',return_value=(people,pd.DataFrame())), \
+                 patch.object(l3,'read',return_value=pd.DataFrame(candidates)), \
+                 patch.object(l3,'sha',return_value='fixture'), \
+                 patch.object(l3,'run_command',side_effect=audit_command), \
+                 patch.object(l3,'ROI_FILES',{'VS':refpath,'vmPFC':refpath}), \
+                 patch.object(sys,'argv',['run_L3stats.py','--stage','roi','--label','test',
+                                         '--with-interactions','--reference',str(refpath)]):
+                l3.main()
+            report=root/'logs/records/L3-preliminary/test'
+            completion=json.loads((report/'completion.json').read_text())
+            self.assertTrue(completion['complete']); self.assertEqual(completion['roi_tests'],24)
+            roi=pd.read_csv(report/'roi-results.tsv',sep='\t')
+            self.assertEqual(roi.groupby('family').size().to_dict(),
+                {'age':18,'age-ratings':3,'age-ratings-interaction':3})
+            self.assertTrue((roi.roi_voxels==48).all())
+            self.assertTrue((roi.directory_roi_voxels==64).all())
+            self.assertEqual(len(list((root/'qc/L3-preliminary/test').glob('*.png'))),3)
+            support=pd.read_csv(report/'analysis-support.tsv',sep='\t')
+            self.assertEqual(len(support),16)
+            self.assertTrue((support.analysis_voxels==48).all())
 
 
 if __name__ == "__main__":

@@ -27,7 +27,7 @@ from run_preliminary_age import (ROOT, KEY, KINDS, ROI_FILES, cohort, require, s
 CONTRASTS = {10: "rew-pun", 11: "F-S", 12: "F-C", 14: "F-S (rew-pun)",
              16: "F-C (rew-pun)", 17: "F-S (rew)"}
 TEMPLATES = {family: ROOT / f"templates/L3_template_pooled_{family}_flame1.fsf"
-             for family in ("age", "age-ratings")}
+             for family in ("age", "age-ratings", "age-ratings-interaction")}
 
 
 def verify_qc_exclusions(runs, qc, thresholds):
@@ -97,10 +97,16 @@ def rating_cohort(data, ratings):
 
 
 def design(data, family):
+    require(family in TEMPLATES, "Unknown model family")
     columns = {"intercept": np.ones(len(data))}
-    if family == "age-ratings":
-        columns["friend_win_minus_stranger_win_rating"] = data.rating_score - data.rating_score.mean()
-    columns["age_decades"] = (data.age - data.age.mean()) / 10
+    age = (data.age - data.age.mean()) / 10
+    if family != "age":
+        rating = data.rating_score - data.rating_score.mean()
+        if family == "age-ratings-interaction":
+            # Product of centered lower-order terms, not residualized/orthogonalized.
+            columns["age_decades_x_rating"] = age * rating
+        columns["friend_win_minus_stranger_win_rating"] = rating
+    columns["age_decades"] = age
     columns["tsnr"] = data.retained_tsnr - data.retained_tsnr.mean()
     columns["fdmean_mm"] = data.retained_mean_fd_mm - data.retained_mean_fd_mm.mean()
     columns["dataset_rf1"] = data.dataset.eq("rf1").astype(float)
@@ -108,7 +114,7 @@ def design(data, family):
     x = np.column_stack(list(columns.values())).astype(float)
     require(np.isfinite(x).all() and np.linalg.matrix_rank(x) == x.shape[1], "Nonfinite/rank-deficient L3 design")
     require(len(data) > x.shape[1] + 10, "Insufficient residual degrees of freedom")
-    indices = [1] if family == "age" else [1, 2]
+    indices = {"age": [1], "age-ratings": [1, 2], "age-ratings-interaction": [1, 2, 3]}[family]
     c = np.zeros((len(indices)*2, x.shape[1]))
     names = []
     for i, col in enumerate(indices):
@@ -177,9 +183,28 @@ def input_dof(row, reference):
     return np.full(reference.shape[:3], value, dtype=np.float32), scalar
 
 
-def audit_dof_inputs(rows, reference, common, destination):
-    """Inspect all subjects, preserving the ordinary FEAT mask and input values."""
+def analysis_support(rows, reference):
+    """Mirror FLAMEO design.cc: mask intersection AND every input VARCOPE > 0.
+
+    DOF is deliberately not used to select voxels: bad DOF on this support fails.
+    image_values rejects nonfinite data and mismatched grids, not just in-mask.
+    """
+    directory = np.ones(reference.shape[:3], dtype=bool)
+    positive = directory.copy()
+    require(len(rows) > 0, "No group inputs")
+    for row in rows.to_dict("records"):
+        directory &= image_values(row["mask_path"], reference) > 0
+        positive &= image_values(row["varcope_path"], reference) > 0
+    effective = directory & positive
+    require(directory.any(), "Empty directory-mask intersection")
+    require(effective.any(), "Empty positive-variance analysis support")
+    return directory, effective
+
+
+def audit_dof_inputs(rows, reference, common, destination, directory=None):
+    """Inspect all subjects on explicit FLAME support; never replace L2 DOF."""
     require(common.any(), "Empty group mask")
+    directory = common if directory is None else directory
     records = []
     for row in rows.to_dict("records"):
         item = {k: row.get(k, "") for k in (*KEY, "runs", "cope", "strategy", "cope_path")}
@@ -191,11 +216,17 @@ def audit_dof_inputs(rows, reference, common, destination):
             var = image_values(row["varcope_path"], reference)
             invalid = dof <= 0
             item.update(dof_source=str(path), individual_mask_voxels=int(individual.sum()),
+                        directory_mask_voxels=int(directory.sum()),
+                        removed_nonpositive_variance_voxels=int((directory & ~common).sum()),
+                        zero_varcope_in_directory=int(((var == 0) & directory).sum()),
+                        negative_varcope_in_directory=int(((var < 0) & directory).sum()),
+                        nonpositive_dof_in_directory=int((invalid & directory).sum()),
                         min_dof_in_common=float(dof[common].min()), max_dof_in_common=float(dof[common].max()),
                         nonpositive_dof_in_individual=int((invalid & individual).sum()),
                         nonpositive_dof_in_common=int((invalid & common).sum()),
                         nonpositive_dof_outside_common=int((invalid & individual & ~common).sum()),
                         nonpositive_dof_with_positive_varcope_in_common=int((invalid & common & (var > 0)).sum()))
+            require((var[common] > 0).all(), "Nonpositive VARCOPE inside analysis support")
             require(not (invalid & common).any(), f"Nonpositive DOF inside group mask: {path}")
         except (ValueError, OSError) as error:
             item.update(status="failed", problem=str(error))
@@ -210,20 +241,24 @@ def stage_input(row, folder, reference, common=None):
 
     design.lev tells FEAT not to re-register these verified RF1-grid inputs.
     Exact COPE/VARCOPE/DOF, original contrast scaling and mean_func are preserved.
+    Adapter mask is the explicit common positive-variance support, so FEAT's
+    poststats and ROI inference use the same support as FLAMEO's variance gate.
     """
     cope, varcope, mask = (Path(row[k]) for k in ("cope_path", "varcope_path", "mask_path"))
     original = cope.parent.parent
     number = int(re.fullmatch(r"cope(\d+)\.nii\.gz", cope.name)[1])
     folder.mkdir(parents=True)
     (folder / "stats").mkdir()
-    for source, dest in ((cope, folder / "stats" / cope.name), (varcope, folder / "stats" / varcope.name),
-                         (mask, folder / "mask.nii.gz")):
+    for source, dest in ((cope, folder / "stats" / cope.name), (varcope, folder / "stats" / varcope.name)):
         image_values(source, reference)
         dest.symlink_to(source.resolve(strict=True))
     dof = original / f"stats/tdof_t{number}.nii.gz"
     individual = image_values(mask, reference) > 0
-    scope = individual if common is None else common
+    variance = image_values(varcope, reference)
+    scope = (individual & (variance > 0)) if common is None else common
     require(scope.any() and not (scope & ~individual).any(), "Invalid group mask")
+    require((variance[scope] > 0).all(), "Nonpositive VARCOPE inside analysis support")
+    nib.save(nib.Nifti1Image(scope.astype(np.uint8), reference.affine), folder / "mask.nii.gz")
     values, dof_source = input_dof(row, reference)
     require((values[scope] > 0).all(), f"Nonpositive DOF inside analysis mask: {dof_source}")
     if dof.is_file():
@@ -242,7 +277,8 @@ def stage_input(row, folder, reference, common=None):
         image_values(source, reference)
         (folder / name).symlink_to(source.resolve(strict=True))
     (folder / "design.lev").write_text("2\n")
-    save_json(folder / "input-adapter.json", dict(role="standard-space input adapter, not a refit", source=row))
+    save_json(folder / "input-adapter.json", dict(role="standard-space input adapter, not a refit", source=row,
+              mask_policy="directory intersection AND all input VARCOPEs > 0", mask_voxels=int(scope.sum())))
     return folder / "stats" / cope.name
 
 
@@ -257,6 +293,7 @@ def audit_fit(output, x, c, reference, expected_mask=None):
     require(np.array_equal(matrix(stats / "design.con"), c), "Fitted contrasts differ")
     settings = fsf_settings(output / "design.fsf")
     require(settings["fmri(mixed_yn)"] == "2", "Not FLAME 1")
+    require(settings["fmri(robust_yn)"] == "0", "Unexpected outlier deweighting")
     mask = image_values(stats / "mask.nii.gz", reference) > 0
     require(mask.any(), "Empty group mask")
     if expected_mask is not None:
@@ -266,7 +303,7 @@ def audit_fit(output, x, c, reference, expected_mask=None):
         for name in ("cope", "varcope", "zstat"):
             values = image_values(stats / f"stats/{name}{i}.nii.gz", reference)
             if name == "varcope":
-                require((values[mask] >= 0).all() and (values[mask] > 0).any(), "Invalid FLAME variance")
+                require((values[mask] > 0).all(), "Invalid FLAME variance on analysis support")
         cluster = image_values(stats / f"cluster_mask_zstat{i}.nii.gz", reference)
         cluster_table(stats, i)
         summary.append(dict(contrast=i, surviving_voxels=int((cluster>0).sum()),
@@ -289,6 +326,7 @@ def main():
     p.add_argument("--label", required=True)
     p.add_argument("--jobs", type=int, default=4)
     p.add_argument("--with-ratings", action="store_true")
+    p.add_argument("--with-interactions", action="store_true", help="Also fit age x raw ratings; implies --with-ratings")
     p.add_argument("--mask-allowance", type=Path)
     p.add_argument("--ledger-dir", type=Path, default=ROOT / "logs/records/exclusion-ledger")
     p.add_argument("--qc", type=Path, default=ROOT / "logs/records/analysis-qc-run-level.tsv")
@@ -297,6 +335,7 @@ def main():
     p.add_argument("--ds-participants", type=Path, default=ROOT / "participants-srndna.tsv")
     p.add_argument("--reference", type=Path, default=ROOT.parent / "rf1-sra-sharedreward/resources/rf1_MNI152NLin6Asym_reference_grid.nii.gz")
     args = p.parse_args()
+    args.with_ratings = args.with_ratings or args.with_interactions
     require(re.fullmatch(r"[A-Za-z0-9_-]+", args.label) and 1 <= args.jobs <= 8, "Invalid label/jobs")
     out = ROOT / "derivatives/fsl/L3-preliminary" / args.label
     report = ROOT / "logs/records/L3-preliminary" / args.label
@@ -310,6 +349,8 @@ def main():
     if args.with_ratings:
         cohorts["age-ratings"], eligibility = rating_cohort(data, read(args.ratings))
         eligibility.to_csv(out / "ratings-eligibility.tsv", sep="\t", index=False)
+        if args.with_interactions:
+            cohorts["age-ratings-interaction"] = cohorts["age-ratings"]
     specs = []
     for family, people in cohorts.items():
         x, c, columns, names = design(people, family)
@@ -329,6 +370,8 @@ def main():
                 qc_exclusion_verification=qc_exclusions,
                 tsnr="mean of retained-run whole-brain median tSNR from smoothed FEAT-input QC",
                 fd="valid-FD-volume-weighted mean over retained runs", robust_outliers=False,
+                support="directory-mask intersection AND every subject VARCOPE > 0; same support for ROI and FEAT",
+                interaction="centered age/10 times centered raw friend-win minus stranger-win rating; both main effects retained",
                 inference="Z>3.1, cluster p<0.05 per signed map; no across-model multiplicity correction",
                 sources=[dict(path=str(path), sha256=sha(path)) for path in sources])
     save_json(report / "plan.json", plan)
@@ -348,7 +391,7 @@ def main():
     save_json(report / "plan.json", plan)
     candidates = read(report / "readiness/verified-pre-QC-candidates.tsv")
     reference = nib.load(args.reference)
-    jobs, prepared, roi_rows = [], [], []
+    jobs, prepared, roi_rows, support_rows, input_failures = [], [], [], [], []
     for spec in specs:
         family, kind, cope = spec["family"], spec["kind"], spec["cope"]
         people = cohorts[family]
@@ -357,23 +400,42 @@ def main():
         folder = out / f"{family}_{kind}_cope-{cope}"
         folder.mkdir()
         rows.to_csv(folder / "ordered-inputs.tsv", sep="\t", index=False)
-        common = np.ones(reference.shape[:3], dtype=bool)
-        for row in rows.to_dict("records"): common &= image_values(row["mask_path"], reference)>0
-        require(common.any(), f"Empty group mask: {folder.name}")
+        directory, common = analysis_support(rows, reference)
+        nib.save(nib.Nifti1Image(directory.astype(np.uint8), reference.affine), folder / "directory-mask.nii.gz")
+        nib.save(nib.Nifti1Image(common.astype(np.uint8), reference.affine), folder / "analysis-mask.nii.gz")
+        diagnostic = audit_dof_inputs(rows, reference, common, report / f"{folder.name}_dof-inputs.tsv", directory)
+        failed = diagnostic[diagnostic.status.eq("failed")]
+        for item in failed.to_dict("records"):
+            input_failures.append(dict(model=folder.name, **item))
+            print(f"INPUT ERROR: {folder.name}: {item['problem']} (COPE: {item['cope_path']})", flush=True)
+        print(f"INPUT AUDIT: {folder.name}: {len(diagnostic)} inputs; {len(failed)} failures; "
+              f"support {int(common.sum())}/{int(directory.sum())} voxels", flush=True)
+        coverage = dict(model=folder.name, directory_voxels=int(directory.sum()), analysis_voxels=int(common.sum()),
+                        removed_nonpositive_variance_voxels=int((directory & ~common).sum()))
+        support_rows.append(coverage)
+        if len(failed):
+            continue
         if args.stage in ("all", "roi"):
             for name, path in ROI_FILES.items():
                 if kind != "act" and name == "VS": continue
                 mask = resample_from_to(nib.load(path), (reference.shape[:3], reference.affine), order=0).get_fdata()>0
-                full_n = int(mask.sum()); mask &= common
+                full_n = int(mask.sum()); directory_n = int((mask & directory).sum()); mask &= common
+                coverage[f"{name}_full_voxels"] = full_n
+                coverage[f"{name}_directory_voxels"] = directory_n
+                coverage[f"{name}_analysis_voxels"] = int(mask.sum())
                 require(mask.any(), f"Empty ROI: {name}")
                 y = np.array([image_values(path, reference)[mask].mean() for path in rows.cope_path])
                 result = hc3_age(x, y)
                 result["beta"] = result.pop("beta_per_decade")
                 roi_rows.append(dict(family=family, kind=kind, cope=cope, roi=name, n=len(people),
-                                     predictor=columns[1], roi_voxels=int(mask.sum()), full_roi_voxels=full_n, **result))
+                                     predictor=columns[1], roi_voxels=int(mask.sum()), full_roi_voxels=full_n,
+                                     directory_roi_voxels=directory_n, **result))
                 private = people[KEY].copy(); private["mean_cope"] = y
                 private.to_csv(folder / f"roi-{name}-values.tsv", sep="\t", index=False)
         prepared.append((spec, folder, rows, x, c, columns, names, common))
+    pd.DataFrame(support_rows).to_csv(report / "analysis-support.tsv", sep="\t", index=False)
+    save_json(report / "input-completion.json", dict(complete=not input_failures,
+              models_checked=len(specs), failures=input_failures))
     if roi_rows:
         roi = pd.DataFrame(roi_rows)
         for family in roi.family.unique():
@@ -391,28 +453,19 @@ def main():
             ax.set_yticks(y, [f"{r.kind} | {r.roi} | COPE{r.cope} {CONTRASTS[r.cope]}"
                              for r in subset.itertuples()])
             ax.invert_yaxis(); ax.axvline(0, color="gray", linewidth=1)
-            ax.set_xlabel("COPE change per decade" if family == "age" else "COPE change per raw rating-difference unit")
+            ax.set_xlabel({"age": "COPE change per decade", "age-ratings": "COPE change per raw rating-difference unit",
+                           "age-ratings-interaction": "Change in ratings slope per decade (COPE / rating unit / decade)"}[family])
             ax.set_title(f"Preliminary pooled {family}: adjusted ROI estimates, HC3 95% CI")
             fig.tight_layout(); fig.savefig(plot_dir / f"{family}-roi.png", dpi=170); plt.close(fig)
-        save_json(report / "roi-completion.json", dict(complete=True, roi_tests=len(roi_rows),
+        save_json(report / "roi-completion.json", dict(complete=not input_failures, roi_tests=len(roi_rows),
                   provisional=readiness["provisional"], wholebrain_complete=False))
-        print(f"ROI COMPLETE: {len(roi_rows)} tests saved before whole-brain preparation.", flush=True)
+        print(f"ROI SAVED: {len(roi_rows)} tests; input audit complete={not input_failures}.", flush=True)
+    if input_failures:
+        save_json(report / "completion.json", dict(complete=False, stage=args.stage,
+            provisional=readiness["provisional"], completed_models=0, expected_models=len(specs),
+            roi_tests=len(roi_rows), failure_stage="input_dof", failures=input_failures))
+        raise ValueError(f"{len(input_failures)} input failures; see {report}/input-completion.json; no FEAT models launched")
     if args.stage != "roi":
-        input_failures = []
-        for spec, folder, rows, x, c, columns, names, common in prepared:
-            diagnostic = audit_dof_inputs(rows, reference, common, report / f"{folder.name}_dof-inputs.tsv")
-            failed = diagnostic[diagnostic.status.eq("failed")]
-            for item in failed.to_dict("records"):
-                input_failures.append(dict(model=folder.name, **item))
-                print(f"INPUT ERROR: {folder.name}: {item['problem']} (COPE: {item['cope_path']})", flush=True)
-            print(f"DOF AUDIT: {folder.name}: {len(diagnostic)} inputs; {len(failed)} failures", flush=True)
-        save_json(report / "input-completion.json", dict(complete=not input_failures,
-                  models_checked=len(prepared), failures=input_failures))
-        if input_failures:
-            save_json(report / "completion.json", dict(complete=False, stage=args.stage,
-                provisional=readiness["provisional"], completed_models=0, expected_models=len(prepared),
-                roi_tests=len(roi_rows), failure_stage="input_dof", failures=input_failures))
-            raise ValueError(f"{len(input_failures)} input DOF failures; see {report}/input-completion.json; no FEAT models launched")
         if args.stage == "inputs":
             print("CHECK PASSED: all requested group-mask DOF input audits; no FEAT models launched.", flush=True)
             return
