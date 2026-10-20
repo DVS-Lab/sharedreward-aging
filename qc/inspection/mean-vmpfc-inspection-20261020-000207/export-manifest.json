@@ -1,0 +1,1059 @@
+{
+  "complete": true,
+  "source_mean_analysis": "L3-mean-activation-20261019-171229",
+  "source_coverage_analysis": "vmpfc-support-20261019-171229",
+  "git_commit": "821d3dcc0c765a717c2546788d091e456a8a735e",
+  "files": [
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-10/directory-mask.nii.gz",
+      "file": "activation/mean_act_cope-10/directory-mask.nii.gz",
+      "bytes": 8414,
+      "sha256": "da6d19e654317e2a10cc5846b47dbe896543dc13972f06aeaf3be5c9750c9ae3"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-10/analysis-mask.nii.gz",
+      "file": "activation/mean_act_cope-10/analysis-mask.nii.gz",
+      "bytes": 8035,
+      "sha256": "97cb542871732e964bd5e08be01030cf167a6920a2b0c89832ea7ef53fbb10a7"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-10/L3.gfeat/cope1.feat/design.fsf",
+      "file": "activation/mean_act_cope-10/fitted/design.fsf",
+      "bytes": 136778,
+      "sha256": "d9bebf01061d96d7abf0752019fe2da0e76bf5b296b2e2b543d3def0f96c063b"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-10/L3.gfeat/cope1.feat/design.mat",
+      "file": "activation/mean_act_cope-10/fitted/design.mat",
+      "bytes": 24364,
+      "sha256": "34752e312117f4e043437fffd55a682985efe7f813b254979c946cf32ee03840"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-10/L3.gfeat/cope1.feat/design.con",
+      "file": "activation/mean_act_cope-10/fitted/design.con",
+      "bytes": 311,
+      "sha256": "d39de8aff13ba9daf1f56e1cd741deea35df1389ca120acd9fae714a7fcb78e9"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-10/L3.gfeat/cope1.feat/mask.nii.gz",
+      "file": "activation/mean_act_cope-10/fitted/mask.nii.gz",
+      "bytes": 6465,
+      "sha256": "902e5cda55ff61c07aa5907374f291c794ff06aceec68dd7f8418f390c9afe19"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-10/L3.gfeat/cope1.feat/stats/smoothness",
+      "file": "activation/mean_act_cope-10/fitted/stats/smoothness",
+      "bytes": 106,
+      "sha256": "9576dbaf9af7d3fe3e1d64353062d8db05157e8619407f5869d766bdefc03906"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-10/L3.gfeat/cope1.feat/stats/cope1.nii.gz",
+      "file": "activation/mean_act_cope-10/fitted/stats/cope1.nii.gz",
+      "bytes": 265787,
+      "sha256": "9948d50331e8b606af93061e909792f6dd91dddd70de911cf2f3225d1f88b286"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-10/L3.gfeat/cope1.feat/stats/varcope1.nii.gz",
+      "file": "activation/mean_act_cope-10/fitted/stats/varcope1.nii.gz",
+      "bytes": 255072,
+      "sha256": "011c1b5945e49d6c275d639470c0eeb145c51e20ee50c78d721c6ed9b8b7ba93"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-10/L3.gfeat/cope1.feat/stats/zstat1.nii.gz",
+      "file": "activation/mean_act_cope-10/fitted/stats/zstat1.nii.gz",
+      "bytes": 265212,
+      "sha256": "01d546995f9493e484ddeb6263be0506ea5a44aae5a012bfc3c4815b33018bcb"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-10/L3.gfeat/cope1.feat/thresh_zstat1.nii.gz",
+      "file": "activation/mean_act_cope-10/fitted/thresh_zstat1.nii.gz",
+      "bytes": 34185,
+      "sha256": "46c35c6410601c0d7dd3643516233d09ca26727f9c8945cfa07bb4288d6c9b00"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-10/L3.gfeat/cope1.feat/cluster_mask_zstat1.nii.gz",
+      "file": "activation/mean_act_cope-10/fitted/cluster_mask_zstat1.nii.gz",
+      "bytes": 4350,
+      "sha256": "93c00238ecfb8dbf6c1ae191733c5938d95af7f27cc3f601865e1aa0ffda8e95"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-10/L3.gfeat/cope1.feat/stats/cope2.nii.gz",
+      "file": "activation/mean_act_cope-10/fitted/stats/cope2.nii.gz",
+      "bytes": 265799,
+      "sha256": "a2ea1984c129165281c72291cf6f1fcaae224ff1c871dc3a12b67893775850b6"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-10/L3.gfeat/cope1.feat/stats/varcope2.nii.gz",
+      "file": "activation/mean_act_cope-10/fitted/stats/varcope2.nii.gz",
+      "bytes": 255072,
+      "sha256": "011c1b5945e49d6c275d639470c0eeb145c51e20ee50c78d721c6ed9b8b7ba93"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-10/L3.gfeat/cope1.feat/stats/zstat2.nii.gz",
+      "file": "activation/mean_act_cope-10/fitted/stats/zstat2.nii.gz",
+      "bytes": 265221,
+      "sha256": "970443344e34b6fee5dbfd78aedf0c475d83282a8df9f55e407b6ab6e18cf194"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-10/L3.gfeat/cope1.feat/thresh_zstat2.nii.gz",
+      "file": "activation/mean_act_cope-10/fitted/thresh_zstat2.nii.gz",
+      "bytes": 18292,
+      "sha256": "4b7bcb437fc884ebf3bfc1145c3cea3023449929043cdbddcacd1a4c93e7d0fb"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-10/L3.gfeat/cope1.feat/cluster_mask_zstat2.nii.gz",
+      "file": "activation/mean_act_cope-10/fitted/cluster_mask_zstat2.nii.gz",
+      "bytes": 1020,
+      "sha256": "4863e796c45653d788f868bfa3bad35859eae75ffc54809f42fb14f3891fb9ab"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-11/directory-mask.nii.gz",
+      "file": "activation/mean_act_cope-11/directory-mask.nii.gz",
+      "bytes": 8414,
+      "sha256": "da6d19e654317e2a10cc5846b47dbe896543dc13972f06aeaf3be5c9750c9ae3"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-11/analysis-mask.nii.gz",
+      "file": "activation/mean_act_cope-11/analysis-mask.nii.gz",
+      "bytes": 8035,
+      "sha256": "97cb542871732e964bd5e08be01030cf167a6920a2b0c89832ea7ef53fbb10a7"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-11/L3.gfeat/cope1.feat/design.fsf",
+      "file": "activation/mean_act_cope-11/fitted/design.fsf",
+      "bytes": 136778,
+      "sha256": "3cc2cdcccd95e569f88f9c37a8222d57bed3b4406b3cf95b235e4935f115f391"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-11/L3.gfeat/cope1.feat/design.mat",
+      "file": "activation/mean_act_cope-11/fitted/design.mat",
+      "bytes": 24364,
+      "sha256": "34752e312117f4e043437fffd55a682985efe7f813b254979c946cf32ee03840"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-11/L3.gfeat/cope1.feat/design.con",
+      "file": "activation/mean_act_cope-11/fitted/design.con",
+      "bytes": 311,
+      "sha256": "d39de8aff13ba9daf1f56e1cd741deea35df1389ca120acd9fae714a7fcb78e9"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-11/L3.gfeat/cope1.feat/mask.nii.gz",
+      "file": "activation/mean_act_cope-11/fitted/mask.nii.gz",
+      "bytes": 6465,
+      "sha256": "902e5cda55ff61c07aa5907374f291c794ff06aceec68dd7f8418f390c9afe19"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-11/L3.gfeat/cope1.feat/stats/smoothness",
+      "file": "activation/mean_act_cope-11/fitted/stats/smoothness",
+      "bytes": 106,
+      "sha256": "0945c5ca794be94c6c69f6498bc3d94700e1bb3e16846602390ada8cecde7d97"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-11/L3.gfeat/cope1.feat/stats/cope1.nii.gz",
+      "file": "activation/mean_act_cope-11/fitted/stats/cope1.nii.gz",
+      "bytes": 266138,
+      "sha256": "889240f788afb221fa79338588ac4b904d2401038fe1b62dadd4e8ce721ae0f4"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-11/L3.gfeat/cope1.feat/stats/varcope1.nii.gz",
+      "file": "activation/mean_act_cope-11/fitted/stats/varcope1.nii.gz",
+      "bytes": 255112,
+      "sha256": "3c4f7c5fa914ee56f7afa918dad6c93a7713a11c5cfeb019d872fd17e99d314f"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-11/L3.gfeat/cope1.feat/stats/zstat1.nii.gz",
+      "file": "activation/mean_act_cope-11/fitted/stats/zstat1.nii.gz",
+      "bytes": 264856,
+      "sha256": "f7aa8fa07545ef8e932623fb9ee86f9a6415d05b8028193020d6dce158bbefea"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-11/L3.gfeat/cope1.feat/thresh_zstat1.nii.gz",
+      "file": "activation/mean_act_cope-11/fitted/thresh_zstat1.nii.gz",
+      "bytes": 68067,
+      "sha256": "ce61a025384a5885acd3116f1dcfbffb0ff44174740030f999070c3ea8360043"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-11/L3.gfeat/cope1.feat/cluster_mask_zstat1.nii.gz",
+      "file": "activation/mean_act_cope-11/fitted/cluster_mask_zstat1.nii.gz",
+      "bytes": 8047,
+      "sha256": "94c118236c0e757e874bdb66c73a1ee05cb25a904cc85df9652c27b4bc21707a"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-11/L3.gfeat/cope1.feat/stats/cope2.nii.gz",
+      "file": "activation/mean_act_cope-11/fitted/stats/cope2.nii.gz",
+      "bytes": 266115,
+      "sha256": "8f06ff1fed85780bbdd25ab9e75c14d0c5ee9ee3abce5acc0a1a7a5fe0efe9b9"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-11/L3.gfeat/cope1.feat/stats/varcope2.nii.gz",
+      "file": "activation/mean_act_cope-11/fitted/stats/varcope2.nii.gz",
+      "bytes": 255112,
+      "sha256": "3c4f7c5fa914ee56f7afa918dad6c93a7713a11c5cfeb019d872fd17e99d314f"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-11/L3.gfeat/cope1.feat/stats/zstat2.nii.gz",
+      "file": "activation/mean_act_cope-11/fitted/stats/zstat2.nii.gz",
+      "bytes": 264866,
+      "sha256": "860fc92170d297bae402a4ba3e11a4a15ad8b4880a9573b038e957a06341be44"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-11/L3.gfeat/cope1.feat/thresh_zstat2.nii.gz",
+      "file": "activation/mean_act_cope-11/fitted/thresh_zstat2.nii.gz",
+      "bytes": 35811,
+      "sha256": "71fd1316b3604fe20b25acd388f8b0a54db33a9f4742f7086fda652f6862cf5b"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-11/L3.gfeat/cope1.feat/cluster_mask_zstat2.nii.gz",
+      "file": "activation/mean_act_cope-11/fitted/cluster_mask_zstat2.nii.gz",
+      "bytes": 4639,
+      "sha256": "45f689e9f81636eb4eb45267b7b6c7106b1cf106b33a8f202918815cd1a1f07a"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-12/directory-mask.nii.gz",
+      "file": "activation/mean_act_cope-12/directory-mask.nii.gz",
+      "bytes": 8414,
+      "sha256": "da6d19e654317e2a10cc5846b47dbe896543dc13972f06aeaf3be5c9750c9ae3"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-12/analysis-mask.nii.gz",
+      "file": "activation/mean_act_cope-12/analysis-mask.nii.gz",
+      "bytes": 8035,
+      "sha256": "97cb542871732e964bd5e08be01030cf167a6920a2b0c89832ea7ef53fbb10a7"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-12/L3.gfeat/cope1.feat/design.fsf",
+      "file": "activation/mean_act_cope-12/fitted/design.fsf",
+      "bytes": 136778,
+      "sha256": "a36aca004204c5c0db0470eefe190592c1a4c1d0290b329225df668f498937a0"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-12/L3.gfeat/cope1.feat/design.mat",
+      "file": "activation/mean_act_cope-12/fitted/design.mat",
+      "bytes": 24364,
+      "sha256": "34752e312117f4e043437fffd55a682985efe7f813b254979c946cf32ee03840"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-12/L3.gfeat/cope1.feat/design.con",
+      "file": "activation/mean_act_cope-12/fitted/design.con",
+      "bytes": 311,
+      "sha256": "d39de8aff13ba9daf1f56e1cd741deea35df1389ca120acd9fae714a7fcb78e9"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-12/L3.gfeat/cope1.feat/mask.nii.gz",
+      "file": "activation/mean_act_cope-12/fitted/mask.nii.gz",
+      "bytes": 6465,
+      "sha256": "902e5cda55ff61c07aa5907374f291c794ff06aceec68dd7f8418f390c9afe19"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-12/L3.gfeat/cope1.feat/stats/smoothness",
+      "file": "activation/mean_act_cope-12/fitted/stats/smoothness",
+      "bytes": 105,
+      "sha256": "835f294de0596904d93d8b422797fd375c091da4943eb62ce14fe8dbe6c75037"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-12/L3.gfeat/cope1.feat/stats/cope1.nii.gz",
+      "file": "activation/mean_act_cope-12/fitted/stats/cope1.nii.gz",
+      "bytes": 266449,
+      "sha256": "31e81851cc73deaeb73ad2caa95b8e4fe632d7b17849f59823457152f3903c71"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-12/L3.gfeat/cope1.feat/stats/varcope1.nii.gz",
+      "file": "activation/mean_act_cope-12/fitted/stats/varcope1.nii.gz",
+      "bytes": 255162,
+      "sha256": "fb969467c455a65d7784c4c5366d36dd8627544ec2e8af8623fd8c17ebc1c2d6"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-12/L3.gfeat/cope1.feat/stats/zstat1.nii.gz",
+      "file": "activation/mean_act_cope-12/fitted/stats/zstat1.nii.gz",
+      "bytes": 264783,
+      "sha256": "2ace3b267f9e1f976f7703776151ca6330fad3024c1d42b45f9b3889de5d45ae"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-12/L3.gfeat/cope1.feat/thresh_zstat1.nii.gz",
+      "file": "activation/mean_act_cope-12/fitted/thresh_zstat1.nii.gz",
+      "bytes": 77446,
+      "sha256": "db240e6050c7ed280e88b98113c035114c46336978fc4292486cc371e8c3a807"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-12/L3.gfeat/cope1.feat/cluster_mask_zstat1.nii.gz",
+      "file": "activation/mean_act_cope-12/fitted/cluster_mask_zstat1.nii.gz",
+      "bytes": 8563,
+      "sha256": "1ef89b43c538944620454de43639724a0469086dc0624ffebe0aee23a35685dc"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-12/L3.gfeat/cope1.feat/stats/cope2.nii.gz",
+      "file": "activation/mean_act_cope-12/fitted/stats/cope2.nii.gz",
+      "bytes": 266470,
+      "sha256": "40853b7665d4d6cb2e6b0c5a2a0f6d2b9003aa7dcc1c53bfc279c98508d20791"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-12/L3.gfeat/cope1.feat/stats/varcope2.nii.gz",
+      "file": "activation/mean_act_cope-12/fitted/stats/varcope2.nii.gz",
+      "bytes": 255162,
+      "sha256": "fb969467c455a65d7784c4c5366d36dd8627544ec2e8af8623fd8c17ebc1c2d6"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-12/L3.gfeat/cope1.feat/stats/zstat2.nii.gz",
+      "file": "activation/mean_act_cope-12/fitted/stats/zstat2.nii.gz",
+      "bytes": 264785,
+      "sha256": "9f2e6225cbb512af135075b351b042ddbb6175f4c522891624cfe85a09b0bef5"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-12/L3.gfeat/cope1.feat/thresh_zstat2.nii.gz",
+      "file": "activation/mean_act_cope-12/fitted/thresh_zstat2.nii.gz",
+      "bytes": 54736,
+      "sha256": "7902b0fe77df9dd646b86bcc7dee768e9459dca5a4af164e9d09e2a698427ddd"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/fsl/L3-preliminary/L3-mean-activation-20261019-171229/mean_act_cope-12/L3.gfeat/cope1.feat/cluster_mask_zstat2.nii.gz",
+      "file": "activation/mean_act_cope-12/fitted/cluster_mask_zstat2.nii.gz",
+      "bytes": 6843,
+      "sha256": "7dce404ec7687bb0a3e5e042453f4f4fce2315850eb5170771b7f7ca4d31a126"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age-ratings-interaction_act_cope-17/vmpfc-roi.nii.gz",
+      "file": "coverage/age-ratings-interaction_act_cope-17/vmpfc-roi.nii.gz",
+      "bytes": 1662,
+      "sha256": "c7010cde41f80ac89ce507d3706fa3998d8880bc5a889a5bcc4fbaf645234460"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age-ratings-interaction_act_cope-17/pooled_mask-frequency.nii.gz",
+      "file": "coverage/age-ratings-interaction_act_cope-17/pooled_mask-frequency.nii.gz",
+      "bytes": 96568,
+      "sha256": "8b9a33c2be53da15afb6dafbf1ac67712e04da34b1cb0b1b6bbff77418c6cd3f"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age-ratings-interaction_act_cope-17/pooled_support-frequency.nii.gz",
+      "file": "coverage/age-ratings-interaction_act_cope-17/pooled_support-frequency.nii.gz",
+      "bytes": 95319,
+      "sha256": "62ac0ab6308e9b256dff32aa8bfc5437e2b7670e33239364aab694530d8c726d"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age-ratings-interaction_act_cope-17/rf1_mask-frequency.nii.gz",
+      "file": "coverage/age-ratings-interaction_act_cope-17/rf1_mask-frequency.nii.gz",
+      "bytes": 87701,
+      "sha256": "984ac522ea942d98d134b6746f0274134bbf0d8c51001e488592e4390ecf183e"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age-ratings-interaction_act_cope-17/rf1_support-frequency.nii.gz",
+      "file": "coverage/age-ratings-interaction_act_cope-17/rf1_support-frequency.nii.gz",
+      "bytes": 85723,
+      "sha256": "dd41ac69c9842aa5443325cdecfc8e3768e4078ec45b594531f78c490506b36f"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age-ratings-interaction_act_cope-17/ds003745_mask-frequency.nii.gz",
+      "file": "coverage/age-ratings-interaction_act_cope-17/ds003745_mask-frequency.nii.gz",
+      "bytes": 53452,
+      "sha256": "e90dcb40c1d279fce2f2a7af35ba2e8c2cf4ce052c017b4ccd4a194ba2fa528f"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age-ratings-interaction_act_cope-17/ds003745_support-frequency.nii.gz",
+      "file": "coverage/age-ratings-interaction_act_cope-17/ds003745_support-frequency.nii.gz",
+      "bytes": 48318,
+      "sha256": "41a5e99f3e1c600a8dbcb5d363eff82d253e3a84fffc4017ae91b7f623681d1b"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age-ratings-interaction_ppi_seed-vs_cope-17/vmpfc-roi.nii.gz",
+      "file": "coverage/age-ratings-interaction_ppi_seed-vs_cope-17/vmpfc-roi.nii.gz",
+      "bytes": 1662,
+      "sha256": "c7010cde41f80ac89ce507d3706fa3998d8880bc5a889a5bcc4fbaf645234460"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age-ratings-interaction_ppi_seed-vs_cope-17/pooled_mask-frequency.nii.gz",
+      "file": "coverage/age-ratings-interaction_ppi_seed-vs_cope-17/pooled_mask-frequency.nii.gz",
+      "bytes": 96568,
+      "sha256": "8b9a33c2be53da15afb6dafbf1ac67712e04da34b1cb0b1b6bbff77418c6cd3f"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age-ratings-interaction_ppi_seed-vs_cope-17/pooled_support-frequency.nii.gz",
+      "file": "coverage/age-ratings-interaction_ppi_seed-vs_cope-17/pooled_support-frequency.nii.gz",
+      "bytes": 95319,
+      "sha256": "62ac0ab6308e9b256dff32aa8bfc5437e2b7670e33239364aab694530d8c726d"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age-ratings-interaction_ppi_seed-vs_cope-17/rf1_mask-frequency.nii.gz",
+      "file": "coverage/age-ratings-interaction_ppi_seed-vs_cope-17/rf1_mask-frequency.nii.gz",
+      "bytes": 87701,
+      "sha256": "984ac522ea942d98d134b6746f0274134bbf0d8c51001e488592e4390ecf183e"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age-ratings-interaction_ppi_seed-vs_cope-17/rf1_support-frequency.nii.gz",
+      "file": "coverage/age-ratings-interaction_ppi_seed-vs_cope-17/rf1_support-frequency.nii.gz",
+      "bytes": 85723,
+      "sha256": "dd41ac69c9842aa5443325cdecfc8e3768e4078ec45b594531f78c490506b36f"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age-ratings-interaction_ppi_seed-vs_cope-17/ds003745_mask-frequency.nii.gz",
+      "file": "coverage/age-ratings-interaction_ppi_seed-vs_cope-17/ds003745_mask-frequency.nii.gz",
+      "bytes": 53452,
+      "sha256": "e90dcb40c1d279fce2f2a7af35ba2e8c2cf4ce052c017b4ccd4a194ba2fa528f"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age-ratings-interaction_ppi_seed-vs_cope-17/ds003745_support-frequency.nii.gz",
+      "file": "coverage/age-ratings-interaction_ppi_seed-vs_cope-17/ds003745_support-frequency.nii.gz",
+      "bytes": 48318,
+      "sha256": "41a5e99f3e1c600a8dbcb5d363eff82d253e3a84fffc4017ae91b7f623681d1b"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age-ratings_act_cope-17/vmpfc-roi.nii.gz",
+      "file": "coverage/age-ratings_act_cope-17/vmpfc-roi.nii.gz",
+      "bytes": 1662,
+      "sha256": "c7010cde41f80ac89ce507d3706fa3998d8880bc5a889a5bcc4fbaf645234460"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age-ratings_act_cope-17/pooled_mask-frequency.nii.gz",
+      "file": "coverage/age-ratings_act_cope-17/pooled_mask-frequency.nii.gz",
+      "bytes": 96568,
+      "sha256": "8b9a33c2be53da15afb6dafbf1ac67712e04da34b1cb0b1b6bbff77418c6cd3f"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age-ratings_act_cope-17/pooled_support-frequency.nii.gz",
+      "file": "coverage/age-ratings_act_cope-17/pooled_support-frequency.nii.gz",
+      "bytes": 95319,
+      "sha256": "62ac0ab6308e9b256dff32aa8bfc5437e2b7670e33239364aab694530d8c726d"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age-ratings_act_cope-17/rf1_mask-frequency.nii.gz",
+      "file": "coverage/age-ratings_act_cope-17/rf1_mask-frequency.nii.gz",
+      "bytes": 87701,
+      "sha256": "984ac522ea942d98d134b6746f0274134bbf0d8c51001e488592e4390ecf183e"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age-ratings_act_cope-17/rf1_support-frequency.nii.gz",
+      "file": "coverage/age-ratings_act_cope-17/rf1_support-frequency.nii.gz",
+      "bytes": 85723,
+      "sha256": "dd41ac69c9842aa5443325cdecfc8e3768e4078ec45b594531f78c490506b36f"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age-ratings_act_cope-17/ds003745_mask-frequency.nii.gz",
+      "file": "coverage/age-ratings_act_cope-17/ds003745_mask-frequency.nii.gz",
+      "bytes": 53452,
+      "sha256": "e90dcb40c1d279fce2f2a7af35ba2e8c2cf4ce052c017b4ccd4a194ba2fa528f"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age-ratings_act_cope-17/ds003745_support-frequency.nii.gz",
+      "file": "coverage/age-ratings_act_cope-17/ds003745_support-frequency.nii.gz",
+      "bytes": 48318,
+      "sha256": "41a5e99f3e1c600a8dbcb5d363eff82d253e3a84fffc4017ae91b7f623681d1b"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age-ratings_ppi_seed-vs_cope-17/vmpfc-roi.nii.gz",
+      "file": "coverage/age-ratings_ppi_seed-vs_cope-17/vmpfc-roi.nii.gz",
+      "bytes": 1662,
+      "sha256": "c7010cde41f80ac89ce507d3706fa3998d8880bc5a889a5bcc4fbaf645234460"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age-ratings_ppi_seed-vs_cope-17/pooled_mask-frequency.nii.gz",
+      "file": "coverage/age-ratings_ppi_seed-vs_cope-17/pooled_mask-frequency.nii.gz",
+      "bytes": 96568,
+      "sha256": "8b9a33c2be53da15afb6dafbf1ac67712e04da34b1cb0b1b6bbff77418c6cd3f"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age-ratings_ppi_seed-vs_cope-17/pooled_support-frequency.nii.gz",
+      "file": "coverage/age-ratings_ppi_seed-vs_cope-17/pooled_support-frequency.nii.gz",
+      "bytes": 95319,
+      "sha256": "62ac0ab6308e9b256dff32aa8bfc5437e2b7670e33239364aab694530d8c726d"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age-ratings_ppi_seed-vs_cope-17/rf1_mask-frequency.nii.gz",
+      "file": "coverage/age-ratings_ppi_seed-vs_cope-17/rf1_mask-frequency.nii.gz",
+      "bytes": 87701,
+      "sha256": "984ac522ea942d98d134b6746f0274134bbf0d8c51001e488592e4390ecf183e"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age-ratings_ppi_seed-vs_cope-17/rf1_support-frequency.nii.gz",
+      "file": "coverage/age-ratings_ppi_seed-vs_cope-17/rf1_support-frequency.nii.gz",
+      "bytes": 85723,
+      "sha256": "dd41ac69c9842aa5443325cdecfc8e3768e4078ec45b594531f78c490506b36f"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age-ratings_ppi_seed-vs_cope-17/ds003745_mask-frequency.nii.gz",
+      "file": "coverage/age-ratings_ppi_seed-vs_cope-17/ds003745_mask-frequency.nii.gz",
+      "bytes": 53452,
+      "sha256": "e90dcb40c1d279fce2f2a7af35ba2e8c2cf4ce052c017b4ccd4a194ba2fa528f"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age-ratings_ppi_seed-vs_cope-17/ds003745_support-frequency.nii.gz",
+      "file": "coverage/age-ratings_ppi_seed-vs_cope-17/ds003745_support-frequency.nii.gz",
+      "bytes": 48318,
+      "sha256": "41a5e99f3e1c600a8dbcb5d363eff82d253e3a84fffc4017ae91b7f623681d1b"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-10/vmpfc-roi.nii.gz",
+      "file": "coverage/age_act_cope-10/vmpfc-roi.nii.gz",
+      "bytes": 1662,
+      "sha256": "c7010cde41f80ac89ce507d3706fa3998d8880bc5a889a5bcc4fbaf645234460"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-10/pooled_mask-frequency.nii.gz",
+      "file": "coverage/age_act_cope-10/pooled_mask-frequency.nii.gz",
+      "bytes": 106703,
+      "sha256": "27a6f91926d049c6f5a458c37dbb646fc6746c981a5e67f9da5448550978aea6"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-10/pooled_support-frequency.nii.gz",
+      "file": "coverage/age_act_cope-10/pooled_support-frequency.nii.gz",
+      "bytes": 105232,
+      "sha256": "e04ca30e51e817602e5b96cde8d84c5a128ca401064c359293941d9fd00e723e"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-10/rf1_mask-frequency.nii.gz",
+      "file": "coverage/age_act_cope-10/rf1_mask-frequency.nii.gz",
+      "bytes": 95674,
+      "sha256": "5e6adb80526a128b9bdde7d20844b47251e1758c3722f3a69b1efc4b914b95b3"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-10/rf1_support-frequency.nii.gz",
+      "file": "coverage/age_act_cope-10/rf1_support-frequency.nii.gz",
+      "bytes": 94047,
+      "sha256": "71653d54d1a6f188965f420060e0fe86a93495ed543f851098739bd66135328e"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-10/ds003745_mask-frequency.nii.gz",
+      "file": "coverage/age_act_cope-10/ds003745_mask-frequency.nii.gz",
+      "bytes": 58221,
+      "sha256": "6e05f8063acbc59e4ebb9e07d57deaaef7b11f4bd6933362cba36a4292632f51"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-10/ds003745_support-frequency.nii.gz",
+      "file": "coverage/age_act_cope-10/ds003745_support-frequency.nii.gz",
+      "bytes": 52149,
+      "sha256": "fde5aeee9fe11a37281c0b71c17d6a47b3e689222c892bc92c90deb405cc7281"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-11/vmpfc-roi.nii.gz",
+      "file": "coverage/age_act_cope-11/vmpfc-roi.nii.gz",
+      "bytes": 1662,
+      "sha256": "c7010cde41f80ac89ce507d3706fa3998d8880bc5a889a5bcc4fbaf645234460"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-11/pooled_mask-frequency.nii.gz",
+      "file": "coverage/age_act_cope-11/pooled_mask-frequency.nii.gz",
+      "bytes": 106703,
+      "sha256": "27a6f91926d049c6f5a458c37dbb646fc6746c981a5e67f9da5448550978aea6"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-11/pooled_support-frequency.nii.gz",
+      "file": "coverage/age_act_cope-11/pooled_support-frequency.nii.gz",
+      "bytes": 105232,
+      "sha256": "e04ca30e51e817602e5b96cde8d84c5a128ca401064c359293941d9fd00e723e"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-11/rf1_mask-frequency.nii.gz",
+      "file": "coverage/age_act_cope-11/rf1_mask-frequency.nii.gz",
+      "bytes": 95674,
+      "sha256": "5e6adb80526a128b9bdde7d20844b47251e1758c3722f3a69b1efc4b914b95b3"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-11/rf1_support-frequency.nii.gz",
+      "file": "coverage/age_act_cope-11/rf1_support-frequency.nii.gz",
+      "bytes": 94047,
+      "sha256": "71653d54d1a6f188965f420060e0fe86a93495ed543f851098739bd66135328e"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-11/ds003745_mask-frequency.nii.gz",
+      "file": "coverage/age_act_cope-11/ds003745_mask-frequency.nii.gz",
+      "bytes": 58221,
+      "sha256": "6e05f8063acbc59e4ebb9e07d57deaaef7b11f4bd6933362cba36a4292632f51"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-11/ds003745_support-frequency.nii.gz",
+      "file": "coverage/age_act_cope-11/ds003745_support-frequency.nii.gz",
+      "bytes": 52149,
+      "sha256": "fde5aeee9fe11a37281c0b71c17d6a47b3e689222c892bc92c90deb405cc7281"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-12/vmpfc-roi.nii.gz",
+      "file": "coverage/age_act_cope-12/vmpfc-roi.nii.gz",
+      "bytes": 1662,
+      "sha256": "c7010cde41f80ac89ce507d3706fa3998d8880bc5a889a5bcc4fbaf645234460"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-12/pooled_mask-frequency.nii.gz",
+      "file": "coverage/age_act_cope-12/pooled_mask-frequency.nii.gz",
+      "bytes": 106703,
+      "sha256": "27a6f91926d049c6f5a458c37dbb646fc6746c981a5e67f9da5448550978aea6"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-12/pooled_support-frequency.nii.gz",
+      "file": "coverage/age_act_cope-12/pooled_support-frequency.nii.gz",
+      "bytes": 105232,
+      "sha256": "e04ca30e51e817602e5b96cde8d84c5a128ca401064c359293941d9fd00e723e"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-12/rf1_mask-frequency.nii.gz",
+      "file": "coverage/age_act_cope-12/rf1_mask-frequency.nii.gz",
+      "bytes": 95674,
+      "sha256": "5e6adb80526a128b9bdde7d20844b47251e1758c3722f3a69b1efc4b914b95b3"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-12/rf1_support-frequency.nii.gz",
+      "file": "coverage/age_act_cope-12/rf1_support-frequency.nii.gz",
+      "bytes": 94047,
+      "sha256": "71653d54d1a6f188965f420060e0fe86a93495ed543f851098739bd66135328e"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-12/ds003745_mask-frequency.nii.gz",
+      "file": "coverage/age_act_cope-12/ds003745_mask-frequency.nii.gz",
+      "bytes": 58221,
+      "sha256": "6e05f8063acbc59e4ebb9e07d57deaaef7b11f4bd6933362cba36a4292632f51"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-12/ds003745_support-frequency.nii.gz",
+      "file": "coverage/age_act_cope-12/ds003745_support-frequency.nii.gz",
+      "bytes": 52149,
+      "sha256": "fde5aeee9fe11a37281c0b71c17d6a47b3e689222c892bc92c90deb405cc7281"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-14/vmpfc-roi.nii.gz",
+      "file": "coverage/age_act_cope-14/vmpfc-roi.nii.gz",
+      "bytes": 1662,
+      "sha256": "c7010cde41f80ac89ce507d3706fa3998d8880bc5a889a5bcc4fbaf645234460"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-14/pooled_mask-frequency.nii.gz",
+      "file": "coverage/age_act_cope-14/pooled_mask-frequency.nii.gz",
+      "bytes": 106703,
+      "sha256": "27a6f91926d049c6f5a458c37dbb646fc6746c981a5e67f9da5448550978aea6"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-14/pooled_support-frequency.nii.gz",
+      "file": "coverage/age_act_cope-14/pooled_support-frequency.nii.gz",
+      "bytes": 105232,
+      "sha256": "e04ca30e51e817602e5b96cde8d84c5a128ca401064c359293941d9fd00e723e"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-14/rf1_mask-frequency.nii.gz",
+      "file": "coverage/age_act_cope-14/rf1_mask-frequency.nii.gz",
+      "bytes": 95674,
+      "sha256": "5e6adb80526a128b9bdde7d20844b47251e1758c3722f3a69b1efc4b914b95b3"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-14/rf1_support-frequency.nii.gz",
+      "file": "coverage/age_act_cope-14/rf1_support-frequency.nii.gz",
+      "bytes": 94047,
+      "sha256": "71653d54d1a6f188965f420060e0fe86a93495ed543f851098739bd66135328e"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-14/ds003745_mask-frequency.nii.gz",
+      "file": "coverage/age_act_cope-14/ds003745_mask-frequency.nii.gz",
+      "bytes": 58221,
+      "sha256": "6e05f8063acbc59e4ebb9e07d57deaaef7b11f4bd6933362cba36a4292632f51"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-14/ds003745_support-frequency.nii.gz",
+      "file": "coverage/age_act_cope-14/ds003745_support-frequency.nii.gz",
+      "bytes": 52149,
+      "sha256": "fde5aeee9fe11a37281c0b71c17d6a47b3e689222c892bc92c90deb405cc7281"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-16/vmpfc-roi.nii.gz",
+      "file": "coverage/age_act_cope-16/vmpfc-roi.nii.gz",
+      "bytes": 1662,
+      "sha256": "c7010cde41f80ac89ce507d3706fa3998d8880bc5a889a5bcc4fbaf645234460"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-16/pooled_mask-frequency.nii.gz",
+      "file": "coverage/age_act_cope-16/pooled_mask-frequency.nii.gz",
+      "bytes": 106703,
+      "sha256": "27a6f91926d049c6f5a458c37dbb646fc6746c981a5e67f9da5448550978aea6"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-16/pooled_support-frequency.nii.gz",
+      "file": "coverage/age_act_cope-16/pooled_support-frequency.nii.gz",
+      "bytes": 105232,
+      "sha256": "e04ca30e51e817602e5b96cde8d84c5a128ca401064c359293941d9fd00e723e"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-16/rf1_mask-frequency.nii.gz",
+      "file": "coverage/age_act_cope-16/rf1_mask-frequency.nii.gz",
+      "bytes": 95674,
+      "sha256": "5e6adb80526a128b9bdde7d20844b47251e1758c3722f3a69b1efc4b914b95b3"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-16/rf1_support-frequency.nii.gz",
+      "file": "coverage/age_act_cope-16/rf1_support-frequency.nii.gz",
+      "bytes": 94047,
+      "sha256": "71653d54d1a6f188965f420060e0fe86a93495ed543f851098739bd66135328e"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-16/ds003745_mask-frequency.nii.gz",
+      "file": "coverage/age_act_cope-16/ds003745_mask-frequency.nii.gz",
+      "bytes": 58221,
+      "sha256": "6e05f8063acbc59e4ebb9e07d57deaaef7b11f4bd6933362cba36a4292632f51"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-16/ds003745_support-frequency.nii.gz",
+      "file": "coverage/age_act_cope-16/ds003745_support-frequency.nii.gz",
+      "bytes": 52149,
+      "sha256": "fde5aeee9fe11a37281c0b71c17d6a47b3e689222c892bc92c90deb405cc7281"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-17/vmpfc-roi.nii.gz",
+      "file": "coverage/age_act_cope-17/vmpfc-roi.nii.gz",
+      "bytes": 1662,
+      "sha256": "c7010cde41f80ac89ce507d3706fa3998d8880bc5a889a5bcc4fbaf645234460"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-17/pooled_mask-frequency.nii.gz",
+      "file": "coverage/age_act_cope-17/pooled_mask-frequency.nii.gz",
+      "bytes": 106703,
+      "sha256": "27a6f91926d049c6f5a458c37dbb646fc6746c981a5e67f9da5448550978aea6"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-17/pooled_support-frequency.nii.gz",
+      "file": "coverage/age_act_cope-17/pooled_support-frequency.nii.gz",
+      "bytes": 105232,
+      "sha256": "e04ca30e51e817602e5b96cde8d84c5a128ca401064c359293941d9fd00e723e"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-17/rf1_mask-frequency.nii.gz",
+      "file": "coverage/age_act_cope-17/rf1_mask-frequency.nii.gz",
+      "bytes": 95674,
+      "sha256": "5e6adb80526a128b9bdde7d20844b47251e1758c3722f3a69b1efc4b914b95b3"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-17/rf1_support-frequency.nii.gz",
+      "file": "coverage/age_act_cope-17/rf1_support-frequency.nii.gz",
+      "bytes": 94047,
+      "sha256": "71653d54d1a6f188965f420060e0fe86a93495ed543f851098739bd66135328e"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-17/ds003745_mask-frequency.nii.gz",
+      "file": "coverage/age_act_cope-17/ds003745_mask-frequency.nii.gz",
+      "bytes": 58221,
+      "sha256": "6e05f8063acbc59e4ebb9e07d57deaaef7b11f4bd6933362cba36a4292632f51"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_act_cope-17/ds003745_support-frequency.nii.gz",
+      "file": "coverage/age_act_cope-17/ds003745_support-frequency.nii.gz",
+      "bytes": 52149,
+      "sha256": "fde5aeee9fe11a37281c0b71c17d6a47b3e689222c892bc92c90deb405cc7281"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-10/vmpfc-roi.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-10/vmpfc-roi.nii.gz",
+      "bytes": 1662,
+      "sha256": "c7010cde41f80ac89ce507d3706fa3998d8880bc5a889a5bcc4fbaf645234460"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-10/pooled_mask-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-10/pooled_mask-frequency.nii.gz",
+      "bytes": 106703,
+      "sha256": "27a6f91926d049c6f5a458c37dbb646fc6746c981a5e67f9da5448550978aea6"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-10/pooled_support-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-10/pooled_support-frequency.nii.gz",
+      "bytes": 105232,
+      "sha256": "e04ca30e51e817602e5b96cde8d84c5a128ca401064c359293941d9fd00e723e"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-10/rf1_mask-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-10/rf1_mask-frequency.nii.gz",
+      "bytes": 95674,
+      "sha256": "5e6adb80526a128b9bdde7d20844b47251e1758c3722f3a69b1efc4b914b95b3"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-10/rf1_support-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-10/rf1_support-frequency.nii.gz",
+      "bytes": 94047,
+      "sha256": "71653d54d1a6f188965f420060e0fe86a93495ed543f851098739bd66135328e"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-10/ds003745_mask-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-10/ds003745_mask-frequency.nii.gz",
+      "bytes": 58221,
+      "sha256": "6e05f8063acbc59e4ebb9e07d57deaaef7b11f4bd6933362cba36a4292632f51"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-10/ds003745_support-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-10/ds003745_support-frequency.nii.gz",
+      "bytes": 52149,
+      "sha256": "fde5aeee9fe11a37281c0b71c17d6a47b3e689222c892bc92c90deb405cc7281"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-11/vmpfc-roi.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-11/vmpfc-roi.nii.gz",
+      "bytes": 1662,
+      "sha256": "c7010cde41f80ac89ce507d3706fa3998d8880bc5a889a5bcc4fbaf645234460"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-11/pooled_mask-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-11/pooled_mask-frequency.nii.gz",
+      "bytes": 106703,
+      "sha256": "27a6f91926d049c6f5a458c37dbb646fc6746c981a5e67f9da5448550978aea6"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-11/pooled_support-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-11/pooled_support-frequency.nii.gz",
+      "bytes": 105232,
+      "sha256": "e04ca30e51e817602e5b96cde8d84c5a128ca401064c359293941d9fd00e723e"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-11/rf1_mask-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-11/rf1_mask-frequency.nii.gz",
+      "bytes": 95674,
+      "sha256": "5e6adb80526a128b9bdde7d20844b47251e1758c3722f3a69b1efc4b914b95b3"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-11/rf1_support-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-11/rf1_support-frequency.nii.gz",
+      "bytes": 94047,
+      "sha256": "71653d54d1a6f188965f420060e0fe86a93495ed543f851098739bd66135328e"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-11/ds003745_mask-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-11/ds003745_mask-frequency.nii.gz",
+      "bytes": 58221,
+      "sha256": "6e05f8063acbc59e4ebb9e07d57deaaef7b11f4bd6933362cba36a4292632f51"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-11/ds003745_support-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-11/ds003745_support-frequency.nii.gz",
+      "bytes": 52149,
+      "sha256": "fde5aeee9fe11a37281c0b71c17d6a47b3e689222c892bc92c90deb405cc7281"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-12/vmpfc-roi.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-12/vmpfc-roi.nii.gz",
+      "bytes": 1662,
+      "sha256": "c7010cde41f80ac89ce507d3706fa3998d8880bc5a889a5bcc4fbaf645234460"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-12/pooled_mask-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-12/pooled_mask-frequency.nii.gz",
+      "bytes": 106703,
+      "sha256": "27a6f91926d049c6f5a458c37dbb646fc6746c981a5e67f9da5448550978aea6"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-12/pooled_support-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-12/pooled_support-frequency.nii.gz",
+      "bytes": 105232,
+      "sha256": "e04ca30e51e817602e5b96cde8d84c5a128ca401064c359293941d9fd00e723e"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-12/rf1_mask-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-12/rf1_mask-frequency.nii.gz",
+      "bytes": 95674,
+      "sha256": "5e6adb80526a128b9bdde7d20844b47251e1758c3722f3a69b1efc4b914b95b3"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-12/rf1_support-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-12/rf1_support-frequency.nii.gz",
+      "bytes": 94047,
+      "sha256": "71653d54d1a6f188965f420060e0fe86a93495ed543f851098739bd66135328e"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-12/ds003745_mask-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-12/ds003745_mask-frequency.nii.gz",
+      "bytes": 58221,
+      "sha256": "6e05f8063acbc59e4ebb9e07d57deaaef7b11f4bd6933362cba36a4292632f51"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-12/ds003745_support-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-12/ds003745_support-frequency.nii.gz",
+      "bytes": 52149,
+      "sha256": "fde5aeee9fe11a37281c0b71c17d6a47b3e689222c892bc92c90deb405cc7281"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-14/vmpfc-roi.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-14/vmpfc-roi.nii.gz",
+      "bytes": 1662,
+      "sha256": "c7010cde41f80ac89ce507d3706fa3998d8880bc5a889a5bcc4fbaf645234460"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-14/pooled_mask-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-14/pooled_mask-frequency.nii.gz",
+      "bytes": 106703,
+      "sha256": "27a6f91926d049c6f5a458c37dbb646fc6746c981a5e67f9da5448550978aea6"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-14/pooled_support-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-14/pooled_support-frequency.nii.gz",
+      "bytes": 105232,
+      "sha256": "e04ca30e51e817602e5b96cde8d84c5a128ca401064c359293941d9fd00e723e"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-14/rf1_mask-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-14/rf1_mask-frequency.nii.gz",
+      "bytes": 95674,
+      "sha256": "5e6adb80526a128b9bdde7d20844b47251e1758c3722f3a69b1efc4b914b95b3"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-14/rf1_support-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-14/rf1_support-frequency.nii.gz",
+      "bytes": 94047,
+      "sha256": "71653d54d1a6f188965f420060e0fe86a93495ed543f851098739bd66135328e"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-14/ds003745_mask-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-14/ds003745_mask-frequency.nii.gz",
+      "bytes": 58221,
+      "sha256": "6e05f8063acbc59e4ebb9e07d57deaaef7b11f4bd6933362cba36a4292632f51"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-14/ds003745_support-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-14/ds003745_support-frequency.nii.gz",
+      "bytes": 52149,
+      "sha256": "fde5aeee9fe11a37281c0b71c17d6a47b3e689222c892bc92c90deb405cc7281"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-16/vmpfc-roi.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-16/vmpfc-roi.nii.gz",
+      "bytes": 1662,
+      "sha256": "c7010cde41f80ac89ce507d3706fa3998d8880bc5a889a5bcc4fbaf645234460"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-16/pooled_mask-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-16/pooled_mask-frequency.nii.gz",
+      "bytes": 106703,
+      "sha256": "27a6f91926d049c6f5a458c37dbb646fc6746c981a5e67f9da5448550978aea6"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-16/pooled_support-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-16/pooled_support-frequency.nii.gz",
+      "bytes": 105232,
+      "sha256": "e04ca30e51e817602e5b96cde8d84c5a128ca401064c359293941d9fd00e723e"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-16/rf1_mask-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-16/rf1_mask-frequency.nii.gz",
+      "bytes": 95674,
+      "sha256": "5e6adb80526a128b9bdde7d20844b47251e1758c3722f3a69b1efc4b914b95b3"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-16/rf1_support-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-16/rf1_support-frequency.nii.gz",
+      "bytes": 94047,
+      "sha256": "71653d54d1a6f188965f420060e0fe86a93495ed543f851098739bd66135328e"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-16/ds003745_mask-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-16/ds003745_mask-frequency.nii.gz",
+      "bytes": 58221,
+      "sha256": "6e05f8063acbc59e4ebb9e07d57deaaef7b11f4bd6933362cba36a4292632f51"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-16/ds003745_support-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-16/ds003745_support-frequency.nii.gz",
+      "bytes": 52149,
+      "sha256": "fde5aeee9fe11a37281c0b71c17d6a47b3e689222c892bc92c90deb405cc7281"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-17/vmpfc-roi.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-17/vmpfc-roi.nii.gz",
+      "bytes": 1662,
+      "sha256": "c7010cde41f80ac89ce507d3706fa3998d8880bc5a889a5bcc4fbaf645234460"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-17/pooled_mask-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-17/pooled_mask-frequency.nii.gz",
+      "bytes": 106703,
+      "sha256": "27a6f91926d049c6f5a458c37dbb646fc6746c981a5e67f9da5448550978aea6"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-17/pooled_support-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-17/pooled_support-frequency.nii.gz",
+      "bytes": 105232,
+      "sha256": "e04ca30e51e817602e5b96cde8d84c5a128ca401064c359293941d9fd00e723e"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-17/rf1_mask-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-17/rf1_mask-frequency.nii.gz",
+      "bytes": 95674,
+      "sha256": "5e6adb80526a128b9bdde7d20844b47251e1758c3722f3a69b1efc4b914b95b3"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-17/rf1_support-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-17/rf1_support-frequency.nii.gz",
+      "bytes": 94047,
+      "sha256": "71653d54d1a6f188965f420060e0fe86a93495ed543f851098739bd66135328e"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-17/ds003745_mask-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-17/ds003745_mask-frequency.nii.gz",
+      "bytes": 58221,
+      "sha256": "6e05f8063acbc59e4ebb9e07d57deaaef7b11f4bd6933362cba36a4292632f51"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/derivatives/qc/vmpfc-support/vmpfc-support-20261019-171229/age_ppi_seed-vs_cope-17/ds003745_support-frequency.nii.gz",
+      "file": "coverage/age_ppi_seed-vs_cope-17/ds003745_support-frequency.nii.gz",
+      "bytes": 52149,
+      "sha256": "fde5aeee9fe11a37281c0b71c17d6a47b3e689222c892bc92c90deb405cc7281"
+    },
+    {
+      "source": "/ZPOOL/data/projects/rf1-sra-sharedreward/resources/rf1_MNI152NLin6Asym_reference_grid.nii.gz",
+      "file": "reference/reference-grid.nii.gz",
+      "bytes": 1168,
+      "sha256": "52fd69e09e50ffe857b25a62afb9b8c4fc31f8b3cad9942a6a6874ff5b067bcf"
+    },
+    {
+      "source": "/usr/local/fsl/data/standard/MNI152_T1_2mm.nii.gz",
+      "file": "reference/MNI152_T1_2mm.nii.gz",
+      "bytes": 1406977,
+      "sha256": "0585cd056bf5ccfb8bf97a5f6a66082d4e7caad525718fc11e40d80a827fcb92"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/masks/seed-vs.nii.gz",
+      "file": "reference/seed-vs.nii.gz",
+      "bytes": 3971,
+      "sha256": "e601c05fe95d6e43968892d4a3b23f7b08963c9b2ca596e594f8efd31f14e091"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/masks/VMPFC-mask-neurovault-resliced-bin.nii.gz",
+      "file": "reference/VMPFC-mask-neurovault-resliced-bin.nii.gz",
+      "bytes": 4933,
+      "sha256": "e802973856ec1c3e830bb8e8650ead0542c509eaaa4f8c4857acff477a7e760a"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/logs/records/L3-preliminary/L3-mean-activation-20261019-171229/completion.json",
+      "file": "reports/activation/completion.json",
+      "bytes": 149,
+      "sha256": "b2819ef2a71ca6148fd36263e686f44b029d5f7a4fc0e42156b2e7d46a384c95"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/logs/records/L3-preliminary/L3-mean-activation-20261019-171229/analysis-support.tsv",
+      "file": "reports/activation/analysis-support.tsv",
+      "bytes": 372,
+      "sha256": "8876e3900e1a5f51d5229c535303f36ae5df84f3808e60e789a879538c496b58"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/logs/records/L3-preliminary/L3-mean-activation-20261019-171229/roi-results.tsv",
+      "file": "reports/activation/roi-results.tsv",
+      "bytes": 1132,
+      "sha256": "96e27286a54fc76164c3d198dae3f85b9d255d9c1fc59df220cb554a5a539ab9"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/logs/records/vmpfc-support/vmpfc-support-20261019-171229/completion.json",
+      "file": "reports/coverage/completion.json",
+      "bytes": 125,
+      "sha256": "b3ff9b3939a3a662d027d21089a28cd6764f1386899b6c5e0039e1721c55436c"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/logs/records/vmpfc-support/vmpfc-support-20261019-171229/model-coverage-summary.tsv",
+      "file": "reports/coverage/model-coverage-summary.tsv",
+      "bytes": 6789,
+      "sha256": "4825770605a5e528e8858d3a70a0e3bcfe5c1fd3436ff1e0ee269518d7564e25"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/logs/records/vmpfc-support/vmpfc-support-20261019-171229/participant-coverage.tsv",
+      "file": "reports/coverage/participant-coverage.tsv",
+      "bytes": 2404097,
+      "sha256": "0ee7a7ceac34783416db9ff6c3c850042a4882d3136e8605661fe4d157e783f8"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/logs/records/vmpfc-support/vmpfc-support-20261019-171229/vmpfc-coverage-summary.png",
+      "file": "reports/coverage/vmpfc-coverage-summary.png",
+      "bytes": 135518,
+      "sha256": "b71d64413ca8a37d6d959769817bea85975980c4406a5b41efe7cef19da04f21"
+    },
+    {
+      "source": "/ZPOOL/data/projects/sharedreward-aging/qc/L3-preliminary/L3-mean-activation-20261019-171229/mean-roi.png",
+      "file": "reports/activation/mean-roi.png",
+      "bytes": 53169,
+      "sha256": "460736f609fe2a07e542b15c882d8af264a9db1aa60e0d51c7e999c857e2260f"
+    }
+  ],
+  "total_bytes": 17650218
+}
